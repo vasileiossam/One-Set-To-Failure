@@ -2,6 +2,7 @@
 using Set.Abstract;
 using Xamarin.Forms;
 using System.Globalization;
+using Set.Models;
 
 namespace Set
 {
@@ -20,14 +21,18 @@ namespace Set
             }
         }
 
+		public Settings Settings { get; set; }
+
 		public App ()
-		{
+		{	
+			Settings = DependencyService.Get<ISettingsStorage>().LoadAsync().Result;
+			var s = Settings.IsMetric;
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-            var mainNav = new NavigationPage (new WorkoutListPage ());
+			var mainNav = new NavigationPage (new WorkoutListPage ());
         	MainPage = mainNav;
 		}
 

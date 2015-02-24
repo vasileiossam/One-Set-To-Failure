@@ -1,19 +1,27 @@
 ﻿using System;
+using System.Globalization;
 
-namespace Set
+namespace Set.Models
 {
 	public class Settings
 	{
-        [PrimaryKey, AutoIncrement]
-        public int SettingID { get; set; }
+		public int? _isMetric;
+		public int? IsMetric 
+		{ 
+			get 
+			{ 
+				if (_isMetric == null) 
+				{
+					_isMetric = RegionInfo.CurrentRegion.IsMetric ? 1 : 0;
+				}
+				return _isMetric;
+			} 
+			set {
+				_isMetric = value;
+			}
+		}
 
-        public string Key {get; set;}
-        public string Value {get; set;}
-
-        IsMetric <------------- ugly when in db, do in json
-            ismetric best practice? what happens if json gone and user selects antoher setting -- existing data
-
-		public Setting ()
+		public Settings ()
 		{
 
 		}

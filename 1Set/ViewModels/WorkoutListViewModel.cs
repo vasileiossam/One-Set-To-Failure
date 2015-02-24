@@ -23,11 +23,11 @@ namespace Set.ViewModels
             }
         }
 
-        public IEnumerable<Routine> Routines {get; set; }
+       // public IEnumerable<Routine> Routines {get; set; }
 
         private void LoadRoutines()
         {
-            Routines = App.RoutineRepository.GetActiveRoutines(_currentDate);
+         //   Routines = App.RoutineRepository.GetActiveRoutines(_currentDate);
         }
     }
 }

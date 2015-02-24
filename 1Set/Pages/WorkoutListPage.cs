@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Set.ViewModels;
+using Set.Models;
 using Xamarin.Forms;
 
 namespace Set
@@ -25,7 +26,7 @@ namespace Set
 
         public WorkoutListPage()
 		{
-			InitializeComponent ();
+		//	this.InitializeComponent ();
             
             ViewModel.CurrentDate = DateTime.Today;
             this.BindingContext = ViewModel;
@@ -34,7 +35,7 @@ namespace Set
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            workoutsList.ItemsSource = ViewModel.Routines;
+          //  workoutsList.ItemsSource = ViewModel.Routines;
         }
 
         protected override void OnDisappearing()
@@ -57,7 +58,7 @@ namespace Set
             var workout = e.SelectedItem as Workout;
             var workoutPage = new WorkoutPage
             {
-                BindingContext = new WorkoutViewModel(workout)
+            //    BindingContext = new WorkoutViewModel(workout)
             };
 
             Navigation.PushAsync(workoutPage);

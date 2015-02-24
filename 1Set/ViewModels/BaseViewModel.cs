@@ -1,5 +1,6 @@
 using System;
 using SQLite.Net.Attributes;
+using System.ComponentModel;
 
 namespace Set.ViewModels
 {

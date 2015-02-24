@@ -5,6 +5,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Set.Abstract;
 using Set.Models;
+using Set.Concrete;
 
 namespace Set
 {
@@ -13,14 +14,14 @@ namespace Set
 		static object locker = new object ();
 		private SQLiteConnection _connection;
 
-        private WorkoutRepository _workoutRepository;
-        public WorkoutRepository WorkoutRepository
+        private WorkoutsRepository _workoutRepository;
+        public WorkoutsRepository WorkoutRepository
         {
             get
             {
                 if (_workoutRepository == null)
                 {
-                    _workoutRepository = new WorkoutRepository(_connection);
+                    _workoutRepository = new WorkoutsRepository(_connection);
                 }
                 return _workoutRepository;
             }

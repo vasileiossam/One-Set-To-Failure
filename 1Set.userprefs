@@ -1,16 +1,25 @@
-﻿<Properties StartupItem="1Set\1Set.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Droid\obj\Debug\android\AndroidManifest.xml">
+﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.emulator-5554" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Models\Settings.cs">
     <Files>
-      <File FileName="Droid\SQLite_Android.cs" Line="72" Column="72" />
-      <File FileName="Droid\Resources\Resource.designer.cs" Line="1" Column="1" />
-      <File FileName="Droid\Resources\AboutResources.txt" Line="28" Column="28" />
-      <File FileName="Droid\obj\Debug\android\AndroidManifest.xml" Line="41" Column="41" />
+      <File FileName="1Set\App.cs" Line="30" Column="30" />
+      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="12" Column="12" />
+      <File FileName="1Set\Models\Set.cs" Line="1" Column="1" />
+      <File FileName="1Set\ViewModels\BaseViewModel.cs" Line="28" Column="28" />
+      <File FileName="1Set\Concrete\Database.cs" Line="17" Column="17" />
+      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="6" Column="6" />
+      <File FileName="1Set\Converters\DateTimeToStringConverter.cs" Line="55" Column="55" />
+      <File FileName="1Set\Pages\WorkoutListPage.cs" Line="21" Column="21" />
+      <File FileName="1Set\Resx\AppResources.Designer.cs" Line="10" Column="10" />
+      <File FileName="Droid\SettingsStorage.cs" Line="1" Column="1" />
+      <File FileName="1Set\Models\Settings.cs" Line="18" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\dev\1Set\Droid\Properties\AssemblyInfo.cs" line="25" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\Concrete\Extensions.cs" line="25" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\App.cs" line="30" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

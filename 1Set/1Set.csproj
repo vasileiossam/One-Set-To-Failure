@@ -33,7 +33,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Workout.cs" />
-    <Compile Include="Models\Routine.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
     <Compile Include="Abstract\ILocale.cs" />
@@ -42,36 +41,30 @@
       <DependentUpon>WorkoutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Pages\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RoutinePage.xaml.cs">
-      <DependentUpon>RoutinePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ExercisePage.xaml.cs">
       <DependentUpon>ExercisePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WorkoutListPage.xaml.cs">
-      <DependentUpon>WorkoutListPage.xaml</DependentUpon>
-    </Compile>    
     <Compile Include="App.cs" />
     <Compile Include="Concrete\Database.cs" />
     <Compile Include="Abstract\IBaseRepository.cs" />
     <Compile Include="Concrete\BaseRepository.cs" />
     <Compile Include="Concrete\Extensions.cs" />
-    <Compile Include="Concrete\WorkoutRepository.cs" />
-    <Compile Include="Concrete\ExerciseRepository.cs" />
-    <Compile Include="Concrete\RoutineRepository.cs" />
-    <Compile Include="Concrete\SetRepository.cs" />
-    <Compile Include="Abstract\IWorkoutRepository.cs" />
-    <Compile Include="Abstract\IExerciseRepository.cs" />
-    <Compile Include="Abstract\IRoutineRepository.cs" />
-    <Compile Include="Abstract\ISetRepository.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\WorkoutListViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
-    <Compile Include="Converters\WeightMetricToImperialConverter.cs" />    
+    <Compile Include="Converters\WeightMetricToImperialConverter.cs" />
+    <Compile Include="Pages\WorkoutListPage.cs">
+      <DependentUpon>WorkoutListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resx\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Abstract\IWorkoutsRepository.cs" />
+    <Compile Include="Abstract\IExercisesRepository.cs" />
+    <Compile Include="Concrete\ExercisesRepository.cs" />
+    <Compile Include="Concrete\WorkoutsRepository.cs" />
+    <Compile Include="Abstract\ISettingsStorage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.3.4.6332\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.4.6332\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -88,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Pages\WorkoutListPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -96,19 +90,18 @@
     <Folder Include="Concrete\" />
     <Folder Include="Converters\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Resx\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\WorkoutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\SettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\RoutinePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ExercisePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resx\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

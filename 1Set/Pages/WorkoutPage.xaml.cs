@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Set.ViewModels;
 using Xamarin.Forms;
 
 namespace Set

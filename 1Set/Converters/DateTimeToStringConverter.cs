@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace Set
 {
@@ -20,7 +21,7 @@ namespace Set
                 // return tomorrow
                 if (date.Date == DateTime.Today.AddDays(1))
                 {
-                    return AppResources.Tomorrow;
+                   return AppResources.Tomorrow;
                 }
                 // return yesterday
                 else
@@ -32,5 +33,13 @@ namespace Set
             // return date with default culture formatting
             return date.ToString();
         }
+
+
+		public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			Debug.WriteLine(value.ToString(), new []{ "DateTimeToStringConverter.ConvertBack"});
+			throw new NotImplementedException ();
+		}
+
     }
 }
