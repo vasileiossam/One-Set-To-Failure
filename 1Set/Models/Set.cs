@@ -14,7 +14,7 @@ namespace Set.Models
 
 		public int WorkoutID { get; set; }
 
-		public int Weight {get; set; }
+		public float Weight {get; set; }
 		public int Reps {get; set; }
 	}
 }

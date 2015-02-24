@@ -7,26 +7,28 @@ namespace Set
 {
 	public class App : Application
 	{
-//		static Database database;
-//		public static TodoItemDatabase Database {
-//			get { 
-//				if (database == null) {
-//					database = new TodoItemDatabase ();
-//				} 
-//				return database; 
-//			}
-//		}
+        static Database _database;
+        public static Database Database
+        {
+            get
+            {
+                if (_database == null)
+                {
+                    _database = new Database();
+                }
+                return _database;
+            }
+        }
 
 		public App ()
 		{
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
-		//--\\	AppResources.Culture = new CultureInfo (netLanguage);
+		    AppResources.Culture = new CultureInfo (netLanguage);
 
-//--			var mainNav = new NavigationPage (new TodoListPage ());
-
-	//--		MainPage = mainNav;
+            var mainNav = new NavigationPage (new WorkoutListPage ());
+        	MainPage = mainNav;
 		}
 
 		protected override void OnStart ()

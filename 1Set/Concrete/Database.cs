@@ -11,11 +11,22 @@ namespace Set
 	public class Database 
 	{
 		static object locker = new object ();
+		private SQLiteConnection _connection;
 
-		SQLiteConnection _connection;
+        private WorkoutRepository _workoutRepository;
+        public WorkoutRepository WorkoutRepository
+        {
+            get
+            {
+                if (_workoutRepository == null)
+                {
+                    _workoutRepository = new WorkoutRepository(_connection);
+                }
+                return _workoutRepository;
+            }
+        }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Tasky.DL.TaskDatabase"/> TaskDatabase. 
 		/// if the database doesn't exist, it will create the database and all the tables.
 		/// </summary>
 		/// <param name='path'>
@@ -28,15 +39,6 @@ namespace Set
 			// create the tables
 			_connection.CreateTable<Exercise>();
 		}
-
-
-		public IEnumerable<Exercise> GetItemsNotDone ()
-		{
-			lock (locker) {
-				return _connection.Query<Exercise>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
-			}
-		}
-
 	}
 }
 

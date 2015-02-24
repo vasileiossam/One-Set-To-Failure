@@ -14,7 +14,7 @@ namespace Set.Models
 		public string Name { get; set; }
 		public string Notes { get; set; }
 		public byte[] Image { get; set; }
-		public int Step {get; set; }
+		public double Step {get; set; }
 	}
 }
 

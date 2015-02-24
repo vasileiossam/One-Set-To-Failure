@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Set;assembly=1Set"
-             x:Class="Set.WorkoutPage"
+             x:Class="Set.WorkoutListPage"
              Title="{Binding Title}">
 
   <ContentPage.Padding>
@@ -16,13 +16,11 @@
       <local:DateTimeToStringConverter x:Key="dateConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
-
-metric converter?
-
+  
   <ContentPage.Content>
-
+    
     <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
-
+      
       <StackLayout Orientation="Horizontal">
         <Button x:Name="PreviousDate" Text="&lt;" Clicked="OnPreviousDateClicked" />
         <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
@@ -30,7 +28,7 @@ metric converter?
       </StackLayout>
 
       <ListView x:Name="workoutsList" ItemSelected="OnWorkoutSelected" IsGroupingEnabled="true">
-
+        
         <ListView.GroupHeaderTemplate>
           <DataTemplate>
             <ViewCell>
@@ -40,7 +38,7 @@ metric converter?
             </ViewCell>
           </DataTemplate>
         </ListView.GroupHeaderTemplate>
-
+        
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
@@ -56,7 +54,7 @@ metric converter?
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
-
+      
     </StackLayout>
-  </ContentPage.Content>
+	</ContentPage.Content>
 </ContentPage>

@@ -12,11 +12,15 @@ namespace Set.Models
 
 		[PrimaryKey, AutoIncrement]
 		public int WorkoutID { get; set; }
-	
-		public int ExerciseID { get; set; }
+
+        public int ExerciseID { get; set; }
 
 		public DateTime StartDate { get; set; }
-		public string Notes { get; set; }
+        
+        public int Reps { get; set; }
+        public float Weight { get; set; }
+		
+        public string Notes { get; set; }
 
 	}
 }

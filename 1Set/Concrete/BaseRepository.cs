@@ -19,7 +19,7 @@ namespace Set.Concrete
 
 		public BaseRepository(SQLiteConnection connection)
 		{
-			this._connection = connection;
+			_connection = connection;
 		}
 
 		public IEnumerable<TEntity> All 
