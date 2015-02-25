@@ -10,17 +10,18 @@ namespace Set
         private WorkoutViewModel _viewModel;
         public WorkoutViewModel ViewModel
         {
-            set
-            {
-                if (_viewModel == null)
-                {
-                    _viewModel = new WorkoutViewModel();
-                }
-            }
-            get
-            {
-                return _viewModel;
-            }
+			get
+			{
+				if (_viewModel == null)
+				{
+					_viewModel =  new WorkoutViewModel();
+				}
+				return _viewModel;
+			}
+			set
+			{
+				_viewModel = value;
+			}
         }
 
 

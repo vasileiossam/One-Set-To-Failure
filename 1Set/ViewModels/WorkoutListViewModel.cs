@@ -1,5 +1,7 @@
 using System;
 using SQLite.Net.Attributes;
+using Set.Models;
+using System.Collections.Generic;
 
 namespace Set.ViewModels
 {
@@ -14,7 +16,7 @@ namespace Set.ViewModels
                 {
                     _currentDate = value;
                     OnPropertyChanged("CurrentDate");
-                    LoadRoutines();
+                    LoadRoutine();
                 }
             }
             get
@@ -23,12 +25,29 @@ namespace Set.ViewModels
             }
         }
 
-       // public IEnumerable<Routine> Routines {get; set; }
+		public List<RoutineDay> RoutineDays {get; set; }
 
-        private void LoadRoutines()
+        private void LoadRoutine()
         {
-         //   Routines = App.RoutineRepository.GetActiveRoutines(_currentDate);
+			var routineDays = App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
+			var workouts = App.Database.WorkoutsRepository.GetWorkouts(_currentDate);
+
+			foreach (var day in routineDays)
+			{
+				var workout = workouts.Find(x => x.ExerciseId == day.ExerciseId);
+
+				// workout hasn't performed for this exercise
+				if (workout == null)
+				{
+					workout = new Workout ();
+					workout.ExerciseId = day.ExerciseId;
+					workout.Exercise = day.Exercise;
+				} 
+
+				day.Workout = workout;
+			}
         }
+
     }
 }
 

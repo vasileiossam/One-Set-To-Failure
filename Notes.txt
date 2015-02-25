@@ -1,55 +1,7 @@
 ﻿
+     
 
-        public IEnumerable<Exercise> GetDayRoutine(DateTime date)
-        {
-            lock (locker)
-            {
-                string dayField;
-
-                switch (date.DayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        dayField = "DoOnMon";
-                        break;
-                    case DayOfWeek.Tuesday:
-                        dayField = "DoOnTue";
-                        break;
-                    case DayOfWeek.Wednesday:
-                        dayField = "DoOnWed";
-                        break;
-                    case DayOfWeek.Thursday:
-                        dayField = "DoOnThu";
-                        break;
-                    case DayOfWeek.Friday:
-                        dayField = "DoOnFri";
-                        break;
-                    case DayOfWeek.Saturday:
-                        dayField = "DoOnSat";
-                        break;
-                    case DayOfWeek.Sunday:
-                        dayField = "DoOnSun";
-                        break;
-                }
-
-                day | exercise  | RowNumber | cando <-- create this every time we create an exersise
-                      <- when adding a rownumber should be + 1 for the day
-
-                - get routine for day
-
-                - get workouts for day
-
-                    - merge them or link them?
-                    
-
-
-                var sql = string.Format(
-                    @"SELECT *  
-                            FROM Routines
-                            INNER JOIN Exercises ON Exercises.ExerciseID = Routines.ExerciseID
-                            WHERE Routines.DayOfWeek = {0}
-                            ORDER BY Routines.RowNumber, Routines.ExerciseID
-                    ", dayField); 
-
+       
                     <--- or create another table with setings for a day -->
                           Exersiceid, sort numb and date and give the option to move exercises on a day.
 
@@ -58,7 +10,7 @@
 
                 - idea: ability to print a routine or weekly program. call it old school printout or export in a txt file.
 
-                var routines = _connection.Query<Routine>(sql);
+            
 
 
                 
@@ -102,3 +54,5 @@
 //									- allow workout without routine
 //
 								//}
+
+

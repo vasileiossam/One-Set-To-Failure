@@ -15,7 +15,7 @@ namespace Set
 		private SQLiteConnection _connection;
 
         private WorkoutsRepository _workoutRepository;
-        public WorkoutsRepository WorkoutRepository
+        public WorkoutsRepository WorkoutsRepository
         {
             get
             {
@@ -26,6 +26,19 @@ namespace Set
                 return _workoutRepository;
             }
         }
+
+		private RoutineDaysRepository _routineDaysRepository;
+		public RoutineDaysRepository RoutineDaysRepository
+		{
+			get
+			{
+				if (_routineDaysRepository == null)
+				{
+					_routineDaysRepository = new RoutineDaysRepository(_connection);
+				}
+				return _routineDaysRepository;
+			}
+		}
 
 		/// <summary>
 		/// if the database doesn't exist, it will create the database and all the tables.
@@ -39,6 +52,9 @@ namespace Set
 
 			// create the tables
 			_connection.CreateTable<Exercise>();
+			_connection.CreateTable<RoutineDay>();
+			_connection.CreateTable<Exercise>();
+			_connection.CreateTable<Workout>();
 		}
 	}
 }

@@ -11,22 +11,23 @@ namespace Set
         private WorkoutListViewModel _viewModel;
         public WorkoutListViewModel ViewModel
         {
-            set
+			get
             {
                 if (_viewModel == null)
                 {
                     _viewModel =  new WorkoutListViewModel();
                 }
+				return _viewModel;
             }
-            get
+			set
             {
-                return _viewModel;
+				_viewModel = value;
             }
         }
 
         public WorkoutListPage()
 		{
-		//	this.InitializeComponent ();
+			this.InitializeComponent ();
             
             ViewModel.CurrentDate = DateTime.Today;
             this.BindingContext = ViewModel;
@@ -35,7 +36,7 @@ namespace Set
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-          //  workoutsList.ItemsSource = ViewModel.Routines;
+			workoutsList.ItemsSource = ViewModel.RoutineDays;
         }
 
         protected override void OnDisappearing()
@@ -58,7 +59,7 @@ namespace Set
             var workout = e.SelectedItem as Workout;
             var workoutPage = new WorkoutPage
             {
-            //    BindingContext = new WorkoutViewModel(workout)
+                //BindingContext = new WorkoutViewModel(workout)
             };
 
             Navigation.PushAsync(workoutPage);

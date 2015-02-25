@@ -6,7 +6,7 @@ namespace Set.Models
 	public class Settings
 	{
 		public int? _isMetric;
-		public int? IsMetric 
+		public int IsMetric 
 		{ 
 			get 
 			{ 
@@ -14,7 +14,7 @@ namespace Set.Models
 				{
 					_isMetric = RegionInfo.CurrentRegion.IsMetric ? 1 : 0;
 				}
-				return _isMetric;
+				return (int) _isMetric;
 			} 
 			set {
 				_isMetric = value;

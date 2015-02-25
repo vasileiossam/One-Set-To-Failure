@@ -17,8 +17,6 @@
     </ResourceDictionary>
   </ContentPage.Resources>
 
-metric converter?
-
   <ContentPage.Content>
 
     <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">

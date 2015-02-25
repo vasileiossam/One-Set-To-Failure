@@ -4,6 +4,7 @@ using SQLiteNetExtensions.Attributes;
 
 namespace Set.Models
 {
+	[Table("Workouts")]
 	public class Workout
 	{
 		public Workout ()

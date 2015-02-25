@@ -19,7 +19,7 @@
   
   <ContentPage.Content>
     
-    <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
+    <StackLayout Orientation="Vertical" >
       
       <StackLayout Orientation="Horizontal">
         <Button x:Name="PreviousDate" Text="&lt;" Clicked="OnPreviousDateClicked" />
@@ -56,5 +56,6 @@
       </ListView>
       
     </StackLayout>
+
 	</ContentPage.Content>
 </ContentPage>

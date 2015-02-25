@@ -3,6 +3,7 @@ using SQLite.Net.Attributes;
 
 namespace Set.Models
 {
+	[Table("Exercises")]
 	public class Exercise
 	{
 		public Exercise ()
@@ -10,7 +11,7 @@ namespace Set.Models
 		}
 
 		[PrimaryKey, AutoIncrement]
-		public int ExerciseID { get; set; }
+		public int ExerciseId { get; set; }
 		public string Title { get; set; }
 		public string Notes { get; set; }
 		public byte[] Image { get; set; }

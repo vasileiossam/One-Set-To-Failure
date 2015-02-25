@@ -14,7 +14,7 @@ namespace Set.Concrete
 	{
 
 		internal SQLiteConnection _connection;
-		static object _locker = new object ();
+		internal static object _locker = new object ();
 
 
 		public BaseRepository(SQLiteConnection connection)

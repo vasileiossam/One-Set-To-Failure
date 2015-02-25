@@ -2,6 +2,7 @@
 using Set.Models;
 using SQLite.Net;
 using Set.Abstract;
+using System.Collections.Generic;
 
 namespace Set.Concrete
 {
@@ -13,7 +14,20 @@ namespace Set.Concrete
 
 		}
 
+		public List<Workout> GetWorkouts(DateTime date)
+		{
+			lock (_locker)
+			{
+				lock (_locker)
+				{
+					var sql = @"SELECT *  
+                            FROM Workouts
+                            WHERE Created = ?";
 
+					return _connection.Query<Workout> (sql, date);
+				}
+			}
+		}
 
     }
 }
