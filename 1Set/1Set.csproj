@@ -33,6 +33,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Workout.cs" />
+    <Compile Include="Models\Routine.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
     <Compile Include="Abstract\ILocale.cs" />
@@ -43,6 +44,9 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Pages\ExercisePage.xaml.cs">
       <DependentUpon>ExercisePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Concrete\Database.cs" />

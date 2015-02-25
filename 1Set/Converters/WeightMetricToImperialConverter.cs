@@ -7,41 +7,27 @@ namespace Set
 {
 
    
+    /// <summary>
+    /// http://stackoverflow.com/questions/12977021/best-practice-for-storing-weights-in-a-sql-database
+    ///	https://msdn.microsoft.com/en-us/library/windows/apps/hh969150.aspx
+    /// </summary>
     public class MetricToImperialConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
                               object parameter, CultureInfo culture)
         {
-//            // value always stored in metric
-//            if (App.IsMetric)
-//            {
-//                return value;
-//            }
-//
-//            // convert to imperial
-//            float metric = (float)value;
-//
-//            // return today
-//            if (date.Date == DateTime.Today)
-//            {
-//                return AppResources.Today;
-//            }
-//            else
-//                // return tomorrow
-//                if (date.Date == DateTime.Today.AddDays(1))
-//                {
-//                    return AppResources.Tomorrow;
-//                }
-//                // return yesterday
-//                else
-//                    if (date.Date == DateTime.Today.AddDays(-1))
-//                    {
-//                        return AppResources.Yesterday;
-//                    }
-//
-//            // return date with default culture formatting
-//            return date.ToString();
-			return null;
+            // metric to metric
+            // we always store weight in metric (Kg), if we are already in metric no conversion is needed
+            if (App.Settings.IsMetric)
+            {
+                return value;
+            }
+            
+            // metric to imperial
+            // 1 Kg = 2.20462 lbs
+            double kgs = (double)value;
+            double lbs = kgs * 2.20462;
+            return lbs;
         }
     
 

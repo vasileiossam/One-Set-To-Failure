@@ -15,13 +15,13 @@ namespace Set.Models
 
         public int ExerciseID { get; set; }
 
-		public DateTime StartDate { get; set; }
-        
-        public int Reps { get; set; }
-        public float Weight { get; set; }
-		
+		public DateTime Created { get; set; }
         public string Notes { get; set; }
 
+        public int Reps { get; set; }
+        public double Weight { get; set; }
+		      
+        public Exercise { get; set; }
 	}
 }
 
