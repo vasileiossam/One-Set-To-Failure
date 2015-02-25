@@ -26,7 +26,6 @@ namespace Set
 		public App ()
 		{	
 			Settings = DependencyService.Get<ISettingsStorage>().LoadAsync().Result;
-			var s = Settings.IsMetric;
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();

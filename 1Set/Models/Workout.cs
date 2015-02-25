@@ -1,5 +1,6 @@
 ﻿using System;
 using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
 
 namespace Set.Models
 {
@@ -11,17 +12,20 @@ namespace Set.Models
 
 
 		[PrimaryKey, AutoIncrement]
-		public int WorkoutID { get; set; }
+		public int WorkoutId { get; set; }
 
-        public int ExerciseID { get; set; }
+		[Indexed]
+		[ForeignKey(typeof(Exercise))]
+        public int ExerciseId { get; set; }
 
 		public DateTime Created { get; set; }
         public string Notes { get; set; }
 
         public int Reps { get; set; }
         public double Weight { get; set; }
-		      
-        public Exercise { get; set; }
+
+		[OneToOne]		      
+		public Exercise Exercise { get; set; }
 	}
 }
 
