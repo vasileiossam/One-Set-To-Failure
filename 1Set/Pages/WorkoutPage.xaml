@@ -11,22 +11,78 @@
                 WinPhone="5, 0, 5, 0" />
   </ContentPage.Padding>
 
+  - integer converter
+  - events
+  
   <ContentPage.Resources>
     <ResourceDictionary>
-      <local:DateTimeToStringConverter x:Key="dateConverter" />
+      <local:WeightMetricToImperialConverter x:Key="weightConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 
   <ContentPage.Content>
+    
+    <StackLayout Orientation="Vertical" >
+      <Label Text="{i18n:Translate Weight}" />
+      <StackLayout Orientation="Horizontal">
+        <Button Text="&#9660;" Clicked="OnWeightDownButtonClicked" x:Name="WeightDownButton" />
+        <Entry Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" x:Name="weightEntry" />
+        <Button Text="&#9650;" Clicked="OnWeightUpButtonClicked" x:Name="WeightUpButton" />
+      </StackLayout>
+    </StackLayout>
 
-    <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
+    <StackLayout Orientation="Vertical" >
+      <Label Text="{i18n:Translate Reps}" />
+      <StackLayout Orientation="Horizontal">
+        <Button Text="&#9660;" Clicked="OnWeightDownButtonClicked" x:Name="WeightDownButton" />
+        <Entry Text="{Binding Workout.Weight, Converter={StaticResource integerConverter}}" x:Name="repsEntry" /> <-- should be a drop down.. do we also have spin controls
+        <Button Text="&#9650;" Clicked="OnWeightUpButtonClicked" x:Name="WeightUpButton" />
+      </StackLayout>
+    </StackLayout>
+
+<!--
+    -----------------------------------------------------
+    Exercise title
+    -----------------------------------------------------
+    Previous (Reps / Weights)
+      100 / 100
+      unknown / unkown
+    ------------------------------
+    Goal +1 next weight level!              <- show the +1 goal and if we doing moving to next weight level
+       [UP] 10 /100                         <- tap here will fill
+                                            <- only show when new                
+    ------------------------------
+    Workout   
+      Reps
+        < [11] > +1                         <- +1 in relation with previous 
+    
+      Weights
+        < [100] >       
+   ------------------------------    
+            Done it!                      | when new, if saved change label to Save
+            Cancel                      
+
+- Merge goal and Workout?
+and use + and arrows to denote the increase?
+
+-  Suggseions?
+
+-->
+  Setting:
+    Done it! goes to next workout or only back
+      if goes to next then rest screen
+      
+  - have a rest calculator as an option (different page
+
+      
+    <StackLayout Orientation="Vertical" >
 
       <StackLayout Orientation="Horizontal">
-        <Button x:Name="PreviousDate" Text="&lt;" Clicked="OnPreviousDateClicked" />
+        
         <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
         <Button x:Name="NextDate" Text="&gt;" Clicked="OnNextDateClicked" />
       </StackLayout>
-
+      
       <ListView x:Name="workoutsList" ItemSelected="OnWorkoutSelected" IsGroupingEnabled="true">
 
         <ListView.GroupHeaderTemplate>
@@ -56,5 +112,6 @@
       </ListView>
 
     </StackLayout>
+
   </ContentPage.Content>
 </ContentPage>

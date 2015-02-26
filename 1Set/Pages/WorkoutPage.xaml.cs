@@ -33,6 +33,7 @@ namespace Set
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            BindingContext = ViewModel;
         }
 
         protected override void OnDisappearing()

@@ -1,5 +1,9 @@
 ﻿
      
+- score system
+ + for every new rep
+ - for every down
+ - 
 
        
                     <--- or create another table with setings for a day -->

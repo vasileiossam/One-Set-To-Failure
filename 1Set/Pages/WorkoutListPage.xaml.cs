@@ -57,9 +57,12 @@ namespace Set
         public void OnWorkoutSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var workout = e.SelectedItem as Workout;
+            var viewModel = new WorkoutViewModel();
+            viewModel.Workout = workout;
+
             var workoutPage = new WorkoutPage
             {
-                //BindingContext = new WorkoutViewModel(workout)
+                ViewModel = viewModel
             };
 
             Navigation.PushAsync(workoutPage);
