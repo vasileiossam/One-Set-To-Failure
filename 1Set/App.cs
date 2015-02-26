@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using System.Globalization;
 using Set.Models;
 using System.Reflection;
+using Set.Localization;
 
 namespace Set
 {
@@ -32,11 +33,7 @@ namespace Set
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-			var assembly = typeof(App).GetTypeInfo().Assembly;
-			foreach (var res in assembly.GetManifestResourceNames()) 
-				System.Diagnostics.Debug.WriteLine("found resource: " + res);
-
-			var mainNav = new NavigationPage (new WorkoutListPage ());
+			var mainNav = new NavigationPage (new ExerciseListPage ());
         	MainPage = mainNav;
 		}
 

@@ -40,7 +40,7 @@ namespace Set {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Set.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
+					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Set.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,6 +62,24 @@ namespace Set {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reps.
+        /// </summary>
+        internal static string Reps {
+            get {
+                return ResourceManager.GetString("Reps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Today.
         /// </summary>
         internal static string Today {
@@ -76,6 +94,33 @@ namespace Set {
         internal static string Tomorrow {
             get {
                 return ResourceManager.GetString("Tomorrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight.
+        /// </summary>
+        internal static string Weight {
+            get {
+                return ResourceManager.GetString("Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workout.
+        /// </summary>
+        internal static string Workout {
+            get {
+                return ResourceManager.GetString("Workout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workouts.
+        /// </summary>
+        internal static string Workouts {
+            get {
+                return ResourceManager.GetString("Workouts", resourceCulture);
             }
         }
         

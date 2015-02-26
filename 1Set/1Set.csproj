@@ -34,8 +34,6 @@
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Workout.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
-    <Compile Include="Abstract\ILocale.cs" />
-    <Compile Include="Abstract\L10n.cs" />
     <Compile Include="Pages\WorkoutPage.xaml.cs">
       <DependentUpon>WorkoutPage.xaml</DependentUpon>
     </Compile>
@@ -70,6 +68,14 @@
     </Compile>
     <Compile Include="Abstract\IRoutineDaysRepository.cs" />
     <Compile Include="Concrete\RoutineDaysRepository.cs" />
+    <Compile Include="ViewModels\ExerciseViewModel.cs" />
+    <Compile Include="Pages\ExerciseListPage.xaml.cs">
+      <DependentUpon>ExerciseListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ExerciseListViewModel.cs" />
+    <Compile Include="Localization\TranslateExtension.cs" />
+    <Compile Include="Localization\ILocale.cs" />
+    <Compile Include="Localization\L10n.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.3.4.6332\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.4.6332\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -101,6 +107,8 @@
     <Folder Include="Converters\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Resx\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\WorkoutPage.xaml">
@@ -109,14 +117,17 @@
     <EmbeddedResource Include="Pages\ExercisePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resx\AppResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\WorkoutListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resx\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ExerciseListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Threading;
-using Set.Abstract;
+using Set.Localization;
 
 [assembly:Dependency(typeof(Set.Locale_Android))]
 

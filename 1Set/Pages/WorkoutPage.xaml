@@ -35,30 +35,31 @@
       <Label Text="{i18n:Translate Reps}" />
       <StackLayout Orientation="Horizontal">
         <Button Text="&#9660;" Clicked="OnWeightDownButtonClicked" x:Name="WeightDownButton" />
-        <Entry Text="{Binding Workout.Weight, Converter={StaticResource integerConverter}}" x:Name="repsEntry" /> <-- should be a drop down.. do we also have spin controls
+        <Entry Text="{Binding Workout.Weight, Converter={StaticResource integerConverter}}" x:Name="repsEntry" /> 
         <Button Text="&#9650;" Clicked="OnWeightUpButtonClicked" x:Name="WeightUpButton" />
       </StackLayout>
     </StackLayout>
 
 <!--
-    -----------------------------------------------------
+    should be a drop down.. do we also have spin controls
+    *****************************************************
     Exercise title
-    -----------------------------------------------------
+    *****************************************************
     Previous (Reps / Weights)
       100 / 100
       unknown / unkown
-    ------------------------------
+    *****************************************************
     Goal +1 next weight level!              <- show the +1 goal and if we doing moving to next weight level
        [UP] 10 /100                         <- tap here will fill
                                             <- only show when new                
-    ------------------------------
+    *****************************************************
     Workout   
       Reps
         < [11] > +1                         <- +1 in relation with previous 
     
       Weights
         < [100] >       
-   ------------------------------    
+   *****************************************************
             Done it!                      | when new, if saved change label to Save
             Cancel                      
 
@@ -67,12 +68,14 @@ and use + and arrows to denote the increase?
 
 -  Suggseions?
 
--->
-  Setting:
+              Setting:
     Done it! goes to next workout or only back
       if goes to next then rest screen
       
   - have a rest calculator as an option (different page
+
+-->
+
 
       
     <StackLayout Orientation="Vertical" >
