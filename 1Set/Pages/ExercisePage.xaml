@@ -13,10 +13,34 @@
 
 	<ContentPage.Content>
 
-	<StackLayout Orientation="Vertical" >
-    	<Entry Placeholder="{i18n:Translate Title}" Text="{Binding Exercise.Title}" x:Name="titleEntry" />
+    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
+      <Entry Placeholder="{i18n:Translate ExerciseName}" Text="{Binding Exercise.Name}"/>
+      
+      <Label Text="{i18n:Translate TrainingProgram}"/>
+      
+      <Label x:Name="MonLabel" />
+      <Switch IsToggled="{Binding DoOnMon}" />
+      
+      <Label x:Name="TueLabel" />
+      <Switch IsToggled="{Binding DoOnTue}" />
+      
+      <Label x:Name="WedLabel" />
+      <Switch IsToggled="{Binding DoOnWed}" />
+      
+      <Label x:Name="ThuLabel" />
+      <Switch IsToggled="{Binding DoOnThu}" />
+      
+      <Label x:Name="FriLabel" />
+      <Switch IsToggled="{Binding DoOnFri}" />
+      
+      <Label x:Name="SatLabel" />
+      <Switch IsToggled="{Binding DoOnSat}" />
+      
+      <Label x:Name="SunLabel" />
+      <Switch IsToggled="{Binding DoOnSun}" />
     </StackLayout>
 
-	</ContentPage.Content>
+
+  </ContentPage.Content>
 </ContentPage>
 	 

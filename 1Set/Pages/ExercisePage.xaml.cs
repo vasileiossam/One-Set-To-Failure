@@ -29,11 +29,20 @@ namespace Set
 			InitializeComponent ();
 		}
 
-		protected async override void OnAppearing()
-		{
-			base.OnAppearing();
-			BindingContext = ViewModel;
-		}
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = ViewModel;
+
+            var dayNames = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
+            MonLabel.Text = dayNames[1];
+            TueLabel.Text = dayNames[2];
+            WedLabel.Text = dayNames[3];
+            ThuLabel.Text = dayNames[4];
+            FriLabel.Text = dayNames[5];
+            SatLabel.Text = dayNames[6];
+            SunLabel.Text = dayNames[0];
+        }
 
 		protected override void OnDisappearing()
 		{
