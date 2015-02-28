@@ -40,6 +40,19 @@ namespace Set
 			}
 		}
 
+		private ExercisesRepository _exercisesRepository;
+		public ExercisesRepository ExercisesRepository
+		{
+			get
+			{
+				if (_exercisesRepository == null)
+				{
+					_exercisesRepository = new ExercisesRepository(_connection);
+				}
+				return _exercisesRepository;
+			}
+		}
+
 		/// <summary>
 		/// if the database doesn't exist, it will create the database and all the tables.
 		/// </summary>

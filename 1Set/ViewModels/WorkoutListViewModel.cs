@@ -10,7 +10,11 @@ namespace Set.ViewModels
         private DateTime _currentDate;
         public DateTime CurrentDate
         {
-            set
+			get
+			{
+				return _currentDate;
+			}
+			set
             {
                 if (_currentDate != value)
                 {
@@ -18,10 +22,6 @@ namespace Set.ViewModels
                     OnPropertyChanged("CurrentDate");
                     LoadRoutine();
                 }
-            }
-            get
-            {
-                return _currentDate;
             }
         }
 

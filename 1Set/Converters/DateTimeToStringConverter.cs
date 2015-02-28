@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 using System.Diagnostics;
+using Set.Resx;
 
 namespace Set
 {

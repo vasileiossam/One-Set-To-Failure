@@ -5,6 +5,8 @@ using System.Globalization;
 using Set.Models;
 using System.Reflection;
 using Set.Localization;
+using Toasts.Forms.Plugin.Abstractions;
+using Set.Resx;
 
 namespace Set
 {
@@ -33,7 +35,7 @@ namespace Set
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-			var mainNav = new NavigationPage (new ExerciseListPage ());
+	    	var mainNav = new NavigationPage (new ExerciseListPage ());
         	MainPage = mainNav;
 		}
 
@@ -50,6 +52,12 @@ namespace Set
 		protected override void OnResume ()
 		{
 			// Handle when your app resumes
+		}
+
+		public static async void ShowToast(ToastNotificationType type, string header, string message)
+		{
+			var notificator = DependencyService.Get<IToastNotificator>();
+			bool tapped = await notificator.Notify(type, header, message, TimeSpan.FromSeconds(2));
 		}
 	}
 }

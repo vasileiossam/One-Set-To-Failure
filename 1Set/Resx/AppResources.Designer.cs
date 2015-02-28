@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Set {
+namespace Set.Resx {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace Set {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Set.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Set.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,6 +58,51 @@ namespace Set {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Exercise.
+        /// </summary>
+        internal static string AddExerciseTitle {
+            get {
+                return ResourceManager.GetString("AddExerciseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exercise or weight machine name.
+        /// </summary>
+        internal static string ExerciseLabel {
+            get {
+                return ResourceManager.GetString("ExerciseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please type an exercise name.
+        /// </summary>
+        internal static string ExerciseNameIsRequired {
+            get {
+                return ResourceManager.GetString("ExerciseNameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        internal static string NotesLabel {
+            get {
+                return ResourceManager.GetString("NotesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight increment or plate weight ({0}).
+        /// </summary>
+        internal static string PlateWeightLabel {
+            get {
+                return ResourceManager.GetString("PlateWeightLabel", resourceCulture);
             }
         }
         
@@ -94,6 +139,15 @@ namespace Set {
         internal static string Tomorrow {
             get {
                 return ResourceManager.GetString("Tomorrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training Program.
+        /// </summary>
+        internal static string TrainingProgram {
+            get {
+                return ResourceManager.GetString("TrainingProgram", resourceCulture);
             }
         }
         

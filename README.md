@@ -9,3 +9,6 @@ https://github.com/oysteinkrog/SQLite.Net-PCL
 
 Json.NET
 http://www.newtonsoft.com/json
+
+Toasts.Forms.Plugin
+https://github.com/EgorBo/Toasts.Forms.Plugin

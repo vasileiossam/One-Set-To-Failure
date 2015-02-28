@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="Set.ExercisePage"
 	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
 	Title="{Binding Title}">
@@ -11,35 +13,63 @@
 	            WinPhone="5, 0, 5, 0" />
 	</ContentPage.Padding>
 
+	<ContentPage.ToolbarItems>
+  		<ToolbarItem Icon="ic_action_accept.png" Order="Primary" Clicked="OnAcceptButtonClicked" x:Name = "AcceptButton"/>
+	</ContentPage.ToolbarItems>
+
 	<ContentPage.Content>
 
     <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
-      <Entry Placeholder="{i18n:Translate ExerciseName}" Text="{Binding Exercise.Name}"/>
-      
-      <Label Text="{i18n:Translate TrainingProgram}"/>
-      
-      <Label x:Name="MonLabel" />
-      <Switch IsToggled="{Binding DoOnMon}" />
-      
-      <Label x:Name="TueLabel" />
-      <Switch IsToggled="{Binding DoOnTue}" />
-      
-      <Label x:Name="WedLabel" />
-      <Switch IsToggled="{Binding DoOnWed}" />
-      
-      <Label x:Name="ThuLabel" />
-      <Switch IsToggled="{Binding DoOnThu}" />
-      
-      <Label x:Name="FriLabel" />
-      <Switch IsToggled="{Binding DoOnFri}" />
-      
-      <Label x:Name="SatLabel" />
-      <Switch IsToggled="{Binding DoOnSat}" />
-      
-      <Label x:Name="SunLabel" />
-      <Switch IsToggled="{Binding DoOnSun}" />
-    </StackLayout>
 
+	  <ContentView Padding="0, 10, 0, 0">
+      	<Entry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}"/>
+	  </ContentView>
+
+      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center"/>	
+      	<Label x:Name="PlateWeightStepperLabel" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center"/>	
+	  	<Stepper Minimum="0" Maximum="50" Increment="1" Value="{Binding Exercise.PlateWeight}" 
+		  	ValueChanged="OnPlateWeightStepperValueChanged" x:Name="PlateWeightStepper" VerticalOptions="Center"/>
+      </StackLayout>
+
+	  <ContentView Padding="0, 10, 0, 10">
+        <Label Text="{i18n:Translate TrainingProgram}" FontSize="Medium"/>	
+	  </ContentView>
+
+	  <Grid RowSpacing="0" HorizontalOptions="Start">
+		<Grid.RowDefinitions>
+		  <RowDefinition Height="*" />  
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+		  <ColumnDefinition Width="Auto" />
+		  <ColumnDefinition Width="150" />
+		</Grid.ColumnDefinitions>
+
+		<Label x:Name="MonLabel" Grid.Row="0" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnMon}" Grid.Row="0" Grid.Column="1"/>
+
+		<Label x:Name="TueLabel" Grid.Row="1" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnTue}" Grid.Row="1" Grid.Column="1"/>
+
+		<Label x:Name="WedLabel" Grid.Row="2" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnWed}" Grid.Row="2" Grid.Column="1"/>
+
+		<Label x:Name="ThuLabel" Grid.Row="3" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnThu}" Grid.Row="3" Grid.Column="1"/>
+
+		<Label x:Name="FriLabel" Grid.Row="4" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnFri}" Grid.Row="4" Grid.Column="1"/>
+
+		<Label x:Name="SatLabel" Grid.Row="5" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnSat}" Grid.Row="5" Grid.Column="1"/>
+
+		<Label x:Name="SunLabel" Grid.Row="6" Grid.Column="0"/>
+		<Switch IsToggled="{Binding DoOnSun}" Grid.Row="6" Grid.Column="1"/>
+	  </Grid>
+        
+	  <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Exercise.Notes}"/>
+    </StackLayout>
 
   </ContentPage.Content>
 </ContentPage>

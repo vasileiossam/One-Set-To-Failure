@@ -5,9 +5,9 @@ using Set.Abstract;
 
 namespace Set.Concrete
 {
-	public class ExerciseRepository : BaseRepository<Exercise>, IExercisesRepository
+	public class ExercisesRepository : BaseRepository<Exercise>, IExercisesRepository
 	{
-        public ExerciseRepository(SQLiteConnection connection)
+		public ExercisesRepository(SQLiteConnection connection)
 			: base(connection)
 		{
 

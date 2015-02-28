@@ -6,8 +6,23 @@ namespace Set.ViewModels
 {
 	public class ExerciseViewModel : BaseViewModel
 	{
-		public Exercise Exercise {get; set; }
-        
+		private Exercise _exercise;
+		public Exercise Exercise
+		{
+			get
+			{
+				if (_exercise == null)
+				{
+					_exercise = new Exercise();
+				}
+				return _exercise;
+			}
+			set
+			{
+				_exercise = value;
+			}
+		}
+
         public bool DoOnMon { get; set; }
         public bool DoOnTue { get; set; }
         public bool DoOnWed { get; set; }

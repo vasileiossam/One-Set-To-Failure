@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Set.ViewModels;
 using Xamarin.Forms;
+using Set.Resx;
 
 namespace Set
 {
@@ -16,7 +17,7 @@ namespace Set
 		{
 			var exercisePage = new ExercisePage
 			{
-				ViewModel = new ExerciseViewModel()
+				ViewModel = new ExerciseViewModel(){Title = AppResources.AddExerciseTitle}
 			};
 
 			Navigation.PushAsync(exercisePage);

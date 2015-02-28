@@ -5,6 +5,7 @@ using System.Resources;
 using System.Threading;
 using System.Globalization;
 using Xamarin.Forms;
+using Set.Resx;
 
 namespace Set.Localization
 {
@@ -32,6 +33,15 @@ namespace Set.Localization
 			string result = temp.GetString (key, new CultureInfo (netLanguage));
 
 			return result; 
+		}
+
+		public static string GetWeightUnit()
+		{
+			if (App.Settings.IsMetric == 1)
+			{
+				return "Kgs";
+			}
+			return "Lbs";
 		}
 	}
 }

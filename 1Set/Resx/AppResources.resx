@@ -144,7 +144,19 @@
   <data name="TrainingProgram" xml:space="preserve">
     <value>Training Program</value>
   </data>
-  <data name="ExerciseName" xml:space="preserve">
-    <value>Exercise Name</value>
+  <data name="ExerciseLabel" xml:space="preserve">
+    <value>Exercise or weight machine name</value>
+  </data>
+  <data name="NotesLabel" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="PlateWeightLabel" xml:space="preserve">
+    <value>Weight increment or plate weight ({0})</value>
+  </data>
+  <data name="AddExerciseTitle" xml:space="preserve">
+    <value>Add Exercise</value>
+  </data>
+    <data name="ExerciseNameIsRequired" xml:space="preserve">
+    <value>Please type an exercise name</value>
   </data>
 </root>
