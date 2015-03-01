@@ -63,18 +63,20 @@ namespace Set
 		{
 			if (string.IsNullOrWhiteSpace (ViewModel.Exercise.Name))
 			{
-				App.ShowToast (ToastNotificationType.Warning, "", AppResources.ExerciseNameIsRequired);
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseNameIsRequired);
 				return false;
 			}
 
 			return true;
 		}
 
-		public void OnAcceptButtonClicked(object sender, EventArgs args)
+		public void OnSaveButtonClicked(object sender, EventArgs args)
 		{
 			if (Validate ())
 			{
 				App.Database.ExercisesRepository.Save(ViewModel.Exercise);
+				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.ExerciseSaved);
+
 				this.Navigation.PopAsync();
 			}
 		}

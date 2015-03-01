@@ -135,6 +135,9 @@
   <data name="Workouts" xml:space="preserve">
     <value>Workouts</value>
   </data>
+  <data name="ExercisesTitle" xml:space="preserve">
+    <value>Exercises</value>
+  </data>
   <data name="Yesterday" xml:space="preserve">
     <value>Yesterday</value>
   </data>
@@ -156,7 +159,13 @@
   <data name="AddExerciseTitle" xml:space="preserve">
     <value>Add Exercise</value>
   </data>
-    <data name="ExerciseNameIsRequired" xml:space="preserve">
+  <data name="EditExerciseTitle" xml:space="preserve">
+    <value>Edit Exercise</value>
+  </data>
+  <data name="ExerciseNameIsRequired" xml:space="preserve">
     <value>Please type an exercise name</value>
+  </data>
+  <data name="ExerciseSaved" xml:space="preserve">
+    <value>Exercise saved</value>
   </data>
 </root>

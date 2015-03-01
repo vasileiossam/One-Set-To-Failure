@@ -3,6 +3,7 @@ using Set.Abstract;
 using SQLite.Net;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Set.Concrete
 {
@@ -22,12 +23,13 @@ namespace Set.Concrete
 			_connection = connection;
 		}
 
-		public IEnumerable<TEntity> All 
+		public ObservableCollection<TEntity> All 
 		{
 			get {
 				lock (_locker) {
-					return (from i in _connection.Table<TEntity> ()
-					       select i).ToList ();
+					var enumerable =  (from i in _connection.Table<TEntity> ()
+					       select i);
+					return new ObservableCollection<TEntity>(enumerable);
 				}
 			}
 		}

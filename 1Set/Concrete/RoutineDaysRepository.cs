@@ -33,5 +33,6 @@ namespace Set.Concrete
 				return _connection.Query<RoutineDay> (sql, (int)date.DayOfWeek);
 			}
 		}
+
 	}
 }

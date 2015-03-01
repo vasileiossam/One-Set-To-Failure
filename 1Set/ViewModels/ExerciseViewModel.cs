@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Set.Models;
+using System.Collections.ObjectModel;
 
 namespace Set.ViewModels
 {
@@ -34,6 +35,7 @@ namespace Set.ViewModels
 		public ExerciseViewModel ()
 		{
 		}
+
 	}
 }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using SQLite.Net.Attributes;
+using System.Collections.Generic;
+using SQLiteNetExtensions.Attributes;
 
 namespace Set.Models
 {
@@ -19,6 +21,9 @@ namespace Set.Models
 		public float PlateWeight {get; set; }
 
         public byte[] Image { get; set; }
+
+		[OneToMany]
+		public List<RoutineDay> RoutineDays {get; set;}
 	}
 }
 

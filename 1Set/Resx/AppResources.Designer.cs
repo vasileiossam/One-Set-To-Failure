@@ -71,6 +71,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Exercise.
+        /// </summary>
+        internal static string EditExerciseTitle {
+            get {
+                return ResourceManager.GetString("EditExerciseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exercise or weight machine name.
         /// </summary>
         internal static string ExerciseLabel {
@@ -85,6 +94,24 @@ namespace Set.Resx {
         internal static string ExerciseNameIsRequired {
             get {
                 return ResourceManager.GetString("ExerciseNameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exercise saved.
+        /// </summary>
+        internal static string ExerciseSaved {
+            get {
+                return ResourceManager.GetString("ExerciseSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exercises.
+        /// </summary>
+        internal static string ExercisesTitle {
+            get {
+                return ResourceManager.GetString("ExercisesTitle", resourceCulture);
             }
         }
         

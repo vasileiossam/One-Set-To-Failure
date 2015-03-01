@@ -1,6 +1,7 @@
 ﻿using System;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
+using System.Collections.Generic;
 
 namespace Set.Models
 {
