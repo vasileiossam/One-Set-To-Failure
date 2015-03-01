@@ -34,5 +34,17 @@ namespace Set.Concrete
 			}
 		}
 
+		public List<RoutineDay> GetRoutine(Exercise exercise)
+		{
+			lock (_locker)
+			{
+				var sql = @"SELECT *  
+                            FROM RoutineDays
+                            WHERE (RoutineDays.ExerciseId = ?)
+                            ORDER BY RoutineDays.DayOfWeek";
+
+				return _connection.Query<RoutineDay> (sql, exercise.ExerciseId);
+			}
+		}
 	}
 }

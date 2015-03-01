@@ -65,6 +65,7 @@ namespace Set
 				Exercise = e.SelectedItem as Exercise,
 				Title = AppResources.EditExerciseTitle
 			};
+			viewModel.LoadRoutine ();
 
 			var page = new ExercisePage
 			{

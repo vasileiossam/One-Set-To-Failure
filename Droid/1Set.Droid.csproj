@@ -87,6 +87,7 @@
     <Compile Include="Locale_Android.cs" />
     <Compile Include="SettingsStorage.cs" />
     <Compile Include="Renders\CustomButtonRender.cs" />
+    <Compile Include="Renders\CustomEntryRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

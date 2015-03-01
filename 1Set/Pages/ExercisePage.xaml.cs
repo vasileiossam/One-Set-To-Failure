@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Set.ViewModels;
+using Set.Models;
 using Xamarin.Forms;
 using Set.Localization;
 using Toasts.Forms.Plugin.Abstractions;
@@ -74,12 +75,15 @@ namespace Set
 		{
 			if (Validate ())
 			{
-				App.Database.ExercisesRepository.Save(ViewModel.Exercise);
+				ViewModel.Save();
+
 				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.ExerciseSaved);
 
 				this.Navigation.PopAsync();
 			}
 		}
+
+
 
 	}
 }

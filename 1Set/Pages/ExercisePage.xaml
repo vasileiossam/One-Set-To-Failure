@@ -19,7 +19,7 @@
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
 		  <ContentView Padding="0, 10, 0, 0">
-	      	<Entry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}" />
+	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}"/>
 		  </ContentView>
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">

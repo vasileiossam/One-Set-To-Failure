@@ -2,8 +2,10 @@
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using Set.Droid.Renders;
+using Set.Controls;
 
-[assembly: ExportRenderer (typeof (Button), typeof (CustomButtonRender))]
+[assembly: ExportRenderer (typeof (CustomButton), typeof (CustomButtonRender))]
+
 namespace Set.Droid.Renders
 {
 	public class CustomButtonRender : ButtonRenderer
@@ -17,7 +19,6 @@ namespace Set.Droid.Renders
 				Control.SetBackgroundResource (Resource.Drawable.ButtonBlue);
 			}
 		}
-
 
 	}
 }
