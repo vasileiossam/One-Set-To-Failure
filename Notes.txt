@@ -1,4 +1,14 @@
-﻿
+﻿- put icons in these too buttons for left and right
+   <Button x:Name="PreviousDate" Text="&lt;" Clicked="OnPreviousDateClicked" />
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
+        <Button x:Name="NextDate" Text="&gt;" Clicked="OnNextDateClicked" />
+
+- exercise list:
+  put days like
+  "title" on Mon, Tue and Wed
+
+- exercise groups?
+- exercise page: put save and delete buttons there
      
 - score system
  + for every new rep

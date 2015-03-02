@@ -129,7 +129,7 @@
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
   </data>
-  <data name="Workout" xml:space="preserve">
+  <data name="WorkoutTitle" xml:space="preserve">
     <value>Workout</value>
   </data>
   <data name="Workouts" xml:space="preserve">
@@ -167,5 +167,17 @@
   </data>
   <data name="ExerciseSaved" xml:space="preserve">
     <value>Exercise saved</value>
+  </data>
+  <data name="MinuteRestTimerDescription" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="MinutesRestTimerDescription" xml:space="preserve">
+    <value>mins</value>
+  </data>
+  <data name="SecondsRestTimerDescription" xml:space="preserve">
+    <value>secs</value>
+  </data>
+  <data name="ZeroSecsRestTimerDescription" xml:space="preserve">
+    <value>Hide rest timer</value>
   </data>
 </root>

@@ -20,14 +20,14 @@ namespace Set.ViewModels
                 {
                     _currentDate = value;
                     OnPropertyChanged("CurrentDate");
-                    LoadRoutine();
+                    LoadRoutineDays();
                 }
             }
         }
 
 		public List<RoutineDay> RoutineDays {get; set; }
 
-        private void LoadRoutine()
+        private void LoadRoutineDays()
         {
 			var routineDays = App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
 			var workouts = App.Database.WorkoutsRepository.GetWorkouts(_currentDate);

@@ -14,7 +14,12 @@
 	            WinPhone="5, 0, 5, 0" />
 	</ContentPage.Padding>
 
-	<ContentPage.Content>
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="ic_action_new.png" Order="Primary" Clicked="OnAddExerciseButtonClicked" x:Name = "AddExerciseButton"/>
+    <ToolbarItem Icon="ic_action_new.png" Order="Primary" Clicked="OnAddExerciseButtonClicked" x:Name = "AddExerciseButton"/>
+  </ContentPage.ToolbarItems>
+  
+  <ContentPage.Content>
 	  <ScrollView>
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 

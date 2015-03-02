@@ -35,7 +35,7 @@ namespace Set
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-	    	var mainNav = new NavigationPage (new ExerciseListPage ());
+	    	var mainNav = new NavigationPage (new WorkoutListPage ());
         	MainPage = mainNav;
 		}
 

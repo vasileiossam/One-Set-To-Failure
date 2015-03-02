@@ -56,9 +56,12 @@ namespace Set
 
         public void OnWorkoutSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var workout = e.SelectedItem as Workout;
-            var viewModel = new WorkoutViewModel();
-            viewModel.Workout = workout;
+            if (((ListView)sender).SelectedItem == null) return;
+
+            var viewModel = new WorkoutViewModel()
+            {
+                Workout = (e.SelectedItem as RoutineDay).Workout
+            };
 
             var workoutPage = new WorkoutPage
             {
@@ -66,6 +69,9 @@ namespace Set
             };
 
             Navigation.PushAsync(workoutPage);
+
+			// deselect row
+			((ListView)sender).SelectedItem = null;
         }
 
 	}

@@ -11,12 +11,11 @@
                 WinPhone="5, 0, 5, 0" />
   </ContentPage.Padding>
 
-  - integer converter
-  - events
-  
   <ContentPage.Resources>
     <ResourceDictionary>
+      <local:DateTimeToStringConverter x:Key="dateConverter" />
       <local:WeightMetricToImperialConverter x:Key="weightConverter" />
+      <local:IntToStringConverter x:Key="intToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 

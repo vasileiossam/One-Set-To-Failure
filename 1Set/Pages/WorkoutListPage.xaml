@@ -14,6 +14,8 @@
   <ContentPage.Resources>
     <ResourceDictionary>
       <local:DateTimeToStringConverter x:Key="dateConverter" />
+      <local:WeightMetricToImperialConverter x:Key="weightConverter" />
+      <local:IntToStringConverter x:Key="intToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
   
@@ -27,29 +29,19 @@
         <Button x:Name="NextDate" Text="&gt;" Clicked="OnNextDateClicked" />
       </StackLayout>
 
-      <ListView x:Name="workoutsList" ItemSelected="OnWorkoutSelected" IsGroupingEnabled="true">
-        
-        <ListView.GroupHeaderTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                <Label Text="{Binding Title}" YAlign="Center" />
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.GroupHeaderTemplate>
-        
+      <ListView ItemSelected="OnWorkoutSelected" x:Name="workoutsList" HasUnevenRows="true">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                <Image WidthRequest="44" HeightRequest="44" Source="{Binding Image}" />
-                <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                  <Label Text="{Binding Name}" YAlign="Center" Font="Medium" />
-                  <Label Text="{Binding Reps}" YAlign="Center" Font="Medium" />
-                  <Label Text="{Binding Weight}" YAlign="Center" Font="Medium" />
+              <ViewCell.View>
+                <StackLayout Padding="10,10,0,0" HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                  <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Medium" />
+                  <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                    <Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Medium" />
+                    <Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Medium" />
+                  </StackLayout>
                 </StackLayout>
-              </StackLayout>
+              </ViewCell.View>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>

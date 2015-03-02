@@ -16,6 +16,9 @@ namespace Set
         public object Convert(object value, Type targetType,
                               object parameter, CultureInfo culture)
         {
+            if (value == null) return string.Empty;
+            if (value == 0) return string.Empty;
+
             // metric to metric
             // we always store weight in metric (Kg), if we are already in metric no conversion is needed
 			if (App.Settings.IsMetric == 1)

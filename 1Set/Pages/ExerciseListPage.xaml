@@ -25,9 +25,9 @@
 	            	<ViewCell.View>
 	                <StackLayout Padding="10,10,0,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
 	                	<Label Text="{Binding Name}" YAlign="Center" FontSize="Medium" />
-						<Label Text="{Binding Notes}" YAlign="Center" TextColor="Gray"/>        
-					</StackLayout>
-					</ViewCell.View>
+						        <Label Text="{Binding Notes}" YAlign="Center" TextColor="Gray"/>        
+					        </StackLayout>
+					      </ViewCell.View>
 	            </ViewCell>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>

@@ -33,6 +33,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Workout.cs" />
+    <Compile Include="Models\RestTimer.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
     <Compile Include="Pages\WorkoutPage.xaml.cs">
       <DependentUpon>WorkoutPage.xaml</DependentUpon>
@@ -53,6 +54,7 @@
     <Compile Include="ViewModels\WorkoutListViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Resx\AppResources.Designer.cs">
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
