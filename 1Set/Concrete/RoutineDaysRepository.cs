@@ -3,7 +3,7 @@ using Set.Models;
 using SQLite.Net;
 using Set.Abstract;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace Set.Concrete
 {
@@ -24,13 +24,15 @@ namespace Set.Concrete
 		{
 			lock (_locker)
 			{
-				var sql = @"SELECT *  
-                            FROM RoutineDays
-                            INNER JOIN Exercises ON Exercises.ExerciseId = RoutineDays.ExerciseId
-                            WHERE (RoutineDays.DayOfWeek = ?) AND (RoutineDays.IsActive = 1)
-                            ORDER BY RoutineDays.RowNumber, RoutineDays.ExerciseId";
+//				var sql = @"SELECT *  
+//                            FROM RoutineDays
+//                            INNER JOIN Exercises ON Exercises.ExerciseId = RoutineDays.ExerciseId
+//                            WHERE (RoutineDays.DayOfWeek = ?) AND (RoutineDays.IsActive = 1)
+//                            ORDER BY RoutineDays.RowNumber, RoutineDays.ExerciseId";
+//
+//				return _connection.Query<RoutineDay> (sql, (int)date.DayOfWeek);
 
-				return _connection.Query<RoutineDay> (sql, (int)date.DayOfWeek);
+				return All.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToList ();
 			}
 		}
 

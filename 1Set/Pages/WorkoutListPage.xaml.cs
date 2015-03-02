@@ -37,21 +37,12 @@ namespace Set
         {
             base.OnAppearing();
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
+			PreviousDate.BackgroundColor = Color.Default;
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-        }
-
-        public void OnPreviousDateClicked(object sender, EventArgs args)
-        {
-            ViewModel.CurrentDate.AddDays(-1);
-        }
-
-        public void OnNextDateClicked(object sender, EventArgs args)
-        {
-            ViewModel.CurrentDate.AddDays(1);
         }
 
         public void OnWorkoutSelected(object sender, SelectedItemChangedEventArgs e)
@@ -74,6 +65,15 @@ namespace Set
 			((ListView)sender).SelectedItem = null;
         }
 
+		public void OnExercisesButtonClicked(object sender, EventArgs args)
+		{
+			Navigation.PushAsync( new ExerciseListPage());
+		}
+
+		public void OnSettingsButtonClicked(object sender, EventArgs args)
+		{
+			Navigation.PushAsync( new SettingsPage());
+		}
 	}
 }
 

@@ -180,4 +180,7 @@
   <data name="ZeroSecsRestTimerDescription" xml:space="preserve">
     <value>Hide rest timer</value>
   </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

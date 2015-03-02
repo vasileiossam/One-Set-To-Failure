@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Collections.Generic;
+using Set.Resx;
 
 namespace Set.Models
 {
@@ -13,7 +15,7 @@ namespace Set.Models
             get
             {
                 var list = new List<RestTimer>();
-                list.Add(new RestTimer() { Description = AppResources.ZeroSecsRestTimerDescription, Seconds = 0 });
+				list.Add(new RestTimer() { Description = AppResources.ZeroSecsRestTimerDescription, Seconds = 0 });
                 
                 list.Add(new RestTimer() { Description = "30 " + AppResources.SecondsRestTimerDescription, Seconds = 30 });
                 list.Add(new RestTimer() { Description = "45 " + AppResources.SecondsRestTimerDescription, Seconds = 45 });

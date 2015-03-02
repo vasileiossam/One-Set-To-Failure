@@ -1,4 +1,7 @@
-﻿- put icons in these too buttons for left and right
+﻿- workoutpagelist
+  replace the labels chevrons with buttons because their not responsive? // try with button
+
+- put icons in these too buttons for left and right
    <Button x:Name="PreviousDate" Text="&lt;" Clicked="OnPreviousDateClicked" />
         <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
         <Button x:Name="NextDate" Text="&gt;" Clicked="OnNextDateClicked" />

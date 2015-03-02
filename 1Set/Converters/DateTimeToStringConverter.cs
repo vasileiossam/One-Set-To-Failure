@@ -32,7 +32,7 @@ namespace Set
                     }
 
             // return date with default culture formatting
-            return date.ToString();
+			return date.ToString("D");
         }
 
 

@@ -2,6 +2,7 @@ using System;
 using SQLite.Net.Attributes;
 using Set.Models;
 using System.Collections.Generic;
+using Set.Resx;
 
 namespace Set.ViewModels
 {
@@ -16,7 +17,7 @@ namespace Set.ViewModels
 
         public void Save()
         {
-            App.Database.ExercisesRepository.Save(Workout);
+            App.Database.WorkoutsRepository.Save(Workout);
         }
     }
 }

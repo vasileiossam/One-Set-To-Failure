@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Set;assembly=1Set"
+			 xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
              x:Class="Set.WorkoutListPage"
              Title="{Binding Title}">
 
   <ContentPage.Padding>
     <OnPlatform x:TypeArguments="Thickness"
                 iOS="5, 20, 5, 0"
-                Android="5, 0, 5, 0"
+                Android="0, 0, 0, 0"
                 WinPhone="5, 0, 5, 0" />
   </ContentPage.Padding>
 
@@ -18,16 +19,35 @@
       <local:IntToStringConverter x:Key="intToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
-  
+
+	<ContentPage.ToolbarItems>
+  		<ToolbarItem Name="{i18n:Translate ExercisesTitle}" Order="Secondary" Clicked="OnExercisesButtonClicked" Priority="0" x:Name = "ExercisesButton"/>
+  		<ToolbarItem Name="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Clicked="OnSettingsButtonClicked" Priority="1" x:Name = "SettingsButton"/>
+	</ContentPage.ToolbarItems>
+
   <ContentPage.Content>
     
-    <StackLayout Orientation="Vertical" >
+    <StackLayout Orientation="Vertical" Padding="0,0,0,0">
       
-      <StackLayout Orientation="Horizontal">
-        <Button x:Name="PreviousDate" Text="&lt;" Clicked="OnPreviousDateClicked" />
-        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
-        <Button x:Name="NextDate" Text="&gt;" Clicked="OnNextDateClicked" />
+      <StackLayout Orientation="Horizontal" Padding="15,8,15,8">
+        
+        <Label Text="  &lt;  " TextColor="#0099CC" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Start" x:Name="PreviousDate">
+			<Label.GestureRecognizers>
+				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Left" />
+			</Label.GestureRecognizers>
+        </Label> 
+
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Medium" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center"/>
+
+        <Label  Text="  &gt;  " TextColor="#0099CC" FontSize="Large" FontAttributes="Bold" HorizontalOptions="End" x:Name="NextDate">
+			<Label.GestureRecognizers>
+				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Right" />
+			</Label.GestureRecognizers>
+		</Label> 
+
       </StackLayout>
+
+      <BoxView HeightRequest="2" Color="#0099CC"/>
 
       <ListView ItemSelected="OnWorkoutSelected" x:Name="workoutsList" HasUnevenRows="true">
         <ListView.ItemTemplate>

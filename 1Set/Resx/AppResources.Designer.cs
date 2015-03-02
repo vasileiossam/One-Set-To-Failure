@@ -116,6 +116,24 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to min.
+        /// </summary>
+        internal static string MinuteRestTimerDescription {
+            get {
+                return ResourceManager.GetString("MinuteRestTimerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mins.
+        /// </summary>
+        internal static string MinutesRestTimerDescription {
+            get {
+                return ResourceManager.GetString("MinutesRestTimerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notes.
         /// </summary>
         internal static string NotesLabel {
@@ -139,6 +157,24 @@ namespace Set.Resx {
         internal static string Reps {
             get {
                 return ResourceManager.GetString("Reps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to secs.
+        /// </summary>
+        internal static string SecondsRestTimerDescription {
+            get {
+                return ResourceManager.GetString("SecondsRestTimerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         
@@ -188,15 +224,6 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Workout.
-        /// </summary>
-        internal static string Workout {
-            get {
-                return ResourceManager.GetString("Workout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Workouts.
         /// </summary>
         internal static string Workouts {
@@ -206,11 +233,29 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Workout.
+        /// </summary>
+        internal static string WorkoutTitle {
+            get {
+                return ResourceManager.GetString("WorkoutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yesterday.
         /// </summary>
         internal static string Yesterday {
             get {
                 return ResourceManager.GetString("Yesterday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide rest timer.
+        /// </summary>
+        internal static string ZeroSecsRestTimerDescription {
+            get {
+                return ResourceManager.GetString("ZeroSecsRestTimerDescription", resourceCulture);
             }
         }
     }

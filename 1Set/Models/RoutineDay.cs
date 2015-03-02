@@ -16,6 +16,7 @@ namespace Set.Models
 		[PrimaryKey, AutoIncrement]
 		public int RoutineDayId { get; set; }
 
+		[Indexed]
 		[ForeignKey(typeof(Exercise))]
         public int ExerciseId { get; set; }        
         

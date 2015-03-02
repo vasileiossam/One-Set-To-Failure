@@ -1,12 +1,26 @@
-using System;
+﻿using System;
 using SQLite.Net.Attributes;
 using Set.Models;
+using System.Windows.Input;
+using Xamarin.Forms;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 namespace Set.ViewModels
 {
-    public class WorkoutListViewModel : BaseViewModel
+	public class WorkoutListViewModel : BaseViewModel
     {
+		private ICommand _chevronTapCommand;
+		public ICommand ChevronTapCommand
+		{
+			get
+			{
+				return _chevronTapCommand;
+			}
+		}
+
         private DateTime _currentDate;
         public DateTime CurrentDate
         {
@@ -26,6 +40,13 @@ namespace Set.ViewModels
         }
 
 		public List<RoutineDay> RoutineDays {get; set; }
+
+		public WorkoutListViewModel ()
+		{
+			Title = "One Set To Exhaustion";
+
+			_chevronTapCommand = new Command (OnChevronTapCommand);
+		}
 
         private void LoadRoutineDays()
         {
@@ -48,6 +69,17 @@ namespace Set.ViewModels
 			}
         }
 
+		private void OnChevronTapCommand (object s) 
+		{
+			if ((string)s == "Left")
+			{
+				CurrentDate = CurrentDate.AddDays (-1);
+			} 
+			else
+			{
+				CurrentDate = CurrentDate.AddDays (1);
+			}
+		}
     }
 }
 
