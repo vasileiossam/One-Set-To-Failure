@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Set.Models
 {
 	public class Settings
     {
         #region Defaults
-        const int DefaultIsMetric = RegionInfo.CurrentRegion.IsMetric ? 1 : 0;
+        int DefaultIsMetric = RegionInfo.CurrentRegion.IsMetric ? 1 : 0;
         const int DefaultRepsToAdvance = 12;
         const int DefaultStartingReps = 5;
         
@@ -73,15 +74,14 @@ namespace Set.Models
             }
         }
         
-
-        public RestTimer _restTimer;
+		public RestTimer _restTimer;
         public RestTimer RestTimer
         {
             get
             {
                 if (_restTimer == null)
                 {
-                    _restTimer = new RestTimer() { Seconds = 60 }; <- iid
+					_restTimer = App.Database.RestTimers.FirstOrDefault (x => x.Seconds == 60);
                 }
                 return _restTimer;
             }
@@ -90,6 +90,24 @@ namespace Set.Models
                 _restTimer = value;
             }
         }
+
+		// workout goal: how many reps to do more in every workout
+		public RepsIncrement _repsIncrement;
+		public RepsIncrement RepsIncrement
+		{
+			get
+			{
+				if (_repsIncrement == null)
+				{
+					_repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == 1);
+				}
+				return _repsIncrement;
+			}
+			set
+			{
+				_repsIncrement = value;
+			}
+		}
         #endregion
 
         public Settings ()

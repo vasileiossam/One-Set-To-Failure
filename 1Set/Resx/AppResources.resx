@@ -183,4 +183,7 @@
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="RepsIncrementDescription" xml:space="preserve">
+    <value>+{0} every {0} workouts</value>
+  </data>
 </root>

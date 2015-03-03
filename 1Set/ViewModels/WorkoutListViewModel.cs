@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Set.ViewModels
 {
@@ -39,7 +40,7 @@ namespace Set.ViewModels
             }
         }
 
-		public List<RoutineDay> RoutineDays {get; set; }
+		public ObservableCollection<RoutineDay> RoutineDays {get; set; }
 
 		public WorkoutListViewModel ()
 		{
@@ -66,7 +67,12 @@ namespace Set.ViewModels
 				} 
 
 				day.Workout = workout;
+
+				// I couldn't make the relationship work with SQLite-Net Extensions...
+				day.Exercise = App.Database.ExercisesRepository.Find (day.ExerciseId);
 			}
+
+			RoutineDays = new ObservableCollection<RoutineDay>(routineDays);
         }
 
 		private void OnChevronTapCommand (object s) 

@@ -1,11 +1,92 @@
-﻿http://forums.xamarin.com/discussion/20117/sqlite-net-extensions-and-sqliteconnection
+﻿   <StackLayout Orientation="Vertical" >
+      <Label Text="{i18n:Translate Reps}" />
+      <StackLayout Orientation="Horizontal">
+        <Button Text="&#9660;" Clicked="OnWeightDownButtonClicked" x:Name="WeightDownButton1" />
+        <Entry Text="{Binding Workout.Weight, Converter={StaticResource integerConverter}}" x:Name="repsEntry" /> 
+        <Button Text="&#9650;"  x:Name="WeightUpButton1" />
+      </StackLayout>
+    </StackLayout>
+<!--
+    should be a drop down.. do we also have spin controls
+    *****************************************************
+    Exercise title
+    *****************************************************
+    Previous (Reps / Weights)
+      100 / 100
+      unknown / unkown
+    *****************************************************
+    Goal +1 next weight level!              <- show the +1 goal and if we doing moving to next weight level
+       [UP] 10 /100                         <- tap here will fill
+                                            <- only show when new                
+    *****************************************************
+    Workout   
+      Reps
+        < [11] > +1                         <- +1 in relation with previous 
+    
+      Weights
+        < [100] >       
+   *****************************************************
+            Done it!                      | when new, if saved change label to Save
+            Cancel                      
+
+- Merge goal and Workout?
+and use + and arrows to denote the increase?
+
+-  Suggseions?
+
+              Setting:
+    Done it! goes to next workout or only back
+      if goes to next then rest screen
+      
+  - have a rest calculator as an option (different page
+
+-->
+
+<!--
+      
+    <StackLayout Orientation="Vertical" >
+
+      <StackLayout Orientation="Horizontal">
+        
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
+        <Button x:Name="NextDate" Text=""  />
+      </StackLayout>
+      
+      <ListView x:Name="workoutsList" ItemSelected="OnWorkoutSelected" IsGroupingEnabled="true">
+
+        <ListView.GroupHeaderTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                <Label Text="{Binding Title}" YAlign="Center" />
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                <Image WidthRequest="44" HeightRequest="44" Source="{Binding Image}" />
+                <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                  <Label Text="{Binding Name}" YAlign="Center" Font="Medium" />
+                  <Label Text="{Binding Reps}" YAlign="Center" Font="Medium" />
+                  <Label Text="{Binding Weight}" YAlign="Center" Font="Medium" />
+                </StackLayout>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+    </StackLayout>-->
+
+http://forums.xamarin.com/discussion/20117/sqlite-net-extensions-and-sqliteconnection
 http://www.codeproject.com/Articles/792883/Using-Sqlite-in-a-Xamarin-Android-Application-Deve
 http://stackoverflow.com/questions/24665304/sqlite-net-extensions-example-on-xamarin-forms                  
 
 - workoutpage list
-  - replace the labels chevrons with images because their not responsive? 
-  - or use the blue button?
-
   - find active routines for the day
 	-if one then display extersises in routine and dont display routine header
 	- if more than one display first a header for routnine and then display extersies
@@ -17,6 +98,8 @@ http://stackoverflow.com/questions/24665304/sqlite-net-extensions-example-on-xam
 			- display the program (what I have to do)
 			- display what I DID
  			- allow workout without routine
+
+ - day notes, workout notes?
 
 - exercise list:
   - put days like "title" on Mon, Tue and Wed

@@ -161,6 +161,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to +{0} every {0} workouts.
+        /// </summary>
+        internal static string RepsIncrementDescription {
+            get {
+                return ResourceManager.GetString("RepsIncrementDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to secs.
         /// </summary>
         internal static string SecondsRestTimerDescription {

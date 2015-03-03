@@ -28,16 +28,15 @@ namespace Set
         public WorkoutListPage()
 		{
 			this.InitializeComponent ();
-            
-            ViewModel.CurrentDate = DateTime.Today;
-            this.BindingContext = ViewModel;
+			this.BindingContext = ViewModel;
 		}
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+			ViewModel.CurrentDate = DateTime.Today;
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
-			PreviousDate.BackgroundColor = Color.Default;
         }
 
         protected override void OnDisappearing()

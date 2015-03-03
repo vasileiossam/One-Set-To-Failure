@@ -31,20 +31,19 @@
       
       <StackLayout Orientation="Horizontal" Padding="15,8,15,8">
         
-        <Label Text="  &lt;  " TextColor="#0099CC" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Start" x:Name="PreviousDate">
-			<Label.GestureRecognizers>
+        <Image Source="ic_fa_chevron_left" HorizontalOptions="Start">
+			<Image.GestureRecognizers>
 				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Left" />
-			</Label.GestureRecognizers>
-        </Label> 
+			</Image.GestureRecognizers>
+        </Image>
 
-        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Medium" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center"/>
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center"/>
 
-        <Label  Text="  &gt;  " TextColor="#0099CC" FontSize="Large" FontAttributes="Bold" HorizontalOptions="End" x:Name="NextDate">
-			<Label.GestureRecognizers>
-				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Right" />
-			</Label.GestureRecognizers>
-		</Label> 
-
+		<Image Source="ic_fa_chevron_right"  HorizontalOptions="End">
+			<Image.GestureRecognizers>
+				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Left" />
+			</Image.GestureRecognizers>
+		</Image>
       </StackLayout>
 
       <BoxView HeightRequest="2" Color="#0099CC"/>
@@ -54,12 +53,15 @@
           <DataTemplate>
             <ViewCell>
               <ViewCell.View>
-                <StackLayout Padding="10,10,0,0" HorizontalOptions="StartAndExpand" Orientation="Vertical">
-                  <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Medium" />
+                <StackLayout Padding="50,10,0,0" HorizontalOptions="StartAndExpand" Orientation="Vertical">
+
+                  <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" />
+
                   <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                    <Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Medium" />
-                    <Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Medium" />
+                    <Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
+                    <Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
                   </StackLayout>
+
                 </StackLayout>
               </ViewCell.View>
             </ViewCell>

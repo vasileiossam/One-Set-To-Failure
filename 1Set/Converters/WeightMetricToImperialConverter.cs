@@ -17,7 +17,7 @@ namespace Set
                               object parameter, CultureInfo culture)
         {
             if (value == null) return string.Empty;
-			if ((int) value == 0) return string.Empty;
+			if ((double) value == 0) return string.Empty;
 
             // metric to metric
             // we always store weight in metric (Kg), if we are already in metric no conversion is needed
