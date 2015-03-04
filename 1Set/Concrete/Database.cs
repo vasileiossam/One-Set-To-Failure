@@ -89,7 +89,7 @@ namespace Set
 		/// <summary>
 		///    +1
 		///    +2
-		///    +1 every 2 workouts
+		///    +1 every other workout
         ///    +1 every 3 workouts
         ///    +1 every 4 workouts
 		/// </summary>
@@ -102,12 +102,13 @@ namespace Set
 				if (_repsIncrements == null)
 				{
 					_repsIncrements = new List<RepsIncrement>();
-
-					_repsIncrements.Add(new RepsIncrement(1, 1, 0));
-					_repsIncrements.Add(new RepsIncrement(2, 2, 0));
-					_repsIncrements.Add(new RepsIncrement(3, 1, 2));
-					_repsIncrements.Add(new RepsIncrement(4, 1, 3));
-					_repsIncrements.Add(new RepsIncrement(5, 1, 4));
+                    
+                    _repsIncrements.Add(new RepsIncrement(1, 0, 0));
+					_repsIncrements.Add(new RepsIncrement(2, 1, 0));
+					_repsIncrements.Add(new RepsIncrement(3, 2, 0));
+					_repsIncrements.Add(new RepsIncrement(4, 1, 2));
+					_repsIncrements.Add(new RepsIncrement(5, 1, 3));
+					_repsIncrements.Add(new RepsIncrement(6, 1, 4));
 				}
 				return _repsIncrements;
 			}

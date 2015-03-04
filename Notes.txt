@@ -133,3 +133,15 @@ http://stackoverflow.com/questions/24665304/sqlite-net-extensions-example-on-xam
                     <--- maybe we need the routine after all
 
 - idea: ability to print a routine or weekly program. call it old school printout or export in a txt file.
+
+
+
+- research: 1) development in iphone watch 2) ideas?
+- idea: fitness log platform
+  - search: https://www.google.com.au/search?q=fitness+log&ie=utf-8&oe=utf-8&gws_rd=cr&ei=Vmj2VLr0A6TDmwXPzoC4AQ
+  - user can havily customize it
+  - can log any sport or fitness activity: walking, swiming, weights ec
+  - has its own API
+  - uses other APIs like fitbit
+  - its mobile, web and watch
+  - can convert activity to steps

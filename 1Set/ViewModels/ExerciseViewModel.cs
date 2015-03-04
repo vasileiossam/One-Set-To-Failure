@@ -25,7 +25,7 @@ namespace Set.ViewModels
 				_exercise = value;
 			}
 		}
-
+        
         public bool DoOnMon { get; set; }
         public bool DoOnTue { get; set; }
         public bool DoOnWed { get; set; }
@@ -36,7 +36,7 @@ namespace Set.ViewModels
 
 		public ExerciseViewModel ()
 		{
-			_routineDays = new List<RoutineDay>();
+		    routineDays = new List<RoutineDay>();
 		}
 
 		public void LoadRoutine()
@@ -54,7 +54,7 @@ namespace Set.ViewModels
 
 		public void Save()
 		{
-			App.Database.ExercisesRepository.Save(Exercise);
+            App.Database.ExercisesRepository.Save(Exercise);
 			SaveRoutine ();
 		}
 

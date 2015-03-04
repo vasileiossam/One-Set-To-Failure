@@ -43,7 +43,7 @@ namespace Set.Concrete
 			}
 		}
 
-		public int Save (TEntity entity) 
+		public virtual int Save (TEntity entity) 
 		{
 			lock (_locker) 
 			{

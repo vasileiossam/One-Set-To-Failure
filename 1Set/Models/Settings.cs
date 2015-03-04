@@ -19,7 +19,7 @@ namespace Set.Models
         const int DefaultWorkoutGoalId = 1;
         #endregion
 
-        public int? _isMetric;
+        protected int? _isMetric;
 		public int IsMetric 
 		{ 
 			get 
@@ -39,7 +39,7 @@ namespace Set.Models
         
         // if you do  more than this Reps you will advance to next weight
         // values 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18...50
-        public int? _repsForWeightUp;
+        protected int? _repsForWeightUp;
         public int RepsForWeightUp
         {
             get
@@ -58,7 +58,7 @@ namespace Set.Models
 
         // if you do less than this Reps you will go to previous weight
         // values 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18...50
-        public int? _repsForWeightDn;
+        protected int? _repsForWeightDn;
         public int RepsForWeightDn
         {
             get
@@ -77,7 +77,7 @@ namespace Set.Models
 
         // reps when starting training on a weight for the first time
         // values 0..50
-        public int? _startingReps;
+        protected int? _startingReps;
         public int StartingReps
         {
             get
@@ -93,8 +93,8 @@ namespace Set.Models
                 _startingReps = value;
             }
         }
-        
-		public RestTimer _restTimer;
+
+        protected RestTimer _restTimer;
         public RestTimer RestTimer
         {
             get
@@ -112,14 +112,14 @@ namespace Set.Models
         }
 
 		// workout goal: how many reps to do more in every workout
-		public RepsIncrement _repsIncrement;
+        protected RepsIncrement _repsIncrement;
 		public RepsIncrement RepsIncrement
 		{
 			get
 			{
 				if (_repsIncrement == null)
 				{
-					_repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == 1);
+                    _repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x => (x.WorkoutCount == 0) && (x.Increment == 1));
 				}
 				return _repsIncrement;
 			}

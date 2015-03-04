@@ -184,7 +184,7 @@
     <value>Settings</value>
   </data>
   <data name="RepsIncrementDescription" xml:space="preserve">
-    <value>+{0} every {0} workouts</value>
+    <value>+{0} in every {0} workouts</value>
   </data>
   <data name="PreviousRepsTitle" xml:space="preserve">
     <value>Previous</value>
@@ -197,5 +197,14 @@
   </data>
   <data name="WeightAbbreviation" xml:space="preserve">
     <value>W</value>
+  </data>
+  <data name="RepsIncrementEveryOtherTimeDescription" xml:space="preserve">
+    <value>+{0} every other time</value>
+  </data>
+  <data name="RepsIncrementZeroWorkCountDescr" xml:space="preserve">
+    <value>+{0} in every workout</value>
+  </data>
+  <data name="RepsIncrementDisabledDescr" xml:space="preserve">
+    <value>No increment</value>
   </data>
 </root>

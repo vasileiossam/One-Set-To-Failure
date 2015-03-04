@@ -12,13 +12,23 @@ namespace Set.Models
 		public string Description 
 		{ 
 			get 
-			{ 
+			{
+                if ((WorkoutCount == 0) && (Increment == 0))
+                {
+                    return AppResources.RepsIncrementDisabledDescr;
+                }
+                else
 				if (WorkoutCount == 0)
 				{
-					return "+" + Increment.ToString ();
+                    return string.Format(AppResources.RepsIncrementZeroWorkCountDescr, Increment);
 				} 
 				else
 				{
+                    if (WorkoutCount == 2)
+                    {
+                        return string.Format(AppResources.RepsIncrementEveryOtherTimeDescription, Increment);
+                    }
+                        
 					return string.Format (AppResources.RepsIncrementDescription, Increment, WorkoutCount);
 				}
 			} 
