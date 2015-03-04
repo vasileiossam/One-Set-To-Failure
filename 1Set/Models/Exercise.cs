@@ -2,6 +2,7 @@
 using SQLite.Net.Attributes;
 using System.Collections.Generic;
 using SQLiteNetExtensions.Attributes;
+using System.Linq;
 
 namespace Set.Models
 {
@@ -113,7 +114,7 @@ namespace Set.Models
         {
             get
             {
-                return App.Database.RestTimer.FirstOrDefault(RestTimerId);
+				return App.Database.RestTimers.FirstOrDefault(x => x.RestTimerId == RestTimerId);
             }
         }
 
@@ -122,7 +123,7 @@ namespace Set.Models
         {
             get
             {
-                return App.Database.RepsIncrements.FirstOrDefault(RepsIncrementId);
+				return App.Database.RepsIncrements.FirstOrDefault(x=> x.RepsIncrementId == RepsIncrementId);
             }
         } 
 

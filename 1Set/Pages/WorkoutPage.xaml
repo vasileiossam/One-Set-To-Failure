@@ -50,7 +50,7 @@
         </StackLayout>
 
 
-        zzzzzzzzzzzzzzzzzzz
+
         <StackLayout Orientation="Vertical" >
       <Label Text="{i18n:Translate Weight}" />
       <StackLayout Orientation="Horizontal">

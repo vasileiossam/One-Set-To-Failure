@@ -2,6 +2,8 @@ using System;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
+using Set.Models;
+using System.Linq;
 
 namespace Set
 {
@@ -13,7 +15,7 @@ namespace Set
         }
 
 
-        public bool IsDivisible(int x, int n)
+		private static bool IsDivisible(int x, int n)
         {
            return (x % n) == 0;
         }        
@@ -38,7 +40,7 @@ namespace Set
             return 0;
         }
 
-        private bool CanCalculateTarget(Workout workout)
+        private static bool CanCalculateTarget(Workout workout)
         {
             var workoutCount = workout.Exercise.RepsIncrement.WorkoutCount; 
 
@@ -48,7 +50,7 @@ namespace Set
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-            var count = All.Where(x => x.ExerciseId == workout.ExerciseId).Count();
+			var count = App.Database.WorkoutsRepository.All.Where(x => x.ExerciseId == workout.ExerciseId).Count();
             if (workout.WorkoutId == 0) count++;
 
             return IsDivisible(count, workoutCount);
@@ -59,11 +61,11 @@ namespace Set
         {
             int targetReps = 0;
             double targetWeight = 0;
-            var startingReps = workout.Exercise.StartingReps; 
+			var startingReps = (int) workout.Exercise.StartingReps; 
 
             if (workout.PreviousWorkout == null)
             {
-                targetReps = startingReps;
+				targetReps = startingReps;
                 targetWeight = 0;
             }
             else
@@ -72,15 +74,15 @@ namespace Set
                 // no previous workout exist, this is the first workout for this exercise
                 if (workout.PreviousWorkout == null)
                 {
-                    targetReps = startingReps;
+					targetReps = startingReps;
                     targetWeight = 0;
                 }
                 else
                 {
                     // go back to previous Weight
-                    if (workout.PreviousWorkout.Rep < workout.Exercise.RepsForWeightDn)
+                    if (workout.PreviousWorkout.Reps < workout.Exercise.RepsForWeightDn)
                     {
-                        targetReps = startingReps;
+						targetReps = startingReps;
                         targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
                     }
                     // advance to next Weight
@@ -104,7 +106,7 @@ namespace Set
                 targetWeight = workout.PreviousWorkout.Weight;
             }
 
-            return new object () {TargetReps = targetReps, TargetWeight = targetWeight};
+            return new {TargetReps = targetReps, TargetWeight = targetWeight};
         }
     }
 }

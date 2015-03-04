@@ -152,6 +152,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        internal static string PreviousRepsTitle {
+            get {
+                return ResourceManager.GetString("PreviousRepsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reps.
         /// </summary>
         internal static string Reps {
@@ -161,11 +170,47 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to +{0} every {0} workouts.
+        ///   Looks up a localized string similar to R.
+        /// </summary>
+        internal static string RepsAbbreviation {
+            get {
+                return ResourceManager.GetString("RepsAbbreviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +{0} in every {0} workouts.
         /// </summary>
         internal static string RepsIncrementDescription {
             get {
                 return ResourceManager.GetString("RepsIncrementDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No increment.
+        /// </summary>
+        internal static string RepsIncrementDisabledDescr {
+            get {
+                return ResourceManager.GetString("RepsIncrementDisabledDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +{0} every other time.
+        /// </summary>
+        internal static string RepsIncrementEveryOtherTimeDescription {
+            get {
+                return ResourceManager.GetString("RepsIncrementEveryOtherTimeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +{0} in every workout.
+        /// </summary>
+        internal static string RepsIncrementZeroWorkCountDescr {
+            get {
+                return ResourceManager.GetString("RepsIncrementZeroWorkCountDescr", resourceCulture);
             }
         }
         
@@ -233,11 +278,29 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to W.
+        /// </summary>
+        internal static string WeightAbbreviation {
+            get {
+                return ResourceManager.GetString("WeightAbbreviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workouts.
         /// </summary>
         internal static string Workouts {
             get {
                 return ResourceManager.GetString("Workouts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target.
+        /// </summary>
+        internal static string WorkoutTargetTitle {
+            get {
+                return ResourceManager.GetString("WorkoutTargetTitle", resourceCulture);
             }
         }
         

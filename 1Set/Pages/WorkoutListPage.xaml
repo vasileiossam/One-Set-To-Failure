@@ -52,17 +52,42 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <ViewCell.View>
-                <StackLayout Padding="50,10,0,0" HorizontalOptions="StartAndExpand" Orientation="Vertical">
 
-                  <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" />
+      <ViewCell.View>
+				<Grid Padding="50,10,0,10" VerticalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="80*" />
+						<ColumnDefinition Width="10*" />
+						<ColumnDefinition Width="10*" />
+					</Grid.ColumnDefinitions>
 
-                  <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                    <Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
+					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="0" />
+
+					<StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+	                    <Grid>
+							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+
+	                    	<Image Source = "ic_fa_circle" WidthRequest="32" HeightRequest="32"/>
+	                    	<Label Text="112" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="White"/>
+	                    </Grid>
+
+	                    <Grid>
+							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+	                    	<Image Source = "ic_fa_circle_o" WidthRequest="32" HeightRequest="32"/>
+		                   	<Label Text="112" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="White"/>
+	                    </Grid>
+					</StackLayout>
+				</Grid> 
+
+<!--                    <Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
                     <Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
-                  </StackLayout>
-
-                </StackLayout>
+-->
+                            
               </ViewCell.View>
             </ViewCell>
           </DataTemplate>

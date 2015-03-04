@@ -36,7 +36,7 @@ namespace Set.ViewModels
 
 		public ExerciseViewModel ()
 		{
-		    routineDays = new List<RoutineDay>();
+		    _routineDays = new List<RoutineDay>();
 		}
 
 		public void LoadRoutine()

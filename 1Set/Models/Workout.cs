@@ -1,6 +1,7 @@
 ﻿using System;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
+using Set;
 
 namespace Set.Models
 {
@@ -26,7 +27,7 @@ namespace Set.Models
         public int Reps { get; set; }
         public double Weight { get; set; }
 
-        public Workout _previousWorkout;
+        protected Workout _previousWorkout;
         [Ignore]
         public Workout PreviousWorkout
         {
@@ -41,7 +42,7 @@ namespace Set.Models
             }
         }
 
-        public int _previousReps;
+		protected int _previousReps;
         public int PreviousReps
         {
             get
@@ -62,7 +63,7 @@ namespace Set.Models
             }
         }
 
-        public double _previousWeight;
+		protected double _previousWeight;
         public double PreviousWeight
         {
             get
@@ -83,10 +84,44 @@ namespace Set.Models
             }
         }
 
-        TargetReps
-        TargetWeight
+		protected int? _targetReps;
+		public int? TargetReps
+		{
+			get
+			{
+				if (_targetReps == null)
+				{
+					dynamic result = WorkoutRules.GetTargetWorkout (this);
+					_targetReps = result.TargetReps;
+				}
+				return _targetReps;
+			}
+			set
+			{
+				_targetReps = value;
+			}
+		}
 
-		[OneToOne]		      
+		protected double? _targetWeight;
+		public double? TargetWeight
+		{
+			get
+			{
+				if (_targetWeight == null)
+				{
+					dynamic result = WorkoutRules.GetTargetWorkout (this);
+					_targetWeight = result.TargetWeight;
+				}
+				return _targetWeight;
+			}
+			set
+			{
+				_targetWeight = value;
+			}
+		}
+
+		[Ignore]
+		[OneToOne]		
 		public Exercise Exercise { get; set; }
 	}
 }

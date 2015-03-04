@@ -65,7 +65,7 @@ namespace Set.Models
             {
                 if (_repsForWeightDn == null)
                 {
-                    _repsForWeightDn = DefaultRepsForWeighDn;
+                    _repsForWeightDn = DefaultRepsForWeightDn;
                 }
                 return (int)_repsForWeightDn;
             }

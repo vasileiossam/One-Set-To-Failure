@@ -32,7 +32,8 @@ namespace Set.Concrete
 
         public Workout GetPreviousWorkout(int exerciseId, DateTime created)
         {
-            var results = All.Where(x => (x.ExericeId == exerciseId) && (x.Created < created)).OrderDescBy(x => x.created); <-- TOP or SKIP
+			var result = All.Where(x => (x.ExerciseId == exerciseId) && (x.Created < created)).OrderByDescending(x => x.Created).FirstOrDefault(); 
+			return result;
         }
     }
 }
