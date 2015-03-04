@@ -186,4 +186,16 @@
   <data name="RepsIncrementDescription" xml:space="preserve">
     <value>+{0} every {0} workouts</value>
   </data>
+  <data name="PreviousRepsTitle" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="WorkoutTargetTitle" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="RepsAbbreviation" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="WeightAbbreviation" xml:space="preserve">
+    <value>W</value>
+  </data>
 </root>

@@ -89,9 +89,9 @@ namespace Set
 		/// <summary>
 		///    +1
 		///    +2
-		///    +1 every 2 times
-		///    +1 every 3 times
-		///    +1 every 4 times
+		///    +1 every 2 workouts
+        ///    +1 every 3 workouts
+        ///    +1 every 4 workouts
 		/// </summary>
 		/// <value>The rest timers.</value>
 		private List<RepsIncrement> _repsIncrements;
@@ -126,7 +126,6 @@ namespace Set
 			// create the tables
 			_connection.CreateTable<Exercise>();
 			_connection.CreateTable<RoutineDay>();
-			_connection.CreateTable<Exercise>();
 			_connection.CreateTable<Workout>();
 		}
 	}

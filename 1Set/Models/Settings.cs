@@ -8,7 +8,8 @@ namespace Set.Models
     {
         #region Defaults
         int DefaultIsMetric = RegionInfo.CurrentRegion.IsMetric ? 1 : 0;
-        const int DefaultRepsToAdvance = 12;
+        const int DefaultRepsForWeightUp = 12;
+        const int DefaultRepsForWeightDn = 5;
         const int DefaultStartingReps = 5;
         
         // 1 min 30secs
@@ -36,25 +37,44 @@ namespace Set.Models
 
         #region Settings that can be overriden in Exercises 
         
-        // total reps to advance to next weight
+        // if you do  more than this Reps you will advance to next weight
         // values 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18...50
-        public int? _repsToAdvance;
-        public int RepsToAdvance
+        public int? _repsForWeightUp;
+        public int RepsForWeightUp
         {
             get
             {
-                if (_repsToAdvance == null)
+                if (_repsForWeightUp == null)
                 {
-                    _repsToAdvance = DefaultRepsToAdvance;
+                    _repsForWeightUp = DefaultRepsForWeightUp;
                 }
-                return (int)_repsToAdvance;
+                return (int)_repsForWeightUp;
             }
             set
             {
-                _repsToAdvance = value;
+                _repsForWeightUp = value;
             }
         }
-        
+
+        // if you do less than this Reps you will go to previous weight
+        // values 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18...50
+        public int? _repsForWeightDn;
+        public int RepsForWeightDn
+        {
+            get
+            {
+                if (_repsForWeightDn == null)
+                {
+                    _repsForWeightDn = DefaultRepsForWeighDn;
+                }
+                return (int)_repsForWeightDn;
+            }
+            set
+            {
+                _repsForWeightDn = value;
+            }
+        }
+
         // reps when starting training on a weight for the first time
         // values 0..50
         public int? _startingReps;

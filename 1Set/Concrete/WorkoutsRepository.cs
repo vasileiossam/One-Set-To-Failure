@@ -3,6 +3,7 @@ using Set.Models;
 using SQLite.Net;
 using Set.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Set.Concrete
 {
@@ -29,5 +30,9 @@ namespace Set.Concrete
 			}
 		}
 
+        public Workout GetPreviousWorkout(int exerciseId, DateTime created)
+        {
+            var results = All.Where(x => (x.ExericeId == exerciseId) && (x.Created < created)).OrderDescBy(x => x.created); <-- TOP or SKIP
+        }
     }
 }

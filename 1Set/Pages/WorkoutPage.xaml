@@ -21,8 +21,37 @@
   </ContentPage.Resources>
 
   <ContentPage.Content>
-    
-    <StackLayout Orientation="Vertical" >
+
+    <ScrollView>
+      <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
+        
+        <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
+        
+        <BoxView HeightRequest="2" Color="#0099CC"/>
+        
+        <Label Text="{i18n:Translate PreviousRepsTitle}" YAlign="Center" Font="Large"/>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="{Binding Workout.PreviousReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
+          <Label Text="{i18n:Translate RepsAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
+          
+          <Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
+          <Label Text="{i18n:Translate WeightAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
+        </StackLayout>
+        
+        <BoxView HeightRequest="2" Color="#0099CC"/>
+
+        <Label Text="{i18n:Translate WorkoutTargetTitle}" YAlign="Center" Font="Large"/>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
+          <Label Text="{i18n:Translate RepsAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
+
+          <Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
+          <Label Text="{i18n:Translate WeightAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
+        </StackLayout>
+
+
+        zzzzzzzzzzzzzzzzzzz
+        <StackLayout Orientation="Vertical" >
       <Label Text="{i18n:Translate Weight}" />
       <StackLayout Orientation="Horizontal">
         <Button Text="&#9660;"  x:Name="WeightDownButton" />
@@ -30,8 +59,9 @@
         <Button Text="&#9650;"  x:Name="WeightUpButton" />
       </StackLayout>
     </StackLayout>
-
- 
+        
+      </StackLayout>
+    </ScrollView>
 
 
   </ContentPage.Content>
