@@ -3,6 +3,7 @@
              xmlns:local="clr-namespace:Set;assembly=1Set"
 			 xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
              x:Class="Set.WorkoutPage"
+			 xmlns:controls="clr-namespace:Set.Controls;assembly=1Set"
              Title="{Binding Title}">
 
   <ContentPage.Padding>
@@ -20,47 +21,99 @@
     </ResourceDictionary>
   </ContentPage.Resources>
 
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="ic_action_accept" Order="Primary" x:Name = "AddExerciseButton"/>
+  </ContentPage.ToolbarItems>
+
   <ContentPage.Content>
 
     <ScrollView>
-      <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
-        
-        <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
-        
-        <BoxView HeightRequest="2" Color="#0099CC"/>
-        
-        <Label Text="{i18n:Translate PreviousRepsTitle}" YAlign="Center" Font="Large"/>
-        <StackLayout Orientation="Horizontal">
-          <Label Text="{Binding Workout.PreviousReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
-          <Label Text="{i18n:Translate RepsAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
-          
-          <Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
-          <Label Text="{i18n:Translate WeightAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
-        </StackLayout>
-        
-        <BoxView HeightRequest="2" Color="#0099CC"/>
+      <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="10, 10, 10, 10">
+      	
+      <Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#212121"/>
 
-        <Label Text="{i18n:Translate WorkoutTargetTitle}" YAlign="Center" Font="Large"/>
-        <StackLayout Orientation="Horizontal">
-          <Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
-          <Label Text="{i18n:Translate RepsAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
+		<Grid VerticalOptions="FillAndExpand">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="8" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="15" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="50" />
+				<ColumnDefinition Width="140" />
+				<ColumnDefinition Width="140" />
+			</Grid.ColumnDefinitions>
+      		
+			<!--  
+					Previous Workout 
+			-->
+      		<Label Grid.Row="0" Grid.Column="1" Text="{i18n:Translate PreviousRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+			<Label Grid.Row="0" Grid.Column="2" Text="{i18n:Translate PreviousWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
 
-          <Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Large" FontAttributes="Bold"/>
-          <Label Text="{i18n:Translate WeightAbbreviation}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#F1F1F1"/>
-        </StackLayout>
+			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_calendar" HorizontalOptions="Center" VerticalOptions="Center"/>
+	        <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+				            	
+	        	<controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
+	        	<Label Text="{Binding Workout.PreviousReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	        </Grid>
+	        <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+	        	
+	        	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
+	           	<Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	        </Grid>
+	        			
+	 		<!--  
+	 				Target Workout 
+	 		-->
+      		<Label Grid.Row="3" Grid.Column="1" Text="{i18n:Translate TargetRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+			<Label Grid.Row="3" Grid.Column="2" Text="{i18n:Translate TargetWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
 
+			<Image Grid.Row="4" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_bullseye" HorizontalOptions="Center" VerticalOptions="Center"/>
+	        <Grid Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+				            	
+	        	<controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
+	        	<Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	        </Grid>
+	        <Grid Grid.Row="4" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+	        	
+	        	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
+	           	<Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	        </Grid>
 
+	 		<BoxView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>    
 
-        <StackLayout Orientation="Vertical" >
-      <Label Text="{i18n:Translate Weight}" />
-      <StackLayout Orientation="Horizontal">
-        <Button Text="&#9660;"  x:Name="WeightDownButton" />
-        <Entry Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" x:Name="weightEntry" />
-        <Button Text="&#9650;"  x:Name="WeightUpButton" />
+	 		<!--  
+	 				Workout 
+	 		-->
+	 		<Image Grid.Row="6" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_android" HorizontalOptions="Center" VerticalOptions="Center"/>
+	 		<controls:CustomEntry Grid.Row="6" Grid.Column="1" Placeholder="{i18n:Translate Reps}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
+	 			Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+	 		<controls:CustomEntry Grid.Row="6" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
+	 			Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+		</Grid> 
+
+<!--	  <ContentView Padding="0, 0, 0, 10">
+	  	<controls:BlueButton Text="Done it!" TextColor="White"/>
+	  </ContentView>
+	  <ContentView Padding="0, 0, 0, 10">
+	  	<controls:BlueButton Text="Back" TextColor="White"/>
+	  </ContentView>-->
+
       </StackLayout>
-    </StackLayout>
-        
-      </StackLayout>
+
     </ScrollView>
 
 

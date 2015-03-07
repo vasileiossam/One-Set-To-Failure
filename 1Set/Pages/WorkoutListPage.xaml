@@ -27,9 +27,9 @@
 
   <ContentPage.Content>
     
-    <StackLayout Orientation="Vertical" Padding="0,0,0,0">
+    <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10">
       
-      <StackLayout Orientation="Horizontal" Padding="15,8,15,8">
+      <StackLayout Orientation="Horizontal">
         
         <Image Source="ic_fa_chevron_left" HorizontalOptions="Start">
 			<Image.GestureRecognizers>
@@ -37,23 +37,23 @@
 			</Image.GestureRecognizers>
         </Image>
 
-        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center"/>
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="#212121"/>
 
 		<Image Source="ic_fa_chevron_right"  HorizontalOptions="End">
 			<Image.GestureRecognizers>
-				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Left" />
+				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Right" />
 			</Image.GestureRecognizers>
 		</Image>
       </StackLayout>
 
-      <BoxView HeightRequest="2" Color="#0099CC"/>
+      <BoxView HeightRequest="2" Color="#B6B6B6"/>
 
       <ListView ItemSelected="OnWorkoutSelected" x:Name="workoutsList" HasUnevenRows="true">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
 
-      <ViewCell.View>
+      		<ViewCell.View>
 				<Grid Padding="50,10,0,10" VerticalOptions="FillAndExpand">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*" />
@@ -64,30 +64,26 @@
 						<ColumnDefinition Width="10*" />
 					</Grid.ColumnDefinitions>
 
-					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="0" />
+					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="0" TextColor="#212121"/>
 
 					<StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
 	                    <Grid>
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 
-	                    	<Image Source = "ic_fa_circle" WidthRequest="32" HeightRequest="32"/>
-	                    	<Label Text="112" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="White"/>
+							<Image Source = "{Binding RepsImage}" WidthRequest="32" HeightRequest="32"/>
+	                    	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="#FFFFFF"/>
 	                    </Grid>
 
 	                    <Grid>
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-	                    	<Image Source = "ic_fa_circle_o" WidthRequest="32" HeightRequest="32"/>
-		                   	<Label Text="112" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="White"/>
+	                    	<Image Source = "{Binding WeightImage}" WidthRequest="32" HeightRequest="32"/>
+		                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="#FFFFFF"/>
 	                    </Grid>
 					</StackLayout>
 				</Grid> 
-
-<!--                    <Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
-                    <Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" Font="Medium" FontAttributes="Bold" />
--->
-                            
+                     
               </ViewCell.View>
             </ViewCell>
           </DataTemplate>

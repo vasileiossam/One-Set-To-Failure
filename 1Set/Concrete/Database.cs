@@ -124,6 +124,10 @@ namespace Set
 		{
 			_connection = DependencyService.Get<ISQLite> ().GetConnection ();
 
+		//	_connection.DropTable<Exercise> ();
+		//	_connection.DropTable<RoutineDay> ();
+		//	_connection.DropTable<Workout> ();
+
 			// create the tables
 			_connection.CreateTable<Exercise>();
 			_connection.CreateTable<RoutineDay>();

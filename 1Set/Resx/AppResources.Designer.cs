@@ -71,6 +71,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Workout.
+        /// </summary>
+        internal static string CurrentWorkoutTitle {
+            get {
+                return ResourceManager.GetString("CurrentWorkoutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Exercise.
         /// </summary>
         internal static string EditExerciseTitle {
@@ -152,11 +161,20 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Previous.
+        ///   Looks up a localized string similar to Previous Reps.
         /// </summary>
         internal static string PreviousRepsTitle {
             get {
                 return ResourceManager.GetString("PreviousRepsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Weight.
+        /// </summary>
+        internal static string PreviousWeightTitle {
+            get {
+                return ResourceManager.GetString("PreviousWeightTitle", resourceCulture);
             }
         }
         
@@ -166,15 +184,6 @@ namespace Set.Resx {
         internal static string Reps {
             get {
                 return ResourceManager.GetString("Reps", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to R.
-        /// </summary>
-        internal static string RepsAbbreviation {
-            get {
-                return ResourceManager.GetString("RepsAbbreviation", resourceCulture);
             }
         }
         
@@ -233,6 +242,24 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target Reps.
+        /// </summary>
+        internal static string TargetRepsTitle {
+            get {
+                return ResourceManager.GetString("TargetRepsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target Weight.
+        /// </summary>
+        internal static string TargetWeightTitle {
+            get {
+                return ResourceManager.GetString("TargetWeightTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         internal static string Title {
@@ -278,29 +305,11 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to W.
-        /// </summary>
-        internal static string WeightAbbreviation {
-            get {
-                return ResourceManager.GetString("WeightAbbreviation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Workouts.
         /// </summary>
         internal static string Workouts {
             get {
                 return ResourceManager.GetString("Workouts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target.
-        /// </summary>
-        internal static string WorkoutTargetTitle {
-            get {
-                return ResourceManager.GetString("WorkoutTargetTitle", resourceCulture);
             }
         }
         

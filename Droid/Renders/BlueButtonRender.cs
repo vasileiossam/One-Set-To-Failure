@@ -4,11 +4,11 @@ using Xamarin.Forms;
 using Set.Droid.Renders;
 using Set.Controls;
 
-[assembly: ExportRenderer (typeof (CustomButton), typeof (CustomButtonRender))]
+[assembly: ExportRenderer (typeof (BlueButton), typeof (BlueButtonRender))]
 
 namespace Set.Droid.Renders
 {
-	public class CustomButtonRender : ButtonRenderer
+	public class BlueButtonRender : ButtonRenderer
 	{
 		protected override void OnElementChanged (ElementChangedEventArgs<Button> e)
 		{

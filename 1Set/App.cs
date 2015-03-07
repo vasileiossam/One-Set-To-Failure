@@ -34,8 +34,12 @@ namespace Set
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
-
+					 
 	    	var mainNav = new NavigationPage (new WorkoutListPage ());
+
+			mainNav.BarBackgroundColor = ColorPalette.Primary;
+			mainNav.BarTextColor = ColorPalette.Icons;
+
         	MainPage = mainNav;
 		}
 

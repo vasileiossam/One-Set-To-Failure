@@ -23,7 +23,7 @@
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
 		  <ContentView Padding="0, 10, 0, 0">
-	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}"/>
+	      	<controls:BoldedEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}"/>
 		  </ContentView>
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
@@ -74,7 +74,7 @@
 		  </ContentView>
 
 		  <ContentView Padding="0, 0, 0, 10">
-		  	<controls:CustomButton Text="Save" TextColor="White" Clicked="OnSaveButtonClicked" x:Name="SaveButton"/>
+		  	<controls:BlueButton Text="Save" TextColor="White" Clicked="OnSaveButtonClicked" x:Name="SaveButton"/>
 		  </ContentView>
 
 	    </StackLayout>

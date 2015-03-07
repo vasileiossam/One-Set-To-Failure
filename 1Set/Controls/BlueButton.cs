@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace Set.Controls
 {
-	public class CustomButton : Button
+	public class BlueButton : Button
 	{
-		public CustomButton ()
+		public BlueButton ()
 		{
 		}
 	}

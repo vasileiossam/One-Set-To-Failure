@@ -22,12 +22,43 @@ namespace Set.Models
         public int RowNumber { get; set; }
 		public int IsActive {get; set;}
 
+		protected Exercise _exercise;
 		[Ignore]
-		public Exercise Exercise { get; set; }
+		public Exercise Exercise
+		{
+			get
+			{
+				_exercise = App.Database.ExercisesRepository.Find(ExerciseId);
+				return _exercise;
+			}
+			set
+			{
+				_exercise = value;
+			}
+		}
 
 		[Ignore]
 		public Workout Workout {get; set;}
 
+		[Ignore]
+		public string RepsImage {
+			get
+			{
+				if (Workout.Reps == 0)
+					return "ic_fa_chevron_circle_right";
+				return "ic_fa_circle";
+			}
+		}
+
+		[Ignore]
+		public string WeightImage {
+			get
+			{
+				if (Workout.Weight == 0)
+					return "ic_fa_chevron_circle_right";
+				return "ic_fa_circle";
+			}
+		}
 
 	}
 }

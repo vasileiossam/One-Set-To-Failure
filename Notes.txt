@@ -1,4 +1,9 @@
-﻿where to update them?
+﻿ 
+
+
+- put kg in weight label
+
+where to update them?
         public int PreviousReps { get; set; }
         public double PreviousWeight { get; set; }
 

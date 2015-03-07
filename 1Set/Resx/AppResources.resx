@@ -187,16 +187,16 @@
     <value>+{0} in every {0} workouts</value>
   </data>
   <data name="PreviousRepsTitle" xml:space="preserve">
-    <value>Previous</value>
+    <value>Previous Reps</value>
   </data>
-  <data name="WorkoutTargetTitle" xml:space="preserve">
-    <value>Target</value>
+  <data name="PreviousWeightTitle" xml:space="preserve">
+    <value>Previous Weight</value>
   </data>
-  <data name="RepsAbbreviation" xml:space="preserve">
-    <value>R</value>
+  <data name="TargetRepsTitle" xml:space="preserve">
+    <value>Target Reps</value>
   </data>
-  <data name="WeightAbbreviation" xml:space="preserve">
-    <value>W</value>
+  <data name="TargetWeightTitle" xml:space="preserve">
+    <value>Target Weight</value>
   </data>
   <data name="RepsIncrementEveryOtherTimeDescription" xml:space="preserve">
     <value>+{0} every other time</value>
@@ -206,5 +206,8 @@
   </data>
   <data name="RepsIncrementDisabledDescr" xml:space="preserve">
     <value>No increment</value>
+  </data>
+  <data name="CurrentWorkoutTitle" xml:space="preserve">
+    <value>Workout</value>
   </data>
 </root>

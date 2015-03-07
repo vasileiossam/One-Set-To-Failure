@@ -120,9 +120,40 @@ namespace Set.Models
 			}
 		}
 
+		protected Exercise _exercise;
 		[Ignore]
-		[OneToOne]		
-		public Exercise Exercise { get; set; }
+		public Exercise Exercise
+		{
+			get
+			{
+				_exercise = App.Database.ExercisesRepository.Find(ExerciseId);
+				return _exercise;
+			}
+			set
+			{
+				_exercise = value;
+			}
+		}
+
+		[Ignore]
+		public string RepsImage {
+			get
+			{
+				if (Reps == 0)
+					return "ic_fa_circle";
+				return "ic_fa_circle";
+			}
+		}
+
+		[Ignore]
+		public string WeightImage {
+			get
+			{
+				if (Weight == 0)
+					return "ic_fa_circle_o";
+				return "ic_fa_circle";
+			}
+		}
 	}
 }
 

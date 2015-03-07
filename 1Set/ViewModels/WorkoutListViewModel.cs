@@ -63,13 +63,9 @@ namespace Set.ViewModels
 				{
 					workout = new Workout ();
 					workout.ExerciseId = day.ExerciseId;
-					workout.Exercise = day.Exercise;
 				} 
 
 				day.Workout = workout;
-
-				// I couldn't make the relationship work with SQLite-Net Extensions...
-				day.Exercise = App.Database.ExercisesRepository.Find (day.ExerciseId);
 			}
 
 			RoutineDays = new ObservableCollection<RoutineDay>(routineDays);
