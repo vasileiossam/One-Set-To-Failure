@@ -1,4 +1,4 @@
-﻿ 
+﻿ - empty days look in evernote/ui/empty datasets
 
 
 - put kg in weight label

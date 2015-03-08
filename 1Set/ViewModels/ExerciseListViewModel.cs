@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using Set.Resx;
 using Set.ViewModels;
+using Xamarin.Forms;
 
 namespace Set
 {
@@ -18,7 +19,7 @@ namespace Set
 			}
 		}
 
-		public ExerciseListViewModel ()
+		public ExerciseListViewModel (INavigation navigation) : base(navigation)
 		{
 			Title = AppResources.ExercisesTitle;
 		}

@@ -14,27 +14,27 @@
 	            WinPhone="5, 0, 5, 0" />
 	</ContentPage.Padding>
 
-<!--  <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="ic_action_new.png" Order="Primary" Clicked="OnAddExerciseButtonClicked" x:Name = "AddExerciseButton"/>
-  </ContentPage.ToolbarItems>-->
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
+  </ContentPage.ToolbarItems>
   
   <ContentPage.Content>
 	  <ScrollView>
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
 		  <ContentView Padding="0, 10, 0, 0">
-	      	<controls:BoldedEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}"/>
+	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}" TextColor="#212121"/>
 		  </ContentView>
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-	      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center"/>	
-	      	<Label x:Name="PlateWeightStepperLabel" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center"/>	
+	      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
+	      	<Label x:Name="PlateWeightStepperLabel" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" TextColor="#212121"/>	
 		  	<Stepper Minimum="0" Maximum="50" Increment="1" Value="{Binding Exercise.PlateWeight}" 
 			  	ValueChanged="OnPlateWeightStepperValueChanged" x:Name="PlateWeightStepper" VerticalOptions="Center"/>
 	      </StackLayout>
 
 		  <ContentView Padding="0, 10, 0, 10">
-	        <Label Text="{i18n:Translate TrainingProgram}" FontSize="Medium" FontAttributes="Bold"/>	
+	        <Label Text="{i18n:Translate TrainingProgram}" FontSize="Medium" FontAttributes="Bold" TextColor="#727272"/>	
 		  </ContentView>
 
 		  <Grid RowSpacing="0" HorizontalOptions="Start">
@@ -47,35 +47,35 @@
 			  <ColumnDefinition Width="150" />
 			</Grid.ColumnDefinitions>
 
-			<Label x:Name="MonLabel" Grid.Row="0" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="MonLabel" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnMon}" Grid.Row="0" Grid.Column="1"/>
 
-			<Label x:Name="TueLabel" Grid.Row="1" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="TueLabel" Grid.Row="1" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnTue}" Grid.Row="1" Grid.Column="1"/>
 
-			<Label x:Name="WedLabel" Grid.Row="2" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="WedLabel" Grid.Row="2" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnWed}" Grid.Row="2" Grid.Column="1"/>
 
-			<Label x:Name="ThuLabel" Grid.Row="3" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="ThuLabel" Grid.Row="3" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnThu}" Grid.Row="3" Grid.Column="1"/>
 
-			<Label x:Name="FriLabel" Grid.Row="4" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="FriLabel" Grid.Row="4" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnFri}" Grid.Row="4" Grid.Column="1"/>
 
-			<Label x:Name="SatLabel" Grid.Row="5" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="SatLabel" Grid.Row="5" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnSat}" Grid.Row="5" Grid.Column="1"/>
 
-			<Label x:Name="SunLabel" Grid.Row="6" Grid.Column="0" FontSize="Medium"/>
+			<Label x:Name="SunLabel" Grid.Row="6" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
 			<Switch IsToggled="{Binding DoOnSun}" Grid.Row="6" Grid.Column="1"/>
 		  </Grid>
 	        
 		  <ContentView Padding="0, 10, 0, 10">
-	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Exercise.Notes}" />
+	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Exercise.Notes}" TextColor="#212121"/>
 		  </ContentView>
 
-		  <ContentView Padding="0, 0, 0, 10">
+<!--		  <ContentView Padding="0, 0, 0, 10">
 		  	<controls:BlueButton Text="Save" TextColor="White" Clicked="OnSaveButtonClicked" x:Name="SaveButton"/>
-		  </ContentView>
+		  </ContentView>-->
 
 	    </StackLayout>
 	</ScrollView>

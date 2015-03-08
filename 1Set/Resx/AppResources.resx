@@ -165,8 +165,23 @@
   <data name="ExerciseNameIsRequired" xml:space="preserve">
     <value>Please type an exercise name</value>
   </data>
+  <data name="WorkoutRepsIsRequired" xml:space="preserve">
+    <value>Please enter how many Reps you did</value>
+  </data>
+  <data name="WorkoutWeightIsRequired" xml:space="preserve">
+    <value>Please enter the Weight of this workout</value>
+  </data>
+  <data name="WorkoutInvalidReps" xml:space="preserve">
+    <value>Invalid Reps value</value>
+  </data>
+  <data name="WorkoutInvalidWeight" xml:space="preserve">
+    <value>Invalid Weight value</value>
+  </data>
   <data name="ExerciseSaved" xml:space="preserve">
     <value>Exercise saved</value>
+  </data>
+  <data name="WorkoutSaved" xml:space="preserve">
+    <value>Workout saved</value>
   </data>
   <data name="MinuteRestTimerDescription" xml:space="preserve">
     <value>min</value>

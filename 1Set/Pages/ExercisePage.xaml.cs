@@ -4,7 +4,6 @@ using Set.ViewModels;
 using Set.Models;
 using Xamarin.Forms;
 using Set.Localization;
-using Toasts.Forms.Plugin.Abstractions;
 using Set.Resx;
 
 namespace Set
@@ -18,7 +17,7 @@ namespace Set
 			{
 				if (_viewModel == null)
 				{
-					_viewModel =  new ExerciseViewModel();
+					_viewModel =  new ExerciseViewModel(Navigation);
 				}
 				return _viewModel;
 			}
@@ -59,30 +58,6 @@ namespace Set
 		{
 			PlateWeightStepperLabel.Text = args.NewValue.ToString ();
 		}
-
-		private bool Validate ()
-		{
-			if (string.IsNullOrWhiteSpace (ViewModel.Exercise.Name))
-			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseNameIsRequired);
-				return false;
-			}
-
-			return true;
-		}
-
-		public void OnSaveButtonClicked(object sender, EventArgs args)
-		{
-			if (Validate ())
-			{
-				ViewModel.Save();
-
-				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.ExerciseSaved);
-
-				this.Navigation.PopAsync();
-			}
-		}
-
 
 
 	}

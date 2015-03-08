@@ -41,22 +41,12 @@ namespace Set.Models
 		public Workout Workout {get; set;}
 
 		[Ignore]
-		public string RepsImage {
+		public string StateImage {
 			get
 			{
-				if (Workout.Reps == 0)
-					return "ic_fa_chevron_circle_right";
-				return "ic_fa_circle";
-			}
-		}
-
-		[Ignore]
-		public string WeightImage {
-			get
-			{
-				if (Workout.Weight == 0)
-					return "ic_fa_chevron_circle_right";
-				return "ic_fa_circle";
+				if ((Workout.Reps == 0) || (Workout.Weight == 0))
+					return "ic_fa_check_circle_action";
+				return "ic_fa_check_circle_o";
 			}
 		}
 

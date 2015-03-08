@@ -305,6 +305,33 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Reps value.
+        /// </summary>
+        internal static string WorkoutInvalidReps {
+            get {
+                return ResourceManager.GetString("WorkoutInvalidReps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Weight value.
+        /// </summary>
+        internal static string WorkoutInvalidWeight {
+            get {
+                return ResourceManager.GetString("WorkoutInvalidWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter how many Reps you did.
+        /// </summary>
+        internal static string WorkoutRepsIsRequired {
+            get {
+                return ResourceManager.GetString("WorkoutRepsIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workouts.
         /// </summary>
         internal static string Workouts {
@@ -314,11 +341,29 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Workout saved.
+        /// </summary>
+        internal static string WorkoutSaved {
+            get {
+                return ResourceManager.GetString("WorkoutSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workout.
         /// </summary>
         internal static string WorkoutTitle {
             get {
                 return ResourceManager.GetString("WorkoutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the Weight of this workout.
+        /// </summary>
+        internal static string WorkoutWeightIsRequired {
+            get {
+                return ResourceManager.GetString("WorkoutWeightIsRequired", resourceCulture);
             }
         }
         

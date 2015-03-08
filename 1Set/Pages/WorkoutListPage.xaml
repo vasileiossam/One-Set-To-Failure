@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Set;assembly=1Set"
+			 xmlns:controls="clr-namespace:Set.Controls;assembly=1Set"
 			 xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
              x:Class="Set.WorkoutListPage"
              Title="{Binding Title}">
@@ -31,7 +32,7 @@
       
       <StackLayout Orientation="Horizontal">
         
-        <Image Source="ic_fa_chevron_left" HorizontalOptions="Start">
+        <Image Source="ic_fa_chevron_left" HorizontalOptions="Start" >
 			<Image.GestureRecognizers>
 				<TapGestureRecognizer Command="{Binding ChevronTapCommand}" CommandParameter="Left" />
 			</Image.GestureRecognizers>
@@ -54,32 +55,36 @@
             <ViewCell>
 
       		<ViewCell.View>
-				<Grid Padding="50,10,0,10" VerticalOptions="FillAndExpand">
+				<Grid Padding="10,10,0,10" VerticalOptions="FillAndExpand">
 					<Grid.RowDefinitions>
-						<RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="50" />
 						<ColumnDefinition Width="80*" />
-						<ColumnDefinition Width="10*" />
-						<ColumnDefinition Width="10*" />
+						<ColumnDefinition Width="145" />
+						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
-					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="0" TextColor="#212121"/>
+					<Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="{Binding StateImage}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-					<StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-	                    <Grid>
+					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="#212121"/>
+
+					<StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 
-							<Image Source = "{Binding RepsImage}" WidthRequest="32" HeightRequest="32"/>
-	                    	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="#FFFFFF"/>
+	                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
+		                   	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+
 	                    </Grid>
 
-	                    <Grid>
+	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-	                    	<Image Source = "{Binding WeightImage}" WidthRequest="32" HeightRequest="32"/>
-		                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" Font="Medium"  FontAttributes = "Bold" TextColor="#FFFFFF"/>
+	                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
+		                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
 	                    </Grid>
 					</StackLayout>
 				</Grid> 

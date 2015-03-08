@@ -22,7 +22,7 @@
   </ContentPage.Resources>
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="ic_action_accept" Order="Primary" x:Name = "AddExerciseButton"/>
+    <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
@@ -30,7 +30,7 @@
     <ScrollView>
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="10, 10, 10, 10">
       	
-      <Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" Font="Large" FontAttributes="Bold" TextColor="#212121"/>
+      <Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#212121"/>
 
 		<Grid VerticalOptions="FillAndExpand">
 			<Grid.RowDefinitions>
@@ -99,8 +99,10 @@
 	 				Workout 
 	 		-->
 	 		<Image Grid.Row="6" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_android" HorizontalOptions="Center" VerticalOptions="Center"/>
+
 	 		<controls:CustomEntry Grid.Row="6" Grid.Column="1" Placeholder="{i18n:Translate Reps}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
 	 			Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+
 	 		<controls:CustomEntry Grid.Row="6" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
 	 			Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 		</Grid> 

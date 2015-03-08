@@ -16,7 +16,7 @@ namespace Set
 			{
 				if (_viewModel == null)
 				{
-					_viewModel =  new ExerciseListViewModel();
+					_viewModel =  new ExerciseListViewModel(Navigation);
 				}
 				return _viewModel;
 			}
@@ -47,7 +47,7 @@ namespace Set
 		{
 			var exercisePage = new ExercisePage
 			{
-				ViewModel = new ExerciseViewModel()
+				ViewModel = new ExerciseViewModel(Navigation)
 				{
 					Title = AppResources.AddExerciseTitle
 				}
@@ -60,7 +60,7 @@ namespace Set
 		{
 			if (((ListView)sender).SelectedItem == null) return;
 
-			var viewModel = new ExerciseViewModel
+			var viewModel = new ExerciseViewModel(Navigation)
 			{
 				Exercise = e.SelectedItem as Exercise,
 				Title = AppResources.EditExerciseTitle

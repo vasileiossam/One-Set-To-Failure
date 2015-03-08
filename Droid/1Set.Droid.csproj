@@ -75,7 +75,7 @@
     <Reference Include="ExifLib">
       <HintPath>..\packages\ExifLib.PCL.1.0.0\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Forms">
+    <Reference Include="Xamarin.Forms.Labs">
       <HintPath>..\packages\Xamarin.Forms.Labs.1.0.1.5\lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.Labs.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -150,6 +150,9 @@
     <AndroidResource Include="Resources\drawable\ic_fa_calendar.png" />
     <AndroidResource Include="Resources\drawable\ic_fa_bullseye.png" />
     <AndroidResource Include="Resources\drawable\ic_fa_android.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_check.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_check_circle_o.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_check_circle_action.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.3.5.6337\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.5.6337\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

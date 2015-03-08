@@ -3,6 +3,8 @@ using SQLite.Net.Attributes;
 using Set.Models;
 using System.Collections.Generic;
 using Set.Resx;
+using Xamarin.Forms;
+using Toasts.Forms.Plugin.Abstractions;
 
 namespace Set.ViewModels
 {
@@ -10,15 +12,50 @@ namespace Set.ViewModels
     {
 		public Workout Workout {get; set; }
 
-		public WorkoutViewModel ()
+		public WorkoutViewModel (INavigation navigation) : base(navigation)
 		{
 			Title = AppResources.WorkoutTitle;
 		}
 
-        public void Save()
-        {
-            App.Database.WorkoutsRepository.Save(Workout);
-        }
+		private bool Validate ()
+		{
+			if (Workout.Reps == 0)
+			{
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutRepsIsRequired);
+				return false;
+			}
+			if (Workout.Weight == 0)
+			{
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutWeightIsRequired);
+				return false;
+			}
+
+			if ((Workout.Reps <= 0) || (Workout.Reps > 100))
+			{
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutInvalidReps);
+				Workout.Reps = 0;
+				return false;
+			}
+			if ((Workout.Weight <= 0) || (Workout.Weight > 1000))
+			{
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutInvalidWeight);
+				Workout.Weight = 0;
+				return false;
+			}
+
+			return true;
+		}
+
+		protected override void OnSave () 
+		{
+			if (Validate ())
+			{
+				App.Database.WorkoutsRepository.Save(Workout);
+				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.WorkoutSaved);
+			 
+				Navigation.PopAsync();
+			}
+		}
     }
 }
 

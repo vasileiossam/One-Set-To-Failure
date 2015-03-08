@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using Set.Models;
 using System.Collections.ObjectModel;
+using Set.Resx;
+using Xamarin.Forms;
+using Toasts.Forms.Plugin.Abstractions;
 
 namespace Set.ViewModels
 {
@@ -34,7 +37,7 @@ namespace Set.ViewModels
         public bool DoOnSat { get; set; }
         public bool DoOnSun { get; set; }
 
-		public ExerciseViewModel ()
+		public ExerciseViewModel (INavigation navigation) : base(navigation)
 		{
 		    _routineDays = new List<RoutineDay>();
 		}
@@ -50,12 +53,6 @@ namespace Set.ViewModels
 			DoOnFri = _routineDays.Exists (x => (x.DayOfWeek == 5) && (x.IsActive == 1));
 			DoOnSat = _routineDays.Exists (x => (x.DayOfWeek == 6) && (x.IsActive == 1));
 			DoOnSun = _routineDays.Exists (x => (x.DayOfWeek == 0) && (x.IsActive == 1));
-		}
-
-		public void Save()
-		{
-            App.Database.ExercisesRepository.Save(Exercise);
-			SaveRoutine ();
 		}
 
 		private void SaveRoutine()
@@ -126,6 +123,30 @@ namespace Set.ViewModels
 
 			if (day) return 1;
 			return 0;
+		}
+
+		private bool Validate ()
+		{
+			if (string.IsNullOrWhiteSpace (Exercise.Name))
+			{
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseNameIsRequired);
+				return false;
+			}
+
+			return true;
+		}
+
+		protected override void OnSave () 
+		{
+			if (Validate ())
+			{
+				App.Database.ExercisesRepository.Save(Exercise);
+				SaveRoutine ();
+
+				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.ExerciseSaved);
+
+				Navigation.PopAsync();
+			}
 		}
 	}
 }

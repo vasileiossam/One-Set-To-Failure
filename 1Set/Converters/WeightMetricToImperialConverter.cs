@@ -34,11 +34,10 @@ namespace Set
         }
     
 
-	public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
-	{
-		Debug.WriteLine(value.ToString(), new []{ "MetricToImperialConverter.ConvertBack"});
-		throw new NotImplementedException ();
-	}
+		public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
+		{
+				return value;
+		}
 
 	}
 }

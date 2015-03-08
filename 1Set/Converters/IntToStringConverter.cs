@@ -17,8 +17,7 @@ namespace Set
     
 	    public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
 	    {
-            Debug.WriteLine(value.ToString(), new[] { "IntToStringConverter.ConvertBack" });
-		    throw new NotImplementedException ();
+			return value;
 	    }
 	}
 }
