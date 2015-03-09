@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Mobile Sales</string>
+	<string name="version">v. 2.00, © 2008-2013 Databank</string>
+    <string name="btnOk">OΚ</string>
+    <string name="btnCancel">Άκυρο</string>
+    
+    <!-- Customer -->   
+    <string name="CustomersActivityTitle">Πελάτες</string>
+    <string name="CustomerTitle">Πελάτης Παραστατικού</string>
+    <string name="btnCustomerDetails">Στοιχεία Πελάτη</string>
+    <string name="btnCustomerSelect">Επιλογή Πελάτη</string>
+    <string name="lblCustomerMessage">Δεν έχετε επιλέξει πελάτη</string>
+    <string name="lblSelectedCustomer">Επιλεγμένος Πελάτης:</string>
+    <string name="lblCustomerName">ΕΠΩΝΥΜΙΑ ΠΕΛΑΤΗ</string>
+    <string name="lblCustomerDetails">ΛΟΙΠΑ ΣΤΟΙΧΕΙΑ</string>
+    
+    <!-- CustomerDetails -->    
+    <string name="CustomerDetailsTitle">Στοιχεία Πελάτη</string>
+    <string name="CustomerDetailsTab1Caption">ΒΑΣΙΚΑ ΣΤΟΙΧΕΙΑ</string>
+    <string name="CustomerDetailsTab2Caption">ΠΑΡΑΤΗΡΗΣΕΙΣ</string>
+        
+    <!-- CustomerSelect -->
+    <string name="CustomerSelectTitle">Aναζήτηση Πελάτη</string>
+    <string name="CustomerSelectHint">Eπωνυμία, κωδικός, ΑΦΜ, πόλη ή τηλέφωνο πελάτη</string>    
+
+    <!-- Tools -->
+    <string name="lblOptionsPathName">Αρχείο παραμέτρων</string>
+	<string name="FileDoesNotExistMessage">Το αρχείο δεν υπάρχει</string>
+	<string name="btnTerminate">Τερματισμός Εφαρμογής</string>
+	<string name="chkCentralOnly">Εμφάνιση μόνο των κεντρικών </string>
+    <string name="ToolsTab1Caption">ΒΟΗΘΗΤΙΚΑ</string>
+    <string name="ToolsTab2Caption">ΑΡΧΕΙΑ ΕΦΑΡΜΟΓΗΣ</string>
+    <string name="lblDatabaseFolder">Βάση Δεδομένων</string>        
+    <string name="ToolsTitle">Βοηθητικά</string>
+    <string name="btnSalesStats">Στατιστικά Πωλήσεων</string>
+    <string name="btnMtrlStockList">Υπόλοιπα Αποθήκης</string>
+    <string name="btnTestPrinter1">Δοκιμή εκτύπωσης με PrintHand trial ή Premium</string>
+    <string name="btnTestPrinter2">Δοκιμή εκτύπωσης με PrinterShare trial ή Premium</string>
+
+
+    <!-- Options -->
+    <string name="OptionsActivityTitle">Παράμετροι</string>
+    <string name="OptionsTitle">Παράμετροι</string>
+    <string name="WHouse">A.X.</string>
+    <string name="Routing">Δρομολόγιο</string>
+    <string name="RelatedInvoice">Σχετικό Παραστατικό</string>    
+    <string name="WHouseHint">Επιλέξτε τον αποθηκευτικό χώρο του φορτηγού</string>
+    <string name="Series1">Σειρά πωλήσεων 1 (αξιακή)</string>
+    <string name="FormSeries1">Φόρμα εκτύπωσης σειράς 1</string>
+    <string name="Series2">Σειρά πωλήσεων 2 (Δελ. Αποστ.)</string>
+    <string name="FormSeries2">Φόρμα εκτύπωσης σειράς 2</string>
+    <string name="InvoicePrinter">Eκτυπωτής παραστατικών</string>
+    <string name="AutoMTRL">Aυτόματη αναζήτηση ειδών</string>
+    <string name="AutoMTRLHint">Στην επιλογή των ειδών εμφανίζονται όλα τα είδη αυτόματα χωρίς να καταχωρήσουμε κάποιο λεκτικό αναζήτησης</string>
+    <string name="HideGroups">Να μην εμφανίζονται οι ομάδες</string>
+    <string name="FiscalYear">Χρήση</string>
+    <string name="PaymentMethods">Tρόποι πληρωμής</string>
+    <string name="Payment1">Μετρητοίς</string>
+    <string name="Payment2">Επι πιστώσει</string>
+    <string name="OrderOptions">Ρυθμίσεις Παραγγελίας</string>
+    <string name="AllowNegQty">Να επιτρέπονται αρνητικές τιμές</string>
+    <string name="AllowNegStor">Να επιτρέπονται αρνητικά υπόλοιπα</string>
+    <string name="PrintToFile">Eκτύπωση ΜΟΝΟ σε αρχείο</string>
+    <string name="TrdrDiscountOptions">Εκπτώσεις Πελατών</string>
+    <string name="TrdrEnableDiscount">Έλεγχος Έκπτωσης</string>
+    <string name="TrdrEnableAutoDiscount">Αυτόματη Έκπτωση ανά Πελάτη</string>
+    <string name="OptionsTab1Caption">ΣΕΛΙΔΑ 1</string>        
+    <string name="OptionsTab2Caption">ΣΕΛΙΔΑ 2</string>        
+    <string name="OptionsTab3Caption">ΣΕΛΙΔΑ 3</string>        
+    <string name="OptionsTab4Caption">ΣΕΛΙΔΑ 4</string>        
+    <string name="OptionsTab5Caption">ΣΕΛΙΔΑ 5</string>        
+    
+    <!-- SalesStats -->
+    <string name="SalesStatsTitle">Στατιστικά Πωλήσεων</string>
+    <string name="SalesCount">Πωλήσεις</string>
+    <string name="CancelationsCount">Ακυρώσεις</string>
+    <string name="SalesTotal">Σύνολο Πωλήσεων</string>
+    <string name="SalesTotalCash">Σύνολο Μετρητά</string>
+    <string name="SalesTotalCredit">Σύνολο Επι Πιστώσει</string>
+    <string name="SalesTotalCancelations">Σύνολο Ακυρώσεων</string>
+    <string name="SalesDayTotal">Ταμείο Ημέρας</string>
+            
+    <!-- Sales -->
+    <string name="SalesActivityTitle">Πωλήσεις</string>    
+    <string name="SalesTitle">Πωλήσεις</string>
+    <string name="btnEditInv">Διόρθωση</string>
+    <string name="btnDelInv">Διαγραφή</string>
+    <string name="btnCancelInv">Ακύρωση</string>
+    <string name="btnPrintInv">Εκτύπωση</string>
+    <string name="DeleteInvoiceTitle">Διαγραφή παραστατικού</string>
+    <string name="CannotDeleteInvoice">Το παραστατικό δεν μπορεί να διαγραφεί γιατί έχει εκτυπωθεί</string>
+    <string name="DeleteInvoiceQuestion">Θέλετε να διαγράψετε το παραστατικό {0};</string>
+    <string name="CancelInvoiceTitle">Άκύρωση παραστατικού</string>
+    <string name="InvoiceIsCanceled">Το παραστατικό είναι ήδη ακυρωμένο</string>
+    <string name="CancelInvoiceQuestion">Θέλετε να ακυρώσετε το παραστατικό {0};</string>
+    <string name="CannotCancelBecauseSeriesMissing">Το παραστατικό δεν μπορεί να ακυρωθεί γιατί δεν έχει οριστεί ακυρωτική σειρά στο S1</string>
+    
+    <!-- SalesTotals -->
+    <string name="SalesTotalsTitle">Έκδοση Παραστατικού</string>
+    <string name="btnPayment1">Μετρητοίς</string>
+    <string name="btnPayment2">Επι πιστώσει</string>
+    <string name="DiscountTotal">Έκπτωση %</string>
+    <string name="ApplyDiscount">Εφαρμογή συνολικής έκπτωσης στο παραστατικό;</string>
+    
+    <!-- SalesEdit -->
+    <string name="SalesEditTitle">Παραστατικό</string>
+    <string name="btnPublish">Έκδοση</string>
+    <string name="AddProduct">Προσθήκη είδους</string>
+    <string name="AddProductWithGroupSearch">Προσθήκη είδους με αναζήτηση ομάδας</string>
+    
+    <!-- SalesSelect -->
+    <string name="SalesSelectTitle">Aναζήτηση Παραστατικού</string>     
+    <string name="SalesSelectTrdName">Πελάτης</string>     
+    <string name="SalesSelectFinCode">Παραστατικό</string>     
+    <string name="SalesSelectTrnDate">Ημερομηνία</string>     
+    
+    <!-- MtrlListItem -->
+    <string name="Description">Περιγραφή</string>
+    <string name="Code">Κωδικός</string>
+    <string name="Price">Τιμή</string>
+    <string name="Remain">Υπόλ.</string>    
+    
+    <!-- MtrlSelect -->
+    <string name="MtrlSelectTitle">Aναζήτηση Είδους</string>   
+    <string name="MtrlSelectHint">Περιγραφή ή κωδικός είδους</string>
+    
+    <!-- MtrlLinesEdit -->
+    <string name="MtrlLinesEditTitle">Στοιχεία γραμμής</string>
+    <string name="MtrUnit">Μονάδα Μέτρησης</string>
+    <string name="Quantity">Ποσότητα</string>
+    <string name="Discount">Έκπτωση %</string>
+    <string name="NetValue">Καθαρή Αξία</string>
+    <string name="MtrlLinesEditTab1Caption">ΕΙΔΟΣ</string>
+    <string name="MtrlLinesEditTab2Caption">ΠΑΡΑΤΗΡΗΣΕΙΣ</string>
+    <string name="NegativeQtyErrorTitle">Αρνητική Τιμή Προϊόντος</string>
+    <string name="NegativeQtyErrorMessage">Η τιμή που ορίσατε δεν είναι επιτρεπτή. Παρακαλώ αλλάξτε τις ρυθμίσεις στο μενού Παραμέτροι</string>
+    <string name="NotEnoughQtyErrorTitle">Υπόλοιπο</string>
+    <string name="NotEnoughQtyErrorMessage">To διαθέσιμο υπόλοιπο του είδους δεν επαρκεί</string>
+    
+    <!-- MtrlStockList -->        
+    <string name="MtrlStockListTitle">Υπόλοιπα Αποθήκης</string>
+    <string name="SelectOrder">Ταξινόμηση με βάση</string>
+    <string name="SortByCode">Κωδικός</string>
+    <string name="SortByName">Περιγραφή</string>
+            
+    <!-- Alert dialog for mtrl that already exists -->
+    <string name="MtrLinesAlertTitle">Το προϊόν υπάρχει ήδη</string>
+    <string name="MtrLinesAlertTitleButtonUpdate">Ενημέρωση</string>
+    <string name="MtrLinesAlertTitleButtonAdd">Νέα γραμμή</string>
+    <string name="MtrLinesAlertTitleButtonCancel">Άκυρο</string>
+    <string name="MtrLinesAlertMessage">Να προστεθεί η ποσότητα στην υπάρχουσα γραμμή ή να δημιουργηθεί νέα γραμμή;</string>
+    
+     <!-- MtrlGroupSelect -->
+    <string name="MtrlGroupSelectTitle">Επιλογή ομάδας</string>
+    <string name="MtrlSubGroupSelectTitle">Επιλογή υποομάδας</string>
+    
+    <!-- alert dialogs, various  -->
+    <string name="Yes">Ναι</string>
+    <string name="No">Όχι</string>
+    <string name="Delete">Διαγραφή</string>
+    <string name="ContextMenuOptions">Eπιλογές</string>    
+</resources>

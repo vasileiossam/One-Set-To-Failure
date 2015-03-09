@@ -19,6 +19,26 @@ namespace Set.ViewModels
 		// try again in the next xamarin forms update
 		public WorkoutListPage Page { get; set; }
 
+		public bool WorkoutsListVisible
+		{
+			get
+			{
+				if (RoutineDays == null)
+				{
+					return false;
+				}
+
+				return RoutineDays.Count > 0;
+			}
+		}
+		public bool NoWorkoutDataVisible
+		{
+			get
+			{
+				return !WorkoutsListVisible;
+			}
+		}
+
 		private ICommand _chevronTapCommand;
 		public ICommand ChevronTapCommand
 		{
@@ -40,6 +60,7 @@ namespace Set.ViewModels
                 if (_currentDate != value)
                 {
                     _currentDate = value;
+					App.CurrentDate = value;
                     OnPropertyChanged("CurrentDate");
 					RoutineDays = LoadRoutineDays();
                 }
@@ -58,6 +79,8 @@ namespace Set.ViewModels
 			{ 
 				_routineDays = value;
 				OnPropertyChanged("RoutineDays");
+				OnPropertyChanged("NoWorkoutDataVisible");
+				OnPropertyChanged("WorkoutsListVisible");
 			}
 		}
 

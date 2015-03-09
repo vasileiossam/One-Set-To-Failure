@@ -37,7 +37,7 @@ namespace Set
         {
             base.OnAppearing();
 
-			ViewModel.CurrentDate = DateTime.Today;
+			ViewModel.CurrentDate = App.CurrentDate;
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
         }
 

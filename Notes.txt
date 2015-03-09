@@ -1,27 +1,12 @@
-﻿ - empty days look in evernote/ui/empty datasets
-
-
-- put kg in weight label
-
+﻿
 where to update them?
         public int PreviousReps { get; set; }
         public double PreviousWeight { get; set; }
-
-   <StackLayout Orientation="Vertical" >
-      <Label Text="{i18n:Translate Reps}" />
-      <StackLayout Orientation="Horizontal">
-        <Button Text="&#9660;" Clicked="OnWeightDownButtonClicked" x:Name="WeightDownButton1" />
-        <Entry Text="{Binding Workout.Weight, Converter={StaticResource integerConverter}}" x:Name="repsEntry" /> 
-        <Button Text="&#9650;"  x:Name="WeightUpButton1" />
-      </StackLayout>
-    </StackLayout>
 
 <!--
 
 - object to validate the common seettings between settings and exercises
   e.g RepsForWeightDn cant be greater than RepsForWeightUp
-
-    should be a drop down.. do we also have spin controls
 
 
     *****************************************************
@@ -52,46 +37,7 @@ and use + and arrows to denote the increase?
 
 -->
 
-<!--
-      
-    <StackLayout Orientation="Vertical" >
-
-      <StackLayout Orientation="Horizontal">
-        
-        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" />
-        <Button x:Name="NextDate" Text=""  />
-      </StackLayout>
-      
-      <ListView x:Name="workoutsList" ItemSelected="OnWorkoutSelected" IsGroupingEnabled="true">
-
-        <ListView.GroupHeaderTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                <Label Text="{Binding Title}" YAlign="Center" />
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.GroupHeaderTemplate>
-
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                <Image WidthRequest="44" HeightRequest="44" Source="{Binding Image}" />
-                <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                  <Label Text="{Binding Name}" YAlign="Center" Font="Medium" />
-                  <Label Text="{Binding Reps}" YAlign="Center" Font="Medium" />
-                  <Label Text="{Binding Weight}" YAlign="Center" Font="Medium" />
-                </StackLayout>
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-
-    </StackLayout>-->
-
+ 
 http://forums.xamarin.com/discussion/20117/sqlite-net-extensions-and-sqliteconnection
 http://www.codeproject.com/Articles/792883/Using-Sqlite-in-a-Xamarin-Android-Application-Deve
 http://stackoverflow.com/questions/24665304/sqlite-net-extensions-example-on-xamarin-forms                  

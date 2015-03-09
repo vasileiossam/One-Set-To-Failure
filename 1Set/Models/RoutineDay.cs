@@ -45,7 +45,7 @@ namespace Set.Models
 			get
 			{
 				if ((Workout.Reps == 0) || (Workout.Weight == 0))
-					return "ic_fa_check_circle_action";
+					return "ic_fa_play_circle_action";
 				return "ic_fa_check_circle_o";
 			}
 		}

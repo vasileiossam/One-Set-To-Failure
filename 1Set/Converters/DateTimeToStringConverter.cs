@@ -12,27 +12,28 @@ namespace Set
                               object parameter, CultureInfo culture)
         {
             DateTime date = (DateTime)value;
+			var fullDay = date.ToString ("dddd") + ", " + date.ToString ("D");
 
             // return today
             if (date.Date == DateTime.Today)
             {
-                return AppResources.Today;
+				return string.Format("{0} ({1})", fullDay, AppResources.Today);
             }
             else
                 // return tomorrow
                 if (date.Date == DateTime.Today.AddDays(1))
                 {
-                   return AppResources.Tomorrow;
+					return string.Format("{0} ({1})", fullDay, AppResources.Tomorrow);
                 }
                 // return yesterday
                 else
                     if (date.Date == DateTime.Today.AddDays(-1))
                     {
-                        return AppResources.Yesterday;
+						return string.Format("{0} ({1})", fullDay, AppResources.Yesterday);
                     }
 
             // return date with default culture formatting
-			return date.ToString("D");
+			return fullDay;
         }
 
 

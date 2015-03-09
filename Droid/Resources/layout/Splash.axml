@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:gravity="center"
+    android:background="@color/apptheme_color">
+    <ImageView
+        android:src="@drawable/Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"
+        android:layout_gravity="center" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text1"
+            android:text="1 Set"
+            android:textStyle="bold"
+            android:textColor="#B3E5FC"
+            android:textColorHighlight="#ffffff"
+            android:textIsSelectable="false"
+            android:textSize="30dp"
+            android:layout_marginRight="5dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text3"
+            android:text=" To Exhaustion"
+            android:textStyle="normal"
+            android:textColor="#B3E5FC"
+            android:textColorHighlight="#ffffff"
+            android:textIsSelectable="false"
+            android:textSize="30dp" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text2"
+        android:text="Loading..."
+        android:textColor="#B3E5FC"
+        android:textColorHighlight="#ffffff"
+        android:textIsSelectable="false"
+        android:textSize="20dp"
+        android:textStyle="normal" />
+</LinearLayout>

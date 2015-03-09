@@ -46,14 +46,14 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="50" />
 				<ColumnDefinition Width="140" />
-				<ColumnDefinition Width="140" />
+				<ColumnDefinition Width="180" />
 			</Grid.ColumnDefinitions>
       		
 			<!--  
 					Previous Workout 
 			-->
       		<Label Grid.Row="0" Grid.Column="1" Text="{i18n:Translate PreviousRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
-			<Label Grid.Row="0" Grid.Column="2" Text="{i18n:Translate PreviousWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+			<Label Grid.Row="0" Grid.Column="2" Text="{Binding PreviousWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
 
 			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_calendar" HorizontalOptions="Center" VerticalOptions="Center"/>
 	        <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -75,7 +75,7 @@
 	 				Target Workout 
 	 		-->
       		<Label Grid.Row="3" Grid.Column="1" Text="{i18n:Translate TargetRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
-			<Label Grid.Row="3" Grid.Column="2" Text="{i18n:Translate TargetWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+			<Label Grid.Row="3" Grid.Column="2" Text="{Binding TargetWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
 
 			<Image Grid.Row="4" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_bullseye" HorizontalOptions="Center" VerticalOptions="Center"/>
 	        <Grid Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">

@@ -152,6 +152,33 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can add exercises and set your training program in the Exercises menu..
+        /// </summary>
+        internal static string NoWorkoutDataLine1 {
+            get {
+                return ResourceManager.GetString("NoWorkoutDataLine1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You also need to rest. If this is your rest day, enjoy it!.
+        /// </summary>
+        internal static string NoWorkoutDataLine2 {
+            get {
+                return ResourceManager.GetString("NoWorkoutDataLine2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No training today!.
+        /// </summary>
+        internal static string NoWorkoutDataTitle {
+            get {
+                return ResourceManager.GetString("NoWorkoutDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weight increment or plate weight ({0}).
         /// </summary>
         internal static string PlateWeightLabel {

@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using Set.Resx;
 using Xamarin.Forms;
 using Toasts.Forms.Plugin.Abstractions;
+using Set.Localization;
 
 namespace Set.ViewModels
 {
     public class WorkoutViewModel : BaseViewModel
     {
 		public Workout Workout {get; set; }
+
+		public string PreviousWeightTitle { get { return AppResources.PreviousWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
+		public string TargetWeightTitle { get { return AppResources.TargetWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
 
 		public WorkoutViewModel (INavigation navigation) : base(navigation)
 		{
@@ -51,7 +55,7 @@ namespace Set.ViewModels
 			if (Validate ())
 			{
 				App.Database.WorkoutsRepository.Save(Workout);
-				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.WorkoutSaved);
+				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
 			 
 				Navigation.PopAsync();
 			}

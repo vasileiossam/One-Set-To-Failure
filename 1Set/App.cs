@@ -25,6 +25,7 @@ namespace Set
             }
         }
 
+		public static DateTime CurrentDate {get; set;}
 		public static Settings Settings { get; set; }
 
 		public App ()
@@ -45,7 +46,7 @@ namespace Set
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
+			CurrentDate = DateTime.Today;
 		}
 
 		protected override void OnSleep ()

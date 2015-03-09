@@ -143,7 +143,7 @@ namespace Set.ViewModels
 				App.Database.ExercisesRepository.Save(Exercise);
 				SaveRoutine ();
 
-				App.ShowToast (ToastNotificationType.Info, "Info", AppResources.ExerciseSaved);
+				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
 
 				Navigation.PopAsync();
 			}
