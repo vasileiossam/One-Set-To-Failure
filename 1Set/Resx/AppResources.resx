@@ -234,4 +234,46 @@
   <data name="NoWorkoutDataLine2" xml:space="preserve">
     <value>You also need to rest. If this is your rest day, enjoy it!</value>
   </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsGeneralTitle" xml:space="preserve">
+    <value>GENERAL</value>
+  </data>
+  <data name="SettingsUnitSystemTitle" xml:space="preserve">
+    <value>Unit System</value>
+  </data>
+  <data name="SettingsTrainingRulesTitle" xml:space="preserve">
+    <value>TRAINING RULES</value>
+ </data>
+  <data name="SettingsTrainingRulesHint" xml:space="preserve">
+    <value>You can override these rules in each exercise</value>
+ </data>
+  <data name="SettingsMaxRepsTitle" xml:space="preserve">
+    <value>Max Reps</value>
+ </data>
+  <data name="SettingsMaxRepsHint" xml:space="preserve">
+    <value>The number of reps to advance to the next weight level</value>
+ </data>
+  <data name="SettingsMinRepsTitle" xml:space="preserve">
+    <value>Min Reps</value>
+ </data>
+  <data name="SettingsMinRepsHint" xml:space="preserve">
+    <value>If you can't do at least this number of Reps you should go back a weight level</value>
+ </data>
+  <data name="SettingsExerciseGoalTitle" xml:space="preserve">
+    <value>Exercise Goal</value>
+ </data>
+  <data name="SettingsExerciseGoalHint" xml:space="preserve">
+    <value>Reps to do more in every workout</value>
+ </data>
+  <data name="SettingsRestTimerTitle" xml:space="preserve">
+    <value>Rest Timer</value>
+ </data>
+  <data name="UnitSystemMetric" xml:space="preserve">
+    <value>Metric (Kgs)</value>
+ </data>
+  <data name="UnitSystemImperial" xml:space="preserve">
+    <value>Imperial (Lbs)</value>
+ </data>
 </root>

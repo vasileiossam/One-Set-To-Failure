@@ -260,11 +260,110 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reps to do more in every workout.
+        /// </summary>
+        internal static string SettingsExerciseGoalHint {
+            get {
+                return ResourceManager.GetString("SettingsExerciseGoalHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exercise Goal.
+        /// </summary>
+        internal static string SettingsExerciseGoalTitle {
+            get {
+                return ResourceManager.GetString("SettingsExerciseGoalTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GENERAL.
+        /// </summary>
+        internal static string SettingsGeneralTitle {
+            get {
+                return ResourceManager.GetString("SettingsGeneralTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of reps to advance to the next weight level.
+        /// </summary>
+        internal static string SettingsMaxRepsHint {
+            get {
+                return ResourceManager.GetString("SettingsMaxRepsHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Reps.
+        /// </summary>
+        internal static string SettingsMaxRepsTitle {
+            get {
+                return ResourceManager.GetString("SettingsMaxRepsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you can&apos;t do at least this number of Reps you should go back a weight level.
+        /// </summary>
+        internal static string SettingsMinRepsHint {
+            get {
+                return ResourceManager.GetString("SettingsMinRepsHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min Reps.
+        /// </summary>
+        internal static string SettingsMinRepsTitle {
+            get {
+                return ResourceManager.GetString("SettingsMinRepsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rest Timer.
+        /// </summary>
+        internal static string SettingsRestTimerTitle {
+            get {
+                return ResourceManager.GetString("SettingsRestTimerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string SettingsTitle {
             get {
                 return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can override these rules in each exercise.
+        /// </summary>
+        internal static string SettingsTrainingRulesHint {
+            get {
+                return ResourceManager.GetString("SettingsTrainingRulesHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TRAINING RULES.
+        /// </summary>
+        internal static string SettingsTrainingRulesTitle {
+            get {
+                return ResourceManager.GetString("SettingsTrainingRulesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit System.
+        /// </summary>
+        internal static string SettingsUnitSystemTitle {
+            get {
+                return ResourceManager.GetString("SettingsUnitSystemTitle", resourceCulture);
             }
         }
         
@@ -319,6 +418,24 @@ namespace Set.Resx {
         internal static string TrainingProgram {
             get {
                 return ResourceManager.GetString("TrainingProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imperial (Lbs).
+        /// </summary>
+        internal static string UnitSystemImperial {
+            get {
+                return ResourceManager.GetString("UnitSystemImperial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metric (Kgs).
+        /// </summary>
+        internal static string UnitSystemMetric {
+            get {
+                return ResourceManager.GetString("UnitSystemMetric", resourceCulture);
             }
         }
         

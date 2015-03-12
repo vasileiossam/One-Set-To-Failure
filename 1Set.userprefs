@@ -1,24 +1,32 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Pages\ExerciseListPage.xaml.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\ViewModels\SettingsViewModel.cs">
     <Files>
-      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\BaseViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\App.cs" Line="1" Column="1" />
-      <File FileName="1Set\Pages\WorkoutListPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="1Set\Pages\WorkoutPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\ExerciseViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\Pages\ExercisePage.xaml.cs" Line="1" Column="1" />
-      <File FileName="1Set\Pages\ExerciseListPage.xaml.cs" Line="39" Column="39" />
-      <File FileName="1Set\ViewModels\ExerciseListViewModel.cs" Line="1" Column="1" />
+      <File FileName="1Set\Models\Settings.cs" Line="33" Column="33" />
+      <File FileName="1Set\ViewModels\SettingsViewModel.cs" Line="94" Column="94" />
+      <File FileName="1Set\Pages\SettingsPage.xaml" Line="51" Column="51" />
+      <File FileName="1Set\Pages\SettingsPage.xaml.cs" Line="36" Column="36" />
+      <File FileName="1Set\Pages\WorkoutPage.xaml.cs" Line="28" Column="28" />
+      <File FileName="1Set\App.cs" Line="22" Column="22" />
+      <File FileName="1Set\Resx\AppResources.resx" Line="8" Column="8" />
+      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="3" Column="3" />
+      <File FileName="1Set\ColorPalette.cs" Line="59" Column="59" />
+      <File FileName="1Set\Models\Exercise.cs" Line="37" Column="37" />
+      <File FileName="1Set\WorkoutRules.cs" Line="54" Column="54" />
+      <File FileName="1Set\Pages\WorkoutListPage.xaml.cs" Line="37" Column="37" />
+      <File FileName="Notes.txt" Line="124" Column="124" />
+      <File FileName="c:\dev\1Set\1Set\obj\Debug\SettingsPage.xaml.g.cs" Line="70" Column="70" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\dev\1Set\Droid\Properties\AssemblyInfo.cs" line="25" column="1" />
       <Breakpoint file="c:\dev\1Set\1Set\Pages\WorkoutListPage.cs" line="59" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\ViewModels\SettingsViewModel.cs" line="58" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="1Set\Pages\SettingsPage.xaml.cs" line="49" offsetX="494" offsetY="768" expression="settingItem" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.ItemProperties.1Set.Droid AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>

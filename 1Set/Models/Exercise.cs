@@ -23,58 +23,41 @@ namespace Set.Models
         
         #region settings with global defaults
         
-        private int? _repsForWeightUp;
-        public int? RepsForWeightUp 
+		protected int? _maxReps;
+		public int? MaxReps 
         {
             get 
             {
-                if (_repsForWeightUp == null)
+				if (_maxReps == null)
                 {
-                    _repsForWeightUp = App.Settings.RepsForWeightUp;
+					_maxReps = App.Settings.MaxReps;
                 }
-                return _repsForWeightUp;
+				return _maxReps;
             } 
             set
             {
-                _repsForWeightUp = value;
+				_maxReps = value;
             }
         }
         
-        private int? _repsForWeightDn;
-        public int? RepsForWeightDn
+		protected int? _minReps;
+		public int? MinReps
         {
             get 
             {
-                if (_repsForWeightDn == null)
+				if (_minReps == null)
                 {
-                    _repsForWeightDn = App.Settings.RepsForWeightDn;
+					_minReps = App.Settings.MinReps;
                 }
-                return _repsForWeightDn;
+				return _minReps;
             } 
             set
             {
-                _repsForWeightDn = value;
+				_minReps = value;
             }
         }
         
-        private int? _startingReps;
-        public int? StartingReps 
-        {
-            get 
-            {
-                if (_startingReps == null)
-                {
-                    _startingReps = App.Settings.StartingReps;
-                }
-                return _startingReps;
-            } 
-            set
-            {
-                _startingReps = value;
-            }
-        }
-        
-        private int? _restTimerId;
+		protected int? _restTimerId;
         public int? RestTimerId 
         {
             get 
@@ -91,7 +74,7 @@ namespace Set.Models
             }
         }
         
-        private int? _repsIncrementId;
+		protected int? _repsIncrementId;
         public int? RepsIncrementId 
         {
             get 

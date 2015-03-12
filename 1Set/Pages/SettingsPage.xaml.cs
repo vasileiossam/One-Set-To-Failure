@@ -1,32 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Set.ViewModels;
 using Xamarin.Forms;
 
 namespace Set
 {
 	public partial class SettingsPage : ContentPage
 	{
-		public SettingsPage ()
+		protected SettingsViewModel _viewModel;
+		public SettingsViewModel ViewModel
 		{
-			InitializeComponent ();
+			get
+			{
+				if (_viewModel == null)
+				{
+					_viewModel =  new SettingsViewModel(Navigation);
+					_viewModel.Page = this;
+				}
+				return _viewModel;
+			}
+			set
+			{
+				_viewModel = value;
+			}
 		}
 
-        // Units and measurements
-        //   Kilograms (Kgs)                                            <- combo to select one or the other
-        //   Pounds (Lbs)
-        
-        // Training Rules 
-        // (you can override in Exercises) 
-        //
-       
-        // Workout goal in Reps
-        // (number of Reps to increase performance in Reps since the last workout or how many more Reps aim to do each time)
-        //    +1
-        //    +2
-        //    +1 every 2 times
-        //    +1 every 3 times
-        //    +1 every 4 times
+		public SettingsPage()
+		{
+			this.InitializeComponent ();
+			this.BindingContext = ViewModel;
+		}
+
+		protected async override void OnAppearing()
+		{
+			base.OnAppearing();
+			settingsList.ItemsSource = ViewModel.SettingsItems;
+		}
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+		}
+
+		public void OnSettingSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			if (((ListView)sender).SelectedItem == null) return;
+
+			var settingItem = e.SelectedItem as SettingItem;
+			settingItem.Clicked (settingItem, e);
+
+			// deselect row
+			((ListView)sender).SelectedItem = null;
+		}
+
 	}
 }
 

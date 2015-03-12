@@ -8,9 +8,8 @@ namespace Set.Models
     {
         #region Defaults
         int DefaultIsMetric = RegionInfo.CurrentRegion.IsMetric ? 1 : 0;
-        const int DefaultRepsForWeightUp = 12;
-        const int DefaultRepsForWeightDn = 5;
-        const int DefaultStartingReps = 5;
+		const int DefaultMaxReps = 12;
+		const int DefaultMinReps = 5;
         
         // 1 min 30secs
         const int DefaultRestTimerId = 4;
@@ -39,58 +38,39 @@ namespace Set.Models
         
         // if you do  more than this Reps you will advance to next weight
         // values 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18...50
-        protected int? _repsForWeightUp;
-        public int RepsForWeightUp
+		protected int? _maxReps;
+		public int MaxReps
         {
             get
             {
-                if (_repsForWeightUp == null)
+				if (_maxReps == null)
                 {
-                    _repsForWeightUp = DefaultRepsForWeightUp;
+					_maxReps = DefaultMaxReps;
                 }
-                return (int)_repsForWeightUp;
+				return (int)_maxReps;
             }
             set
             {
-                _repsForWeightUp = value;
+				_maxReps = value;
             }
-        }
+        } 
 
         // if you do less than this Reps you will go to previous weight
         // values 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18...50
-        protected int? _repsForWeightDn;
-        public int RepsForWeightDn
+        protected int? _minReps;
+        public int MinReps
         {
             get
             {
-                if (_repsForWeightDn == null)
+				if (_minReps == null)
                 {
-                    _repsForWeightDn = DefaultRepsForWeightDn;
+					_minReps = DefaultMinReps;
                 }
-                return (int)_repsForWeightDn;
+				return (int)_minReps;
             }
             set
             {
-                _repsForWeightDn = value;
-            }
-        }
-
-        // reps when starting training on a weight for the first time
-        // values 0..50
-        protected int? _startingReps;
-        public int StartingReps
-        {
-            get
-            {
-                if (_startingReps == null)
-                {
-                    _startingReps = DefaultStartingReps;
-                }
-                return (int)_startingReps;
-            }
-            set
-            {
-                _startingReps = value;
+				_minReps = value;
             }
         }
 

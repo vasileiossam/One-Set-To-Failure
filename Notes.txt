@@ -1,4 +1,58 @@
-﻿
+﻿next app:
+motivator app
+  timer with motivational part (images and quotes)
+  keep a log of each use of the timer
+  statistics? 
+------------------
+        // Units and measurements
+        //   Kilograms (Kgs)                                            <- combo to select one or the other
+        //   Pounds (Lbs)
+        
+        // Training Rules 
+        // (you can override in Exercises) 
+        //
+       
+        // Workout goal in Reps
+        // (number of Reps to increase performance in Reps since the last workout or how many more Reps aim to do each time)
+        //    +1
+        //    +2
+        //    +1 every 2 times
+        //    +1 every 3 times
+        //    +1 every 4 times
+
+	  
+	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="20, 10, 10, 10" Spacing="5">
+
+	    <Label Text="{i18n:Translate SettingsGeneralTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121" FontAttributes="Bold"/>	
+	    <ContentView Padding="-10, 0, 0, 10"><BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+		<Label Text="{i18n:Translate SettingsUnitSystemTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
+
+		<ContentView Padding="-10, 0, 0, 0"><BoxView HeightRequest="1" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+
+		<ContentView Padding="0, 15, 0, 0">
+	    	<Label Text="{i18n:Translate SettingsTrainingRulesTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121" FontAttributes="Bold"/>	
+	    </ContentView>
+		<Label Text="{i18n:Translate SettingsTrainingRulesHint}" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
+		<ContentView Padding="-10, 0, 0, 10"><BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+
+	    <Label Text="{i18n:Translate SettingsMaxRepsTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
+		<Label Text="{i18n:Translate SettingsMaxRepsTitleHint}" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
+		<ContentView Padding="-10, 0, 0, 0"><BoxView HeightRequest="1" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+	    
+	    <Label Text="{i18n:Translate SettingsMinRepsTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
+		<Label Text="{i18n:Translate SettingsMinRepsTitleHint}" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
+		<ContentView Padding="-10, 0, 0, 0"><BoxView HeightRequest="1" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+
+	    <Label Text="{i18n:Translate SettingsExerciseGoalTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
+		<Label Text="{i18n:Translate SettingsExerciseGoalHint}" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
+		<ContentView Padding="-10, 0, 0, 0"><BoxView HeightRequest="1" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+
+		<Label Text="{i18n:Translate SettingsRestTimerTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
+		<ContentView Padding="-10, 0, 0, 0"><BoxView HeightRequest="1" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/></ContentView>
+	    </StackLayout>
+	 
+
+
 where to update them?
         public int PreviousReps { get; set; }
         public double PreviousWeight { get; set; }

@@ -61,7 +61,7 @@ namespace Set
         {
             int targetReps = 0;
             double targetWeight = 0;
-			var startingReps = (int) workout.Exercise.StartingReps; 
+			var startingReps = (int) workout.Exercise.MinReps; 
 
             if (workout.PreviousWorkout == null)
             {
@@ -80,13 +80,13 @@ namespace Set
                 else
                 {
                     // go back to previous Weight
-                    if (workout.PreviousWorkout.Reps < workout.Exercise.RepsForWeightDn)
+						if (workout.PreviousWorkout.Reps < workout.Exercise.MinReps)
                     {
 						targetReps = startingReps;
                         targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
                     }
                     // advance to next Weight
-                    else if (targetReps > workout.Exercise.RepsForWeightUp)
+						else if (targetReps > workout.Exercise.MaxReps)
                     {
                         targetReps = startingReps;
                         targetWeight = GetNextWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);

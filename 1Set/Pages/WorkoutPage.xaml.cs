@@ -37,6 +37,8 @@ namespace Set
             base.OnAppearing();
             BindingContext = ViewModel;
 
+			var action = await DisplayActionSheet ("ActionSheet: Save Photo?", "Cancel", "Delete", null);
+
 			// Bug in Android where this list is not scrollable.
 					 
 //			string[] options = new string[50];
