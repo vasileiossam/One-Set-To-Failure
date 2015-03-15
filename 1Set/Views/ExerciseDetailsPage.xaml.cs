@@ -8,7 +8,7 @@ using Set.Resx;
 
 namespace Set
 {
-	public partial class ExercisePage : ContentPage
+	public partial class ExerciseDetailsPage : ContentPage
 	{
 		private ExerciseViewModel _viewModel;
 		public ExerciseViewModel ViewModel
@@ -27,7 +27,7 @@ namespace Set
 			}
 		}
 
-		public ExercisePage ()
+		public ExerciseDetailsPage ()
 		{
 			InitializeComponent ();
 		}

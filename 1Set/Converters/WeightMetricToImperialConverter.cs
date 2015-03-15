@@ -21,7 +21,7 @@ namespace Set
 
             // metric to metric
             // we always store weight in metric (Kg), if we are already in metric no conversion is needed
-			if (App.Settings.IsMetric == 1)
+			if (App.Settings.IsMetric)
             {
                 return value;
             }

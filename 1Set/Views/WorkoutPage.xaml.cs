@@ -36,26 +36,6 @@ namespace Set
         {
             base.OnAppearing();
             BindingContext = ViewModel;
-
-			var action = await DisplayActionSheet ("ActionSheet: Save Photo?", "Cancel", "Delete", null);
-
-			// Bug in Android where this list is not scrollable.
-					 
-//			string[] options = new string[50];
-//			for (var i = 0; i < 50; i++)
-//			{
-//				options[i] = i.ToString();
-//			}
-//
-//			WeightUpButton.Clicked += async (sender, e) => {
-//							var action = await DisplayActionSheet ("ActionSheet: Save Photo?", "Cancel", "Delete",
-//
-//											
-//					options);
-//							 
-//};
-//		 
-
         }
 
         protected override void OnDisappearing()

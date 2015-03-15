@@ -20,35 +20,43 @@ namespace Set.Droid
 		}
 
 
-		public async Task SaveAsync(Settings settings)
+		public void Save(Settings settings)
 		{
 			var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			var path = Path.Combine(folder, FileName);
 
 			using (StreamWriter sw = File.CreateText (path)) {
 				var json = JsonConvert.SerializeObject (settings);
-				await sw.WriteAsync (json);
+				sw.Write (json);
 			}
 		}
 
-		public async Task<Settings> LoadAsync()
+		public Settings Load()
 		{
-			Settings settings;
-			var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			var path = Path.Combine(folder, FileName);
-
-			if (File.Exists (path)) {
-				using (StreamReader sr = File.OpenText (path)) {
-					var json = await sr.ReadToEndAsync ();
-					settings = JsonConvert.DeserializeObject<Settings> (json);
-
-				}
-			} 
-			else 
+			try
 			{
-				settings = new Settings ();
+				Settings settings;
+				var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+				var path = Path.Combine(folder, FileName);
+
+				if (File.Exists (path)) {
+					using (StreamReader sr = File.OpenText (path)) {
+						var json = sr.ReadLine ();
+						settings = JsonConvert.DeserializeObject<Settings> (json);
+
+					}
+				} 
+				else 
+				{
+					settings = new Settings ();
+				}
+
+				return settings;
 			}
-			return settings;
+			catch(Exception ex)
+			{
+				throw ex; 
+			}
 		}
 	}
 }

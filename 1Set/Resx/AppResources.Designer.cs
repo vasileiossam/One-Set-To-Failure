@@ -71,6 +71,33 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workout data have been cleared.
+        /// </summary>
+        internal static string ClearWorkoutDataCompleted {
+            get {
+                return ResourceManager.GetString("ClearWorkoutDataCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to clear all workout data?.
+        /// </summary>
+        internal static string ClearWorkoutDataQuestion {
+            get {
+                return ResourceManager.GetString("ClearWorkoutDataQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workout.
         /// </summary>
         internal static string CurrentWorkoutTitle {
@@ -139,6 +166,15 @@ namespace Set.Resx {
         internal static string MinutesRestTimerDescription {
             get {
                 return ResourceManager.GetString("MinutesRestTimerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -256,6 +292,33 @@ namespace Set.Resx {
         internal static string SecondsRestTimerDescription {
             get {
                 return ResourceManager.GetString("SecondsRestTimerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clears all Workout Data but keeps settings and your exercises data.
+        /// </summary>
+        internal static string SettingsClearWorkoutDataHint {
+            get {
+                return ResourceManager.GetString("SettingsClearWorkoutDataHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Workout Data.
+        /// </summary>
+        internal static string SettingsClearWorkoutDataTitle {
+            get {
+                return ResourceManager.GetString("SettingsClearWorkoutDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DATA.
+        /// </summary>
+        internal static string SettingsDataTitle {
+            get {
+                return ResourceManager.GetString("SettingsDataTitle", resourceCulture);
             }
         }
         
@@ -508,6 +571,15 @@ namespace Set.Resx {
         internal static string WorkoutWeightIsRequired {
             get {
                 return ResourceManager.GetString("WorkoutWeightIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         

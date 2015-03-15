@@ -13,7 +13,6 @@ namespace Set.Models
             Created = DateTime.Today;
 		}
 
-
 		[PrimaryKey, AutoIncrement]
 		public int WorkoutId { get; set; }
 

@@ -6,8 +6,8 @@ namespace Set
 {
 	public interface ISettingsStorage
 	{
-		Task SaveAsync(Settings settings);
-		Task<Settings> LoadAsync();
+		void Save(Settings settings);
+		Settings Load();
 	}
 }
 

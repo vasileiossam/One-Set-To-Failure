@@ -7,6 +7,7 @@ using System.Reflection;
 using Set.Localization;
 using Toasts.Forms.Plugin.Abstractions;
 using Set.Resx;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -30,7 +31,7 @@ namespace Set
 
 		public App ()
 		{	
-			Settings = DependencyService.Get<ISettingsStorage>().LoadAsync().Result;
+			Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
@@ -63,6 +64,11 @@ namespace Set
 		{
 			var notificator = DependencyService.Get<IToastNotificator>();
 			bool tapped = await notificator.Notify(type, header, message, TimeSpan.FromSeconds(2));
+		}
+
+		public static void SaveSettings()
+		{
+			DependencyService.Get<ISettingsStorage> ().Save(Settings);
 		}
 	}
 }

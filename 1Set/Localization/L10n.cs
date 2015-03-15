@@ -37,7 +37,7 @@ namespace Set.Localization
 
 		public static string GetWeightUnit()
 		{
-			if (App.Settings.IsMetric == 1)
+			if (App.Settings.IsMetric)
 			{
 				return "Kgs";
 			}

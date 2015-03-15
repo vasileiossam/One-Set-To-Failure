@@ -4,35 +4,29 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using Set.Models;
 using System.Threading.Tasks;
+using System.Linq;
+using Toasts.Forms.Plugin.Abstractions;
 
 namespace Set.ViewModels
 {
-	public class SettingItem
-	{
-		public string Title { get; set; }
-		public string Hint { get; set; }
-		public string Value { get; set; }
-		public EventHandler Clicked {get; set;}
-	}
-
 	public class SettingsViewModel : BaseViewModel
 	{
 		public SettingsPage Page { get; set; }
 
-		protected ObservableCollection<SettingItem> _settingsItems;
-		public ObservableCollection<SettingItem> SettingsItems
+		protected ObservableCollection<PreferenceGroup> _settings;
+		public ObservableCollection<PreferenceGroup> Settings
 		{
 			get
 			{
-				_settingsItems = LoadSettings();
-				return _settingsItems;
+				_settings = LoadSettings();
+				return _settings;
 			}
 			set
 			{ 
-				if (_settingsItems != value)
+				if (_settings != value)
 				{
-					_settingsItems = value;
-					OnPropertyChanged("SettingItems");
+					_settings = value;
+					OnPropertyChanged("Settings");
 				}
 			}
 		}
@@ -42,30 +36,157 @@ namespace Set.ViewModels
 			Title = AppResources.SettingsTitle;
 		}
 
-		protected ObservableCollection<SettingItem> LoadSettings()
+		protected ObservableCollection<PreferenceGroup> LoadSettings()
 		{
-			var list = new ObservableCollection<SettingItem> ();
+			var list = new ObservableCollection<PreferenceGroup>();
 
-			list.Add (new SettingItem (){ Title = AppResources.SettingsUnitSystemTitle, Hint = "", Clicked = async (sender, e) => {
+			var generalGroup = new PreferenceGroup (){ Title = AppResources.SettingsGeneralTitle };
+			list.Add (generalGroup);
 
-					string[] options = new string[2];
-					options[0] = AppResources.UnitSystemMetric;
-					options[1] = AppResources.UnitSystemImperial;
+			var options = new string[2];
+			options[0] = AppResources.UnitSystemMetric;
+			options[1] = AppResources.UnitSystemImperial;
+			var value = options [1];
+			if (App.Settings.IsMetric)
+				value = options [0];
+			generalGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsUnitSystemTitle, 
+				Hint = "",
+				Value = value,
+				Options = options,
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.IsMetric = ((string)preference.Value == AppResources.UnitSystemMetric);
+					App.SaveSettings();
+				}
+			});
 
-					var action = await Page.DisplayActionSheet (AppResources.SettingsUnitSystemTitle, "Cancel", null, options);
+			var rulesGroup = new PreferenceGroup (){ Title = AppResources.SettingsTrainingRulesTitle, Hint = AppResources.SettingsTrainingRulesHint };
+			list.Add (rulesGroup);
 
-					var settingItem = sender as SettingItem;
-					settingItem.Value = "xxx";
-					OnPropertyChanged("SettingItems"); <--- flatten the list To properties int the viewmodel
-				}});
+			rulesGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsMaxRepsTitle, 
+				Hint = AppResources.SettingsMaxRepsHint,
+				Value = App.Settings.MaxReps,
+				Options = ListPreference.GetOptionsList(0, 50, false),
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.MaxReps = int.Parse((string) preference.Value);
+					App.SaveSettings();
+				}
+			});
 
-			list.Add (new SettingItem (){ Title = AppResources.SettingsTrainingRulesTitle, Value = "asdfa", Hint = AppResources.SettingsTrainingRulesHint});
-			list.Add (new SettingItem (){ Title = AppResources.SettingsMaxRepsTitle, Hint = AppResources.SettingsMaxRepsHint});
-			list.Add (new SettingItem (){ Title = AppResources.SettingsMinRepsTitle, Hint = AppResources.SettingsMinRepsHint});
-			list.Add (new SettingItem (){ Title = AppResources.SettingsExerciseGoalTitle, Hint = AppResources.SettingsExerciseGoalHint});
-			list.Add (new SettingItem (){ Title = AppResources.SettingsRestTimerTitle, Hint = ""});
+			rulesGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsMinRepsTitle, 
+				Hint = AppResources.SettingsMinRepsHint,
+				Value = App.Settings.MinReps,
+				Options = ListPreference.GetOptionsList(0, 50, false),
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.MinReps = int.Parse((string) preference.Value);
+					App.SaveSettings();
+				}
+			});
+
+			var index = 0;
+			options = new String[App.Database.RepsIncrements.Count];
+			foreach(var item in App.Database.RepsIncrements)
+			{
+				options[index++] = item.Description;
+			}
+			rulesGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsExerciseGoalTitle, 
+				Hint = AppResources.SettingsExerciseGoalHint,
+				Value = App.Settings.RepsIncrement.Description,
+				Options = options,
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.RepsIncrementId = App.Database.RepsIncrements.FirstOrDefault (x => x.Description == (string) preference.Value).RepsIncrementId;
+					App.SaveSettings();
+				}
+			});
+
+			index = 0;
+			options = new String[App.Database.RestTimers.Count];
+			foreach(var item in App.Database.RestTimers)
+			{
+				options[index++] = item.Description;
+			}
+			rulesGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsRestTimerTitle, 
+				Hint = "",
+				Value = App.Settings.RestTimer.Description,
+				Options = options,
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.RestTimerId = App.Database.RestTimers.FirstOrDefault (x => x.Description == (string) preference.Value).RestTimerId;
+					App.SaveSettings();
+				}
+			});
+
+
+			var dataGroup = new PreferenceGroup (){ Title = AppResources.SettingsDataTitle };
+			list.Add (dataGroup);
+
+			dataGroup.Add (new AlertPreference ()
+			{ 
+				Title = AppResources.SettingsClearWorkoutDataTitle, 
+				Hint = AppResources.SettingsClearWorkoutDataHint,
+				PopupTitle = AppResources.SettingsClearWorkoutDataTitle,
+				PopupMessage = AppResources.ClearWorkoutDataQuestion,
+				TostMessage = AppResources.ClearWorkoutDataCompleted,
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.MinReps = int.Parse((string) preference.Value);
+					App.SaveSettings();
+				}
+			});
 
 			return list;
+		}
+
+		public async void OnClicked(object sender, EventArgs args)
+		{
+			if (sender is ListPreference)
+			{
+				var preference = sender as ListPreference;
+				var action = await Page.DisplayActionSheet (preference.Title, AppResources.CancelButton, null, preference.Options);
+
+				if ((action != null) && (action != AppResources.CancelButton))
+				{
+					preference.Value = action;
+					preference.OnSave (sender, args);
+				}
+			}
+
+			if (sender is AlertPreference)
+			{
+				var preference = sender as AlertPreference;
+				var answer = await Page.DisplayAlert (preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
+
+				if (answer)
+				{
+					App.Database.ClearWorkoutData ();
+					App.ShowToast (ToastNotificationType.Info, preference.PopupTitle, preference.TostMessage);
+				}
+			}
 		}
 	}
 }

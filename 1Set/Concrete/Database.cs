@@ -133,6 +133,11 @@ namespace Set
 			_connection.CreateTable<RoutineDay>();
 			_connection.CreateTable<Workout>();
 		}
+
+		public void ClearWorkoutData()
+		{
+			_connection.Execute ("DELETE FROM Workouts");
+		}
 	}
 }
 

@@ -105,6 +105,7 @@ namespace Set.ViewModels
 				{
 					workout = new Workout ();
 					workout.ExerciseId = day.ExerciseId;
+					workout.Created = _currentDate;
 				} 
 
 				day.Workout = workout;

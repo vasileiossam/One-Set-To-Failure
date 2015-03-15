@@ -64,7 +64,7 @@ namespace Set.Models
             {
                 if (_restTimerId == null)
                 {
-                    _restTimerId = App.Settings.RestTimer.RestTimerId;
+					_restTimerId = 0; // App.Settings.RestTimer.RestTimerId;
                 }
                 return _restTimerId;
             } 
@@ -81,7 +81,7 @@ namespace Set.Models
             {
                 if (_repsIncrementId == null)
                 {
-                    _repsIncrementId = App.Settings.RepsIncrement.RepsIncrementId;
+					_repsIncrementId = 0; //App.Settings.RepsIncrement.RepsIncrementId;
                 }
                 return _repsIncrementId;
             } 

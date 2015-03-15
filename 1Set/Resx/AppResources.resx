@@ -246,6 +246,9 @@
   <data name="SettingsTrainingRulesTitle" xml:space="preserve">
     <value>TRAINING RULES</value>
  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>DATA</value>
+  </data>
   <data name="SettingsTrainingRulesHint" xml:space="preserve">
     <value>You can override these rules in each exercise</value>
  </data>
@@ -275,5 +278,26 @@
  </data>
   <data name="UnitSystemImperial" xml:space="preserve">
     <value>Imperial (Lbs)</value>
+ </data>
+ <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+ </data>
+ <data name="SettingsClearWorkoutDataTitle" xml:space="preserve">
+    <value>Clear Workout Data</value>
+ </data>
+ <data name="SettingsClearWorkoutDataHint" xml:space="preserve">
+    <value>Clears all Workout Data but keeps settings and your exercises data</value>
+ </data>
+ <data name="ClearWorkoutDataQuestion" xml:space="preserve">
+    <value>Are you sure you want to clear all workout data?</value>
+ </data>
+ <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+ </data>
+ <data name="No" xml:space="preserve">
+    <value>No</value>
+ </data>
+ <data name="ClearWorkoutDataCompleted" xml:space="preserve">
+    <value>Workout data have been cleared</value>
  </data>
 </root>
