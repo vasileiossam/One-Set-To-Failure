@@ -13,7 +13,7 @@ using Android.Content.PM;
 
 namespace Set.Droid
 {
-	[Activity(Label = "One Set To Exhaustion", Icon = "@drawable/icon", Theme = "@style/Theme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, MainLauncher = true, NoHistory = true)]
+	[Activity(Label = "One Set To Fatigue", Icon = "@drawable/icon", Theme = "@style/Theme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, MainLauncher = true, NoHistory = true)]
 	public class SplashActivity : Activity
 	{
 		protected override async void OnCreate(Bundle bundle)

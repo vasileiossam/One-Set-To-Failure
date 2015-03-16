@@ -86,7 +86,7 @@ namespace Set.ViewModels
 
 		public WorkoutListViewModel (INavigation navigation) : base(navigation)
 		{
-			Title = "One Set To Exhaustion";
+			Title = "One Set To Fatigue";
 
 			_chevronTapCommand = new Command (OnChevronTapCommand);
 		}

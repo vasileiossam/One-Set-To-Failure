@@ -3,7 +3,7 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Droid\SplashActivity.cs">
     <Files>
       <File FileName="1Set\Models\Settings.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\SettingsViewModel.cs" Line="48" Column="48" />
+      <File FileName="1Set\ViewModels\SettingsViewModel.cs" Line="1" Column="1" />
       <File FileName="1Set\App.cs" Line="1" Column="1" />
       <File FileName="1Set\Resx\AppResources.resx" Line="1" Column="1" />
       <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="1" Column="1" />
@@ -12,8 +12,8 @@
       <File FileName="1Set\WorkoutRules.cs" Line="1" Column="1" />
       <File FileName="Notes.txt" Line="1" Column="1" />
       <File FileName="c:\dev\1Set\1Set\obj\Debug\SettingsPage.xaml.g.cs" Line="1" Column="1" />
-      <File FileName="Droid\SplashActivity.cs" Line="77" Column="77" />
-      <File FileName="Droid\MainActivity.cs" Line="93" Column="93" />
+      <File FileName="Droid\SplashActivity.cs" Line="1" Column="1" />
+      <File FileName="Droid\MainActivity.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -21,11 +21,11 @@
       <Breakpoint file="C:\dev\1Set\Droid\Properties\AssemblyInfo.cs" line="25" column="1" />
       <Breakpoint file="c:\dev\1Set\1Set\Pages\WorkoutListPage.cs" line="59" column="1" />
       <Breakpoint file="C:\dev\1Set\1Set\ViewModels\SettingsViewModel.cs" line="58" column="1" />
-      <Breakpoint file="C:\dev\1Set\Droid\SplashActivity.cs" line="22" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="1Set\Pages\SettingsPage.xaml.cs" line="49" offsetX="494" offsetY="768" expression="settingItem" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <AuthorInfo Name="Vasileios Samaltanos" Email="sos@arxeio.gr" Copyright="Vasileios Samaltanos" Company="" Trademark="" />
   <MonoDevelop.Ide.ItemProperties.1Set.Droid AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>
