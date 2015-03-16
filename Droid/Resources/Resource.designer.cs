@@ -136,10 +136,16 @@ namespace Set.Droid
 			public const int info = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int success = 2130837525;
+			public const int splash = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int warning = 2130837526;
+			public const int SplashScreen = 2130837526;
+			
+			// aapt resource value: 0x7f020017
+			public const int success = 2130837527;
+			
+			// aapt resource value: 0x7f020018
+			public const int warning = 2130837528;
 			
 			static Drawable()
 			{
@@ -160,18 +166,6 @@ namespace Set.Droid
 			// aapt resource value: 0x7f080000
 			public const int image = 2131230720;
 			
-			// aapt resource value: 0x7f080003
-			public const int imageView1 = 2131230723;
-			
-			// aapt resource value: 0x7f080004
-			public const int text1 = 2131230724;
-			
-			// aapt resource value: 0x7f080006
-			public const int text2 = 2131230726;
-			
-			// aapt resource value: 0x7f080005
-			public const int text3 = 2131230725;
-			
 			// aapt resource value: 0x7f080001
 			public const int title = 2131230721;
 			
@@ -190,9 +184,6 @@ namespace Set.Droid
 			
 			// aapt resource value: 0x7f030000
 			public const int crouton = 2130903040;
-			
-			// aapt resource value: 0x7f030001
-			public const int Splash = 2130903041;
 			
 			static Layout()
 			{

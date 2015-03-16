@@ -9,18 +9,19 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Threading;
+using Android.Content.PM;
 
 namespace Set.Droid
 {
-	[Activity(Theme = "@style/Theme.Splash", MainLauncher = true, NoHistory = true)]
+	[Activity(Label = "One Set To Exhaustion", Icon = "@drawable/icon", Theme = "@style/Theme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, MainLauncher = true, NoHistory = true)]
 	public class SplashActivity : Activity
 	{
 		protected override async void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
-			SetContentView(Resource.Layout.Splash);
 
-			this.StartActivity(typeof(MainActivity));
+			var intent = new Intent(this, typeof(MainActivity));
+			StartActivity(intent);
 		}
 	}
 

@@ -45,7 +45,7 @@ namespace Set
 
 		public void OnAddExerciseButtonClicked(object sender, EventArgs args)
 		{
-			var exercisePage = new ExerciseDetailsPage
+			var exercisePage = new ExercisePage
 			{
 				ViewModel = new ExerciseViewModel(Navigation)
 				{
@@ -67,7 +67,7 @@ namespace Set
 			};
 			viewModel.LoadRoutine ();
 
-			var page = new ExerciseDetailsPage
+			var page = new ExercisePage
 			{
 				ViewModel = viewModel
 			};

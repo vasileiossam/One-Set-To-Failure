@@ -19,8 +19,6 @@
   </ContentPage.ToolbarItems>
   
   <ContentPage.Content>
-  <TabbedPage>
-  </TabbedPage>
 	  <ScrollView>
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 

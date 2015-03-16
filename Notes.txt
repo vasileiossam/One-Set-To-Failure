@@ -1,4 +1,6 @@
-﻿- rule: always suggest previoues reps/weihght
+﻿- workoutlist -: swipe gesture
+
+- rule: always suggest previoues reps/weihght
 
 next app:
 motivator app

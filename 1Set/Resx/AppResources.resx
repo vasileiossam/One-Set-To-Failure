@@ -300,4 +300,10 @@
  <data name="ClearWorkoutDataCompleted" xml:space="preserve">
     <value>Workout data have been cleared</value>
  </data>
+ <data name="ExercisePageDetails" xml:space="preserve">
+    <value>Details</value>
+ </data>
+ <data name="ExercisePageTrainingRules" xml:space="preserve">
+    <value>Training Rules</value>
+ </data>
 </root>

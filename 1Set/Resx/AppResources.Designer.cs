@@ -134,6 +134,24 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string ExercisePageDetails {
+            get {
+                return ResourceManager.GetString("ExercisePageDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training Rules.
+        /// </summary>
+        internal static string ExercisePageTrainingRules {
+            get {
+                return ResourceManager.GetString("ExercisePageTrainingRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exercise saved.
         /// </summary>
         internal static string ExerciseSaved {
@@ -170,7 +188,7 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string No {
             get {
