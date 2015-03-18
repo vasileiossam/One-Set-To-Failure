@@ -1,94 +1,16 @@
-﻿- workoutlist -: swipe gesture
-
+﻿- exercise list: put days like "title" on Mon, Tue and Wed
 - rule: always suggest previoues reps/weihght
-
-next app:
-motivator app
-  timer with motivational part (images and quotes)
-  keep a log of each use of the timer
-  statistics? 
-------------------
-        // Units and measurements
-        //   Kilograms (Kgs)                                            <- combo to select one or the other
-        //   Pounds (Lbs)
-        
-        // Training Rules 
-        // (you can override in Exercises) 
-        //
-       
-        // Workout goal in Reps
-        // (number of Reps to increase performance in Reps since the last workout or how many more Reps aim to do each time)
-        //    +1
-        //    +2
-        //    +1 every 2 times
-        //    +1 every 3 times
-        //    +1 every 4 times
-
-
-where to update them?
+- workoutlist: swipe gesture
+- about
+- where to update them?
         public int PreviousReps { get; set; }
         public double PreviousWeight { get; set; }
-
-<!--
 
 - object to validate the common seettings between settings and exercises
   e.g RepsForWeightDn cant be greater than RepsForWeightUp
 
-
-    *****************************************************
-    Goal +1 next weight level!              <- show the +1 goal and if we doing moving to next weight level
-       [UP] 10 /100                         <- tap here will fill
-                                            <- only show when new                
-    *****************************************************
-    Workout   
-      Reps
-        < [11] > +1                         <- +1 in relation with previous 
-    
-      Weights
-        < [100] >                                 <--- convert weights when saving?
-   *****************************************************
-            Done it!                      | when new, if saved change label to Save
-            Cancel                      
-
-- Merge goal and Workout?
-and use + and arrows to denote the increase?
-
--  Suggseions?
-
-              Setting:
-    Done it! goes to next workout or only back
-      if goes to next then rest screen
-      
-  - have a rest calculator as an option (different page
-
--->
-
- 
-http://forums.xamarin.com/discussion/20117/sqlite-net-extensions-and-sqliteconnection
-http://www.codeproject.com/Articles/792883/Using-Sqlite-in-a-Xamarin-Android-Application-Deve
-http://stackoverflow.com/questions/24665304/sqlite-net-extensions-example-on-xamarin-forms                  
-
-- workoutpage list
-  - find active routines for the day
-	-if one then display extersises in routine and dont display routine header
-	- if more than one display first a header for routnine and then display extersies
-
-		- find workouts for the day
-			- merge them with routine
-			- what is left
-			- what i want
-			- display the program (what I have to do)
-			- display what I DID
- 			- allow workout without routine
-
- - day notes, workout notes?
-
-- exercise list:
-  - put days like "title" on Mon, Tue and Wed
-
-- exercise page 
-  - put save and delete buttons on toolbar?
-  - settings that need to be overriden
+- exercise page: delete 
+ - exercise settings that need to be overriden
         // Exercises page
         // have options to override all training rules (rest timer included)
         // where to have it? see UI patterns 
@@ -96,29 +18,109 @@ http://stackoverflow.com/questions/24665304/sqlite-net-extensions-example-on-xam
         //   button Training Rules?
         //   tabs: Basic / Advanced?
 
-- score system
- + for every new rep
- - for every down
- 
+- day notes, workout notes?
+                   
 - do I need user id in all tables? 
+    <--- or create another table with setings for a day -->
+          Exersiceid, sort numb and date and give the option to move exercises on a day.
 
-       
-                    <--- or create another table with setings for a day -->
-                          Exersiceid, sort numb and date and give the option to move exercises on a day.
-
-                    <--- sort numb is not going to workig because an exercice is part of multiple days 
-                    <--- maybe we need the routine after all
+    <--- sort numb is not going to workig because an exercice is part of multiple days 
+    <--- maybe we need the routine after all
 
 - idea: ability to print a routine or weekly program. call it old school printout or export in a txt file.
 
+- score system
+  + for every new rep
+  - for every down
+----------------------------------
+    - learning
+     - read Charles book
+     - read the Android UI design patterns
+     - read xamarins intro article
+     - check pluralsight
+
+- design app
+     
+- first version andr optimized for tablet
+
+- option to show motivitional quotes inn the log exersise screen.
+  - ability to set their own motivational messages
+    or
+  - to choose from different groups of quote databases
+   
+- option to have motivational images (more than one and rotate them) in log exersise screen
+  - can take photo
+  - select predifined from ancient greek kurous
+
+- in the log workout screen:
+  - suggest the number of last reps + increase
+  - have plus and minus to change the number
+  - have boxes with predifined higher numbers not lowers.
+    - e.g. if goal is to do 7 reps today then offer
+       - 7 in the reps box
+       - 8, 9, 10 in diffeent boxes underneath
+
+- when in log exersise screen: swipe left/right will havigate in the exercises of the selected workout
+
+- monetize:
+  - think about free or not
+    - what are my goals?
+      - to actuall earn money or to use it to find a better job?
+   - in regards to the features that I will put and the other apps don't have it.
+     - is better to have app free and gain members first?
+     - or payed from the begnining
+     - features will be copied from other apps. how to ensure biggest market share
+
+- it should work in briefcace mode without internet and it will send data online. both modes
+  - can work without sign in or make account
+
+- gamefiy or not as an option
+     - badges like strava or 10.000 steps challenge?
+
+- offer extra log functios like logging running on a treadmill
+
+- send data to other apps like fitbit
+  - which else?
+
+- counter like in the xls to count days when putting a goal
+
+- xamarin forms + mvvmlight presentation
+
+----------------------------------
+- workouts
+    - date
+    + name <- link to exersices
+    - weight
+    - reps
+    + comments
+
++ exercises
+    + name
+    + comments
+    + picture
+    + step
+       
+- routines
+    - name
+    - comments
+    - show on mon, day, tue
+    - active
+
+    - motivation
+
+    - routinesExersises
+       - exersise 1
+       - rest period
+       - exersise 2
+-----------------------------------
+
+    *****************************************************
+    Goal +1 next weight level!              <- show the +1 goal and if we doing moving to next weight level
+       [UP] 10 /100                         <- tap here will fill
+                                           <- only show when new                
+- Merge goal and Workout?
+and use + and arrows to denote the increase?
+
+- have a rest calculator as an option (different page
 
 
-- research: 1) development in iphone watch 2) ideas?
-- idea: fitness log platform
-  - search: https://www.google.com.au/search?q=fitness+log&ie=utf-8&oe=utf-8&gws_rd=cr&ei=Vmj2VLr0A6TDmwXPzoC4AQ
-  - user can havily customize it
-  - can log any sport or fitness activity: walking, swiming, weights ec
-  - has its own API
-  - uses other APIs like fitbit
-  - its mobile, web and watch
-  - can convert activity to steps
