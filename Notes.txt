@@ -1,7 +1,15 @@
-﻿- exercise list: put days like "title" on Mon, Tue and Wed
-- rule: always suggest previoues reps/weihght
+﻿- about/attribution icon
+- exercise list: put days like "title" on Mon, Tue and Wed
+- day notes, workout notes?
+  - show on ex list
+  - show icon on workout when taps -> popups
+  - icon on day
+- exercise page: delete 
+
 - workoutlist: swipe gesture
-- about
+- when in log exersise screen: swipe left/right will havigate in the exercises of the selected workout
+- rule: always suggest previoues reps/weihght
+------
 - where to update them?
         public int PreviousReps { get; set; }
         public double PreviousWeight { get; set; }
@@ -9,7 +17,6 @@
 - object to validate the common seettings between settings and exercises
   e.g RepsForWeightDn cant be greater than RepsForWeightUp
 
-- exercise page: delete 
  - exercise settings that need to be overriden
         // Exercises page
         // have options to override all training rules (rest timer included)
@@ -17,9 +24,7 @@
         //   app toolbar button: Training Rules?
         //   button Training Rules?
         //   tabs: Basic / Advanced?
-
-- day notes, workout notes?
-                   
+                 
 - do I need user id in all tables? 
     <--- or create another table with setings for a day -->
           Exersiceid, sort numb and date and give the option to move exercises on a day.
@@ -39,10 +44,6 @@
      - read xamarins intro article
      - check pluralsight
 
-- design app
-     
-- first version andr optimized for tablet
-
 - option to show motivitional quotes inn the log exersise screen.
   - ability to set their own motivational messages
     or
@@ -59,8 +60,6 @@
     - e.g. if goal is to do 7 reps today then offer
        - 7 in the reps box
        - 8, 9, 10 in diffeent boxes underneath
-
-- when in log exersise screen: swipe left/right will havigate in the exercises of the selected workout
 
 - monetize:
   - think about free or not

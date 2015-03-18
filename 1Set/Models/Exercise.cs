@@ -111,6 +111,8 @@ namespace Set.Models
         } 
 
         public byte[] Image { get; set; }
+
+
 	}
 }
 

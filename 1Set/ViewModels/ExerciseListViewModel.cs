@@ -11,11 +11,12 @@ namespace Set
 {
 	public class ExerciseListViewModel : BaseViewModel
 	{
-		public ObservableCollection<Exercise> Exercises 
+        public ObservableCollection<ExerciseViewModel> ExerciseViewModel 
 		{
 			get
 			{
-				return App.Database.ExercisesRepository.All;
+				var exercisesList = App.Database.ExercisesRepository.All;
+                convert list to view models
 			}
 		}
 

@@ -25,8 +25,10 @@
 	            	<ViewCell.View>
 	                <StackLayout Padding="10,10,0,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
 	                	<Label Text="{Binding Name}" YAlign="Center" FontSize="Medium" />
-						        <Label Text="{Binding Notes}" YAlign="Center" TextColor="Gray"/>        
-					        </StackLayout>
+				            <Label Text="{Binding Notes}" YAlign="Center" TextColor="#B6B6B6"/>
+                    <Label IsVisible="{Binding TrainingDaysVisible}" Text="{i18n:Translate TrainingDaysLabel}" YAlign="Center" TextColor="#B6B6B6"/>
+                    <Label Text="{Binding TrainingDays}" YAlign="Center" TextColor="#B6B6B6"/>
+                  </StackLayout>
 					      </ViewCell.View>
 	            </ViewCell>
 	          </DataTemplate>

@@ -234,9 +234,6 @@
   <data name="NoWorkoutDataLine2" xml:space="preserve">
     <value>You also need to rest. If this is your rest day, enjoy it!</value>
   </data>
-  <data name="SettingsTitle" xml:space="preserve">
-    <value>Settings</value>
-  </data>
   <data name="SettingsGeneralTitle" xml:space="preserve">
     <value>GENERAL</value>
   </data>
@@ -245,65 +242,83 @@
   </data>
   <data name="SettingsTrainingRulesTitle" xml:space="preserve">
     <value>TRAINING RULES</value>
- </data>
+  </data>
   <data name="SettingsDataTitle" xml:space="preserve">
     <value>DATA</value>
   </data>
   <data name="SettingsTrainingRulesHint" xml:space="preserve">
     <value>You can override these rules in each exercise</value>
- </data>
+  </data>
   <data name="SettingsMaxRepsTitle" xml:space="preserve">
     <value>Max Reps</value>
- </data>
+  </data>
   <data name="SettingsMaxRepsHint" xml:space="preserve">
     <value>The number of reps to advance to the next weight level</value>
- </data>
+  </data>
   <data name="SettingsMinRepsTitle" xml:space="preserve">
     <value>Min Reps</value>
- </data>
+  </data>
   <data name="SettingsMinRepsHint" xml:space="preserve">
     <value>If you can't do at least this number of Reps you should go back a weight level</value>
- </data>
+  </data>
   <data name="SettingsExerciseGoalTitle" xml:space="preserve">
     <value>Exercise Goal</value>
- </data>
+  </data>
   <data name="SettingsExerciseGoalHint" xml:space="preserve">
     <value>Reps to do more in every workout</value>
- </data>
+  </data>
   <data name="SettingsRestTimerTitle" xml:space="preserve">
     <value>Rest Timer</value>
- </data>
+  </data>
   <data name="UnitSystemMetric" xml:space="preserve">
     <value>Metric (Kgs)</value>
- </data>
+  </data>
   <data name="UnitSystemImperial" xml:space="preserve">
     <value>Imperial (Lbs)</value>
- </data>
- <data name="CancelButton" xml:space="preserve">
+  </data>
+  <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
- </data>
- <data name="SettingsClearWorkoutDataTitle" xml:space="preserve">
+  </data>
+  <data name="SettingsClearWorkoutDataTitle" xml:space="preserve">
     <value>Clear Workout Data</value>
- </data>
- <data name="SettingsClearWorkoutDataHint" xml:space="preserve">
+  </data>
+  <data name="SettingsClearWorkoutDataHint" xml:space="preserve">
     <value>Clears all Workout Data but keeps settings and your exercises data</value>
- </data>
- <data name="ClearWorkoutDataQuestion" xml:space="preserve">
+  </data>
+  <data name="ClearWorkoutDataQuestion" xml:space="preserve">
     <value>Are you sure you want to clear all workout data?</value>
- </data>
- <data name="Yes" xml:space="preserve">
+  </data>
+  <data name="Yes" xml:space="preserve">
     <value>Yes</value>
- </data>
- <data name="No" xml:space="preserve">
+  </data>
+  <data name="No" xml:space="preserve">
     <value>No</value>
- </data>
- <data name="ClearWorkoutDataCompleted" xml:space="preserve">
+  </data>
+  <data name="ClearWorkoutDataCompleted" xml:space="preserve">
     <value>Workout data have been cleared</value>
- </data>
- <data name="ExercisePageDetails" xml:space="preserve">
+  </data>
+  <data name="ExercisePageDetails" xml:space="preserve">
     <value>Details</value>
- </data>
- <data name="ExercisePageTrainingRules" xml:space="preserve">
+  </data>
+  <data name="ExercisePageTrainingRules" xml:space="preserve">
     <value>Training Rules</value>
- </data>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AuthorTitle" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="CreditTitle" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="SupportTitle" xml:space="preserve">
+    <value>Support and feedback</value>
+  </data>
+  <data name="VersionTitle" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="TrainingDaysLabel" xml:space="preserve">
+    <value>Training on </value>
+  </data>
 </root>
