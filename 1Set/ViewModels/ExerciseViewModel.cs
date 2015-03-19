@@ -41,37 +41,36 @@ namespace Set.ViewModels
         { 
             get
             {
-                load rountine has to be executed
-
-                var list = new List<string>();
-                
-                var dayNames = AppResources.Culture.DateTimeFormat.DayNames;
-                if (DoOnMon) { list.Add(dayNames[1]); }
-                if (DoOnTue) { list.Add(dayNames[2]); }
-                if (DoOnWed) { list.Add(dayNames[3]); }
-                if (DoOnThu) { list.Add(dayNames[4]); }
-                if (DoOnFri) { list.Add(dayNames[5]); }
-                if (DoOnSat) { list.Add(dayNames[6]); }
-                if (DoOnSun) { list.Add(dayNames[0]); }
-                
-                var s = String.Join(", ", list.Select(x => x.Name));
-                s = s.Trim();
-                
-                // replace last , with 'and'
-                var andStr = get and string
-                if (s != string.Empty)
-                {
-                    var place = s.LastIndexOf(",");
-                    if (place >= 0)
-                    {
-                        s = s.Remove(place, 1).Insert(place, " " + andStr + " ");
-                    }
-                }
-
-                return s;
+//				 var list = new List<string>();
+//                
+//                var dayNames = AppResources.Culture.DateTimeFormat.DayNames;
+//                if (DoOnMon) { list.Add(dayNames[1]); }
+//                if (DoOnTue) { list.Add(dayNames[2]); }
+//                if (DoOnWed) { list.Add(dayNames[3]); }
+//                if (DoOnThu) { list.Add(dayNames[4]); }
+//                if (DoOnFri) { list.Add(dayNames[5]); }
+//                if (DoOnSat) { list.Add(dayNames[6]); }
+//                if (DoOnSun) { list.Add(dayNames[0]); }
+//                
+//                var s = String.Join(", ", list.Select(x => x.Name));
+//                s = s.Trim();
+//                
+//                // replace last , with 'and'
+//                var andStr = get and string
+//                if (s != string.Empty)
+//                {
+//                    var place = s.LastIndexOf(",");
+//                    if (place >= 0)
+//                    {
+//                        s = s.Remove(place, 1).Insert(place, " " + andStr + " ");
+//                    }
+//                }
+//
+//                return s;
+				return "";
             }
         }
-        public bool TrainingDaysVisible { get; } <- write get or check if binding can take argument
+		public bool TrainingDaysVisible { get {return false;} } 
 
 		public ExerciseViewModel (INavigation navigation) : base(navigation)
 		{

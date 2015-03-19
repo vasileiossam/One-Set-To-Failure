@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="Set.AboutPage"
 	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
 	xmlns:controls="clr-namespace:Set.Controls;assembly=1Set"
@@ -13,27 +15,32 @@
 	</ContentPage.Padding>
 
 	<ContentPage.Content>
-	<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
-    
-    <Image HeightRequest="48" WidthRequest="48" Source="icon" HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Label Text="{Binding AppTitle}" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" TextColor="#212121"/>
-        
-    <ContentView Padding="0, 10, 0, 0">
-      <Label Text="{i18n:Translate VersionTitle}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>
-      <Label Text="{Binding Version}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>
-     
-      <Label Text="{i18n:Translate AuthorTitle}" FontSize="Medium"  VerticalOptions="Center" TextColor="#212121"/>
-      <Label Text="{Binding Author}" FontSize="Medium"  VerticalOptions="Center" TextColor="#212121"/>
-    </ContentView>
+		<ScrollView>
+		<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10">
+	    
+	    	<Image HeightRequest="96" WidthRequest="96" Source="drawable-xhdpi/icon" HorizontalOptions="Center" VerticalOptions="Center"/>
+	    	<Label Text="{Binding AppTitle}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+	       	
+	       	<StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" HorizontalOptions="Center">     
+		    	<Label Text="{i18n:Translate VersionTitle}" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+		    	<Label Text="{Binding Version}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			</StackLayout>
 
-    <Label Text="{i18n:Translate SupportTitle}" FontSize="Medium"  VerticalOptions="Center" TextColor="#212121"/>
-    <Label Text="{Binding SupportEmail}" FontSize="Medium"  VerticalOptions="Center" TextColor="#212121"/>
+			<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+		    
+		    <Label Text="{i18n:Translate AuthorTitle}" FontSize="Medium"  HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+		    <Label Text="{Binding Author}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+		 	
+		 	<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+		    
+		    <Label Text="{i18n:Translate SupportTitle}" FontSize="Medium"  HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+		    <Label Text="{Binding SupportEmail}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
 
-    <BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+		    <BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
 
-    <Label Text="{i18n:Translate CreditTitle}" FontSize="Medium"  VerticalOptions="Center" TextColor="#212121"/>
-    <Label Text="{Binding Credit1}" FontSize="Medium"  VerticalOptions="Center" TextColor="#212121"/>    
-  </StackLayout>
-
+		    <Label Text="{i18n:Translate CreditTitle}" FontSize="Medium"  HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+	    	<Label Text="{Binding Credit1}" FontSize="Small"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#212121"/>    
+	  </StackLayout>
+	  </ScrollView>
 	</ContentPage.Content>
 </ContentPage>

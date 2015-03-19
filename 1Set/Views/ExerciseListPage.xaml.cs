@@ -35,7 +35,7 @@ namespace Set
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-			exercisesList.ItemsSource = ViewModel.Exercises;
+			//exercisesList.ItemsSource = ViewModel.Exercises;
 		}
 
 		protected override void OnDisappearing()

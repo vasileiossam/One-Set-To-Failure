@@ -243,8 +243,17 @@
   <data name="SettingsTrainingRulesTitle" xml:space="preserve">
     <value>TRAINING RULES</value>
   </data>
+  <data name="SettingsOtherTitle" xml:space="preserve">
+    <value>OTHER</value>
+  </data>
   <data name="SettingsDataTitle" xml:space="preserve">
     <value>DATA</value>
+  </data>
+  <data name="SettingsAboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SettingsAboutHint" xml:space="preserve">
+    <value>Version info and credits</value>
   </data>
   <data name="SettingsTrainingRulesHint" xml:space="preserve">
     <value>You can override these rules in each exercise</value>
@@ -307,13 +316,13 @@
     <value>About</value>
   </data>
   <data name="AuthorTitle" xml:space="preserve">
-    <value>Author</value>
+    <value>Developed by</value>
   </data>
   <data name="CreditTitle" xml:space="preserve">
-    <value>Credit</value>
+    <value>Credits (with many thanks!)</value>
   </data>
   <data name="SupportTitle" xml:space="preserve">
-    <value>Support and feedback</value>
+    <value>Support and feedback to</value>
   </data>
   <data name="VersionTitle" xml:space="preserve">
     <value>Version</value>

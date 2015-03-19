@@ -62,11 +62,29 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Exercise.
         /// </summary>
         internal static string AddExerciseTitle {
             get {
                 return ResourceManager.GetString("AddExerciseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Developed by.
+        /// </summary>
+        internal static string AuthorTitle {
+            get {
+                return ResourceManager.GetString("AuthorTitle", resourceCulture);
             }
         }
         
@@ -94,6 +112,15 @@ namespace Set.Resx {
         internal static string ClearWorkoutDataQuestion {
             get {
                 return ResourceManager.GetString("ClearWorkoutDataQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credits (with many thanks!).
+        /// </summary>
+        internal static string CreditTitle {
+            get {
+                return ResourceManager.GetString("CreditTitle", resourceCulture);
             }
         }
         
@@ -314,6 +341,24 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version info and credits.
+        /// </summary>
+        internal static string SettingsAboutHint {
+            get {
+                return ResourceManager.GetString("SettingsAboutHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string SettingsAboutTitle {
+            get {
+                return ResourceManager.GetString("SettingsAboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clears all Workout Data but keeps settings and your exercises data.
         /// </summary>
         internal static string SettingsClearWorkoutDataHint {
@@ -404,6 +449,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OTHER.
+        /// </summary>
+        internal static string SettingsOtherTitle {
+            get {
+                return ResourceManager.GetString("SettingsOtherTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rest Timer.
         /// </summary>
         internal static string SettingsRestTimerTitle {
@@ -445,6 +499,15 @@ namespace Set.Resx {
         internal static string SettingsUnitSystemTitle {
             get {
                 return ResourceManager.GetString("SettingsUnitSystemTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support and feedback to.
+        /// </summary>
+        internal static string SupportTitle {
+            get {
+                return ResourceManager.GetString("SupportTitle", resourceCulture);
             }
         }
         
@@ -494,6 +557,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Training on .
+        /// </summary>
+        internal static string TrainingDaysLabel {
+            get {
+                return ResourceManager.GetString("TrainingDaysLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Training Program.
         /// </summary>
         internal static string TrainingProgram {
@@ -517,6 +589,15 @@ namespace Set.Resx {
         internal static string UnitSystemMetric {
             get {
                 return ResourceManager.GetString("UnitSystemMetric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string VersionTitle {
+            get {
+                return ResourceManager.GetString("VersionTitle", resourceCulture);
             }
         }
         

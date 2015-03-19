@@ -159,6 +159,17 @@ namespace Set.ViewModels
 				}
 			});
 
+			var otherGroup = new PreferenceGroup (){ Title = AppResources.SettingsOtherTitle };
+			list.Add (otherGroup);
+
+			otherGroup.Add (new PagePreference ()
+			{ 
+				Title = AppResources.SettingsAboutTitle,
+				Hint = AppResources.SettingsAboutHint,
+				Navigation = Page.Navigation,
+				NavigateToPage = typeof(AboutPage) 
+			});
+
 			return list;
 		}
 

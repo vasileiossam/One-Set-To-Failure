@@ -10,7 +10,6 @@ namespace Set
         public StatisticsPage()
 		{
 			this.InitializeComponent ();
-			this.BindingContext = ViewModel;
 		}
 
 		protected async override void OnAppearing()

@@ -28,6 +28,7 @@ namespace Set
 
 		public static DateTime CurrentDate {get; set;}
 		public static Settings Settings { get; set; }
+		public static string Version {get; set;}
 
 		public App ()
 		{	

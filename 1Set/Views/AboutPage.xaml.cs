@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Set.ViewModels;
+using Set.Models;
 using Xamarin.Forms;
+using Set.Resx;
 
 namespace Set
 {

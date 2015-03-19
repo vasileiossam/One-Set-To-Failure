@@ -14,6 +14,7 @@ namespace Set.ViewModels
 
 		public string Title { get; set; }
 		public string Hint { get; set; }
+		public INavigation Navigation { get; set; }
 
 		protected object _value;
 		public object Value 
@@ -39,13 +40,14 @@ namespace Set.ViewModels
 				return !string.IsNullOrEmpty (Hint);
 			}
 		}
+		public bool IsValueVisible { get; set; }
 
 		public EventHandler Clicked {get; set;}
 		public EventHandler OnSave {get; set;}
 
 		public Preference ()
 		{
-
+			IsValueVisible = true;
 		}
 
 		protected void OnPropertyChanged(string propertyName)
@@ -96,6 +98,28 @@ namespace Set.ViewModels
 		public string PopupTitle { get; set; }
 		public string PopupMessage {get; set;}
 		public string TostMessage { get; set; }
+
+		public AlertPreference():base()
+		{
+			IsValueVisible = false;
+		}
+	}
+
+	public class PagePreference : Preference
+	{
+		public Type NavigateToPage { get; set; }
+
+		public PagePreference():base()
+		{
+			Clicked += OnClicked;
+			IsValueVisible = false;
+		}
+
+		public async void OnClicked(object sender, EventArgs args)
+		{
+			var page = Activator.CreateInstance (NavigateToPage);
+			Navigation.PushAsync (page as Page);
+		}
 	}
 }
 

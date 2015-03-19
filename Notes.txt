@@ -1,4 +1,4 @@
-﻿- about/attribution icon
+﻿
 - exercise list: put days like "title" on Mon, Tue and Wed
 - day notes, workout notes?
   - show on ex list

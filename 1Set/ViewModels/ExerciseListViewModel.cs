@@ -16,7 +16,8 @@ namespace Set
 			get
 			{
 				var exercisesList = App.Database.ExercisesRepository.All;
-                convert list to view models
+              //  convert list to view models
+				return null;
 			}
 		}
 
