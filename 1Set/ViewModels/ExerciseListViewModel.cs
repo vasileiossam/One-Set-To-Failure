@@ -6,22 +6,37 @@ using System.Collections.ObjectModel;
 using Set.Resx;
 using Set.ViewModels;
 using Xamarin.Forms;
+using AutoMapper;
+using System.Diagnostics;
 
 namespace Set
 {
 	public class ExerciseListViewModel : BaseViewModel
 	{
-        public ObservableCollection<ExerciseViewModel> ExerciseViewModel 
+        public ObservableCollection<ExerciseViewModel> Exercises 
 		{
 			get
 			{
-				var exercisesList = App.Database.ExercisesRepository.All;
-              //  convert list to view models
+				try
+				{
+					var exercisesList = App.Database.ExercisesRepository.All;
+					var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseViewModel>>(exercisesList);
+					foreach(var item in exerciseViewModelsList)
+					{
+						item.LoadRoutine();
+					}
+					return exerciseViewModelsList;
+				}
+				catch(Exception  ex)
+				{
+					App.ShowErrorPage (this, ex);
+				}
+
 				return null;
 			}
 		}
 
-		public ExerciseListViewModel (INavigation navigation) : base(navigation)
+		public ExerciseListViewModel () : base()
 		{
 			Title = AppResources.ExercisesTitle;
 		}

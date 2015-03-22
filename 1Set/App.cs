@@ -8,6 +8,8 @@ using Set.Localization;
 using Toasts.Forms.Plugin.Abstractions;
 using Set.Resx;
 using System.Threading.Tasks;
+using Set.ViewModels;
+using Set.Views;
 
 namespace Set
 {
@@ -71,5 +73,22 @@ namespace Set
 		{
 			DependencyService.Get<ISettingsStorage> ().Save(Settings);
 		}
+
+		public static void ShowErrorPage(object sender, Exception ex)
+		{
+			var viewModel = new ErrorViewModel () { Sender = sender, Exception = ex };
+
+			var mainPage = App.Current.MainPage;
+			if (mainPage != null)
+			{
+				mainPage.Navigation.PushAsync (new ErrorPage (){ ViewModel = viewModel });
+			} 
+			else
+			{
+				var mainNav = new NavigationPage (new ErrorPage (){ ViewModel = viewModel });
+				App.Current.MainPage = mainNav;
+			}
+		}
+
 	}
 }

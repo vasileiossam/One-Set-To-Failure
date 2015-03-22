@@ -16,7 +16,7 @@ namespace Set.ViewModels
 		public string PreviousWeightTitle { get { return AppResources.PreviousWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
 		public string TargetWeightTitle { get { return AppResources.TargetWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
 
-		public WorkoutViewModel (INavigation navigation) : base(navigation)
+		public WorkoutViewModel () : base()
 		{
 			Title = AppResources.WorkoutTitle;
 		}

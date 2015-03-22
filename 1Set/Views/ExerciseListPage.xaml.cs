@@ -16,7 +16,7 @@ namespace Set
 			{
 				if (_viewModel == null)
 				{
-					_viewModel =  new ExerciseListViewModel(Navigation);
+					_viewModel =  new ExerciseListViewModel(){Navigation = this.Navigation};
 				}
 				return _viewModel;
 			}
@@ -35,7 +35,7 @@ namespace Set
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-			//exercisesList.ItemsSource = ViewModel.Exercises;
+			exercisesList.ItemsSource = ViewModel.Exercises;
 		}
 
 		protected override void OnDisappearing()
@@ -47,9 +47,10 @@ namespace Set
 		{
 			var exercisePage = new ExercisePage
 			{
-				ViewModel = new ExerciseViewModel(Navigation)
+				ViewModel = new ExerciseViewModel()
 				{
-					Title = AppResources.AddExerciseTitle
+					Title = AppResources.AddExerciseTitle,
+					Navigation = this.Navigation
 				}
 			};
 
@@ -60,17 +61,19 @@ namespace Set
 		{
 			if (((ListView)sender).SelectedItem == null) return;
 
-			var viewModel = new ExerciseViewModel(Navigation)
-			{
-				Exercise = e.SelectedItem as Exercise,
-				Title = AppResources.EditExerciseTitle
-			};
+			var viewModel = e.SelectedItem as ExerciseViewModel;
+			viewModel.Navigation = Navigation;
+			ViewModel.Title = AppResources.EditExerciseTitle; 
 			viewModel.LoadRoutine ();
 
-			var page = new ExercisePage
+			var page = new ExerciseDetailsPage //ExercisePage
 			{
 				ViewModel = viewModel
 			};
+
+			// TODO replace this with MessagingCenter
+			// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
+			viewModel.Page = page;
 
 			Navigation.PushAsync(page);
 

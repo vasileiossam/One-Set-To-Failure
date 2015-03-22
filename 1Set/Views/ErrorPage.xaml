@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Set.Views.ErrorPage">
+	
+	<ContentPage.Padding>
+	<OnPlatform x:TypeArguments="Thickness"
+	            iOS="5, 20, 5, 0"
+	            Android="5, 0, 5, 0"
+	            WinPhone="5, 0, 5, 0" />
+	</ContentPage.Padding>
+
+
+	<ContentPage.Content>
+		<ScrollView>
+			<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
+
+			<Label Text="Error" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+
+			<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+			<Label Text="Sender" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			<Label Text="{Binding SenderToString}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+
+			<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+			<Label Text="Exception" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			<Label Text="{Binding ExceptionToString}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

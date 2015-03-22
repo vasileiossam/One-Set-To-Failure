@@ -3,6 +3,7 @@ using SQLite.Net.Attributes;
 using System.ComponentModel;
 using Xamarin.Forms;
 using System.Windows.Input;
+using AutoMapper;
 
 namespace Set.ViewModels
 {
@@ -10,10 +11,15 @@ namespace Set.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+		[IgnoreMap]
 		public INavigation Navigation { get; set; }
+
+		[IgnoreMap]
 		public ICommand SaveCommand { get; set; }
 
         private string _title;
+
+		[IgnoreMap]
         public string Title
         {
             set
@@ -30,9 +36,8 @@ namespace Set.ViewModels
             }
         }
 
-		public BaseViewModel(INavigation navigation)
+		public BaseViewModel()
         {
-			Navigation = navigation;
 			SaveCommand = new Command (() => OnSave ());
         }
 

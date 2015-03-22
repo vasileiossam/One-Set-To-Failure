@@ -58,7 +58,7 @@ namespace Set.Concrete
 			}
 		}
 
-		public int Delete(int id)
+		public virtual int Delete(int id)
 		{
 			lock (_locker) 
 			{

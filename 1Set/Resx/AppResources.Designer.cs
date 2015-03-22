@@ -80,6 +80,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        internal static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Developed by.
         /// </summary>
         internal static string AuthorTitle {
@@ -116,6 +125,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment Workout.
+        /// </summary>
+        internal static string CommentWorkoutTitle {
+            get {
+                return ResourceManager.GetString("CommentWorkoutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credits (with many thanks!).
         /// </summary>
         internal static string CreditTitle {
@@ -139,6 +157,24 @@ namespace Set.Resx {
         internal static string EditExerciseTitle {
             get {
                 return ResourceManager.GetString("EditExerciseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this exercise? Any workout data for this exercise will be deleted as well..
+        /// </summary>
+        internal static string ExerciseDeleteQuestion {
+            get {
+                return ResourceManager.GetString("ExerciseDeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Exercise.
+        /// </summary>
+        internal static string ExerciseDeleteQuestionTitle {
+            get {
+                return ResourceManager.GetString("ExerciseDeleteQuestionTitle", resourceCulture);
             }
         }
         
@@ -557,7 +593,7 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Training on .
+        ///   Looks up a localized string similar to Training on.
         /// </summary>
         internal static string TrainingDaysLabel {
             get {

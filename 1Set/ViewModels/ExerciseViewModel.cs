@@ -5,81 +5,97 @@ using System.Collections.ObjectModel;
 using Set.Resx;
 using Xamarin.Forms;
 using Toasts.Forms.Plugin.Abstractions;
+using AutoMapper;
+using System.Linq;
+using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace Set.ViewModels
 {
 	public class ExerciseViewModel : BaseViewModel
 	{
-		private List<RoutineDay> _routineDays;
+		// TODO replace this with MessagingCenter
+		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
+		[IgnoreMap]
+    	public ExerciseDetailsPage Page { get; set; }
 
-		private Exercise _exercise;
-		public Exercise Exercise
-		{
-			get
-			{
-				if (_exercise == null)
-				{
-					_exercise = new Exercise();
-				}
-				return _exercise;
-			}
-			set
-			{
-				_exercise = value;
-			}
-		}
-        
+		#region Exercice model
+		public int ExerciseId { get; set; }
+		public string Name { get; set; }
+		public string Notes { get; set; }
+		public float PlateWeight {get; set; }
+		#endregion
+
+		public bool NotesVisible { get { return !string.IsNullOrEmpty (Notes); }}
+
+		private List<RoutineDay> _routineDays;
+		[IgnoreMap]
         public bool DoOnMon { get; set; }
-        public bool DoOnTue { get; set; }
-        public bool DoOnWed { get; set; }
-        public bool DoOnThu { get; set; }
-        public bool DoOnFri { get; set; }
-        public bool DoOnSat { get; set; }
-        public bool DoOnSun { get; set; }
+		[IgnoreMap]
+		public bool DoOnTue { get; set; }
+		[IgnoreMap]
+		public bool DoOnWed { get; set; }
+		[IgnoreMap]
+		public bool DoOnThu { get; set; }
+		[IgnoreMap]
+		public bool DoOnFri { get; set; }
+		[IgnoreMap]
+		public bool DoOnSat { get; set; }
+		[IgnoreMap] 
+		public bool DoOnSun { get; set; }
 
         public string TrainingDays 
         { 
             get
             {
-//				 var list = new List<string>();
-//                
-//                var dayNames = AppResources.Culture.DateTimeFormat.DayNames;
-//                if (DoOnMon) { list.Add(dayNames[1]); }
-//                if (DoOnTue) { list.Add(dayNames[2]); }
-//                if (DoOnWed) { list.Add(dayNames[3]); }
-//                if (DoOnThu) { list.Add(dayNames[4]); }
-//                if (DoOnFri) { list.Add(dayNames[5]); }
-//                if (DoOnSat) { list.Add(dayNames[6]); }
-//                if (DoOnSun) { list.Add(dayNames[0]); }
-//                
-//                var s = String.Join(", ", list.Select(x => x.Name));
-//                s = s.Trim();
-//                
-//                // replace last , with 'and'
-//                var andStr = get and string
-//                if (s != string.Empty)
-//                {
-//                    var place = s.LastIndexOf(",");
-//                    if (place >= 0)
-//                    {
-//                        s = s.Remove(place, 1).Insert(place, " " + andStr + " ");
-//                    }
-//                }
-//
-//                return s;
-				return "";
+				var list = new List<string>();
+				var dayNames = AppResources.Culture.DateTimeFormat.AbbreviatedDayNames;
+
+				if (DoOnMon) { list.Add(dayNames[1]); }
+                if (DoOnTue) { list.Add(dayNames[2]); }
+				if (DoOnWed) { list.Add(dayNames[3]); }
+                if (DoOnThu) { list.Add(dayNames[4]); }
+                if (DoOnFri) { list.Add(dayNames[5]); }
+                if (DoOnSat) { list.Add(dayNames[6]); }
+                if (DoOnSun) { list.Add(dayNames[0]); }
+                
+				var s = string.Join(", ", list);
+                
+                // replace last , with 'and'
+                if (s != string.Empty)
+                {
+                    var place = s.LastIndexOf(",");
+                    if (place >= 0)
+                    {
+						s = s.Remove(place, 1).Insert(place, " " + AppResources.And);
+                    }
+                }
+
+				return s;
             }
         }
-		public bool TrainingDaysVisible { get {return false;} } 
+		public bool TrainingDaysVisible { get { return !string.IsNullOrEmpty (TrainingDays); }}
 
-		public ExerciseViewModel (INavigation navigation) : base(navigation)
+		protected ICommand _deleteCommand;
+		public ICommand DeleteCommand { 
+			get 
+			{ 
+				if (_deleteCommand == null)
+				{
+					_deleteCommand = new Command (() => OnDelete ());
+				}
+				return _deleteCommand;
+			}
+		}
+
+		public ExerciseViewModel () : base()
 		{
 		    _routineDays = new List<RoutineDay>();
 		}
 
 		public void LoadRoutine()
 		{
-			_routineDays = App.Database.RoutineDaysRepository.GetRoutine(Exercise);
+			_routineDays = App.Database.RoutineDaysRepository.GetRoutine(ExerciseId);
 
 			DoOnMon = _routineDays.Exists (x => (x.DayOfWeek == 1) && (x.IsActive == 1));
 			DoOnTue = _routineDays.Exists (x => (x.DayOfWeek == 2) && (x.IsActive == 1));
@@ -95,13 +111,13 @@ namespace Set.ViewModels
 			// insert
 			if (_routineDays.Count == 0)
 			{
-				CreateRoutineDay(Exercise.ExerciseId, 1, DoOnMon);
-				CreateRoutineDay(Exercise.ExerciseId, 2, DoOnTue);
-				CreateRoutineDay(Exercise.ExerciseId, 3, DoOnWed);
-				CreateRoutineDay(Exercise.ExerciseId, 4, DoOnThu);
-				CreateRoutineDay(Exercise.ExerciseId, 5, DoOnFri);
-				CreateRoutineDay(Exercise.ExerciseId, 6, DoOnSat);
-				CreateRoutineDay(Exercise.ExerciseId, 0, DoOnSun);
+				CreateRoutineDay(ExerciseId, 1, DoOnMon);
+				CreateRoutineDay(ExerciseId, 2, DoOnTue);
+				CreateRoutineDay(ExerciseId, 3, DoOnWed);
+				CreateRoutineDay(ExerciseId, 4, DoOnThu);
+				CreateRoutineDay(ExerciseId, 5, DoOnFri);
+				CreateRoutineDay(ExerciseId, 6, DoOnSat);
+				CreateRoutineDay(ExerciseId, 0, DoOnSun);
 			} 
 			// update
 			else
@@ -162,7 +178,7 @@ namespace Set.ViewModels
 
 		private bool Validate ()
 		{
-			if (string.IsNullOrWhiteSpace (Exercise.Name))
+			if (string.IsNullOrWhiteSpace (Name))
 			{
 				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseNameIsRequired);
 				return false;
@@ -175,12 +191,31 @@ namespace Set.ViewModels
 		{
 			if (Validate ())
 			{
-				App.Database.ExercisesRepository.Save(Exercise);
+				var exercise = Mapper.Map<Exercise>(this);
+				App.Database.ExercisesRepository.Save(exercise);
 				SaveRoutine ();
 
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
 
 				Navigation.PopAsync();
+			}
+		}
+
+		protected virtual async Task OnDelete () 
+		{
+			try
+			{
+				var answer = await Page.DisplayAlert (AppResources.ExerciseDeleteQuestionTitle, AppResources.ExerciseDeleteQuestion, AppResources.Yes, AppResources.No);
+
+				if (answer)
+				{
+					App.Database.ExercisesRepository.Delete (ExerciseId);
+					Navigation.PopAsync();
+				}
+			}
+			catch(Exception ex)
+			{
+				App.ShowErrorPage (this, ex);
 			}
 		}
 	}

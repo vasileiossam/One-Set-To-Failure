@@ -1,10 +1,8 @@
-﻿
-- exercise list: put days like "title" on Mon, Tue and Wed
-- day notes, workout notes?
-  - show on ex list
+﻿- day notes, workout notes?
   - show icon on workout when taps -> popups
   - icon on day
-- exercise page: delete 
+
+- page for empty exercises list
 
 - workoutlist: swipe gesture
 - when in log exersise screen: swipe left/right will havigate in the exercises of the selected workout
@@ -122,4 +120,4 @@ and use + and arrows to denote the increase?
 
 - have a rest calculator as an option (different page
 
-
+http://adventuresinxamarinforms.com/2014/12/09/creating-a-xamarin-forms-app-part-9-working-with-alerts-and-dialogs/

@@ -84,7 +84,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		public WorkoutListViewModel (INavigation navigation) : base(navigation)
+		public WorkoutListViewModel () : base()
 		{
 			Title = "One Set To Fatigue";
 

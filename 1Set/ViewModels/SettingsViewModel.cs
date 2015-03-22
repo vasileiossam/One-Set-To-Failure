@@ -11,6 +11,8 @@ namespace Set.ViewModels
 {
 	public class SettingsViewModel : BaseViewModel
 	{
+		// TODO replace this with MessagingCenter
+		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
 		public SettingsPage Page { get; set; }
 
 		protected ObservableCollection<PreferenceGroup> _settings;
@@ -31,7 +33,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		public SettingsViewModel  (INavigation navigation) : base(navigation)
+		public SettingsViewModel  () : base()
 		{
 			Title = AppResources.SettingsTitle;
 		}

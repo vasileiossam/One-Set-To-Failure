@@ -15,8 +15,7 @@ namespace Set
             {
                 if (_viewModel == null)
                 {
-					_viewModel =  new WorkoutListViewModel(Navigation);
-
+					_viewModel =  new WorkoutListViewModel(){Navigation = this.Navigation};
 					_viewModel.Page = this;
                 }
 				return _viewModel;
@@ -50,9 +49,10 @@ namespace Set
         {
             if (((ListView)sender).SelectedItem == null) return;
 
-			var viewModel = new WorkoutViewModel(Navigation)
+			var viewModel = new WorkoutViewModel()
             {
-                Workout = (e.SelectedItem as RoutineDay).Workout
+                Workout = (e.SelectedItem as RoutineDay).Workout,
+				Navigation = this.Navigation
             };
 
             var workoutPage = new WorkoutPage
@@ -74,6 +74,11 @@ namespace Set
 		public void OnSettingsButtonClicked(object sender, EventArgs args)
 		{
 			Navigation.PushAsync( new SettingsPage());
+		}
+
+		public void OnCommentWorkoutClicked(object sender, EventArgs args)
+		{
+			Navigation.PushModalAsync(new WorkoutCommentPage ());
 		}
 
 		public void Refresh()

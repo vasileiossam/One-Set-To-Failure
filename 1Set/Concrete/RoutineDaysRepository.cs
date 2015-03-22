@@ -36,7 +36,7 @@ namespace Set.Concrete
 			}
 		}
 
-		public List<RoutineDay> GetRoutine(Exercise exercise)
+		public List<RoutineDay> GetRoutine(int exerciseId)
 		{
 			lock (_locker)
 			{
@@ -45,7 +45,7 @@ namespace Set.Concrete
                             WHERE (RoutineDays.ExerciseId = ?)
                             ORDER BY RoutineDays.DayOfWeek";
 
-				return _connection.Query<RoutineDay> (sql, exercise.ExerciseId);
+				return _connection.Query<RoutineDay> (sql, exerciseId);
 			}
 		}
 	}

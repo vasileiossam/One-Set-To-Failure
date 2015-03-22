@@ -15,7 +15,7 @@
 	</ContentPage.Padding>
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
+      <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
   </ContentPage.ToolbarItems>
   
   <ContentPage.Content>
@@ -23,13 +23,13 @@
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
 		  <ContentView Padding="0, 10, 0, 0">
-	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}" TextColor="#212121"/>
+	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="#212121"/>
 		  </ContentView>
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
 	      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
 	      	<Label x:Name="PlateWeightStepperLabel" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" TextColor="#212121"/>	
-		  	<Stepper Minimum="0" Maximum="50" Increment="1" Value="{Binding Exercise.PlateWeight}" 
+		  	<Stepper Minimum="0" Maximum="50" Increment="1" Value="{Binding PlateWeight}" 
 			  	ValueChanged="OnPlateWeightStepperValueChanged" x:Name="PlateWeightStepper" VerticalOptions="Center"/>
 	      </StackLayout>
 
@@ -70,7 +70,7 @@
 		  </Grid>
 	        
 		  <ContentView Padding="0, 10, 0, 10">
-	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Exercise.Notes}" TextColor="#212121"/>
+	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="#212121"/>
 		  </ContentView>
 
 <!--		  <ContentView Padding="0, 0, 0, 10">

@@ -17,8 +17,8 @@ namespace Set.ViewModels
         public string SupportEmail { get; set; }
         public string Credit1 { get; set; }
 
-        public AboutViewModel(INavigation navigation)
-            : base(navigation)
+        public AboutViewModel()
+            : base()
 		{
 			Title = AppResources.AboutTitle;
 			AppTitle = "One Set To Fatigue";

@@ -15,7 +15,7 @@ namespace Set
 			{
 				if (_viewModel == null)
 				{
-					_viewModel =  new ExerciseViewModel(Navigation);
+					_viewModel =  new ExerciseViewModel(){Navigation = this.Navigation};
 				}
 				return _viewModel;
 			}

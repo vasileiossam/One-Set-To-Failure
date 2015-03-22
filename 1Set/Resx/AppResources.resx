@@ -328,6 +328,18 @@
     <value>Version</value>
   </data>
   <data name="TrainingDaysLabel" xml:space="preserve">
-    <value>Training on </value>
+    <value>Training on</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="ExerciseDeleteQuestionTitle" xml:space="preserve">
+    <value>Delete Exercise</value>
+  </data>
+  <data name="ExerciseDeleteQuestion" xml:space="preserve">
+    <value>Are you sure you want to delete this exercise? Any workout data for this exercise will be deleted as well.</value>
+  </data>
+  <data name="CommentWorkoutTitle" xml:space="preserve">
+    <value>Comment Workout</value>
   </data>
 </root>

@@ -17,6 +17,9 @@ namespace Set.Droid
 		{
 			base.OnCreate (bundle);
 
+			var bootstrapper = new Bootstrapper ();
+			bootstrapper.Automapper ();
+
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
 			ToastNotificatorImplementation.Init();
@@ -26,6 +29,7 @@ namespace Set.Droid
 
 			LoadApplication(new App ());
 
+			bootstrapper.CheckMapper ();
 		}
 	}
 }

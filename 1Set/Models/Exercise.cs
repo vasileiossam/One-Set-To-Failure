@@ -3,6 +3,7 @@ using SQLite.Net.Attributes;
 using System.Collections.Generic;
 using SQLiteNetExtensions.Attributes;
 using System.Linq;
+using AutoMapper;
 
 namespace Set.Models
 {
@@ -16,7 +17,6 @@ namespace Set.Models
 
 		[PrimaryKey, AutoIncrement]
 		public int ExerciseId { get; set; }
-		
         public string Name { get; set; }
 	    public string Notes { get; set; }
 		public float PlateWeight {get; set; }
@@ -24,6 +24,7 @@ namespace Set.Models
         #region settings with global defaults
         
 		protected int? _maxReps;
+		[IgnoreMap]
 		public int? MaxReps 
         {
             get 
@@ -41,6 +42,7 @@ namespace Set.Models
         }
         
 		protected int? _minReps;
+		[IgnoreMap]
 		public int? MinReps
         {
             get 
@@ -58,6 +60,7 @@ namespace Set.Models
         }
         
 		protected int? _restTimerId;
+		[IgnoreMap]
         public int? RestTimerId 
         {
             get 
@@ -75,14 +78,18 @@ namespace Set.Models
         }
         
 		protected int? _repsIncrementId;
+		[IgnoreMap]
         public int? RepsIncrementId 
         {
             get 
             {
-                if (_repsIncrementId == null)
-                {
-					_repsIncrementId = 0; //App.Settings.RepsIncrement.RepsIncrementId;
-                }
+				if (_repsIncrementId == null)
+				{
+					_repsIncrementId = 1; 
+				} else if (_repsIncrementId == 0)
+				{
+					_repsIncrementId = 1;
+				}
                 return _repsIncrementId;
             } 
             set
@@ -93,6 +100,7 @@ namespace Set.Models
         #endregion
 
         [Ignore]
+		[IgnoreMap]
         public RestTimer RestTimer
         {
             get
@@ -102,14 +110,17 @@ namespace Set.Models
         }
 
         [Ignore]
-        public RepsIncrement RepsIncrement
+		[IgnoreMap]
+		public RepsIncrement RepsIncrement
         {
             get
             {
-				return App.Database.RepsIncrements.FirstOrDefault(x=> x.RepsIncrementId == RepsIncrementId);
+				var repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x=> x.RepsIncrementId == RepsIncrementId);
+				return repsIncrement;
             }
         } 
 
+		[IgnoreMap]
         public byte[] Image { get; set; }
 
 

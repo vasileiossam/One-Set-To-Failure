@@ -1,6 +1,9 @@
 3rd Party libs/packages
 -----------------------
 
+AutoMapper
+https://github.com/AutoMapper/AutoMapper
+
 SQLite-Net Extensions
 https://bitbucket.org/twincoders/sqlite-net-extensions
 

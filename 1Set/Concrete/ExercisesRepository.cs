@@ -12,5 +12,15 @@ namespace Set.Concrete
 		{
 
 		}
+
+		public override int Delete(int id)
+		{
+			lock (_locker) 
+			{
+				_connection.Execute ("DELETE FROM RoutineDays WHERE ExerciseId = ?", id);
+				_connection.Execute ("DELETE FROM Workouts WHERE ExerciseId = ?", id);
+				return _connection.Delete<Exercise>(id);			
+			}
+		}
 	}
 }

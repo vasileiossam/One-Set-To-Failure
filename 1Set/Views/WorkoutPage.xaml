@@ -31,6 +31,7 @@
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="10, 10, 10, 10">
       	
       <Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#212121"/>
+  	  <Label IsVisible="{Binding Binding Workout.Exercise.NotesVisible}" Text="{Binding Workout.Exercise.Notes}" FontSize="Small" TextColor="#727272"/>
 
 		<Grid VerticalOptions="FillAndExpand">
 			<Grid.RowDefinitions>
