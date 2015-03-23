@@ -1,4 +1,12 @@
-﻿- where is my cheeky version notes?
+﻿- workout list notes
+  - show
+  - add
+  - edit
+  - popup? no
+
+- exercise list: page for empty exercises list
+----------------------------------
+- where is my cheeky version notes?
 
 - learning
  - read Charles book
@@ -21,13 +29,7 @@
      - or payed from the begnining
      - features will be copied from other apps. how to ensure biggest market share
 
-- workout list notes
-  - show
-  - add
-  - edit
-  - popup? no
 
-- exercise list: page for empty exercises list
 - exercise settings that need to be overriden
   // Exercises page
   // have options to override all training rules (rest timer included)

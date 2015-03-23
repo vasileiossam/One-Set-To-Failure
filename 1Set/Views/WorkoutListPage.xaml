@@ -24,7 +24,7 @@
 	<ContentPage.ToolbarItems>
   		<ToolbarItem Name="{i18n:Translate ExercisesTitle}" Order="Secondary" Clicked="OnExercisesButtonClicked" Priority="0" x:Name = "ExercisesButton"/>
   		<ToolbarItem Name="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Clicked="OnSettingsButtonClicked" Priority="1" x:Name = "SettingsButton"/>
-  		<ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Clicked="OnCommentWorkoutClicked" Priority="1"/>
+  		<ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Clicked="OnCalendarNotesClicked" Priority="1"/>
 	</ContentPage.ToolbarItems>
 
   <ContentPage.Content>

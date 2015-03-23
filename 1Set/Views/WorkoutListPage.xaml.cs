@@ -76,9 +76,9 @@ namespace Set
 			Navigation.PushAsync( new SettingsPage());
 		}
 
-		public void OnCommentWorkoutClicked(object sender, EventArgs args)
+        public void OnCalendarNotesClicked(object sender, EventArgs args)
 		{
-			Navigation.PushAsync(new WorkoutCommentPage (ViewModel.CurrentDate)); ccc
+			Navigation.PushAsync(new CalendarNotesPage(ViewModel.CurrentDate)); 
 		}
 
 		public void Refresh()

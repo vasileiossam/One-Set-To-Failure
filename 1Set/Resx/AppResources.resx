@@ -339,7 +339,7 @@
   <data name="ExerciseDeleteQuestion" xml:space="preserve">
     <value>Are you sure you want to delete this exercise? Any workout data for this exercise will be deleted as well.</value>
   </data>
-  <data name="WorkoutNotesTitle" xml:space="preserve">
+  <data name="CalendarNotesTitle" xml:space="preserve">
     <value>Workout Notes</value>
   </data>
 </root>
