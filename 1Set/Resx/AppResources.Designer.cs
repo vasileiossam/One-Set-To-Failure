@@ -125,15 +125,6 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comment Workout.
-        /// </summary>
-        internal static string CommentWorkoutTitle {
-            get {
-                return ResourceManager.GetString("CommentWorkoutTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Credits (with many thanks!).
         /// </summary>
         internal static string CreditTitle {
@@ -661,6 +652,15 @@ namespace Set.Resx {
         internal static string WorkoutInvalidWeight {
             get {
                 return ResourceManager.GetString("WorkoutInvalidWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workout Notes.
+        /// </summary>
+        internal static string WorkoutNotesTitle {
+            get {
+                return ResourceManager.GetString("WorkoutNotesTitle", resourceCulture);
             }
         }
         

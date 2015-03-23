@@ -1,15 +1,18 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\WorkoutCommentPage.xaml.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\WorkoutListPage.xaml.cs">
     <Files>
-      <File FileName="1Set\Views\WorkoutListPage.xaml" Line="1" Column="1" />
-      <File FileName="1Set\Resx\AppResources.resx" Line="27" Column="27" />
-      <File FileName="1Set\Views\WorkoutListPage.xaml.cs" Line="1" Column="1" />
+      <File FileName="1Set\Views\WorkoutListPage.xaml.cs" Line="69" Column="69" />
+      <File FileName="1Set\ViewModels\WorkoutCommentViewModel.cs" Line="42" Column="42" />
       <File FileName="1Set\Views\WorkoutCommentPage.xaml" Line="15" Column="15" />
+      <File FileName="Notes.txt" Line="86" Column="86" />
+      <File FileName="1Set\Views\WorkoutListPage.xaml" Line="24" Column="24" />
       <File FileName="1Set\Views\ErrorPage.xaml" Line="4" Column="4" />
       <File FileName="1Set\Views\ExercisePage.xaml" Line="1" Column="1" />
       <File FileName="1Set\Views\ExerciseDetailsPage.xaml" Line="1" Column="1" />
-      <File FileName="1Set\Views\WorkoutCommentPage.xaml.cs" Line="22" Column="22" />
+      <File FileName="1Set\Views\WorkoutCommentPage.xaml.cs" Line="1" Column="1" />
+      <File FileName="1Set\Resx\AppResources.resx" Line="32" Column="32" />
+      <File FileName="1Set\Models\Calendar.cs" Line="3" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

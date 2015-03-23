@@ -41,6 +41,19 @@ namespace Set
 			}
 		}
 
+		private CalendarRepository _calendarRepository;
+		public CalendarRepository CalendarRepository
+		{
+			get
+			{
+				if (_calendarRepository == null)
+				{
+					_calendarRepository = new CalendarRepository(_connection);
+				}
+				return _calendarRepository;
+			}
+		}
+
 		private ExercisesRepository _exercisesRepository;
 		public ExercisesRepository ExercisesRepository
 		{
@@ -132,6 +145,7 @@ namespace Set
 			_connection.CreateTable<Exercise>();
 			_connection.CreateTable<RoutineDay>();
 			_connection.CreateTable<Workout>();
+			_connection.CreateTable<Calendar>();
 		}
 
 		public void ClearWorkoutData()

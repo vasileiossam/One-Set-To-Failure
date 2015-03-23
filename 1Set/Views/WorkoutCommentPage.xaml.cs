@@ -10,9 +10,6 @@ namespace Set
 		public WorkoutCommentPage ()
 		{
 			InitializeComponent ();
-
-			WidthRequest = 300;
-			HeightRequest = 300;
 		}
 	}
 }

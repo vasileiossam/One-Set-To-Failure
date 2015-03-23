@@ -78,7 +78,7 @@ namespace Set
 
 		public void OnCommentWorkoutClicked(object sender, EventArgs args)
 		{
-			Navigation.PushModalAsync(new WorkoutCommentPage ());
+			Navigation.PushAsync(new WorkoutCommentPage (ViewModel.CurrentDate)); ccc
 		}
 
 		public void Refresh()
