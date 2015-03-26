@@ -78,7 +78,7 @@ namespace Set
 
         public void OnCalendarNotesClicked(object sender, EventArgs args)
 		{
-			Navigation.PushAsync(new CalendarNotesPage(ViewModel.CurrentDate)); 
+			Navigation.PushAsync(new CalendarNotesPage (ViewModel.CurrentDate, this.Navigation)); 
 		}
 
 		public void Refresh()

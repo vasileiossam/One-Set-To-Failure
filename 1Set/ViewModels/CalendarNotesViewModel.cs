@@ -6,6 +6,8 @@ using Set.Resx;
 using Xamarin.Forms;
 using Toasts.Forms.Plugin.Abstractions;
 using Set.Localization;
+using AutoMapper;
+using System.Linq;
 
 namespace Set.ViewModels
 {
@@ -27,13 +29,7 @@ namespace Set.ViewModels
                 {
                     _date = value;
                     OnPropertyChanged("Date");
-
-                    var repository = App.Database.CalendarRepository;
-                    var calendar = repository.Find(x => x == _date);
-                    if (calendar != null)
-                    {
-
-                    }
+					LoadNotes ();
                 }
             }
         }
@@ -41,7 +37,38 @@ namespace Set.ViewModels
         public CalendarNotesViewModel()
             : base()
 		{
-            Title = AppResources.CalendarNotesTitle;
+			Title = AppResources.CommentTitle;
+		}
+
+		protected void LoadNotes()
+		{
+			var repository = App.Database.CalendarRepository;
+			var calendar = repository.All.FirstOrDefault(x => x.Date == _date);
+
+			if (calendar == null)
+			{
+				CalendarId = 0;
+				Notes = string.Empty;
+			} else
+			{
+				CalendarId = calendar.CalendarId;
+				Notes = calendar.Notes;
+			}
+		}
+
+		private bool Validate ()
+		{
+			return true;
+		}
+
+		protected override void OnSave () 
+		{
+			if (Validate ())
+			{
+				var calendar = new Calendar (){ CalendarId = CalendarId, Date = Date, Notes = Notes };
+				App.Database.CalendarRepository.Save(calendar);
+				Navigation.PopAsync();
+			}
 		}
 	}
 }

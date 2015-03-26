@@ -150,9 +150,6 @@
   <data name="ExerciseLabel" xml:space="preserve">
     <value>Exercise or weight machine name</value>
   </data>
-  <data name="NotesLabel" xml:space="preserve">
-    <value>Notes</value>
-  </data>
   <data name="PlateWeightLabel" xml:space="preserve">
     <value>Weight increment or plate weight ({0})</value>
   </data>
@@ -339,7 +336,10 @@
   <data name="ExerciseDeleteQuestion" xml:space="preserve">
     <value>Are you sure you want to delete this exercise? Any workout data for this exercise will be deleted as well.</value>
   </data>
-  <data name="CalendarNotesTitle" xml:space="preserve">
-    <value>Workout Notes</value>
+  <data name="CommentTitle" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="CommentWorkoutTitle" xml:space="preserve">
+    <value>Comment Workout</value>
   </data>
 </root>

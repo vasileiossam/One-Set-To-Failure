@@ -11,10 +11,15 @@
                 Android="0, 0, 0, 0"
                 WinPhone="5, 0, 5, 0" />
   </ContentPage.Padding>
+
+  <ContentPage.ToolbarItems>
+      <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
+  </ContentPage.ToolbarItems>
+
   <ContentPage.Content>
   	<ScrollView>
   	<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
-   	  <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="#212121"/>	<--- change this with multiline
+		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="#212121" FontSize="24"/>
   	</StackLayout>
   	</ScrollView>
   </ContentPage.Content>

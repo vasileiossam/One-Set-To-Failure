@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Set.ViewModels;
+using Set.Models;
 using Xamarin.Forms;
+using Set.Resx;
 
 namespace Set
 {
@@ -9,12 +11,12 @@ namespace Set
 	{
         public CalendarNotesViewModel ViewModel { get; set; }
 
-        public CalendarNotesPage(DateTime date)
+		public CalendarNotesPage(DateTime date, INavigation navigation)
 		{
 			InitializeComponent ();
 
-
-            ViewModel = new CalendarNotesViewModel() { Date = date };
+			ViewModel = new CalendarNotesViewModel() { Date = date };
+			ViewModel.Navigation = navigation;
 		}
 
         protected async override void OnAppearing()
@@ -22,6 +24,7 @@ namespace Set
             base.OnAppearing();
             BindingContext = ViewModel;
         }
+
 	}
 }
 
