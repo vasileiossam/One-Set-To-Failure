@@ -19,6 +19,32 @@ namespace Set.ViewModels
 		// try again in the next xamarin forms update
 		public WorkoutListPage Page { get; set; }
 
+		public string _calendarNotes;
+		public string CalendarNotes
+		{
+			get
+			{
+				return _calendarNotes;
+			}
+			set
+			{
+				if (_calendarNotes != value)
+				{
+					_calendarNotes = value;
+					OnPropertyChanged("CalendarNotes");
+					OnPropertyChanged("CalendarNotesVisible");
+				}
+			}
+		}
+
+		public bool CalendarNotesVisible 
+		{ 
+			get 
+			{ 
+				return !string.IsNullOrEmpty (CalendarNotes);
+			} 
+		}
+
 		public bool WorkoutsListVisible
 		{
 			get
@@ -48,6 +74,15 @@ namespace Set.ViewModels
 			}
 		}
 
+		private ICommand _calendarNotesCommand;
+		public ICommand CalendarNotesCommand
+		{
+			get
+			{
+				return _calendarNotesCommand;
+			}
+		}
+
 		protected DateTime _currentDate;
         public DateTime CurrentDate
         {
@@ -63,6 +98,7 @@ namespace Set.ViewModels
 					App.CurrentDate = value;
                     OnPropertyChanged("CurrentDate");
 					RoutineDays = LoadRoutineDays();
+					CalendarNotes = App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
                 }
             }
         }
@@ -89,6 +125,7 @@ namespace Set.ViewModels
 			Title = "One Set To Fatigue";
 
 			_chevronTapCommand = new Command (OnChevronTapCommand);
+			_calendarNotesCommand = new Command (OnCalendarNotesCommand);
 		}
 
 		protected ObservableCollection<RoutineDay> LoadRoutineDays()
@@ -126,6 +163,11 @@ namespace Set.ViewModels
 				CurrentDate = CurrentDate.AddDays (1);
 				Page.Refresh ();
 			}
+		}
+
+		private void OnCalendarNotesCommand()
+		{
+			Navigation.PushAsync(new CalendarNotesPage (CurrentDate, Page.Navigation)); 	
 		}
     }
 }

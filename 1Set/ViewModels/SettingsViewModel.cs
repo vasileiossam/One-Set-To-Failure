@@ -161,8 +161,38 @@ namespace Set.ViewModels
 				}
 			});
 
+			// OTHER GROUP
+
 			var otherGroup = new PreferenceGroup (){ Title = AppResources.SettingsOtherTitle };
 			list.Add (otherGroup);
+
+			otherGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.ShowPreviousRepsWeight,
+				Value = ListPreference.GetBoolAsString(App.Settings.PreviousRepsWeightVisible),
+				Options = ListPreference.YesNoOptions,
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.PreviousRepsWeightVisible = preference.GetValueAsBool();
+					App.SaveSettings();
+				}
+			});
+
+			otherGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.ShowTargetRepsWeight,
+				Value = ListPreference.GetBoolAsString(App.Settings.TargetRepsWeightVisible),
+				Options = ListPreference.YesNoOptions,
+				Clicked = OnClicked,
+				OnSave = (sender, args) =>
+				{
+					var preference = sender as ListPreference;
+					App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
+					App.SaveSettings();
+				}
+			});
 
 			otherGroup.Add (new PagePreference ()
 			{ 

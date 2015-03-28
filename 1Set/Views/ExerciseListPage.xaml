@@ -19,7 +19,25 @@
 	<ContentPage.Content>
 	    <StackLayout Orientation="Vertical" >
 
-	      <ListView ItemSelected="OnExerciseSelected" x:Name="exercisesList" HasUnevenRows="true">
+		  <!-- No data -->
+	      <StackLayout IsVisible="{Binding NoDataVisible}" Orientation="Vertical" Padding="50, 30, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+	        <Image Source="gymnast21.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+			<ContentView Padding="0, 0, 0, 0">
+	        	<Label Text="{i18n:Translate NoExerciseDataTitle}" 
+	        		FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+			</ContentView>
+			<ContentView Padding="0, 10, 0, 0">
+	        	<Label Text="{i18n:Translate NoExerciseDataLine1}" 
+	        		FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+			</ContentView>
+			<ContentView Padding="0, 10, 0, 0">
+				<Label Text="{i18n:Translate NoExerciseDataLine2}" 
+					FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+			</ContentView>
+	      </StackLayout>
+
+	      <ListView IsVisible="{Binding ListVisible}" ItemSelected="OnExerciseSelected" x:Name="exercisesList" HasUnevenRows="true">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
 	            <ViewCell> 

@@ -40,6 +40,7 @@
 
 		    <Label Text="{i18n:Translate CreditTitle}" FontSize="Medium"  HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
 	    	<Label Text="{Binding Credit1}" FontSize="Small"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#212121"/>    
+			<Label Text="{Binding Credit2}" FontSize="Small"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#212121"/>    
 	  </StackLayout>
 	  </ScrollView>
 	</ContentPage.Content>

@@ -80,7 +80,7 @@ namespace Set
                 else
                 {
                     // go back to previous Weight
-						if (workout.PreviousWorkout.Reps < workout.Exercise.MinReps)
+					if (workout.PreviousWorkout.Reps < workout.Exercise.MinReps)
                     {
 						targetReps = startingReps;
                         targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);

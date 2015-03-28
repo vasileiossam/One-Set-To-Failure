@@ -36,6 +36,26 @@ namespace Set
 			}
 		}
 
+		public bool ListVisible
+		{
+			get
+			{
+				if (Exercises == null)
+				{
+					return false;
+				}
+
+				return Exercises.Count > 0;
+			}
+		}
+		public bool NoDataVisible
+		{
+			get
+			{
+				return !ListVisible;
+			}
+		}
+
 		public ExerciseListViewModel () : base()
 		{
 			Title = AppResources.ExercisesTitle;

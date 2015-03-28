@@ -16,6 +16,22 @@ namespace Set.ViewModels
 		public string PreviousWeightTitle { get { return AppResources.PreviousWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
 		public string TargetWeightTitle { get { return AppResources.TargetWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
 
+		public bool NotesVisible
+		{
+			get
+			{
+				if (Workout == null)
+					return false;
+				if (Workout.Exercise == null)
+					return false;
+
+				return !string.IsNullOrEmpty (Workout.Exercise.Notes);
+			}
+		}
+
+		public bool TargetRepsWeightVisible { get { return App.Settings.TargetRepsWeightVisible;} }
+		public bool PreviousRepsWeightVisible { get { return App.Settings.PreviousRepsWeightVisible;} }
+
 		public WorkoutViewModel () : base()
 		{
 			Title = AppResources.WorkoutTitle;

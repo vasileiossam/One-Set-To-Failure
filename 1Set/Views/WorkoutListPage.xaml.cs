@@ -29,13 +29,14 @@ namespace Set
         public WorkoutListPage()
 		{
 			this.InitializeComponent ();
-			this.BindingContext = ViewModel;
 		}
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+			this.BindingContext = ViewModel;
 
+			ViewModel.CalendarNotes = App.Database.CalendarRepository.GetCalendarNotes (App.CurrentDate);
 			ViewModel.CurrentDate = App.CurrentDate;
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
         }
@@ -74,11 +75,6 @@ namespace Set
 		public void OnSettingsButtonClicked(object sender, EventArgs args)
 		{
 			Navigation.PushAsync( new SettingsPage());
-		}
-
-        public void OnCalendarNotesClicked(object sender, EventArgs args)
-		{
-			Navigation.PushAsync(new CalendarNotesPage (ViewModel.CurrentDate, this.Navigation)); 
 		}
 
 		public void Refresh()

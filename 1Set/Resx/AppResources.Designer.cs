@@ -269,6 +269,33 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tap the + button to create an Exercise.
+        /// </summary>
+        internal static string NoExerciseDataLine1 {
+            get {
+                return ResourceManager.GetString("NoExerciseDataLine1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string NoExerciseDataLine2 {
+            get {
+                return ResourceManager.GetString("NoExerciseDataLine2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Exercises here yet!.
+        /// </summary>
+        internal static string NoExerciseDataTitle {
+            get {
+                return ResourceManager.GetString("NoExerciseDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can add exercises and set your training program in the Exercises menu..
         /// </summary>
         internal static string NoWorkoutDataLine1 {
@@ -535,6 +562,24 @@ namespace Set.Resx {
         internal static string SettingsUnitSystemTitle {
             get {
                 return ResourceManager.GetString("SettingsUnitSystemTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show the previous Reps and Weight in the exercise workout page.
+        /// </summary>
+        internal static string ShowPreviousRepsWeight {
+            get {
+                return ResourceManager.GetString("ShowPreviousRepsWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show the target Reps and Weight in the exercise workout page.
+        /// </summary>
+        internal static string ShowTargetRepsWeight {
+            get {
+                return ResourceManager.GetString("ShowTargetRepsWeight", resourceCulture);
             }
         }
         

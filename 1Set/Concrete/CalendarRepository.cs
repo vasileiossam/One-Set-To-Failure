@@ -14,5 +14,15 @@ namespace Set.Concrete
 		{
 
 		}
+
+		public string GetCalendarNotes (DateTime date)
+		{
+			var calendar = All.FirstOrDefault (x => x.Date == date);
+			if (calendar == null)
+			{
+				return string.Empty;
+			}
+			return calendar.Notes;
+		}
 	}
 }

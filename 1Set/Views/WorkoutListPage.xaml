@@ -24,7 +24,7 @@
 	<ContentPage.ToolbarItems>
   		<ToolbarItem Name="{i18n:Translate ExercisesTitle}" Order="Secondary" Clicked="OnExercisesButtonClicked" Priority="0" x:Name = "ExercisesButton"/>
   		<ToolbarItem Name="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Clicked="OnSettingsButtonClicked" Priority="1" x:Name = "SettingsButton"/>
-  		<ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Clicked="OnCalendarNotesClicked" Priority="1"/>
+  		<ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>
 	</ContentPage.ToolbarItems>
 
   <ContentPage.Content>
@@ -38,8 +38,13 @@
       </StackLayout>
 
       <BoxView HeightRequest="2" Color="#B6B6B6"/>
-	  
-	  <!-- No training -->
+
+      <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 5, 10, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+      	<Button BackgroundColor="Transparent" Image="drawable-hdpi/ic_fa_comment_o.png"  Command="{Binding CalendarNotesCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
+      	<Button BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="#727272" />
+	  </StackLayout>
+
+	  <!-- No data -->
       <StackLayout IsVisible="{Binding NoWorkoutDataVisible}" Orientation="Vertical" Padding="10, 30, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Image Source="comfortable.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
 
@@ -85,7 +90,6 @@
 
 	                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
 		                   	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
-
 	                    </Grid>
 
 	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">

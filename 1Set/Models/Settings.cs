@@ -12,6 +12,9 @@ namespace Set.Models
 		public int MinReps { get; set; }
 		public int RestTimerId { get; set; }
 		public int RepsIncrementId { get; set; }
+		public bool PreviousRepsWeightVisible { get; set; }
+		public bool TargetRepsWeightVisible { get; set; }
+
 
 		public Settings()
 		{
@@ -21,6 +24,8 @@ namespace Set.Models
 			MinReps = 5;
 			RestTimerId = 4; // 1 min 30secs
 			RepsIncrementId = 1; // +1
+			PreviousRepsWeightVisible = true;
+			TargetRepsWeightVisible = true;
 		}
 
 		[JsonIgnore]

@@ -61,11 +61,31 @@ namespace Set.ViewModels
 
 	public class ListPreference : Preference
 	{
+		public static string[] YesNoOptions = new string[2]{"No", "Yes"};
+
 		public string[] Options {get; set;}
 
 		public ListPreference()
 		{
 
+		}
+
+		public bool GetValueAsBool()
+		{
+			if (Value == null)
+			{
+				return false;
+			}
+
+			var s = (string)Value;
+			return String.Equals (s, AppResources.Yes, StringComparison.OrdinalIgnoreCase);
+		}
+
+		public static string GetBoolAsString(bool b)
+		{
+			if (b)
+				return AppResources.Yes;
+			return AppResources.No;
 		}
 
 		public static string[] GetOptionsList(int startNum, int finishNum, bool includeZero)

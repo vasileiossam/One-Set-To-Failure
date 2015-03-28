@@ -222,15 +222,6 @@
   <data name="CurrentWorkoutTitle" xml:space="preserve">
     <value>Workout</value>
   </data>
-  <data name="NoWorkoutDataTitle" xml:space="preserve">
-    <value>No training today!</value>
-  </data>
-  <data name="NoWorkoutDataLine1" xml:space="preserve">
-    <value>You can add exercises and set your training program in the Exercises menu.</value>
-  </data>
-  <data name="NoWorkoutDataLine2" xml:space="preserve">
-    <value>You also need to rest. If this is your rest day, enjoy it!</value>
-  </data>
   <data name="SettingsGeneralTitle" xml:space="preserve">
     <value>GENERAL</value>
   </data>
@@ -342,4 +333,33 @@
   <data name="CommentWorkoutTitle" xml:space="preserve">
     <value>Comment Workout</value>
   </data>
+
+  <data name="NoWorkoutDataTitle" xml:space="preserve">
+    <value>No training today!</value>
+  </data>
+  <data name="NoWorkoutDataLine1" xml:space="preserve">
+    <value>You can add exercises and set your training program in the Exercises menu.</value>
+  </data>
+  <data name="NoWorkoutDataLine2" xml:space="preserve">
+    <value>You also need to rest. If this is your rest day, enjoy it!</value>
+  </data>
+
+  <data name="NoExerciseDataTitle" xml:space="preserve">
+    <value>No Exercises here yet!</value>
+  </data>
+  <data name="NoExerciseDataLine1" xml:space="preserve">
+    <value>Tap the + button to create an Exercise</value>
+  </data>
+  <data name="NoExerciseDataLine2" xml:space="preserve">
+    <value></value>
+  </data>
+
+  <data name="ShowPreviousRepsWeight" xml:space="preserve">
+	<value>Show the previous Reps and Weight in the exercise workout page</value>
+  </data>
+
+  <data name="ShowTargetRepsWeight" xml:space="preserve">
+    <value>Show the target Reps and Weight in the exercise workout page</value>
+  </data>
+
 </root>
