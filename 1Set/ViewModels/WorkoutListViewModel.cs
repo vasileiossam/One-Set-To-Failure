@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Set.ViewModels
 {
@@ -97,18 +98,23 @@ namespace Set.ViewModels
                     _currentDate = value;
 					App.CurrentDate = value;
                     OnPropertyChanged("CurrentDate");
-					RoutineDays = LoadRoutineDays();
-					CalendarNotes = App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
+					RoutineDays = LoadRoutineDays().Result;
+					CalendarNotes = GetCalendarNotes ().Result;
                 }
             }
         }
+
+		private async Task<string> GetCalendarNotes()
+		{
+			return await App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
+		}
 
 		protected ObservableCollection<RoutineDay> _routineDays;
 		public ObservableCollection<RoutineDay> RoutineDays
 		{
 			get
 			{
-				_routineDays = LoadRoutineDays ();
+				_routineDays = LoadRoutineDays ().Result;
 				return _routineDays;
 			}
 			set
@@ -128,10 +134,10 @@ namespace Set.ViewModels
 			_calendarNotesCommand = new Command (OnCalendarNotesCommand);
 		}
 
-		protected ObservableCollection<RoutineDay> LoadRoutineDays()
+		protected async Task<ObservableCollection<RoutineDay>> LoadRoutineDays()
         {
-			var routineDays = App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
-			var workouts = App.Database.WorkoutsRepository.GetWorkouts(_currentDate);
+			var routineDays = await App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
+			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(_currentDate);
 
 			foreach (var day in routineDays)
 			{

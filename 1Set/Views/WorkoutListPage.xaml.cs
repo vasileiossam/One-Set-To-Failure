@@ -36,7 +36,7 @@ namespace Set
             base.OnAppearing();
 			this.BindingContext = ViewModel;
 
-			ViewModel.CalendarNotes = App.Database.CalendarRepository.GetCalendarNotes (App.CurrentDate);
+			ViewModel.CalendarNotes = await App.Database.CalendarRepository.GetCalendarNotes (App.CurrentDate);
 			ViewModel.CurrentDate = App.CurrentDate;
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
         }

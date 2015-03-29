@@ -1,4 +1,5 @@
 ﻿using System;
+using SQLite.Net.Async;
 using SQLite.Net;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,14 @@ using Set.Abstract;
 using Set.Models;
 using Set.Concrete;
 using Set.Resx;
+using System.Threading.Tasks;
 
 namespace Set
 {
 	public class Database 
 	{
 		static object locker = new object ();
-		private SQLiteConnection _connection;
+		private SQLiteAsyncConnection _connection;
 
         private WorkoutsRepository _workoutRepository;
         public WorkoutsRepository WorkoutsRepository
@@ -136,21 +138,25 @@ namespace Set
 		public Database()
 		{
 			_connection = DependencyService.Get<ISQLite> ().GetConnection ();
-
-		//	_connection.DropTable<Exercise> ();
-		//	_connection.DropTable<RoutineDay> ();
-		//	_connection.DropTable<Workout> ();
-
-			// create the tables
-			_connection.CreateTable<Exercise>();
-			_connection.CreateTable<RoutineDay>();
-			_connection.CreateTable<Workout>();
-			_connection.CreateTable<Calendar>();
+			CreateTables ();
 		}
 
-		public void ClearWorkoutData()
+		public async Task CreateTables()
 		{
-			_connection.Execute ("DELETE FROM Workouts");
+			//	_connection.DropTable<Exercise> ();
+			//	_connection.DropTable<RoutineDay> ();
+			//	_connection.DropTable<Workout> ();
+
+			// create the tables			
+			await _connection.CreateTableAsync<Exercise>();
+			await _connection.CreateTableAsync<RoutineDay>();
+			await _connection.CreateTableAsync<Workout>();
+			await _connection.CreateTableAsync<Calendar>();
+		}
+
+		public async Task ClearWorkoutData()
+		{
+			await _connection.ExecuteAsync ("DELETE FROM Workouts");
 		}
 	}
 }

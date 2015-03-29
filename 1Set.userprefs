@@ -1,18 +1,19 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\WorkoutListPage.xaml.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Notes.txt">
     <Files>
-      <File FileName="1Set\Views\WorkoutListPage.xaml.cs" Line="69" Column="69" />
-      <File FileName="1Set\ViewModels\WorkoutCommentViewModel.cs" Line="42" Column="42" />
-      <File FileName="1Set\Views\WorkoutCommentPage.xaml" Line="15" Column="15" />
-      <File FileName="Notes.txt" Line="86" Column="86" />
-      <File FileName="1Set\Views\WorkoutListPage.xaml" Line="24" Column="24" />
-      <File FileName="1Set\Views\ErrorPage.xaml" Line="4" Column="4" />
-      <File FileName="1Set\Views\ExercisePage.xaml" Line="1" Column="1" />
-      <File FileName="1Set\Views\ExerciseDetailsPage.xaml" Line="1" Column="1" />
-      <File FileName="1Set\Views\WorkoutCommentPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="1Set\Resx\AppResources.resx" Line="32" Column="32" />
-      <File FileName="1Set\Models\Calendar.cs" Line="3" Column="3" />
+      <File FileName="Notes.txt" Line="5" Column="16" />
+      <File FileName="1Set\Views\SettingsPage.xaml.cs" Line="24" Column="3" />
+      <File FileName="1Set\Views\SettingsPage.xaml" Line="57" Column="1" />
+      <File FileName="1Set\ViewModels\Preference.cs" Line="88" Column="27" />
+      <File FileName="1Set\Resx\AppResources.resx" Line="361" Column="35" />
+      <File FileName="1Set\App.cs" Line="32" Column="23" />
+      <File FileName="1Set\Views\WorkoutPage.xaml" Line="112" Column="1" />
+      <File FileName="1Set\ViewModels\ExerciseListViewModel.cs" Line="51" Column="1" />
+      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="34" Column="1" />
+      <File FileName="1Set\WorkoutRules.cs" Line="53" Column="37" />
+      <File FileName="1Set\Concrete\Database.cs" Line="19" Column="9" />
+      <File FileName="1Set\Models\Settings.cs" Line="27" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

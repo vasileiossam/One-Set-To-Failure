@@ -6,6 +6,7 @@ using Set.Resx;
 using Xamarin.Forms;
 using Toasts.Forms.Plugin.Abstractions;
 using Set.Localization;
+using System.Threading.Tasks;
 
 namespace Set.ViewModels
 {
@@ -66,11 +67,11 @@ namespace Set.ViewModels
 			return true;
 		}
 
-		protected override void OnSave () 
+		protected override async Task OnSave () 
 		{
 			if (Validate ())
 			{
-				App.Database.WorkoutsRepository.Save(Workout);
+				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
 			 
 				Navigation.PopAsync();

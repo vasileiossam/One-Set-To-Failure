@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using System.Windows.Input;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Set.ViewModels
 {
@@ -49,7 +50,7 @@ namespace Set.ViewModels
             }
         }
 
-		protected virtual void OnSave () 
+		protected virtual async Task OnSave () 
 		{
 
 		}

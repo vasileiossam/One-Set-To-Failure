@@ -1,10 +1,12 @@
-﻿- workout list notes
-  - show
-  - add
-  - edit
-  - popup? no
+﻿- optimize workout page loading
 
-- exercise list: page for empty exercises list
+- exercise list: 
+
+  option show timer button?
+options how best performance 
+implement best performance?
+
+ test when switching units of measurements
 ----------------------------------
 - where is my cheeky version notes?
 
@@ -15,6 +17,7 @@
  - check pluralsight
  - http://adventuresinxamarinforms.com/2014/12/09/creating-a-xamarin-forms-app-part-9-working-with-alerts-and-dialogs/
  - xamarin forms + mvvmlight presentation
+ - http://www.xforms-kickstarter.com/
 
 - set this as a goal in the next app
    - it should work in briefcace mode without internet and it will send data online. both modes
@@ -44,7 +47,7 @@
 - improver timer with more settings
 - implement timer to get used in the workout
 
-- settings: rule: always suggest previoues reps/weihght
+
 - where to update them?
  public int PreviousReps { get; set; }
  public double PreviousWeight { get; set; }

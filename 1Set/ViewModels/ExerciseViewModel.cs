@@ -93,9 +93,9 @@ namespace Set.ViewModels
 		    _routineDays = new List<RoutineDay>();
 		}
 
-		public void LoadRoutine()
+		public async Task LoadRoutine()
 		{
-			_routineDays = App.Database.RoutineDaysRepository.GetRoutine(ExerciseId);
+			_routineDays = await App.Database.RoutineDaysRepository.GetRoutine(ExerciseId);
 
 			DoOnMon = _routineDays.Exists (x => (x.DayOfWeek == 1) && (x.IsActive == 1));
 			DoOnTue = _routineDays.Exists (x => (x.DayOfWeek == 2) && (x.IsActive == 1));
@@ -106,7 +106,7 @@ namespace Set.ViewModels
 			DoOnSun = _routineDays.Exists (x => (x.DayOfWeek == 0) && (x.IsActive == 1));
 		}
 
-		private void SaveRoutine()
+		private async Task SaveRoutine()
 		{
 			// insert
 			if (_routineDays.Count == 0)
@@ -125,12 +125,12 @@ namespace Set.ViewModels
 				foreach (var routineDay in _routineDays)
 				{
 					routineDay.IsActive = GetActive (routineDay.DayOfWeek);
-					App.Database.RoutineDaysRepository.Save(routineDay);
+					await App.Database.RoutineDaysRepository.SaveAsync(routineDay);
 				}
 			}
 		}
 
-		public void CreateRoutineDay(int exerciseId, int dayOfWeek, bool isActive)
+		public async Task CreateRoutineDay(int exerciseId, int dayOfWeek, bool isActive)
 		{
 			var routineDay = new RoutineDay()
 			{
@@ -140,7 +140,7 @@ namespace Set.ViewModels
 				IsActive = isActive ? 1 : 0 
 			};
 
-			App.Database.RoutineDaysRepository.Save(routineDay);
+			await App.Database.RoutineDaysRepository.SaveAsync(routineDay);
 		}
 
 		public int GetActive(int dayOfWeek)
@@ -187,12 +187,12 @@ namespace Set.ViewModels
 			return true;
 		}
 
-		protected override void OnSave () 
+		protected override async Task OnSave () 
 		{
 			if (Validate ())
 			{
 				var exercise = Mapper.Map<Exercise>(this);
-				App.Database.ExercisesRepository.Save(exercise);
+				await App.Database.ExercisesRepository.SaveAsync(exercise);
 				SaveRoutine ();
 
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
@@ -209,7 +209,7 @@ namespace Set.ViewModels
 
 				if (answer)
 				{
-					App.Database.ExercisesRepository.Delete (ExerciseId);
+					await App.Database.ExercisesRepository.DeleteAsync(ExerciseId);
 					Navigation.PopAsync();
 				}
 			}

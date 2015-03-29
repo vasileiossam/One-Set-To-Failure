@@ -8,6 +8,7 @@ using Set.ViewModels;
 using Xamarin.Forms;
 using AutoMapper;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -17,23 +18,26 @@ namespace Set
 		{
 			get
 			{
-				try
-				{
-					var exercisesList = App.Database.ExercisesRepository.All;
-					var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseViewModel>>(exercisesList);
-					foreach(var item in exerciseViewModelsList)
-					{
-						item.LoadRoutine();
-					}
-					return exerciseViewModelsList;
-				}
-				catch(Exception  ex)
-				{
-					App.ShowErrorPage (this, ex);
-				}
-
-				return null;
+				return GetExercises().Result;
 			}
+		}
+		private async Task<ObservableCollection<ExerciseViewModel>> GetExercises()
+		{
+			try
+			{
+				var exercisesList = await App.Database.ExercisesRepository.AllAsync();
+				var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseViewModel>>(exercisesList);
+				foreach(var item in exerciseViewModelsList)
+				{
+					item.LoadRoutine();
+				}
+				return exerciseViewModelsList;
+			}
+			catch(Exception  ex)
+			{
+				App.ShowErrorPage (this, ex);
+			}
+			return null;
 		}
 
 		public bool ListVisible

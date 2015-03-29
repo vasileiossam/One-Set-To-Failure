@@ -2,6 +2,7 @@
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using Set;
+using System.Threading.Tasks;
 
 namespace Set.Models
 {
@@ -32,7 +33,7 @@ namespace Set.Models
         {
             get
             {
-                _previousWorkout = App.Database.WorkoutsRepository.GetPreviousWorkout(ExerciseId, Created);
+				_previousWorkout = GetPreviousWorkout ().Result;
                 return _previousWorkout;
             }
             set
@@ -40,6 +41,10 @@ namespace Set.Models
                 _previousWorkout = value;
             }
         }
+		private async Task<Workout> GetPreviousWorkout()
+		{
+			return await App.Database.WorkoutsRepository.GetPreviousWorkout(ExerciseId, Created);
+		}
 
 		protected int _previousReps;
         public int PreviousReps
@@ -125,13 +130,17 @@ namespace Set.Models
 		{
 			get
 			{
-				_exercise = App.Database.ExercisesRepository.Find(ExerciseId);
+				_exercise = GetExerciseAsync ().Result;
 				return _exercise;
 			}
 			set
 			{
 				_exercise = value;
 			}
+		}
+		private async Task<Exercise> GetExerciseAsync()
+		{
+			return await App.Database.ExercisesRepository.FindAsync(ExerciseId);
 		}
 
 		[Ignore]

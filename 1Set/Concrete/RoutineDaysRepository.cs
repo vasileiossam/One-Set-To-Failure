@@ -1,15 +1,18 @@
 ﻿using System;
 using Set.Models;
 using SQLite.Net;
+using SQLite.Net.Async;
 using Set.Abstract;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Set.Concrete
 {
 	public class RoutineDaysRepository : BaseRepository<RoutineDay>, IRoutineDaysRepository
 	{
-		public RoutineDaysRepository(SQLiteConnection connection)
+		public RoutineDaysRepository(SQLiteAsyncConnection connection)
 			: base(connection)
 		{
 
@@ -20,10 +23,8 @@ namespace Set.Concrete
 		/// </summary>
 		/// <returns>The routine.</returns>
 		/// <param name="date">Date.</param>
-		public List<RoutineDay> GetRoutine(DateTime date)
+		public async Task<List<RoutineDay>> GetRoutine(DateTime date)
 		{
-			lock (_locker)
-			{
 //				var sql = @"SELECT *  
 //                            FROM RoutineDays
 //                            INNER JOIN Exercises ON Exercises.ExerciseId = RoutineDays.ExerciseId
@@ -32,21 +33,18 @@ namespace Set.Concrete
 //
 //				return _connection.Query<RoutineDay> (sql, (int)date.DayOfWeek);
 
-				return All.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToList ();
-			}
+			ObservableCollection<RoutineDay> all = await AllAsync();
+			return all.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToList ();
 		}
 
-		public List<RoutineDay> GetRoutine(int exerciseId)
+		public async Task<List<RoutineDay>> GetRoutine(int exerciseId)
 		{
-			lock (_locker)
-			{
-				var sql = @"SELECT *  
-                            FROM RoutineDays
-                            WHERE (RoutineDays.ExerciseId = ?)
-                            ORDER BY RoutineDays.DayOfWeek";
+			var sql = @"SELECT *  
+                        FROM RoutineDays
+                        WHERE (RoutineDays.ExerciseId = ?)
+                        ORDER BY RoutineDays.DayOfWeek";
 
-				return _connection.Query<RoutineDay> (sql, exerciseId);
-			}
+			return await _connection.QueryAsync<RoutineDay> (sql, exerciseId);
 		}
 	}
 }

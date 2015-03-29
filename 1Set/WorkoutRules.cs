@@ -2,8 +2,10 @@ using System;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Set.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -40,7 +42,7 @@ namespace Set
             return 0;
         }
 
-        private static bool CanCalculateTarget(Workout workout)
+        private static async Task<bool> CanCalculateTarget(Workout workout)
         {
             var workoutCount = workout.Exercise.RepsIncrement.WorkoutCount; 
 
@@ -50,14 +52,15 @@ namespace Set
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-			var count = App.Database.WorkoutsRepository.All.Where(x => x.ExerciseId == workout.ExerciseId).Count();
+			ObservableCollection<Workout> collection = await App.Database.WorkoutsRepository.AllAsync();
+			var count = collection.Where(x => x.ExerciseId == workout.ExerciseId).Count();
             if (workout.WorkoutId == 0) count++;
 
             return IsDivisible(count, workoutCount);
         }
 
 
-        public static object GetTargetWorkout(Workout workout)
+        public static async Task<object> GetTargetWorkout(Workout workout)
         {
             int targetReps = 0;
             double targetWeight = 0;
@@ -69,7 +72,7 @@ namespace Set
                 targetWeight = 0;
             }
             else
-            if (CanCalculateTarget(workout))
+            if (await CanCalculateTarget(workout))
             {
                 // no previous workout exist, this is the first workout for this exercise
                 if (workout.PreviousWorkout == null)

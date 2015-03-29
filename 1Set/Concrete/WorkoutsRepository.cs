@@ -1,38 +1,35 @@
 ﻿using System;
 using Set.Models;
 using SQLite.Net;
+using SQLite.Net.Async;
 using Set.Abstract;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Set.Concrete
 {
 	public class WorkoutsRepository : BaseRepository<Workout>, IWorkoutsRepository
 	{
-		public WorkoutsRepository(SQLiteConnection connection)
+		public WorkoutsRepository(SQLiteAsyncConnection connection)
 			: base(connection)
 		{
 
 		}
 
-		public List<Workout> GetWorkouts(DateTime date)
+		public async Task<List<Workout>> GetWorkouts(DateTime date)
 		{
-			lock (_locker)
-			{
-				lock (_locker)
-				{
-					var sql = @"SELECT *  
-                            FROM Workouts
-                            WHERE Created = ?";
+			var sql = @"SELECT *  
+                    FROM Workouts
+                    WHERE Created = ?";
 
-					return _connection.Query<Workout> (sql, date);
-				}
-			}
+			return await _connection.QueryAsync<Workout> (sql, date);
 		}
 
-        public Workout GetPreviousWorkout(int exerciseId, DateTime created)
+        public async Task<Workout> GetPreviousWorkout(int exerciseId, DateTime created)
         {
-			var result = All.Where(x => (x.ExerciseId == exerciseId) && (x.Created < created)).OrderByDescending(x => x.Created).FirstOrDefault(); 
+			var all = await AllAsync();
+			var result = all.Where(x => (x.ExerciseId == exerciseId) && (x.Created < created)).OrderByDescending(x => x.Created).FirstOrDefault(); 
 			return result;
         }
     }

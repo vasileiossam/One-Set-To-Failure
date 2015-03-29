@@ -4,6 +4,9 @@ using Set;
 using Xamarin.Forms;
 using System.IO;
 using Set.Droid;
+using SQLite.Net.Async;
+using SQLite.Net;
+using SQLite.Net.Platform.XamarinAndroid;
 
 [assembly: Dependency (typeof (SQLite_Android))]
 
@@ -16,7 +19,7 @@ namespace Set
 		}
 
 		#region ISQLite implementation
-		public SQLite.Net.SQLiteConnection GetConnection ()
+		public SQLiteAsyncConnection GetConnection ()
 		{
 			var sqliteFilename = "OneSet.db3";
 			string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal); // Documents folder
@@ -26,7 +29,7 @@ namespace Set
 			Console.WriteLine (path);
 			if (!File.Exists(path))
 			{
-				var s = Forms.Context.Resources.OpenRawResource(Resource.Raw.OneSet);  // RESOURCE NAME ###
+				var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
 
 				// create a write stream
 				FileStream writeStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
@@ -34,8 +37,13 @@ namespace Set
 				ReadWriteStream(s, writeStream);
 			}
 
-			var plat = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
-			var conn = new SQLite.Net.SQLiteConnection(plat, path);
+
+			var connectionParameters = new SQLiteConnectionString(path, false); 
+			var platform = new SQLitePlatformAndroid();
+			var sqliteConnectionPool = new SQLiteConnectionPool(platform); 
+			var conn = new SQLiteAsyncConnection(
+				() => sqliteConnectionPool.GetConnection(connectionParameters)
+			); 
 
 			// Return the database connection 
 			return conn;

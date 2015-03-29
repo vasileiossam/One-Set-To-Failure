@@ -2,6 +2,7 @@
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Set.Models
 {
@@ -28,13 +29,17 @@ namespace Set.Models
 		{
 			get
 			{
-				_exercise = App.Database.ExercisesRepository.Find(ExerciseId);
+				_exercise = GetExercise ().Result;
 				return _exercise;
 			}
 			set
 			{
 				_exercise = value;
 			}
+		}
+		private async Task<Exercise> GetExercise()
+		{
+			return await App.Database.ExercisesRepository.FindAsync(ExerciseId);
 		}
 
 		[Ignore]

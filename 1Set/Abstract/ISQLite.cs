@@ -1,11 +1,11 @@
 ﻿using System;
-using SQLite.Net;
+using SQLite.Net.Async;
 
 namespace Set.Abstract
 {
 	public interface ISQLite
 	{
-		SQLiteConnection GetConnection();
+		SQLiteAsyncConnection GetConnection();
 	}
 }
 

@@ -8,6 +8,7 @@ using Toasts.Forms.Plugin.Abstractions;
 using Set.Localization;
 using AutoMapper;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Set.ViewModels
 {
@@ -40,10 +41,11 @@ namespace Set.ViewModels
 			Title = AppResources.CommentTitle;
 		}
 
-		protected void LoadNotes()
+		protected async Task LoadNotes()
 		{
 			var repository = App.Database.CalendarRepository;
-			var calendar = repository.All.FirstOrDefault(x => x.Date == _date);
+			var all = await repository.AllAsync ();
+			var calendar = all.FirstOrDefault(x => x.Date == _date);
 
 			if (calendar == null)
 			{
@@ -61,12 +63,12 @@ namespace Set.ViewModels
 			return true;
 		}
 
-		protected override void OnSave () 
+		protected override async Task OnSave () 
 		{
 			if (Validate ())
 			{
 				var calendar = new Calendar (){ CalendarId = CalendarId, Date = Date, Notes = Notes };
-				App.Database.CalendarRepository.Save(calendar);
+				await App.Database.CalendarRepository.SaveAsync(calendar);
 				Navigation.PopAsync();
 			}
 		}

@@ -1,9 +1,12 @@
 ﻿using System;
 using Set.Abstract;
 using SQLite.Net;
+using SQLite.Net.Async;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Set.Concrete
 {
@@ -13,57 +16,50 @@ namespace Set.Concrete
 	/// </summary>
 	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : new ()
 	{
+		internal SQLiteAsyncConnection _connection;
 
-		internal SQLiteConnection _connection;
-		internal static object _locker = new object ();
-
-
-		public BaseRepository(SQLiteConnection connection)
+		public BaseRepository(SQLiteAsyncConnection connection)
 		{
 			_connection = connection;
 		}
 
-		public ObservableCollection<TEntity> All 
+		public async Task<ObservableCollection<TEntity>> AllAsync()
 		{
-			get {
-				lock (_locker) {
-					var enumerable =  (from i in _connection.Table<TEntity> ()
-					       select i);
-					return new ObservableCollection<TEntity>(enumerable);
-				}
+			// http://www.captechconsulting.com/blog/nicholas-cipollina/cross-platform-sqlite-support-%E2%80%93-part-1
+			try
+			{
+				var enumerable = _connection.Table<TEntity> ();
+				var list = await enumerable.ToListAsync().ConfigureAwait(false);
+				var koko=list.Any(x=>true);
+				return new ObservableCollection<TEntity>(list);
+			}
+			catch(Exception ex)
+			{
+				Debug.WriteLine (ex.Message);
+			}
+			return null;
+		}
+
+		public async Task<TEntity> FindAsync (int id) 
+		{
+			return await _connection.Table<TEntity>().Where(x => (int) x.GetId() == id).FirstOrDefaultAsync();
+		}
+
+		public virtual async Task<int> SaveAsync (TEntity entity) 
+		{
+			if ((int) entity.GetId() != 0) 
+			{
+				await _connection.UpdateAsync(entity);
+				return (int) entity.GetId();
+			} else 
+			{
+				return await _connection.InsertAsync(entity);
 			}
 		}
 
-
-		public TEntity Find (int id) 
+		public virtual async Task<int> DeleteAsync(int id)
 		{
-			lock (_locker) 
-			{
-				return _connection.Table<TEntity>().FirstOrDefault(x => (int) x.GetId() == id);
-			}
-		}
-
-		public virtual int Save (TEntity entity) 
-		{
-			lock (_locker) 
-			{
-				if ((int) entity.GetId() != 0) 
-				{
-					_connection.Update(entity);
-					return (int) entity.GetId();
-				} else 
-				{
-					return _connection.Insert(entity);
-				}
-			}
-		}
-
-		public virtual int Delete(int id)
-		{
-			lock (_locker) 
-			{
-				return _connection.Delete<TEntity>(id);
-			}
+			return await _connection.DeleteAsync<TEntity>(id);
 		}
 
 	}
