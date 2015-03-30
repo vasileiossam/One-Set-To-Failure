@@ -22,31 +22,46 @@ namespace Set
 		public SQLiteAsyncConnection GetConnection ()
 		{
 			var sqliteFilename = "OneSet.db3";
-			string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal); // Documents folder
-			var path = Path.Combine(documentsPath, sqliteFilename);
+			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			var path = Path.Combine (documentsPath, sqliteFilename);
+			var platform = new SQLitePlatformAndroid ();
 
-			// This is where we copy in the prepopulated database
-			Console.WriteLine (path);
-			if (!File.Exists(path))
-			{
-				var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
+			var connectionWithLock = new SQLiteConnectionWithLock (
+				platform,
+				new SQLiteConnectionString (path, true));
 
-				// create a write stream
-				FileStream writeStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-				// write to the stream
-				ReadWriteStream(s, writeStream);
-			}
+			var connection = new SQLiteAsyncConnection (() => connectionWithLock);
+
+			return connection;
 
 
-			var connectionParameters = new SQLiteConnectionString(path, false); 
-			var platform = new SQLitePlatformAndroid();
-			var sqliteConnectionPool = new SQLiteConnectionPool(platform); 
-			var conn = new SQLiteAsyncConnection(
-				() => sqliteConnectionPool.GetConnection(connectionParameters)
-			); 
-
-			// Return the database connection 
-			return conn;
+//
+//			var sqliteFilename = "OneSet.db3";
+//			string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal); 
+//			var path = Path.Combine(documentsPath, sqliteFilename);
+//
+//			// This is where we copy in the prepopulated database
+//			Console.WriteLine (path);
+//			if (!File.Exists(path))
+//			{
+//				var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
+//
+//				// create a write stream
+//				FileStream writeStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+//				// write to the stream
+//				ReadWriteStream(s, writeStream);
+//			}
+//
+//
+//			var connectionParameters = new SQLiteConnectionString(path, false); 
+//			var platform = new SQLitePlatformAndroid();
+//			var sqliteConnectionPool = new SQLiteConnectionPool(platform); 
+//			var conn = new SQLiteAsyncConnection(
+//				() => sqliteConnectionPool.GetConnection(connectionParameters)
+//			); 
+//
+//			// Return the database connection 
+//			return conn;
 		}
 		#endregion
 

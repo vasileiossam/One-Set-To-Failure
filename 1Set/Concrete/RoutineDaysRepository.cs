@@ -33,18 +33,29 @@ namespace Set.Concrete
 //
 //				return _connection.Query<RoutineDay> (sql, (int)date.DayOfWeek);
 
-			ObservableCollection<RoutineDay> all = await AllAsync();
-			return all.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToList ();
+		//var k = await _connection.QueryAsync<RoutineDay> ("SELECT * FROM RoutineDays");
+			List<RoutineDay> list = new List<RoutineDay> ();
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{
+				list = await _connection.Table<RoutineDay> ()
+					.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToListAsync ();
+				return list;
+			}
 		}
 
 		public async Task<List<RoutineDay>> GetRoutine(int exerciseId)
 		{
-			var sql = @"SELECT *  
+			List<RoutineDay> list = new List<RoutineDay> ();
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{			
+				var sql = @"SELECT *  
                         FROM RoutineDays
                         WHERE (RoutineDays.ExerciseId = ?)
                         ORDER BY RoutineDays.DayOfWeek";
 
-			return await _connection.QueryAsync<RoutineDay> (sql, exerciseId);
+				list = await _connection.QueryAsync<RoutineDay> (sql, exerciseId);
+				return list;
+			}
 		}
 	}
 }

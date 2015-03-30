@@ -15,25 +15,14 @@ namespace Set
 {
 	public class App : Application
 	{
-        static Database _database;
-        public static Database Database
-        {
-            get
-            {
-                if (_database == null)
-                {
-                    _database = new Database();
-                }
-                return _database;
-            }
-        }
-
+		public static Database Database = new Database ();
 		public static DateTime CurrentDate {get; set;}
 		public static Settings Settings { get; set; }
 		public static string Version {get; set;}
 
 		public App ()
 		{	
+			
 			Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 

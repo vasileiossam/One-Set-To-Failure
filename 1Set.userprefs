@@ -1,25 +1,21 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Notes.txt">
     <Files>
-      <File FileName="Notes.txt" Line="5" Column="16" />
-      <File FileName="1Set\Views\SettingsPage.xaml.cs" Line="24" Column="3" />
-      <File FileName="1Set\Views\SettingsPage.xaml" Line="57" Column="1" />
-      <File FileName="1Set\ViewModels\Preference.cs" Line="88" Column="27" />
-      <File FileName="1Set\Resx\AppResources.resx" Line="361" Column="35" />
-      <File FileName="1Set\App.cs" Line="32" Column="23" />
-      <File FileName="1Set\Views\WorkoutPage.xaml" Line="112" Column="1" />
-      <File FileName="1Set\ViewModels\ExerciseListViewModel.cs" Line="51" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="34" Column="1" />
-      <File FileName="1Set\WorkoutRules.cs" Line="53" Column="37" />
-      <File FileName="1Set\Concrete\Database.cs" Line="19" Column="9" />
-      <File FileName="1Set\Models\Settings.cs" Line="27" Column="29" />
+      <File FileName="1Set\Concrete\BaseRepository.cs" Line="35" Column="5" />
+      <File FileName="c:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs" Line="26" Column="32" />
+      <File FileName="Notes.txt" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\dev\1Set\Droid\Properties\AssemblyInfo.cs" line="25" column="1" />
       <Breakpoint file="c:\dev\1Set\1Set\Pages\WorkoutListPage.cs" line="59" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\WorkoutRules.cs" line="55" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="34" column="11" />
+      <Breakpoint file="C:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs" line="37" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="32" column="4" />
+      <Breakpoint file="C:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="38" column="34" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

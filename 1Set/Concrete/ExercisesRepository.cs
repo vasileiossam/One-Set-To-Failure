@@ -17,9 +17,12 @@ namespace Set.Concrete
 
 		public override async Task<int> DeleteAsync(int id)
 		{
-			await _connection.ExecuteAsync ("DELETE FROM RoutineDays WHERE ExerciseId = ?", id);
-			await _connection.ExecuteAsync ("DELETE FROM Workouts WHERE ExerciseId = ?", id);
-			return await _connection.DeleteAsync<Exercise>(id);			
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{				
+				await _connection.ExecuteAsync ("DELETE FROM RoutineDays WHERE ExerciseId = ?", id);
+				await _connection.ExecuteAsync ("DELETE FROM Workouts WHERE ExerciseId = ?", id);
+				return await _connection.DeleteAsync<Exercise> (id);			
+			}
 		}
 	}
 }

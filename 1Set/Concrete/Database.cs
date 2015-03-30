@@ -14,8 +14,8 @@ namespace Set
 {
 	public class Database 
 	{
-		static object locker = new object ();
-		private SQLiteAsyncConnection _connection;
+		private static readonly AsyncLock Mutex = new AsyncLock ();
+		private readonly SQLiteAsyncConnection _connection;
 
         private WorkoutsRepository _workoutRepository;
         public WorkoutsRepository WorkoutsRepository
@@ -138,20 +138,29 @@ namespace Set
 		public Database()
 		{
 			_connection = DependencyService.Get<ISQLite> ().GetConnection ();
-			CreateTables ();
+			CreateDatabaseAsync ();
 		}
 
-		public async Task CreateTables()
+		public async Task CreateDatabaseAsync ()
 		{
 			//	_connection.DropTable<Exercise> ();
 			//	_connection.DropTable<RoutineDay> ();
 			//	_connection.DropTable<Workout> ();
 
-			// create the tables			
-			await _connection.CreateTableAsync<Exercise>();
-			await _connection.CreateTableAsync<RoutineDay>();
-			await _connection.CreateTableAsync<Workout>();
-			await _connection.CreateTableAsync<Calendar>();
+			try
+			{
+				using (await Mutex.LockAsync ().ConfigureAwait (false)) 
+				{
+					await _connection.CreateTableAsync<Exercise> ().ConfigureAwait (false);
+					await _connection.CreateTableAsync<RoutineDay> ().ConfigureAwait (false);
+					await _connection.CreateTableAsync<Workout> ().ConfigureAwait (false);
+					await _connection.CreateTableAsync<Calendar> ().ConfigureAwait (false);
+				}
+			}
+			catch(Exception ex)
+			{
+				App.ShowErrorPage (this, ex);
+			}
 		}
 
 		public async Task ClearWorkoutData()

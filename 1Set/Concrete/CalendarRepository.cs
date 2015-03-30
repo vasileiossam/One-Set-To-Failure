@@ -17,10 +17,21 @@ namespace Set.Concrete
 
 		}
 
+		public async Task<Calendar> FindAsync (DateTime date) 
+		{
+			using (await Mutex.LockAsync ().ConfigureAwait (false)) 
+			{
+				var entity = await _connection.Table<Calendar> ()
+					.Where (x => x.Date == date)
+					.FirstOrDefaultAsync ();
+
+				return entity;
+			}
+		}
+
 		public async Task<string> GetCalendarNotes (DateTime date)
 		{
-			var all = await AllAsync ();
-			var calendar = all.FirstOrDefault (x => x.Date == date);
+			var calendar = await FindAsync (date);
 			if (calendar == null)
 			{
 				return string.Empty;

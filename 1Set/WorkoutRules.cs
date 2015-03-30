@@ -52,7 +52,8 @@ namespace Set
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-			ObservableCollection<Workout> collection = await App.Database.WorkoutsRepository.AllAsync();
+			var list = await App.Database.WorkoutsRepository.AllAsync();
+			var collection = new ObservableCollection<Workout> (list);
 			var count = collection.Where(x => x.ExerciseId == workout.ExerciseId).Count();
             if (workout.WorkoutId == 0) count++;
 

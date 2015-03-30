@@ -19,18 +19,29 @@ namespace Set.Concrete
 
 		public async Task<List<Workout>> GetWorkouts(DateTime date)
 		{
-			var sql = @"SELECT *  
+			List<Workout> list = new List<Workout> ();
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{				
+				var sql = @"SELECT *  
                     FROM Workouts
                     WHERE Created = ?";
 
-			return await _connection.QueryAsync<Workout> (sql, date);
+				list = await _connection.QueryAsync<Workout> (sql, date);
+				return list;
+			}
 		}
 
         public async Task<Workout> GetPreviousWorkout(int exerciseId, DateTime created)
         {
-			var all = await AllAsync();
-			var result = all.Where(x => (x.ExerciseId == exerciseId) && (x.Created < created)).OrderByDescending(x => x.Created).FirstOrDefault(); 
-			return result;
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{				
+				var workout = await _connection.Table<Workout> ()
+					.Where (x => (x.ExerciseId == exerciseId) && (x.Created < created))
+					.OrderByDescending (x => x.Created)
+					.FirstOrDefaultAsync ();
+
+				return workout;
+			}
         }
     }
 }
