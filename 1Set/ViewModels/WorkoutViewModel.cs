@@ -38,6 +38,11 @@ namespace Set.ViewModels
 			Title = AppResources.WorkoutTitle;
 		}
 
+		public async Task Load()
+		{
+			await Workout.Load ();
+		}
+
 		private bool Validate ()
 		{
 			if (Workout.Reps == 0)

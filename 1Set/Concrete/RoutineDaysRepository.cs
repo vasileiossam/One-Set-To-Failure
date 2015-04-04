@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Set.Concrete
 {
@@ -34,12 +35,45 @@ namespace Set.Concrete
 //				return _connection.Query<RoutineDay> (sql, (int)date.DayOfWeek);
 
 		//var k = await _connection.QueryAsync<RoutineDay> ("SELECT * FROM RoutineDays");
-			List<RoutineDay> list = new List<RoutineDay> ();
-			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			try
 			{
-				list = await _connection.Table<RoutineDay> ()
-					.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToListAsync ();
-				return list;
+				List<RoutineDay> list = new List<RoutineDay> ();
+				using (await Mutex.LockAsync ().ConfigureAwait (false))
+				{
+					list = await _connection.Table<RoutineDay> ()
+						.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToListAsync ();
+
+					await LoadRelations(list, date);
+					return list;
+				}
+			}
+			catch(Exception ex)
+			{
+			  Debug.WriteLine (ex.Message);
+			}
+
+			return null;
+		}
+
+		private async Task LoadRelations(List<RoutineDay> list, DateTime date)
+		{
+			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(date);
+
+			foreach (var day in list)
+			{
+				var workout = workouts.Find (x => x.ExerciseId == day.ExerciseId);
+
+				// workout hasn't performed for this exercise
+				if (workout == null)
+				{
+					workout = new Workout ();
+					workout.ExerciseId = day.ExerciseId;
+					workout.Created = date;
+				} 
+
+				day.Workout = workout;
+				day.Exercise = await App.Database.ExercisesRepository.FindAsync (day.ExerciseId);
+				day.Workout.Exercise = day.Exercise;
 			}
 		}
 

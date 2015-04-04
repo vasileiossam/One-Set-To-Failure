@@ -8,23 +8,7 @@ namespace Set
 {
 	public partial class WorkoutPage : ContentPage
 	{
-        private WorkoutViewModel _viewModel;
-        public WorkoutViewModel ViewModel
-        {
-			get
-			{
-				if (_viewModel == null)
-				{
-					_viewModel =  new WorkoutViewModel(){Navigation = this.Navigation};
-				}
-				return _viewModel;
-			}
-			set
-			{
-				_viewModel = value;
-			}
-        }
-
+		public WorkoutViewModel ViewModel { get; set; }
 
 		public WorkoutPage ()
 		{
@@ -35,6 +19,7 @@ namespace Set
         {
             base.OnAppearing();
             BindingContext = ViewModel;
+			await ViewModel.Load ();
         }
 
         protected override void OnDisappearing()

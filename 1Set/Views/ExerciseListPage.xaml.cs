@@ -4,6 +4,7 @@ using Set.ViewModels;
 using Set.Models;
 using Xamarin.Forms;
 using Set.Resx;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -29,12 +30,19 @@ namespace Set
 		public ExerciseListPage ()
 		{
 			InitializeComponent ();
-			this.BindingContext = ViewModel;
+
+			exercisesList.ItemSelected += async (sender, e) =>
+			{
+				OnExerciseSelected (sender, e);
+			};
 		}
 
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
+
+			this.BindingContext = ViewModel;
+			await ViewModel.Load ();
 			exercisesList.ItemsSource = ViewModel.Exercises;
 		}
 
@@ -57,14 +65,14 @@ namespace Set
 			Navigation.PushAsync(exercisePage);
 		}
 
-		public void OnExerciseSelected(object sender, SelectedItemChangedEventArgs e)
+		public async Task OnExerciseSelected(object sender, SelectedItemChangedEventArgs e)
 		{
 			if (((ListView)sender).SelectedItem == null) return;
 
 			var viewModel = e.SelectedItem as ExerciseViewModel;
 			viewModel.Navigation = Navigation;
 			ViewModel.Title = AppResources.EditExerciseTitle; 
-			viewModel.LoadRoutine ();
+			await viewModel.Load ();
 
 			var page = new ExerciseDetailsPage //ExercisePage
 			{

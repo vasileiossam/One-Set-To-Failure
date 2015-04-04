@@ -14,14 +14,63 @@ namespace Set
 {
 	public class ExerciseListViewModel : BaseViewModel
 	{
-        public ObservableCollection<ExerciseViewModel> Exercises 
+		protected ObservableCollection<ExerciseViewModel> _exercises;
+		public ObservableCollection<ExerciseViewModel> Exercises
 		{
 			get
 			{
-				return GetExercises().Result;
+				return _exercises;
+			}
+			set
+			{ 
+				if (_exercises != value)
+				{				
+					_exercises = value;
+					OnPropertyChanged ("Exercises");
+				}
 			}
 		}
-		private async Task<ObservableCollection<ExerciseViewModel>> GetExercises()
+
+		protected bool _listVisible;
+		public bool ListVisible
+		{
+			get
+			{
+				return _listVisible;
+			}
+			set
+			{
+				if (_listVisible != value)
+				{
+					_listVisible = value;
+					OnPropertyChanged("ListVisible");
+				}
+			}
+		}
+
+		protected bool _noDataVisible;
+		public bool NoDataVisible
+		{
+			get
+			{
+				return _noDataVisible;
+			}
+			set
+			{
+				if (_noDataVisible != value)
+				{
+					_noDataVisible = value;
+					OnPropertyChanged("NoDataVisible");
+				}
+			}
+		}
+
+		public ExerciseListViewModel () : base()
+		{
+			Title = AppResources.ExercisesTitle;
+		}
+
+		public async Task Load()
 		{
 			try
 			{
@@ -29,40 +78,25 @@ namespace Set
 				var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseViewModel>>(exercisesList);
 				foreach(var item in exerciseViewModelsList)
 				{
-					item.LoadRoutine();
+					await item.Load();
 				}
-				return exerciseViewModelsList;
+
+				if (exerciseViewModelsList ==  null)
+				{
+					ListVisible = false;
+				}
+				else
+				{
+					ListVisible = exerciseViewModelsList.Count > 0;
+				}
+				NoDataVisible = !ListVisible;
+
+				Exercises = exerciseViewModelsList;
 			}
 			catch(Exception  ex)
 			{
 				App.ShowErrorPage (this, ex);
 			}
-			return null;
-		}
-
-		public bool ListVisible
-		{
-			get
-			{
-				if (Exercises == null)
-				{
-					return false;
-				}
-
-				return Exercises.Count > 0;
-			}
-		}
-		public bool NoDataVisible
-		{
-			get
-			{
-				return !ListVisible;
-			}
-		}
-
-		public ExerciseListViewModel () : base()
-		{
-			Title = AppResources.ExercisesTitle;
 		}
 	}
 }

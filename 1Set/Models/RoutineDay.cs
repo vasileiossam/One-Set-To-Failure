@@ -23,24 +23,8 @@ namespace Set.Models
         public int RowNumber { get; set; }
 		public int IsActive {get; set;}
 
-		protected Exercise _exercise;
 		[Ignore]
-		public Exercise Exercise
-		{
-			get
-			{
-				_exercise = GetExercise ().Result;
-				return _exercise;
-			}
-			set
-			{
-				_exercise = value;
-			}
-		}
-		private async Task<Exercise> GetExercise()
-		{
-			return await App.Database.ExercisesRepository.FindAsync(ExerciseId);
-		}
+		public Exercise Exercise { get; set; }
 
 		[Ignore]
 		public Workout Workout {get; set;}

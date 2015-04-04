@@ -23,7 +23,7 @@ namespace Set.Concrete
 			{
 				var entity = await _connection.Table<Calendar> ()
 					.Where (x => x.Date == date)
-					.FirstOrDefaultAsync ();
+					.FirstOrDefaultAsync ().ConfigureAwait(false);
 
 				return entity;
 			}

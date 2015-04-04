@@ -3,6 +3,9 @@ using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using Set;
 using System.Threading.Tasks;
+using Set.Concrete;
+using Xamarin.Forms;
+using Set.Abstract;
 
 namespace Set.Models
 {
@@ -27,24 +30,8 @@ namespace Set.Models
         public int Reps { get; set; }
         public double Weight { get; set; }
 
-        protected Workout _previousWorkout;
         [Ignore]
-        public Workout PreviousWorkout
-        {
-            get
-            {
-				_previousWorkout = GetPreviousWorkout ().Result;
-                return _previousWorkout;
-            }
-            set
-            {
-                _previousWorkout = value;
-            }
-        }
-		private async Task<Workout> GetPreviousWorkout()
-		{
-			return await App.Database.WorkoutsRepository.GetPreviousWorkout(ExerciseId, Created);
-		}
+		public Workout PreviousWorkout { get; set; }
 
 		protected int _previousReps;
         public int PreviousReps
@@ -88,60 +75,11 @@ namespace Set.Models
             }
         }
 
-		protected int? _targetReps;
-		public int? TargetReps
-		{
-			get
-			{
-				if (_targetReps == null)
-				{
-					dynamic result = WorkoutRules.GetTargetWorkout (this);
-					_targetReps = result.TargetReps;
-				}
-				return _targetReps;
-			}
-			set
-			{
-				_targetReps = value;
-			}
-		}
+		public int TargetReps { get; set; }
+		public double TargetWeight { get; set; }
 
-		protected double? _targetWeight;
-		public double? TargetWeight
-		{
-			get
-			{
-				if (_targetWeight == null)
-				{
-					dynamic result = WorkoutRules.GetTargetWorkout (this);
-					_targetWeight = result.TargetWeight;
-				}
-				return _targetWeight;
-			}
-			set
-			{
-				_targetWeight = value;
-			}
-		}
-
-		protected Exercise _exercise;
 		[Ignore]
-		public Exercise Exercise
-		{
-			get
-			{
-				_exercise = GetExerciseAsync ().Result;
-				return _exercise;
-			}
-			set
-			{
-				_exercise = value;
-			}
-		}
-		private async Task<Exercise> GetExerciseAsync()
-		{
-			return await App.Database.ExercisesRepository.FindAsync(ExerciseId);
-		}
+		public Exercise Exercise { get; set; }
 
 		[Ignore]
 		public string RepsImage {
@@ -161,6 +99,14 @@ namespace Set.Models
 					return "ic_fa_circle_o";
 				return "ic_fa_circle";
 			}
+		}
+
+		public async Task Load()
+		{
+			PreviousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout (ExerciseId, Created);
+			dynamic result = await WorkoutRules.GetTargetWorkout (this);
+			TargetReps = result.TargetReps;
+			TargetWeight = result.TargetReps;
 		}
 	}
 }

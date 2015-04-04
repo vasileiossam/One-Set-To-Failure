@@ -34,10 +34,9 @@ namespace Set
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-			this.BindingContext = ViewModel;
 
-			ViewModel.CalendarNotes = await App.Database.CalendarRepository.GetCalendarNotes (App.CurrentDate);
-			ViewModel.CurrentDate = App.CurrentDate;
+			this.BindingContext = ViewModel;
+			await ViewModel.Load (App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
         }
 

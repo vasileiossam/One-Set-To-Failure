@@ -39,7 +39,7 @@
 
       <BoxView HeightRequest="2" Color="#B6B6B6"/>
 
-      <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 5, 10, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+     <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 5, 10, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
       	<Button BackgroundColor="Transparent" Image="drawable-hdpi/ic_fa_comment_o.png"  Command="{Binding CalendarNotesCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
       	<Button BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="#727272" />
 	  </StackLayout>

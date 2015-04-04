@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Set.Models;
 
 namespace Set.Concrete
 {
@@ -49,11 +50,20 @@ namespace Set.Concrete
 		{
 			using (await Mutex.LockAsync ().ConfigureAwait (false)) 
 			{
-				var entity = await _connection.Table<TEntity> ()
-					.Where (x => (int) x.GetId() == id)
-					.FirstOrDefaultAsync ();
+				try
+				{
+					List<TEntity> list = new List<TEntity> ();
 
-				return entity;
+					var sql = string.Format (@"SELECT * FROM {0} WHERE {1} = ?", Extensions.GetTableName(typeof(TEntity)), Extensions.IdentifierPropertyName (typeof(TEntity)));
+					list = await _connection.QueryAsync<TEntity> (sql, id);
+
+					if (list.Count > 0)	return list [0];
+				}
+				catch(Exception ex)
+				{
+					Debug.WriteLine (ex.Message);				
+				}
+				return default(TEntity);
 			}
 		}
 

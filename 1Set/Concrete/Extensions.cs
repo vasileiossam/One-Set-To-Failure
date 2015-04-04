@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using SQLite.Net.Attributes;
 
 namespace Set.Concrete
 {
@@ -12,7 +13,8 @@ namespace Set.Concrete
     {
         public static object GetId(this object model)
         {
-			return model.GetType().GetRuntimeProperty(model.IdentifierPropertyName()).GetValue(model, new object[0]);
+			var id = model.GetType().GetRuntimeProperty(model.IdentifierPropertyName()).GetValue(model, new object[0]);
+			return id;
         }
 
         public static string IdentifierPropertyName(this Object model)
@@ -37,6 +39,14 @@ namespace Set.Concrete
             }
             return "";
         }
+
+		public static string GetTableName(Type type)
+		{
+			var attribute = type.GetAttribute<TableAttribute> ();
+
+			if (attribute == null) return string.Empty;
+			return (attribute as TableAttribute).Name;
+		}
     }
 
     public static class PropertyInfoExtensions
@@ -71,5 +81,8 @@ namespace Set.Concrete
         {
             return propertyInfo.GetCustomAttributes(typeof(T), false).FirstOrDefault() as T;
         }
+
+
     }
+
 }

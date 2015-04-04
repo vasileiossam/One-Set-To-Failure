@@ -29,6 +29,7 @@ namespace Set.ViewModels
 		public bool NotesVisible { get { return !string.IsNullOrEmpty (Notes); }}
 
 		private List<RoutineDay> _routineDays;
+
 		[IgnoreMap]
         public bool DoOnMon { get; set; }
 		[IgnoreMap]
@@ -93,7 +94,12 @@ namespace Set.ViewModels
 		    _routineDays = new List<RoutineDay>();
 		}
 
-		public async Task LoadRoutine()
+		public async Task Load()
+		{
+			await LoadRoutine ();
+		}
+
+		private async Task LoadRoutine()
 		{
 			_routineDays = await App.Database.RoutineDaysRepository.GetRoutine(ExerciseId);
 

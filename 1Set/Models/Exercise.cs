@@ -12,7 +12,8 @@ namespace Set.Models
 	{
 		public Exercise ()
 		{
-
+			Name = string.Empty;
+			Notes = string.Empty;
 		}
 
 		[PrimaryKey, AutoIncrement]

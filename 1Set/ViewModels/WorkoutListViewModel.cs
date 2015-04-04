@@ -20,7 +20,7 @@ namespace Set.ViewModels
 		// try again in the next xamarin forms update
 		public WorkoutListPage Page { get; set; }
 
-		public string _calendarNotes;
+		protected string _calendarNotes;
 		public string CalendarNotes
 		{
 			get
@@ -33,36 +33,58 @@ namespace Set.ViewModels
 				{
 					_calendarNotes = value;
 					OnPropertyChanged("CalendarNotes");
+				}
+			}
+		}
+
+		protected bool _calendarNotesVisible;
+		public bool CalendarNotesVisible 
+		{ 
+			get
+			{
+				return _calendarNotesVisible;
+			}
+			set
+			{
+				if (_calendarNotesVisible != value)
+				{
+					_calendarNotesVisible = value;
 					OnPropertyChanged("CalendarNotesVisible");
 				}
 			}
 		}
 
-		public bool CalendarNotesVisible 
-		{ 
-			get 
-			{ 
-				return !string.IsNullOrEmpty (CalendarNotes);
-			} 
-		}
-
+		protected bool _workoutsListVisible;
 		public bool WorkoutsListVisible
 		{
 			get
 			{
-				if (RoutineDays == null)
+				return _workoutsListVisible;
+			}
+			set
+			{
+				if (_workoutsListVisible != value)
 				{
-					return false;
+					_workoutsListVisible = value;
+					OnPropertyChanged("WorkoutsListVisible");
 				}
-
-				return RoutineDays.Count > 0;
 			}
 		}
+
+		protected bool _noWorkoutDataVisible;
 		public bool NoWorkoutDataVisible
 		{
 			get
 			{
-				return !WorkoutsListVisible;
+				return _noWorkoutDataVisible;
+			}
+			set
+			{
+				if (_noWorkoutDataVisible != value)
+				{
+					_noWorkoutDataVisible = value;
+					OnPropertyChanged("NoWorkoutDataVisible");
+				}
 			}
 		}
 
@@ -98,31 +120,24 @@ namespace Set.ViewModels
                     _currentDate = value;
 					App.CurrentDate = value;
                     OnPropertyChanged("CurrentDate");
-					RoutineDays = LoadRoutineDays().Result;
-					CalendarNotes = GetCalendarNotes ().Result;
                 }
             }
         }
-
-		private async Task<string> GetCalendarNotes()
-		{
-			return await App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
-		}
 
 		protected ObservableCollection<RoutineDay> _routineDays;
 		public ObservableCollection<RoutineDay> RoutineDays
 		{
 			get
 			{
-				_routineDays = LoadRoutineDays ().Result;
 				return _routineDays;
 			}
 			set
 			{ 
-				_routineDays = value;
-				OnPropertyChanged("RoutineDays");
-				OnPropertyChanged("NoWorkoutDataVisible");
-				OnPropertyChanged("WorkoutsListVisible");
+				if (_routineDays != value)
+				{				
+					_routineDays = value;
+					OnPropertyChanged ("RoutineDays");
+				}
 			}
 		}
 
@@ -130,43 +145,40 @@ namespace Set.ViewModels
 		{
 			Title = "One Set To Fatigue";
 
-			_chevronTapCommand = new Command (OnChevronTapCommand);
+			_chevronTapCommand = new Command (async(object s) => { OnChevronTapCommand(s); });
 			_calendarNotesCommand = new Command (OnCalendarNotesCommand);
 		}
 
-		protected async Task<ObservableCollection<RoutineDay>> LoadRoutineDays()
-        {
-			var routineDays = await App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
-			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(_currentDate);
+		public async Task Load(DateTime date)
+		{
+			CurrentDate = date;
+			CalendarNotes = await App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
+			CalendarNotesVisible = !string.IsNullOrEmpty (CalendarNotes);
 
-			foreach (var day in routineDays)
+			var list = await App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
+			RoutineDays = new ObservableCollection<RoutineDay>(list);
+
+			if (RoutineDays == null)
 			{
-				var workout = workouts.Find(x => x.ExerciseId == day.ExerciseId);
-
-				// workout hasn't performed for this exercise
-				if (workout == null)
-				{
-					workout = new Workout ();
-					workout.ExerciseId = day.ExerciseId;
-					workout.Created = _currentDate;
-				} 
-
-				day.Workout = workout;
+				WorkoutsListVisible = false;
 			}
+			else
+			{
+				WorkoutsListVisible = RoutineDays.Count > 0;
+			}
+			NoWorkoutDataVisible = !WorkoutsListVisible;
+		}
 
-			return new ObservableCollection<RoutineDay>(routineDays);
-        }
-
-		private void OnChevronTapCommand (object s) 
+		private async Task OnChevronTapCommand (object s) 
 		{
 			if ((string)s == "Left")
 			{
-				CurrentDate = CurrentDate.AddDays (-1);
+				await Load(CurrentDate.AddDays (-1));
 				Page.Refresh ();
 			} 
 			else
 			{
-				CurrentDate = CurrentDate.AddDays (1);
+				await Load(CurrentDate.AddDays (1));
 				Page.Refresh ();
 			}
 		}
