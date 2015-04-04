@@ -138,7 +138,7 @@ namespace Set.ViewModels
 		public async void OnClicked(object sender, EventArgs args)
 		{
 			var page = Activator.CreateInstance (NavigateToPage);
-			Navigation.PushAsync (page as Page);
+			await Navigation.PushAsync (page as Page);
 		}
 	}
 }

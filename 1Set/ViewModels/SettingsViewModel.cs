@@ -226,7 +226,7 @@ namespace Set.ViewModels
 
 				if (answer)
 				{
-					App.Database.ClearWorkoutData ();
+					await App.Database.ClearWorkoutData ();
 					App.ShowToast (ToastNotificationType.Info, preference.PopupTitle, preference.TostMessage);
 				}
 			}

@@ -30,7 +30,6 @@ namespace Set.ViewModels
                 {
                     _date = value;
                     OnPropertyChanged("Date");
-					LoadNotes ();
                 }
             }
         }
@@ -41,7 +40,7 @@ namespace Set.ViewModels
 			Title = AppResources.CommentTitle;
 		}
 
-		protected async Task LoadNotes()
+		public async Task Load()
 		{
 			var repository = App.Database.CalendarRepository;
 			var all = await repository.AllAsync ();
@@ -69,7 +68,7 @@ namespace Set.ViewModels
 			{
 				var calendar = new Calendar (){ CalendarId = CalendarId, Date = Date, Notes = Notes };
 				await App.Database.CalendarRepository.SaveAsync(calendar);
-				Navigation.PopAsync();
+				await Navigation.PopAsync();
 			}
 		}
 	}

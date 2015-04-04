@@ -87,7 +87,7 @@ namespace Set.ViewModels
 				}
 				return _deleteCommand;
 			}
-		}
+		}   
 
 		public ExerciseViewModel () : base()
 		{
@@ -117,13 +117,13 @@ namespace Set.ViewModels
 			// insert
 			if (_routineDays.Count == 0)
 			{
-				CreateRoutineDay(ExerciseId, 1, DoOnMon);
-				CreateRoutineDay(ExerciseId, 2, DoOnTue);
-				CreateRoutineDay(ExerciseId, 3, DoOnWed);
-				CreateRoutineDay(ExerciseId, 4, DoOnThu);
-				CreateRoutineDay(ExerciseId, 5, DoOnFri);
-				CreateRoutineDay(ExerciseId, 6, DoOnSat);
-				CreateRoutineDay(ExerciseId, 0, DoOnSun);
+				await CreateRoutineDay(ExerciseId, 1, DoOnMon);
+				await CreateRoutineDay(ExerciseId, 2, DoOnTue);
+				await CreateRoutineDay(ExerciseId, 3, DoOnWed);
+				await CreateRoutineDay(ExerciseId, 4, DoOnThu);
+				await CreateRoutineDay(ExerciseId, 5, DoOnFri);
+				await CreateRoutineDay(ExerciseId, 6, DoOnSat);
+				await CreateRoutineDay(ExerciseId, 0, DoOnSun);
 			} 
 			// update
 			else
@@ -199,11 +199,11 @@ namespace Set.ViewModels
 			{
 				var exercise = Mapper.Map<Exercise>(this);
 				await App.Database.ExercisesRepository.SaveAsync(exercise);
-				SaveRoutine ();
+				await SaveRoutine ();
 
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
 
-				Navigation.PopAsync();
+				await Navigation.PopAsync();
 			}
 		}
 
@@ -216,7 +216,7 @@ namespace Set.ViewModels
 				if (answer)
 				{
 					await App.Database.ExercisesRepository.DeleteAsync(ExerciseId);
-					Navigation.PopAsync();
+					await Navigation.PopAsync();
 				}
 			}
 			catch(Exception ex)

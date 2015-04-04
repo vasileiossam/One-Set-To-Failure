@@ -17,6 +17,9 @@ namespace Set.Droid
 		{
 			base.OnCreate (bundle);
 
+			var currentDomain = AppDomain.CurrentDomain;
+			currentDomain.UnhandledException += HandleUnhandledException;
+
 			var bootstrapper = new Bootstrapper ();
 			bootstrapper.Automapper ();
 
@@ -30,6 +33,19 @@ namespace Set.Droid
 			LoadApplication(new App ());
 
 			bootstrapper.CheckMapper ();
+		}
+
+		static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			//Exception d = (Exception)e.ExceptionObject;
+			Console.WriteLine("TEST");
+		}
+
+		protected override void Dispose (bool disposing)
+		{
+			var currentDomain = AppDomain.CurrentDomain;
+			currentDomain.UnhandledException -= HandleUnhandledException;
+			base.Dispose (disposing);
 		}
 	}
 }

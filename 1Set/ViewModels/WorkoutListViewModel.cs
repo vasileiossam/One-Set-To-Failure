@@ -146,7 +146,7 @@ namespace Set.ViewModels
 			Title = "One Set To Fatigue";
 
 			_chevronTapCommand = new Command (async(object s) => { OnChevronTapCommand(s); });
-			_calendarNotesCommand = new Command (OnCalendarNotesCommand);
+			_calendarNotesCommand = new Command (async() => { OnCalendarNotesCommand(); });
 		}
 
 		public async Task Load(DateTime date)
@@ -183,9 +183,14 @@ namespace Set.ViewModels
 			}
 		}
 
-		private void OnCalendarNotesCommand()
+		private async Task OnCalendarNotesCommand()
 		{
-			Navigation.PushAsync(new CalendarNotesPage (CurrentDate, Page.Navigation)); 	
+			var viewModel = new CalendarNotesViewModel() {Navigation = Page.Navigation, Date = CurrentDate };
+			await viewModel.Load ();
+
+			var page = new CalendarNotesPage () {ViewModel = viewModel};
+
+			await Navigation.PushAsync(page); 	
 		}
     }
 }

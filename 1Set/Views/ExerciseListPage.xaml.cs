@@ -33,7 +33,7 @@ namespace Set
 
 			exercisesList.ItemSelected += async (sender, e) =>
 			{
-				OnExerciseSelected (sender, e);
+				await OnExerciseSelected (sender, e);
 			};
 		}
 
@@ -83,7 +83,7 @@ namespace Set
 			// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
 			viewModel.Page = page;
 
-			Navigation.PushAsync(page);
+			await Navigation.PushAsync(page);
 
 			// deselect row
 			((ListView)sender).SelectedItem = null;

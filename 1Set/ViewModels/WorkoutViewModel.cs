@@ -79,7 +79,7 @@ namespace Set.ViewModels
 				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
 			 
-				Navigation.PopAsync();
+				await Navigation.PopAsync();
 			}
 		}
     }

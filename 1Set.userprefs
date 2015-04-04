@@ -1,21 +1,29 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Notes.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="c:\dev\1Set\Droid\SQLite_Android.cs">
     <Files>
-      <File FileName="1Set\Concrete\BaseRepository.cs" Line="35" Column="5" />
-      <File FileName="c:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs" Line="26" Column="32" />
-      <File FileName="Notes.txt" Line="1" Column="1" />
+      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="158" Column="30" />
+      <File FileName="1Set\Views\WorkoutListPage.xaml" Line="1" Column="1" />
+      <File FileName="1Set\Views\WorkoutListPage.xaml.cs" Line="1" Column="1" />
+      <File FileName="1Set\App.cs" Line="1" Column="1" />
+      <File FileName="Droid\MainActivity.cs" Line="41" Column="1" />
+      <File FileName="1Set\Concrete\WorkoutsRepository.cs" Line="1" Column="1" />
+      <File FileName="README.md" Line="1" Column="1" />
+      <File FileName="c:\dev\1Set\Droid\SQLite_Android.cs" Line="42" Column="1" />
+      <File FileName="c:\dev\1Set\1Set\AsyncLock.cs" Line="1" Column="1" />
+      <File FileName="..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
+      <File FileName="c:\dev\1Set\1Set\Concrete\CalendarRepository.cs" Line="1" Column="1" />
+      <File FileName="1Set\Concrete\RoutineDaysRepository.cs" Line="50" Column="6" />
+      <File FileName="1Set\Models\Calendar.cs" Line="1" Column="1" />
+      <File FileName="Droid\Properties\AssemblyInfo.cs" Line="25" Column="1" />
+      <File FileName="1Set\WorkoutRules.cs" Line="55" Column="1" />
+      <File FileName="1Set\Concrete\Extensions.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\dev\1Set\Droid\Properties\AssemblyInfo.cs" line="25" column="1" />
-      <Breakpoint file="c:\dev\1Set\1Set\Pages\WorkoutListPage.cs" line="59" column="1" />
-      <Breakpoint file="C:\dev\1Set\1Set\WorkoutRules.cs" line="55" column="1" />
-      <Breakpoint file="C:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="34" column="11" />
-      <Breakpoint file="C:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs" line="37" column="1" />
-      <Breakpoint file="C:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="32" column="4" />
-      <Breakpoint file="C:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="38" column="34" />
+      <Breakpoint file="C:\dev\1Set\Droid\MainActivity.cs" line="41" column="1" />
+      <Breakpoint file="c:\dev\1Set\Droid\SQLite_Android.cs" line="42" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

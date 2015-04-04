@@ -21,20 +21,26 @@ namespace Set
 		#region ISQLite implementation
 		public SQLiteAsyncConnection GetConnection ()
 		{
-			var sqliteFilename = "OneSet.db3";
-			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			var path = Path.Combine (documentsPath, sqliteFilename);
-			var platform = new SQLitePlatformAndroid ();
+			try
+			{
+				
+				var sqliteFilename = "OneSet.db3";
+				var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+				var path = Path.Combine (documentsPath, sqliteFilename);
+				var platform = new SQLitePlatformAndroid ();
 
-			var connectionWithLock = new SQLiteConnectionWithLock (
-				platform,
-				new SQLiteConnectionString (path, true));
+				var connectionWithLock = new SQLiteConnectionWithLock (
+					platform,
+					new SQLiteConnectionString (path, true));
 
-			var connection = new SQLiteAsyncConnection (() => connectionWithLock);
+				var connection = new SQLiteAsyncConnection (() => connectionWithLock);
 
-			return connection;
-
-
+				return connection;
+			}
+			catch(Exception ex)
+			{
+				throw new Exception ("Cannot get connection", ex);
+			}
 //
 //			var sqliteFilename = "OneSet.db3";
 //			string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal); 

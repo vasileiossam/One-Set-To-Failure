@@ -11,12 +11,9 @@ namespace Set
 	{
         public CalendarNotesViewModel ViewModel { get; set; }
 
-		public CalendarNotesPage(DateTime date, INavigation navigation)
+		public CalendarNotesPage()
 		{
 			InitializeComponent ();
-
-			ViewModel = new CalendarNotesViewModel() { Date = date };
-			ViewModel.Navigation = navigation;
 		}
 
         protected async override void OnAppearing()
@@ -24,7 +21,6 @@ namespace Set
             base.OnAppearing();
             BindingContext = ViewModel;
         }
-
 	}
 }
 
