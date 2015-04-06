@@ -33,48 +33,8 @@ namespace Set.Models
         [Ignore]
 		public Workout PreviousWorkout { get; set; }
 
-		protected int _previousReps;
-        public int PreviousReps
-        {
-            get
-            {
-                if (PreviousWorkout != null)
-                {
-                    _previousReps = PreviousWorkout.Reps;
-                }
-                else
-                {
-                    _previousReps = 0;
-                }
-                return _previousReps;
-            }
-            set
-            {
-                _previousReps = value;
-            }
-        }
-
-		protected double _previousWeight;
-        public double PreviousWeight
-        {
-            get
-            {
-                if (PreviousWorkout != null)
-                {
-                    _previousWeight = PreviousWorkout.Weight;
-                }
-                else
-                {
-                    _previousWeight = 0;
-                }
-                return _previousWeight;
-            }
-            set
-            {
-                _previousWeight = value;
-            }
-        }
-
+		public int PreviousReps { get; set; }
+		public double PreviousWeight { get; set; }
 		public int TargetReps { get; set; }
 		public double TargetWeight { get; set; }
 
@@ -104,6 +64,9 @@ namespace Set.Models
 		public async Task Load()
 		{
 			PreviousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout (ExerciseId, Created);
+			PreviousReps = PreviousWorkout.Reps;
+			PreviousWeight = PreviousWorkout.Weight;
+
 			dynamic result = await WorkoutRules.GetTargetWorkout (this);
 			TargetReps = result.TargetReps;
 			TargetWeight = result.TargetReps;

@@ -145,7 +145,7 @@ namespace Set
 		{
 			//	_connection.DropTable<Exercise> ();
 			//	_connection.DropTable<RoutineDay> ();
-			//	_connection.DropTable<Workout> ();
+			//await _connection.DropTableAsync<Workout> ();
 
 			try
 			{
