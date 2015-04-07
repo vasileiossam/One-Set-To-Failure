@@ -107,6 +107,7 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
+    <None Include="Data\android-pull-database.bat" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\layout\" />
@@ -115,6 +116,7 @@
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Renders\" />
     <Folder Include="Resources\drawable-ldpi\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />

@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Set.Localization;
 using Set.Resx;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -55,6 +56,9 @@ namespace Set
 				deleteItem.SetBinding<ExerciseViewModel> (ToolbarItem.CommandProperty, x => x.DeleteCommand);
 				ToolbarItems.Insert (0, deleteItem);
 			}
+
+			// following statement will prevent a compiler warning about async method lacking await
+			await Task.FromResult(0);
         }
 
 		protected override void OnDisappearing()

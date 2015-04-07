@@ -52,7 +52,8 @@ namespace Set.ViewModels
 
 		protected virtual async Task OnSave () 
 		{
-
+			// following statement will prevent a compiler warning about async method lacking await
+			await Task.FromResult(0);
 		}
     }
 }

@@ -145,8 +145,8 @@ namespace Set.ViewModels
 		{
 			Title = "One Set To Fatigue";
 
-			_chevronTapCommand = new Command (async(object s) => { OnChevronTapCommand(s); });
-			_calendarNotesCommand = new Command (async() => { OnCalendarNotesCommand(); });
+			_chevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
+			_calendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
 		}
 
 		public async Task Load(DateTime date)

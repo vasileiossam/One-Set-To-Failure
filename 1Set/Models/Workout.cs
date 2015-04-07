@@ -63,13 +63,30 @@ namespace Set.Models
 
 		public async Task Load()
 		{
-			PreviousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout (ExerciseId, Created);
-			PreviousReps = PreviousWorkout.Reps;
-			PreviousWeight = PreviousWorkout.Weight;
+			try
+			{
+				// update previous and target workout only when adding a new workout
+				// if (WorkoutId == 0)
+				{
+					PreviousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout (ExerciseId, Created);
+					if (PreviousWorkout != null)
+					{
+						PreviousReps = PreviousWorkout.Reps;
+						PreviousWeight = PreviousWorkout.Weight;
+					}
 
-			dynamic result = await WorkoutRules.GetTargetWorkout (this);
-			TargetReps = result.TargetReps;
-			TargetWeight = result.TargetReps;
+					dynamic targetWorkout = await WorkoutRules.GetTargetWorkout (this);
+					if (targetWorkout != null)
+					{
+						TargetReps = targetWorkout.TargetReps;
+						TargetWeight = targetWorkout.TargetReps;
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				App.ShowErrorPage (this, ex);
+			}
 		}
 	}
 }

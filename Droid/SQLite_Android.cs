@@ -23,15 +23,33 @@ namespace Set
 		{
 			try
 			{
-				
-				var sqliteFilename = "OneSet.db3";
-				var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-				var path = Path.Combine (documentsPath, sqliteFilename);
-				var platform = new SQLitePlatformAndroid ();
+				//var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+				var rootPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+				var appPath = System.IO.Path.Combine(rootPath, "OneSet");
 
+				if (!Directory.Exists(appPath))
+				{
+					Directory.CreateDirectory(appPath);
+				}
+
+				var dbFilename = "OneSet.db3";
+				var dbPath = Path.Combine(appPath, dbFilename);
+				if (!File.Exists(dbPath))
+				{
+					var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
+
+					// create a write stream
+					var writeStream = new FileStream(dbPath, FileMode.OpenOrCreate, FileAccess.Write);
+				
+					// write to the stream
+					ReadWriteStream(s, writeStream);
+				}					
+
+
+				var platform = new SQLitePlatformAndroid ();
 				var connectionWithLock = new SQLiteConnectionWithLock (
 					platform,
-					new SQLiteConnectionString (path, true));
+					new SQLiteConnectionString (dbPath, true));
 
 				var connection = new SQLiteAsyncConnection (() => connectionWithLock);
 

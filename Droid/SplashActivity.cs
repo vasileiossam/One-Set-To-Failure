@@ -10,6 +10,7 @@ using Android.Views;
 using Android.Widget;
 using System.Threading;
 using Android.Content.PM;
+using System.Threading.Tasks;
 
 namespace Set.Droid
 {
@@ -22,6 +23,9 @@ namespace Set.Droid
 
 			var intent = new Intent(this, typeof(MainActivity));
 			StartActivity(intent);
+
+			// following statement will prevent a compiler warning about async method lacking await
+			await Task.FromResult(0);
 		}
 	}
 

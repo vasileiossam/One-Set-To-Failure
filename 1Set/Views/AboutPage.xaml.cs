@@ -4,6 +4,7 @@ using Set.ViewModels;
 using Set.Models;
 using Xamarin.Forms;
 using Set.Resx;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -36,6 +37,9 @@ namespace Set
 		{
             base.OnAppearing();
             BindingContext = ViewModel;
+
+			// following statement will prevent a compiler warning about async method lacking await
+			await Task.FromResult(0);
 		}
 
 		protected override void OnDisappearing()
