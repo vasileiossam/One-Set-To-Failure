@@ -55,6 +55,11 @@ namespace Set
 			((ListView)sender).SelectedItem = null;
 		}
 
+		public void Refresh()
+		{
+			settingsList.ItemsSource = null;
+			settingsList.ItemsSource = ViewModel.Settings;
+		}
 	}
 }
 

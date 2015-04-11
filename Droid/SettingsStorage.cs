@@ -12,20 +12,25 @@ namespace Set.Droid
 {
 	public class SettingsStorage : ISettingsStorage
 	{
-		const string FileName = "settings.json";
+		public const string FileName = "settings.json";
 
 		public SettingsStorage ()
 		{
 
 		}
 
+		public static string GetPathName()
+		{
+			var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			var pathName = Path.Combine(folder, FileName);
+			return pathName;
+		}
 
 		public void Save(Settings settings)
 		{
-			var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			var path = Path.Combine(folder, FileName);
+			var pathName = GetPathName ();
 
-			using (StreamWriter sw = File.CreateText (path)) {
+			using (StreamWriter sw = File.CreateText (pathName)) {
 				var json = JsonConvert.SerializeObject (settings);
 				sw.Write (json);
 			}
@@ -36,11 +41,10 @@ namespace Set.Droid
 			try
 			{
 				Settings settings;
-				var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-				var path = Path.Combine(folder, FileName);
+				var pathName = GetPathName ();
 
-				if (File.Exists (path)) {
-					using (StreamReader sr = File.OpenText (path)) {
+				if (File.Exists (pathName)) {
+					using (StreamReader sr = File.OpenText (pathName)) {
 						var json = sr.ReadLine ();
 						settings = JsonConvert.DeserializeObject<Settings> (json);
 

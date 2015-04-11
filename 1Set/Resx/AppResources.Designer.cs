@@ -323,6 +323,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weight increment or plate weight ({0}).
         /// </summary>
         internal static string PlateWeightLabel {
@@ -395,6 +404,42 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no backups available.
+        /// </summary>
+        internal static string RestoreNoBackupMessage {
+            get {
+                return ResourceManager.GetString("RestoreNoBackupMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        internal static string RestoreNoBackupTitle {
+            get {
+                return ResourceManager.GetString("RestoreNoBackupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to restore the {0} backup? .
+        /// </summary>
+        internal static string RestoreQuestionMessage {
+            get {
+                return ResourceManager.GetString("RestoreQuestionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        internal static string RestoreQuestionTitle {
+            get {
+                return ResourceManager.GetString("RestoreQuestionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to secs.
         /// </summary>
         internal static string SecondsRestTimerDescription {
@@ -418,6 +463,42 @@ namespace Set.Resx {
         internal static string SettingsAboutTitle {
             get {
                 return ResourceManager.GetString("SettingsAboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup your data locally to SD Card.
+        /// </summary>
+        internal static string SettingsBackupLocallyHint {
+            get {
+                return ResourceManager.GetString("SettingsBackupLocallyHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string SettingsBackupLocallyTitle {
+            get {
+                return ResourceManager.GetString("SettingsBackupLocallyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup created at {0}.
+        /// </summary>
+        internal static string SettingsBackupToastMessageOnSuccess {
+            get {
+                return ResourceManager.GetString("SettingsBackupToastMessageOnSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string SettingsBackupToastTitleOnSuccess {
+            get {
+                return ResourceManager.GetString("SettingsBackupToastTitleOnSuccess", resourceCulture);
             }
         }
         
@@ -476,6 +557,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last backup on {0}.
+        /// </summary>
+        internal static string SettingsLastBackupDate {
+            get {
+                return ResourceManager.GetString("SettingsLastBackupDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of reps to advance to the next weight level.
         /// </summary>
         internal static string SettingsMaxRepsHint {
@@ -517,6 +607,42 @@ namespace Set.Resx {
         internal static string SettingsOtherTitle {
             get {
                 return ResourceManager.GetString("SettingsOtherTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore your data from a previously created backup.
+        /// </summary>
+        internal static string SettingsRestoreLocallyHint {
+            get {
+                return ResourceManager.GetString("SettingsRestoreLocallyHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        internal static string SettingsRestoreLocallyTitle {
+            get {
+                return ResourceManager.GetString("SettingsRestoreLocallyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your data restored successfully.
+        /// </summary>
+        internal static string SettingsRestoreToastMessageOnSuccess {
+            get {
+                return ResourceManager.GetString("SettingsRestoreToastMessageOnSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        internal static string SettingsRestoreToastTitleOnSuccess {
+            get {
+                return ResourceManager.GetString("SettingsRestoreToastTitleOnSuccess", resourceCulture);
             }
         }
         
@@ -616,6 +742,15 @@ namespace Set.Resx {
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string ToastErrorTitle {
+            get {
+                return ResourceManager.GetString("ToastErrorTitle", resourceCulture);
             }
         }
         

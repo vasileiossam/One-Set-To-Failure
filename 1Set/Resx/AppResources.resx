@@ -362,4 +362,62 @@
     <value>Show the target Reps and Weight in the exercise workout page</value>
   </data>
 
+  <data name="SettingsBackupLocallyTitle" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+
+  <data name="SettingsBackupLocallyHint" xml:space="preserve">
+    <value>Backup your data locally to SD Card</value>
+  </data>
+
+  <data name="SettingsBackupToastTitleOnSuccess" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+
+  <data name="SettingsBackupToastMessageOnSuccess" xml:space="preserve">
+    <value>Backup created at {0}</value>
+  </data>
+  <data name="SettingsLastBackupDate" xml:space="preserve">
+    <value>Last backup on {0}</value>
+  </data>
+
+  <data name="SettingsRestoreLocallyTitle" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+
+  <data name="SettingsRestoreLocallyHint" xml:space="preserve">
+    <value>Restore your data from a previously created backup</value>
+  </data>
+
+  <data name="ToastErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+
+  <data name="RestoreNoBackupTitle" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+
+  <data name="RestoreNoBackupMessage" xml:space="preserve">
+    <value>There are no backups available</value>
+  </data>
+
+  <data name="RestoreQuestionTitle" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+
+  <data name="RestoreQuestionMessage" xml:space="preserve">
+    <value>Would you like to restore the {0} backup? </value>
+  </data>
+
+  <data name="SettingsRestoreToastTitleOnSuccess" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+
+  <data name="SettingsRestoreToastMessageOnSuccess" xml:space="preserve">
+    <value>Your data restored successfully</value>
+  </data>
 </root>

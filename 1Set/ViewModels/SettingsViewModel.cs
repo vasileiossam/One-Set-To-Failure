@@ -6,6 +6,8 @@ using Set.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using Toasts.Forms.Plugin.Abstractions;
+using Set.Abstract;
+using System.Globalization;
 
 namespace Set.ViewModels
 {
@@ -20,7 +22,7 @@ namespace Set.ViewModels
 		{
 			get
 			{
-				_settings = LoadSettings();
+				_settings = LoadSettings().Result;
 				return _settings;
 			}
 			set
@@ -38,10 +40,11 @@ namespace Set.ViewModels
 			Title = AppResources.SettingsTitle;
 		}
 
-		protected ObservableCollection<PreferenceGroup> LoadSettings()
+		protected async Task<ObservableCollection<PreferenceGroup>> LoadSettings()
 		{
 			var list = new ObservableCollection<PreferenceGroup>();
 
+			#region general group
 			var generalGroup = new PreferenceGroup (){ Title = AppResources.SettingsGeneralTitle };
 			list.Add (generalGroup);
 
@@ -65,7 +68,9 @@ namespace Set.ViewModels
 					App.SaveSettings();
 				}
 			});
+			#endregion
 
+			#region rules group
 			var rulesGroup = new PreferenceGroup (){ Title = AppResources.SettingsTrainingRulesTitle, Hint = AppResources.SettingsTrainingRulesHint };
 			list.Add (rulesGroup);
 
@@ -140,8 +145,9 @@ namespace Set.ViewModels
 					App.SaveSettings();
 				}
 			});
+			#endregion
 
-
+			#region data group
 			var dataGroup = new PreferenceGroup (){ Title = AppResources.SettingsDataTitle };
 			list.Add (dataGroup);
 
@@ -151,18 +157,86 @@ namespace Set.ViewModels
 				Hint = AppResources.SettingsClearWorkoutDataHint,
 				PopupTitle = AppResources.SettingsClearWorkoutDataTitle,
 				PopupMessage = AppResources.ClearWorkoutDataQuestion,
-				TostMessage = AppResources.ClearWorkoutDataCompleted,
 				Clicked = OnClicked,
-				OnSave = (sender, args) =>
+				OnExecute = async(sender, args) =>
 				{
-					var preference = sender as ListPreference;
-					App.Settings.MinReps = int.Parse((string) preference.Value);
-					App.SaveSettings();
+					var preference = sender as AlertPreference;
+					await App.Database.ClearWorkoutData ();
+					App.ShowToast (ToastNotificationType.Info, preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
 				}
 			});
 
-			// OTHER GROUP
+			var backupPreference = new AlertPreference ()
+			{ 
+				Title = AppResources.SettingsBackupLocallyTitle, 
+				Hint = AppResources.SettingsBackupLocallyHint,
+				Clicked = OnClicked,
+				Value = await GetLastBackupDate(),
+				IsValueVisible = !string.IsNullOrEmpty(await GetLastBackupDate())
+			};
+			backupPreference.OnExecute += async (sender, args) =>
+			{
+				try
+				{	
+					var backupService = DependencyService.Get<IBackupRestore>();
+					await backupService.Backup();
 
+					var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();				
+					App.ShowToast (ToastNotificationType.Info, AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));		
+
+					var preference = sender as AlertPreference;
+					preference.Value = await GetLastBackupDate();
+				}
+				catch(Exception ex)
+				{
+					App.ShowToast (ToastNotificationType.Error, AppResources.ToastErrorTitle, ex.Message);		
+				}
+			};
+			dataGroup.Add (backupPreference);
+
+			var restorePreference = new AlertPreference ()
+			{ 
+				Title = AppResources.SettingsRestoreLocallyTitle, 
+				Hint = AppResources.SettingsRestoreLocallyHint,
+				Clicked = OnClicked
+			};
+			restorePreference.OnExecute += async (sender, args) =>
+			{
+				try
+				{	
+					var backupService = DependencyService.Get<IBackupRestore>();
+					var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();				
+
+					if (backupInfo.LastBackupDate == null)
+					{
+						await Page.DisplayAlert (AppResources.RestoreNoBackupTitle, AppResources.RestoreNoBackupMessage, AppResources.OK);
+					}
+					else
+					{
+						var answer = await Page.DisplayAlert (AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
+						if (answer)
+						{
+							await backupService.Restore();	
+
+							// reload settings
+							App.Settings = DependencyService.Get<ISettingsStorage>().Load();
+							Page.Refresh();
+
+							App.ShowToast (ToastNotificationType.Info, AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);		
+						}
+					}
+				}
+				catch(Exception ex)
+				{
+					App.ShowToast (ToastNotificationType.Error, AppResources.ToastErrorTitle, ex.Message);		
+				}
+
+			};
+			dataGroup.Add (restorePreference);
+
+			#endregion
+
+			#region other group
 			var otherGroup = new PreferenceGroup (){ Title = AppResources.SettingsOtherTitle };
 			list.Add (otherGroup);
 
@@ -201,6 +275,7 @@ namespace Set.ViewModels
 				Navigation = Page.Navigation,
 				NavigateToPage = typeof(AboutPage) 
 			});
+			#endregion
 
 			return list;
 		}
@@ -222,15 +297,57 @@ namespace Set.ViewModels
 			if (sender is AlertPreference)
 			{
 				var preference = sender as AlertPreference;
-				var answer = await Page.DisplayAlert (preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
 
-				if (answer)
+				if (!string.IsNullOrEmpty (preference.PopupMessage))
 				{
-					await App.Database.ClearWorkoutData ();
-					App.ShowToast (ToastNotificationType.Info, preference.PopupTitle, preference.TostMessage);
+					var answer = await Page.DisplayAlert (preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
+
+					if (answer)
+					{
+						preference.OnExecute (sender, args);
+					}
+				} 
+				else
+				{
+					preference.OnExecute (sender, args);
 				}
 			}
 		}
+
+		public async Task<string> GetLastBackupDate()
+		{
+			var lastBackupDate = string.Empty;
+			var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
+
+			if (backupInfo.LastBackupDate != null) 
+			{
+				var date = (DateTime) backupInfo.LastBackupDate;
+			
+				lastBackupDate = string.Format(AppResources.SettingsLastBackupDate, 
+					date.ToString("D") + ", " + date.ToString("hh:mm:ss")
+				);
+			}
+
+			return lastBackupDate;
+		}
+
+		public async Task<string> GetRestoreQuestionMessage()
+		{
+			var lastBackupDate = string.Empty;
+			var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
+
+			if (backupInfo.LastBackupDate != null) 
+			{
+				var date = (DateTime) backupInfo.LastBackupDate;
+
+				lastBackupDate = string.Format(AppResources.RestoreQuestionMessage, 
+					date.ToString("D") + ", " + date.ToString("hh:mm:ss")
+				);
+			}
+
+			return lastBackupDate;
+		}
+
 	}
 }
 

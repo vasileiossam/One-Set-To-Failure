@@ -10,46 +10,46 @@ using SQLite.Net.Platform.XamarinAndroid;
 
 [assembly: Dependency (typeof (SQLite_Android))]
 
-namespace Set
+namespace Set.Droid
 {
 	public class SQLite_Android : ISQLite
 	{
+		public const string FileName = "OneSet.db3";
+
 		public SQLite_Android ()
 		{
 		}
 
 		#region ISQLite implementation
+
+		public static string GetPathName()
+		{
+			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			var pathName = Path.Combine (documentsPath, FileName);
+			return pathName;
+		}
+
 		public SQLiteAsyncConnection GetConnection ()
 		{
 			try
 			{
-				//var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-				var rootPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-				var appPath = System.IO.Path.Combine(rootPath, "OneSet");
+				var pathName = GetPathName();
 
-				if (!Directory.Exists(appPath))
-				{
-					Directory.CreateDirectory(appPath);
-				}
-
-				var dbFilename = "OneSet.db3";
-				var dbPath = Path.Combine(appPath, dbFilename);
-				if (!File.Exists(dbPath))
+				if (!File.Exists(pathName))
 				{
 					var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
 
 					// create a write stream
-					var writeStream = new FileStream(dbPath, FileMode.OpenOrCreate, FileAccess.Write);
+					var writeStream = new FileStream(pathName, FileMode.OpenOrCreate, FileAccess.Write);
 				
 					// write to the stream
 					ReadWriteStream(s, writeStream);
 				}					
 
-
 				var platform = new SQLitePlatformAndroid ();
 				var connectionWithLock = new SQLiteConnectionWithLock (
 					platform,
-					new SQLiteConnectionString (dbPath, true));
+					new SQLiteConnectionString (pathName, true));
 
 				var connection = new SQLiteAsyncConnection (() => connectionWithLock);
 
@@ -59,24 +59,7 @@ namespace Set
 			{
 				throw new Exception ("Cannot get connection", ex);
 			}
-//
-//			var sqliteFilename = "OneSet.db3";
-//			string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal); 
-//			var path = Path.Combine(documentsPath, sqliteFilename);
-//
-//			// This is where we copy in the prepopulated database
-//			Console.WriteLine (path);
-//			if (!File.Exists(path))
-//			{
-//				var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
-//
-//				// create a write stream
-//				FileStream writeStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-//				// write to the stream
-//				ReadWriteStream(s, writeStream);
-//			}
-//
-//
+
 //			var connectionParameters = new SQLiteConnectionString(path, false); 
 //			var platform = new SQLitePlatformAndroid();
 //			var sqliteConnectionPool = new SQLiteConnectionPool(platform); 

@@ -117,7 +117,7 @@ namespace Set.ViewModels
 	{
 		public string PopupTitle { get; set; }
 		public string PopupMessage {get; set;}
-		public string TostMessage { get; set; }
+		public EventHandler OnExecute {get; set;}
 
 		public AlertPreference():base()
 		{
