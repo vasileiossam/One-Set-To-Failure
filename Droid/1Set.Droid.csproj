@@ -178,6 +178,26 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_comment_o.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_comment_o.png" />
     <AndroidResource Include="Resources\drawable\gymnast21.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_caret_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.1.6349\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.1.6349\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

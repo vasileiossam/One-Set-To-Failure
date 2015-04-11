@@ -112,6 +112,7 @@
 		<Grid VerticalOptions="FillAndExpand">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="50" />
@@ -121,10 +122,19 @@
 	 		<Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_android" HorizontalOptions="Center" VerticalOptions="Center"/>
 
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="1" Placeholder="{i18n:Translate Reps}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
-	 			Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+	 			Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
-	 			Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+	 			Text="{Binding Weight, Converter={StaticResource weightConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+
+		    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
+				<Button Image="ic_fa_caret_up.png" Command="{Binding RepsUpCommand}"/>
+				<Button Image="ic_fa_caret_down.png" Command="{Binding RepsDownCommand}"/>
+			</StackLayout>
+		    <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
+				<Button Image="ic_fa_caret_up.png" Command="{Binding WeighUpCommand}"/>
+				<Button Image="ic_fa_caret_down.png" Command="{Binding WeighDownCommand}"/>
+			</StackLayout>
 		</Grid> 
 
 
