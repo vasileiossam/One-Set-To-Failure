@@ -28,7 +28,8 @@
 	</ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    
+    <controls:GestureFrame x:Name="MainFrame">
+
     <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
       
       <StackLayout Orientation="Horizontal">
@@ -109,5 +110,6 @@
       
     </StackLayout>
 
+    </controls:GestureFrame>
 	</ContentPage.Content>
 </ContentPage>

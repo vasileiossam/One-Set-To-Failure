@@ -38,6 +38,16 @@ namespace Set
 			this.BindingContext = ViewModel;
 			await ViewModel.Load (App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
+
+			MainFrame.SwipeLeft += (s, e) =>
+			{
+				ViewModel.ChevronTapCommand.Execute("Left");
+			};
+
+			MainFrame.SwipeRight += (s, e) =>
+			{
+				ViewModel.ChevronTapCommand.Execute("Right");
+			};
         }
 
         protected override void OnDisappearing()

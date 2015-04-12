@@ -102,6 +102,8 @@
     <Compile Include="Renders\CustomEntryRender.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="BackupRestore.cs" />
+    <Compile Include="Renders\GestureFrameRenderer.cs" />
+    <Compile Include="Renders\CustomGestureListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
