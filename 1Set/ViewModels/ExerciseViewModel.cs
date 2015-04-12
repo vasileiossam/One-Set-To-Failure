@@ -198,7 +198,7 @@ namespace Set.ViewModels
 			if (Validate ())
 			{
 				var exercise = Mapper.Map<Exercise>(this);
-				await App.Database.ExercisesRepository.SaveAsync(exercise);
+				ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);
 				await SaveRoutine ();
 
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);

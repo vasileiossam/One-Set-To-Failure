@@ -420,4 +420,8 @@
   <data name="SettingsRestoreToastMessageOnSuccess" xml:space="preserve">
     <value>Your data restored successfully</value>
   </data>
+
+  <data name="NotesLabel" xml:space="preserve">
+    <value>Notes</value>
+  </data>
 </root>

@@ -296,6 +296,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        internal static string NotesLabel {
+            get {
+                return ResourceManager.GetString("NotesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can add exercises and set your training program in the Exercises menu..
         /// </summary>
         internal static string NoWorkoutDataLine1 {

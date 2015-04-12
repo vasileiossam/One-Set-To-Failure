@@ -78,7 +78,8 @@ namespace Set.Concrete
 				} 
 				else
 				{
-					return await _connection.InsertAsync (entity);
+					await _connection.InsertAsync (entity);
+					return (int)entity.GetId ();
 				}
 			}
 		}
