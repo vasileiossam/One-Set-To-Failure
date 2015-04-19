@@ -123,10 +123,11 @@ namespace Set.ViewModels
 
 		protected override async Task OnSave () 
 		{
+			Workout.Reps = Reps;
+			Workout.Weight = Weight;
+
 			if (Validate ())
 			{
-				Workout.Reps = Reps;
-				Workout.Weight = Weight;
 				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);

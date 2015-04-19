@@ -68,39 +68,7 @@ namespace Set
 				return _exercisesRepository;
 			}
 		}
-
-		/// <summary>
-		///  hide rest timer
-		///  30 secs
-		///  45 secs
-		///  1 min
-		///  1 min 30 secs
-		///  1 min 45 secs
-		///  2 min
-		///  2 min 30 secs
-		/// </summary>
-		private List<RestTimer> _restTimers;
-		public List<RestTimer> RestTimers
-		{
-			get
-			{
-				if (_restTimers == null)
-				{
-					_restTimers = new List<RestTimer>();
-
-					_restTimers.Add(new RestTimer(1, AppResources.ZeroSecsRestTimerDescription, 0 ));
-					_restTimers.Add(new RestTimer(2, "30 " + AppResources.SecondsRestTimerDescription, 30));
-					_restTimers.Add(new RestTimer(3, "45 " + AppResources.SecondsRestTimerDescription, 45));
-					_restTimers.Add(new RestTimer(4, "1 " + AppResources.MinuteRestTimerDescription, 60));
-					_restTimers.Add(new RestTimer(5, "1 " + AppResources.MinuteRestTimerDescription + " 30 " + AppResources.SecondsRestTimerDescription, 60 + 30));
-					_restTimers.Add(new RestTimer(6, "1 " + AppResources.MinuteRestTimerDescription + " 45 " + AppResources.SecondsRestTimerDescription, 60 + 45));
-					_restTimers.Add(new RestTimer(7, "2 " + AppResources.MinutesRestTimerDescription, 2 * 60 ));
-					_restTimers.Add(new RestTimer(8, "2 " + AppResources.MinutesRestTimerDescription + " 30 " + AppResources.SecondsRestTimerDescription, 2 * 60 + 30 ));
-				}
-				return _restTimers;
-			}
-		}
-
+	
 		/// <summary>
 		///    +1
 		///    +2

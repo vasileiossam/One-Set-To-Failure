@@ -100,15 +100,6 @@ namespace Set.Models
         }
         #endregion
 
-        [Ignore]
-		[IgnoreMap]
-        public RestTimer RestTimer
-        {
-            get
-            {
-				return App.Database.RestTimers.FirstOrDefault(x => x.RestTimerId == RestTimerId);
-            }
-        }
 
         [Ignore]
 		[IgnoreMap]

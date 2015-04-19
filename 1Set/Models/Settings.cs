@@ -10,11 +10,15 @@ namespace Set.Models
 		public bool IsMetric { get; set; }
 		public int MaxReps { get; set; }
 		public int MinReps { get; set; }
-		public int RestTimerId { get; set; }
 		public int RepsIncrementId { get; set; }
 		public bool PreviousRepsWeightVisible { get; set; }
 		public bool TargetRepsWeightVisible { get; set; }
 
+		#region Rest Timer
+		public bool RestTimerAutoStart { get; set; }
+		public bool RestTimerPlaySounds { get; set; }
+		public int RestTimerTotalSeconds { get; set; }
+		#endregion
 
 		public Settings()
 		{
@@ -22,20 +26,16 @@ namespace Set.Models
 			IsMetric = RegionInfo.CurrentRegion.IsMetric;
 			MaxReps = 12;
 			MinReps = 5;
-			RestTimerId = 4; // 1 min 30secs
 			RepsIncrementId = 1; // +1
 			PreviousRepsWeightVisible = true;
 			TargetRepsWeightVisible = true;
-		}
 
-		[JsonIgnore]
-        public RestTimer RestTimer
-        {
-            get
-            {
-				return App.Database.RestTimers.FirstOrDefault (x => x.RestTimerId == RestTimerId);
-            }
-        }
+			#region Rest Timer defaults
+			RestTimerAutoStart = true;
+			RestTimerPlaySounds = true;
+			RestTimerTotalSeconds = 90;
+			#endregion
+		}
 
 		// exercise goal: how many reps to do more in every workout
 		[JsonIgnore]

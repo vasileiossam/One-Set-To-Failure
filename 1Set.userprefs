@@ -1,12 +1,19 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\ViewModels\ExerciseViewModel.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\RestTimerPage.xaml">
     <Files>
-      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="51" Column="3" />
-      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="152" Column="40" />
-      <File FileName="1Set\ViewModels\ExerciseViewModel.cs" Line="191" Column="5" />
-      <File FileName="1Set\Concrete\BaseRepository.cs" Line="81" Column="6" />
-      <File FileName="c:\dev\1Set\1Set\AsyncLock.cs" Line="28" Column="1" />
+      <File FileName="1Set\ViewModels\RestTimerViewModel.cs" Line="53" Column="25" />
+      <File FileName="1Set\Views\RestTimerPage.xaml" Line="41" Column="42" />
+      <File FileName="1Set\Views\WorkoutPage.xaml" Line="127" Column="149" />
+      <File FileName="1Set\Models\Settings.cs" Line="36" Column="30" />
+      <File FileName="1Set\Views\CalendarNotesPage.xaml" Line="1" Column="1" />
+      <File FileName="1Set\Views\RestTimerPage.cs" Line="22" Column="1" />
+      <File FileName="1Set\ViewModels\SettingsViewModel.cs" Line="124" Column="22" />
+      <File FileName="1Set\Views\ExerciseDetailsPage.xaml" Line="70" Column="12" />
+      <File FileName="1Set\Models\Exercise.cs" Line="103" Column="1" />
+      <File FileName="1Set\Resx\AppResources.resx" Line="431" Column="39" />
+      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="55" Column="27" />
+      <File FileName="1Set\Concrete\Database.cs" Line="109" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

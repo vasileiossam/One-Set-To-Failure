@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
+	xmlns:controls="clr-namespace:Set.Controls;assembly=1Set"
+	x:Class="Set.RestTimerPage"
+    Title="{Binding Title}">
+
+  <ContentPage.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="0, 0, 0, 0"
+                WinPhone="5, 0, 5, 0" />
+  </ContentPage.Padding>
+
+  <ContentPage.Content>
+  	<ScrollView>
+  		<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
+
+		  <ContentView Padding="0, 10, 0, 10" IsVisible="{Binding StartCommandVisible}" HorizontalOptions="CenterAndExpand" WidthRequest="128">
+		    <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="48" FontAttributes="Bold" TextColor="#727272"/>
+		  </ContentView>
+
+		  <ContentView Padding="0, 10, 0, 10" IsVisible="{Binding PauseCommandVisible}" HorizontalOptions="CenterAndExpand">
+		    <Label Text="{Binding SecondsLeft}" YAlign="Center" XAlign="Center" FontSize="48" FontAttributes="Bold" TextColor="#727272"/>
+		  </ContentView>
+
+ 		  <Grid RowSpacing="0" HorizontalOptions="Start">
+			<Grid.RowDefinitions>
+			  <RowDefinition Height="*" />  
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+			  <ColumnDefinition Width="Auto" />
+			  <ColumnDefinition Width="150" />
+			</Grid.ColumnDefinitions>
+
+			<Label Text="{i18n:Translate RestTimerAutoStartTitle}" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
+			<Switch IsToggled="{Binding AutoStart}" Grid.Row="0" Grid.Column="1"/>
+
+			<Label Text="{i18n:Translate RestTimerPlaySoundsTitle}" Grid.Row="1" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
+			<Switch IsToggled="{Binding PlaySounds}" Grid.Row="1" Grid.Column="1"/>
+		  </Grid>
+
+		  <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding StartCommandVisible}">
+			<controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White"/>
+		  </ContentView>
+		  <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding PauseCommandVisible}">
+			<controls:BlueButton Text="{i18n:Translate RestTimerPause}" Command="{Binding PauseCommand}" TextColor="White"/>
+		  </ContentView>
+		  <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding ResetCommandVisible}">
+			<controls:BlueButton Text="{i18n:Translate RestTimerReset}" Command="{Binding ResetCommand}" TextColor="White"/>
+		  </ContentView>
+
+  		</StackLayout>
+  	</ScrollView>
+  </ContentPage.Content>
+</ContentPage>

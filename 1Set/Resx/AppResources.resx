@@ -180,18 +180,6 @@
   <data name="WorkoutSaved" xml:space="preserve">
     <value>Workout saved</value>
   </data>
-  <data name="MinuteRestTimerDescription" xml:space="preserve">
-    <value>min</value>
-  </data>
-  <data name="MinutesRestTimerDescription" xml:space="preserve">
-    <value>mins</value>
-  </data>
-  <data name="SecondsRestTimerDescription" xml:space="preserve">
-    <value>secs</value>
-  </data>
-  <data name="ZeroSecsRestTimerDescription" xml:space="preserve">
-    <value>Hide rest timer</value>
-  </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -264,7 +252,7 @@
   <data name="SettingsExerciseGoalHint" xml:space="preserve">
     <value>Reps to do more in every workout</value>
   </data>
-  <data name="SettingsRestTimerTitle" xml:space="preserve">
+  <data name="RestTimerTitle" xml:space="preserve">
     <value>Rest Timer</value>
   </data>
   <data name="UnitSystemMetric" xml:space="preserve">
@@ -423,5 +411,24 @@
 
   <data name="NotesLabel" xml:space="preserve">
     <value>Notes</value>
+  </data>
+
+  <data name="RestTimerStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+
+  <data name="RestTimerPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+
+  <data name="RestTimerReset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+
+  <data name="RestTimerAutoStartTitle" xml:space="preserve">
+    <value>Auto Start</value>
+  </data>
+  <data name="RestTimerPlaySoundsTitle" xml:space="preserve">
+    <value>Sound</value>
   </data>
 </root>

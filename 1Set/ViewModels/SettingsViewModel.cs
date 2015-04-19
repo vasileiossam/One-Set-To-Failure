@@ -125,26 +125,6 @@ namespace Set.ViewModels
 				}
 			});
 
-			index = 0;
-			options = new String[App.Database.RestTimers.Count];
-			foreach(var item in App.Database.RestTimers)
-			{
-				options[index++] = item.Description;
-			}
-			rulesGroup.Add (new ListPreference ()
-			{ 
-				Title = AppResources.SettingsRestTimerTitle, 
-				Hint = "",
-				Value = App.Settings.RestTimer.Description,
-				Options = options,
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-					App.Settings.RestTimerId = App.Database.RestTimers.FirstOrDefault (x => x.Description == (string) preference.Value).RestTimerId;
-					App.SaveSettings();
-				}
-			});
 			#endregion
 
 			#region data group

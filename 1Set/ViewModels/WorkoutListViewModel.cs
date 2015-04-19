@@ -106,6 +106,15 @@ namespace Set.ViewModels
 			}
 		}
 
+		private ICommand _restTimerCommand;
+		public ICommand RestTimerCommand
+		{
+			get
+			{
+				return _restTimerCommand;
+			}
+		}
+
 		protected DateTime _currentDate;
         public DateTime CurrentDate
         {
@@ -147,6 +156,7 @@ namespace Set.ViewModels
 
 			_chevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
 			_calendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
+			_restTimerCommand = new Command (async() => { await OnRestTimerCommand(); });
 		}
 
 		public async Task Load(DateTime date)
@@ -192,6 +202,17 @@ namespace Set.ViewModels
 
 			await Navigation.PushAsync(page); 	
 		}
+
+		private async Task OnRestTimerCommand()
+		{
+			var viewModel = new RestTimerViewModel() {Navigation = Page.Navigation};
+			await viewModel.Load ();
+
+			var page = new RestTimerPage () {ViewModel = viewModel};
+
+			await Navigation.PushAsync(page); 	
+		}
+
     }
 }
 

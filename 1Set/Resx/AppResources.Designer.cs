@@ -242,24 +242,6 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to min.
-        /// </summary>
-        internal static string MinuteRestTimerDescription {
-            get {
-                return ResourceManager.GetString("MinuteRestTimerDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to mins.
-        /// </summary>
-        internal static string MinutesRestTimerDescription {
-            get {
-                return ResourceManager.GetString("MinutesRestTimerDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string No {
@@ -449,11 +431,56 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to secs.
+        ///   Looks up a localized string similar to Auto Start.
         /// </summary>
-        internal static string SecondsRestTimerDescription {
+        internal static string RestTimerAutoStartTitle {
             get {
-                return ResourceManager.GetString("SecondsRestTimerDescription", resourceCulture);
+                return ResourceManager.GetString("RestTimerAutoStartTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        internal static string RestTimerPause {
+            get {
+                return ResourceManager.GetString("RestTimerPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound.
+        /// </summary>
+        internal static string RestTimerPlaySoundsTitle {
+            get {
+                return ResourceManager.GetString("RestTimerPlaySoundsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string RestTimerReset {
+            get {
+                return ResourceManager.GetString("RestTimerReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string RestTimerStart {
+            get {
+                return ResourceManager.GetString("RestTimerStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rest Timer.
+        /// </summary>
+        internal static string RestTimerTitle {
+            get {
+                return ResourceManager.GetString("RestTimerTitle", resourceCulture);
             }
         }
         
@@ -652,15 +679,6 @@ namespace Set.Resx {
         internal static string SettingsRestoreToastTitleOnSuccess {
             get {
                 return ResourceManager.GetString("SettingsRestoreToastTitleOnSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rest Timer.
-        /// </summary>
-        internal static string SettingsRestTimerTitle {
-            get {
-                return ResourceManager.GetString("SettingsRestTimerTitle", resourceCulture);
             }
         }
         
@@ -913,15 +931,6 @@ namespace Set.Resx {
         internal static string Yesterday {
             get {
                 return ResourceManager.GetString("Yesterday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hide rest timer.
-        /// </summary>
-        internal static string ZeroSecsRestTimerDescription {
-            get {
-                return ResourceManager.GetString("ZeroSecsRestTimerDescription", resourceCulture);
             }
         }
     }
