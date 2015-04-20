@@ -11,10 +11,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+namespace Set
+{
+	public enum RestTimerStates 
+	{
+		Paused,
+		Running,
+		Editing
+	};
+}
+
 namespace Set.ViewModels
 {
 	public class RestTimerViewModel : BaseViewModel
 	{
+		protected RestTimerStates _state;
+		public RestTimerStates State
+		{
+			get
+			{
+				return _state;
+			}
+			set
+			{
+				if (_state != value)
+				{
+					_state = value;
+					OnPropertyChanged ("State");
+				}
+			}
+		}
+
 		protected int _totalSeconds;
 		public int TotalSeconds
 		{
@@ -27,6 +54,7 @@ namespace Set.ViewModels
 				if (_totalSeconds != value)
 				{
 					_totalSeconds = value;
+					Save ();
 					OnPropertyChanged ("TotalSeconds");
 				}
 			}
@@ -49,8 +77,8 @@ namespace Set.ViewModels
 			}
 		}
 
-		protected bool _playSounds;
-		public bool PlaySounds
+		protected bool? _playSounds;
+		public bool? PlaySounds
 		{
 			get
 			{
@@ -62,6 +90,33 @@ namespace Set.ViewModels
 				{
 					_playSounds = value;
 					OnPropertyChanged("PlaySounds");
+
+					if (_playSounds == true)
+					{
+						_playSoundsImage = "sound";
+					}
+					else
+					{
+						_playSoundsImage = "nosound";
+					}
+					OnPropertyChanged("PlaySoundsImage");
+				}
+			}
+		}
+
+		protected string _playSoundsImage;
+		public string PlaySoundsImage
+		{
+			get
+			{
+				return _playSoundsImage;
+			}
+			set
+			{
+				if (_playSoundsImage != value)
+				{
+					_playSoundsImage = value;
+					OnPropertyChanged("PlaySoundsImage");
 				}
 			}
 		}
@@ -78,32 +133,13 @@ namespace Set.ViewModels
 				if (_autoStart != value)
 				{
 					_autoStart = value;
+					Save ();
 					OnPropertyChanged("AutoStart");
 				}
 			}
 		}
 
-		protected bool _isActive;
-		public bool IsActive
-		{
-			get
-			{
-				return _isActive;
-			}
-			set
-			{
-				if (_isActive != value)
-				{
-					_isActive = value;
-
-					StartCommandVisible = !_isActive;
-					PauseCommandVisible = _isActive;
-					ResetCommandVisible = _isActive;
-
-					OnPropertyChanged("IsActive");
-				}
-			}
-		}
+		protected bool _canSave = false;
 
 		#region commands
 		protected ICommand _startCommand;
@@ -133,54 +169,21 @@ namespace Set.ViewModels
 			}
 		}
 
-		protected bool _startCommandVisible;
-		public bool StartCommandVisible
+		protected ICommand _playSoundsCommand;
+		public ICommand PlaySoundsCommand
 		{
 			get
 			{
-				return _startCommandVisible;
-			}
-			set
-			{
-				if (_startCommandVisible != value)
-				{
-					_startCommandVisible = value;
-					OnPropertyChanged("StartCommandVisible");
-				}
+				return _playSoundsCommand;
 			}
 		}
 
-		protected bool _pauseCommandVisible;
-		public bool PauseCommandVisible
+		protected ICommand _editingModeCommand;
+		public ICommand EditingModeCommand
 		{
 			get
 			{
-				return _pauseCommandVisible;
-			}
-			set
-			{
-				if (_pauseCommandVisible != value)
-				{
-					_pauseCommandVisible = value;
-					OnPropertyChanged("PauseCommandVisible");
-				}
-			}
-		}
-
-		protected bool _resetCommandVisible;
-		public bool ResetCommandVisible
-		{
-			get
-			{
-				return _resetCommandVisible;
-			}
-			set
-			{
-				if (_resetCommandVisible != value)
-				{
-					_resetCommandVisible = value;
-					OnPropertyChanged("ResetCommandVisible");
-				}
+				return _editingModeCommand;
 			}
 		}
 
@@ -194,43 +197,45 @@ namespace Set.ViewModels
 			_startCommand = new Command (async() => { await OnStartCommand(); });
 			_pauseCommand = new Command (async() => { await OnPauseCommand(); });
 			_resetCommand = new Command (async() => { await OnResetCommand(); });
+
+			_playSoundsCommand  = new Command (() => { 
+				PlaySounds = !PlaySounds; 
+				Save();
+			});
+
+			_editingModeCommand  = new Command (() => { 
+				State = RestTimerStates.Editing;
+			});
 		}
 
 		public async Task Load()
 		{
+			_canSave = false;
 			AutoStart = App.Settings.RestTimerAutoStart;
 			PlaySounds = App.Settings.RestTimerPlaySounds;
 			TotalSeconds = App.Settings.RestTimerTotalSeconds;
 
 			await OnResetCommand ();
 
+			_canSave = true;
+
 			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);
 		}
 
-		private bool Validate ()
+		protected void Save()
 		{
-			return true;
-		}
-
-		protected override async Task OnSave () 
-		{
-			if (Validate ())
-			{
-				App.Settings.RestTimerAutoStart = AutoStart;
-				App.Settings.RestTimerPlaySounds = PlaySounds;
-				App.Settings.RestTimerTotalSeconds = TotalSeconds;
-				App.SaveSettings();
-
-				IsActive = false;
-
-				await Navigation.PopAsync();
-			}
+			if (!_canSave)
+				return;
+			App.Settings.RestTimerAutoStart = AutoStart;
+			App.Settings.RestTimerPlaySounds = PlaySounds ?? false;
+			App.Settings.RestTimerTotalSeconds = TotalSeconds;
+			App.SaveSettings ();
 		}
 
 		protected bool OnTimer()
 		{
-			if (!IsActive)
+			if (State != RestTimerStates.Running)
 				return false;
 			
 			if ((SecondsLeft - 1) < 0)
@@ -240,12 +245,17 @@ namespace Set.ViewModels
 			}
 
 			SecondsLeft = SecondsLeft - 1;
-			return IsActive;	
+			return State == RestTimerStates.Running;	
 		}
 
 		private async Task OnStartCommand()
-		{
-			IsActive = true;
+		{	
+			if (State == RestTimerStates.Editing)
+			{
+				SecondsLeft = TotalSeconds;
+			}
+
+			State = RestTimerStates.Running;
 			Device.StartTimer(TimeSpan.FromSeconds(1), () => {	return OnTimer(); });
 
 			// following statement will prevent a compiler warning about async method lacking await
@@ -254,7 +264,7 @@ namespace Set.ViewModels
 
 		private async Task OnPauseCommand()
 		{
-			IsActive = false;
+			State = RestTimerStates.Paused;
 
 			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);
@@ -262,12 +272,8 @@ namespace Set.ViewModels
 
 		private async Task OnResetCommand()
 		{
-			IsActive = false;
+			State = RestTimerStates.Paused;
 			SecondsLeft = TotalSeconds;
-
-			StartCommandVisible = !_isActive;
-			PauseCommandVisible = _isActive;
-			ResetCommandVisible = _isActive;
 			 
 			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);

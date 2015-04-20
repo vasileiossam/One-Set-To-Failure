@@ -160,16 +160,22 @@ namespace Set.Droid
 			public const int info = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int splash = 2130837533;
+			public const int nosound = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int SplashScreen = 2130837534;
+			public const int sound = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int success = 2130837535;
+			public const int splash = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int warning = 2130837536;
+			public const int SplashScreen = 2130837536;
+			
+			// aapt resource value: 0x7f020021
+			public const int success = 2130837537;
+			
+			// aapt resource value: 0x7f020022
+			public const int warning = 2130837538;
 			
 			static Drawable()
 			{
