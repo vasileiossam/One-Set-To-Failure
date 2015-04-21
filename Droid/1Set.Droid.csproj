@@ -104,6 +104,7 @@
     <Compile Include="BackupRestore.cs" />
     <Compile Include="Renders\GestureFrameRenderer.cs" />
     <Compile Include="Renders\CustomGestureListener.cs" />
+    <Compile Include="SoundService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -203,6 +204,7 @@
     <AndroidResource Include="Resources\drawable\ic_action_time.png" />
     <AndroidResource Include="Resources\drawable\nosound.png" />
     <AndroidResource Include="Resources\drawable\sound.png" />
+    <AndroidResource Include="Resources\raw\Bleep.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.1.6349\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.1.6349\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

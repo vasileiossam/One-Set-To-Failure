@@ -206,8 +206,6 @@ namespace Set.ViewModels
 		private async Task OnRestTimerCommand()
 		{
 			var viewModel = new RestTimerViewModel() {Navigation = Page.Navigation};
-			await viewModel.Load ();
-
 			var page = new RestTimerPage () {ViewModel = viewModel};
 
 			await Navigation.PushAsync(page); 	

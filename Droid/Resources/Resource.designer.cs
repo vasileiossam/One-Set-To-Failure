@@ -229,7 +229,10 @@ namespace Set.Droid
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int OneSet = 2130968576;
+			public const int Bleep = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int OneSet = 2130968577;
 			
 			static Raw()
 			{

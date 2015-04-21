@@ -25,6 +25,9 @@ namespace Set.ViewModels
 {
 	public class RestTimerViewModel : BaseViewModel
 	{
+		public ProgressBar ProgressBar { get; set; }
+		protected double _progressStep;
+
 		protected RestTimerStates _state;
 		public RestTimerStates State
 		{
@@ -241,10 +244,28 @@ namespace Set.ViewModels
 			if ((SecondsLeft - 1) < 0)
 			{
 				OnResetCommand ();
+
+				if (PlaySounds == true)
+				{
+					var soundService = DependencyService.Get<ISoundService> ();
+					soundService.Play ("Bleep");
+				}
+
 				return false;
 			}
 
 			SecondsLeft = SecondsLeft - 1;
+
+			var progress = ProgressBar.Progress + _progressStep;
+			if (progress >= 1)
+			{
+				ProgressBar.Progress = 1;
+			}
+			else
+			{
+				ProgressBar.Progress = progress;
+			}
+
 			return State == RestTimerStates.Running;	
 		}
 
@@ -253,6 +274,8 @@ namespace Set.ViewModels
 			if (State == RestTimerStates.Editing)
 			{
 				SecondsLeft = TotalSeconds;
+				ProgressBar.Progress = 0;
+				_progressStep = GetProgressStep ();
 			}
 
 			State = RestTimerStates.Running;
@@ -274,9 +297,22 @@ namespace Set.ViewModels
 		{
 			State = RestTimerStates.Paused;
 			SecondsLeft = TotalSeconds;
-			 
+			ProgressBar.Progress = 0;
+			_progressStep = GetProgressStep ();
+
 			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);
+		}
+
+		protected double GetProgressStep()
+		{
+			if (TotalSeconds == 0)
+			{
+				return 0;
+			} else
+			{
+				return 1.0 / TotalSeconds;
+			}			
 		}
 	}
 }

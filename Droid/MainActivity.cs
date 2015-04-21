@@ -13,9 +13,12 @@ namespace Set.Droid
 	[Activity (Label = "One Set To Fatigue", Icon = "@drawable/icon",  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
+		public static String PACKAGE_NAME;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			PACKAGE_NAME = ApplicationContext.PackageName;
 
 			var currentDomain = AppDomain.CurrentDomain;
 			currentDomain.UnhandledException += HandleUnhandledException;

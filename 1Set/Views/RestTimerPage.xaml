@@ -28,15 +28,19 @@
 			    <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="72" FontAttributes="Bold" TextColor="#727272"/>
 			  </ContentView>
 
-			  <ContentView Padding="0, 10, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
+			  <ContentView Padding="0, 10, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
 				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="#727272"/>
 			  </ContentView>
-			  <ContentView Padding="0, 10, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
+			  <ContentView Padding="0, 10, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
 				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="#727272"/>
 			  </ContentView>
 
 			  <Button BackgroundColor="Transparent" Image="{Binding PlaySoundsImage}" Command="{Binding PlaySoundsCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
 		  </StackLayout>
+
+		  <ContentView Padding="0, 0, 0, 20" HorizontalOptions="Fill">
+		  	<ProgressBar x:Name = "ProgressBar"/>
+   		  </ContentView>
 
  		  <Grid RowSpacing="0">
 			<Grid.RowDefinitions>
