@@ -18,7 +18,7 @@ namespace Set.Droid
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-			PACKAGE_NAME = ApplicationContext.PackageName;
+			PACKAGE_NAME = ApplicationContext.ApplicationInfo.PackageName;
 
 			var currentDomain = AppDomain.CurrentDomain;
 			currentDomain.UnhandledException += HandleUnhandledException;

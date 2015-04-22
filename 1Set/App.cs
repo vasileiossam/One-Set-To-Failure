@@ -55,7 +55,7 @@ namespace Set
 		public static async void ShowToast(ToastNotificationType type, string header, string message)
 		{
 			var notificator = DependencyService.Get<IToastNotificator>();
-			bool tapped = await notificator.Notify(type, header, message, TimeSpan.FromSeconds(2));
+			bool tapped = await notificator.Notify(type, header, message, TimeSpan.FromSeconds(1.5));
 		}
 
 		public static void SaveSettings()

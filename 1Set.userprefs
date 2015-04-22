@@ -1,42 +1,11 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Droid\SoundService.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\ViewModels\WorkoutViewModel.cs">
     <Files>
-      <File FileName="1Set\ViewModels\RestTimerViewModel.cs" Line="251" Column="31" />
-      <File FileName="1Set\Views\RestTimerPage.xaml" Line="42" Column="41" />
-      <File FileName="1Set\Resx\AppResources.resx" Line="1" Column="1" />
-      <File FileName="1Set\Concrete\Database.cs" Line="1" Column="1" />
-      <File FileName="1Set\Converters\IntToStringConverter.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="209" Column="30" />
-      <File FileName="1Set\Views\RestTimerPage.cs" Line="25" Column="19" />
-      <File FileName="Droid\Properties\AndroidManifest.xml" Line="8" Column="12" />
-      <File FileName="Droid\SoundService.cs" Line="26" Column="1" />
+      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="135" Column="13" />
+      <File FileName="1Set\ViewModels\RestTimerViewModel.cs" Line="272" Column="9" />
+      <File FileName="1Set\App.cs" Line="58" Column="90" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="1Set" expanded="True">
-            <Node name="Abstract" expanded="True" />
-            <Node name="Converters" expanded="True" />
-            <Node name="Models" expanded="True" />
-            <Node name="Resx" expanded="True" />
-            <Node name="ViewModels" expanded="True" />
-            <Node name="Views" expanded="True">
-              <Node name="RestTimerPage.xaml" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="1Set.Droid" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="Assets" expanded="True" />
-            <Node name="Properties" expanded="True" />
-            <Node name="Resources" expanded="True">
-              <Node name="raw" expanded="True" />
-            </Node>
-            <Node name="SoundService.cs" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -45,7 +14,6 @@
       <Breakpoint file="c:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="44" column="1" />
       <Breakpoint file="C:\dev\1Set\1Set\ViewModels\ExerciseListViewModel.cs" line="83" column="1" />
       <Breakpoint file="C:\dev\1Set\1Set\Models\Workout.cs" line="69" column="1" />
-      <Breakpoint file="C:\dev\1Set\Droid\SoundService.cs" line="26" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

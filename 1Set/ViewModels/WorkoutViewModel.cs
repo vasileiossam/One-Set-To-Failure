@@ -131,8 +131,18 @@ namespace Set.ViewModels
 				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
-			 
-				await Navigation.PopAsync();
+
+				if (App.Settings.RestTimerAutoStart == true)
+				{
+					Navigation.PopAsync (false);
+					var viewModel = new RestTimerViewModel () { Navigation = Navigation };
+					var page = new RestTimerPage () { ViewModel = viewModel };
+					await Navigation.PushAsync (page); 	
+					viewModel.OnStartCommand ();
+				} else
+				{
+					await Navigation.PopAsync();					
+				}
 			}
 		}
 

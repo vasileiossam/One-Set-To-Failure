@@ -20,9 +20,21 @@ namespace Set.Droid
 
 		public void Play(string soundFileName)
 		{
-			//var uri = Android.Net.Uri.Parse("android.resource://" + MainActivity.PACKAGE_NAME + "/raw/" + soundFileName);
-			var uri = Android.Net.Uri.Parse("android.resource://" + MainActivity.PACKAGE_NAME + "/" + soundFileName + ".mp3");
-			var player = MediaPlayer.Create (Android.App.Application.Context, uri);
+			// nothing worked...
+			// var uri = Android.Net.Uri.Parse("android.resource://" + MainActivity.PACKAGE_NAME + "/raw/" + soundFileName);
+			//var resId = Android.Content.Res.Resources.System.GetIdentifier (soundFileName, "raw", MainActivity.PACKAGE_NAME);
+
+			int resId = 0;
+			if (soundFileName == "Bleep") 
+			{
+				resId = Resource.Raw.Bleep;
+			}
+			else 
+			{
+				throw new NotImplementedException();
+			}
+
+			var player = MediaPlayer.Create (Android.App.Application.Context, resId);
 			if (player != null)
 			{
 				player.Start ();

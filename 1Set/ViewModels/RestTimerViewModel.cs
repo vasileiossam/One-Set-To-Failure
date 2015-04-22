@@ -269,7 +269,7 @@ namespace Set.ViewModels
 			return State == RestTimerStates.Running;	
 		}
 
-		private async Task OnStartCommand()
+		public async Task OnStartCommand()
 		{	
 			if (State == RestTimerStates.Editing)
 			{
@@ -313,6 +313,16 @@ namespace Set.ViewModels
 			{
 				return 1.0 / TotalSeconds;
 			}			
+		}
+
+		public void StopTimers()
+		{
+			State = RestTimerStates.Paused;
+		}
+
+		public void Start()
+		{
+			
 		}
 	}
 }

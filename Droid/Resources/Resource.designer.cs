@@ -38,6 +38,8 @@ namespace Set.Droid
 			global::Toasts.Forms.Plugin.Droid.Resource.Layout.crouton = global::Set.Droid.Resource.Layout.crouton;
 			global::Toasts.Forms.Plugin.Droid.Resource.String.ApplicationName = global::Set.Droid.Resource.String.ApplicationName;
 			global::Toasts.Forms.Plugin.Droid.Resource.String.Hello = global::Set.Droid.Resource.String.Hello;
+			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::Set.Droid.Resource.String.ApplicationName;
+			global::Xamarin.Forms.Platform.Resource.String.Hello = global::Set.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute

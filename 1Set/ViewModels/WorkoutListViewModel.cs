@@ -207,7 +207,6 @@ namespace Set.ViewModels
 		{
 			var viewModel = new RestTimerViewModel() {Navigation = Page.Navigation};
 			var page = new RestTimerPage () {ViewModel = viewModel};
-
 			await Navigation.PushAsync(page); 	
 		}
 
