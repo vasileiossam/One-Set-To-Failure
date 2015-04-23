@@ -42,19 +42,24 @@ namespace Set
 			await ViewModel.Load (App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
 
-			MainFrame.SwipeLeft += (s, e) =>
-			{
-				ViewModel.ChevronTapCommand.Execute("Left");
-			};
-
-			MainFrame.SwipeRight += (s, e) =>
-			{
-				ViewModel.ChevronTapCommand.Execute("Right");
-			};
+			MainFrame.SwipeLeft += OnLeftChevronTapCommand;
+			MainFrame.SwipeRight += OnRightChevronTapCommand;
         }
+
+		private async void OnLeftChevronTapCommand(object sender, EventArgs args)
+		{
+			ViewModel.ChevronTapCommand.Execute("Left");
+		}
+
+		private async void OnRightChevronTapCommand(object sender, EventArgs args)
+		{
+			ViewModel.ChevronTapCommand.Execute("Right");
+		}
 
         protected override void OnDisappearing()
         {
+			MainFrame.SwipeLeft -= OnLeftChevronTapCommand;
+			MainFrame.SwipeRight -= OnRightChevronTapCommand;			
             base.OnDisappearing();
         }
 
