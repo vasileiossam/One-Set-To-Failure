@@ -47,7 +47,7 @@
 	                    	
 	                    	<StackLayout IsVisible="{Binding TrainingDaysVisible}" VerticalOptions="FillAndExpand" Orientation="Horizontal">
 	                    		<Label Text="{i18n:Translate TrainingDaysLabel}" TextColor="#212121" FontSize="Small" YAlign="Center"/>
-	                    		<Label Text="{Binding TrainingDays}" TextColor="#212121" FontSize="Small" YAlign="Center" />
+	                    		<Label Text="{Binding TrainingDays}" TextColor="#212121" FontSize="Small" YAlign="Center"/>
 	                    	</StackLayout>
 
 	                    	<Label IsVisible="{Binding NotesVisible}" Text="{Binding Notes}" FontSize="Small" TextColor="#727272" YAlign="Center"/>

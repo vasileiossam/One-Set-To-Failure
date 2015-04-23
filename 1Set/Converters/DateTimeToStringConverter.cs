@@ -12,7 +12,8 @@ namespace Set
                               object parameter, CultureInfo culture)
         {
             DateTime date = (DateTime)value;
-			var fullDay = date.ToString ("dddd") + ", " + date.ToString ("D");
+			//var fullDay = date.ToString ("ddd") + ", " + date.ToString ("D");
+			var fullDay = date.ToString ("dddd d MMMM");
 
             // return today
             if (date.Date == DateTime.Today)

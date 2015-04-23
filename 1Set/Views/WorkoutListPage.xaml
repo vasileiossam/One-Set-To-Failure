@@ -29,31 +29,33 @@
 	</ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <controls:GestureFrame x:Name="MainFrame">
+    <controls:GestureFrame x:Name="MainFrame" Padding="10, 10, 10, 10" >
 
-    <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
+    <StackLayout Orientation="Vertical">
       
-      <StackLayout Orientation="Horizontal">
-        <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" />
+      <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
+        <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
         <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="#212121"/>
-		<Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"/>
+		<Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"  HorizontalOptions="End"/>
       </StackLayout>
 
       <BoxView HeightRequest="2" Color="#B6B6B6"/>
 
-     <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 5, 10, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+     <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 0, 0, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Spacing="0">
       	<Button BackgroundColor="Transparent" Image="drawable-hdpi/ic_fa_comment_o.png"  Command="{Binding CalendarNotesCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
-      	<Button BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="#727272" />
+      	<Button x:Name="CalendarNotesButton" BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="#727272" />
 	  </StackLayout>
 
 	  <!-- No data -->
-      <StackLayout IsVisible="{Binding NoWorkoutDataVisible}" Orientation="Vertical" Padding="10, 30, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Image Source="comfortable.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
+      <StackLayout x:Name="NoDataLayout" IsVisible="{Binding NoWorkoutDataVisible}" Orientation="Vertical" Padding="10, 20, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+
+       	<Image x:Name="NoDataImage" Source="comfortable.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
 
 		<ContentView Padding="0, 0, 0, 0">
-        	<Label Text="{i18n:Translate NoWorkoutDataTitle}" 
-        		FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+    		<Label Text="{i18n:Translate NoWorkoutDataTitle}" 
+    			FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
 		</ContentView>
+	
 		<ContentView Padding="0, 10, 0, 0">
         	<Label Text="{i18n:Translate NoWorkoutDataLine1}" 
         		FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
@@ -70,7 +72,7 @@
             <ViewCell>
 
       		<ViewCell.View>
-				<Grid Padding="10,5,0,10" VerticalOptions="FillAndExpand">
+				<Grid Padding="10,0,0,10" VerticalOptions="FillAndExpand">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
