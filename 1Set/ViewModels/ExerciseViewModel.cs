@@ -23,7 +23,7 @@ namespace Set.ViewModels
 		public int ExerciseId { get; set; }
 		public string Name { get; set; }
 		public string Notes { get; set; }
-		public float PlateWeight {get; set; }
+		public double PlateWeight {get; set; }
 		#endregion
 
 		public bool NotesVisible { get { return !string.IsNullOrEmpty (Notes); }}
@@ -97,6 +97,15 @@ namespace Set.ViewModels
 		public async Task Load()
 		{
 			await LoadRoutine ();
+
+			if (App.Settings.IsMetric)
+			{
+				PlateWeight = Math.Round (PlateWeight, 2);
+			} else
+			{
+				// imperial: database is always metric but we have to convert to imperial
+				PlateWeight = Math.Round (PlateWeight * App.ImperialMetricFactor, 2);
+			}
 		}
 
 		private async Task LoadRoutine()
@@ -198,6 +207,13 @@ namespace Set.ViewModels
 			if (Validate ())
 			{
 				var exercise = Mapper.Map<Exercise>(this);
+
+				// imperial to metric - always save in metric
+				if (!App.Settings.IsMetric)
+				{
+					exercise.PlateWeight = PlateWeight / App.ImperialMetricFactor;
+				}
+
 				ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);
 				await SaveRoutine ();
 

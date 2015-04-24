@@ -146,6 +146,23 @@ namespace Set.ViewModels
 				}
 			});
 
+			options = new String[1];
+			options[0] = "Life Fitness equipment";
+			dataGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsLoadSampleDataTitle, 
+				Hint = AppResources.SettingsLoadSampleDataHint,
+				Options = options,
+				Clicked = OnClicked,
+				IsValueVisible = false,
+				OnSave = async(sender, args) =>
+				{
+					var preference = sender as Preference;
+					await App.Database.LoadLifeFitnessData ();
+					App.ShowToast (ToastNotificationType.Info, preference.Title, AppResources.LoadSampleDataCompleted);
+				}
+			});
+
 			var backupPreference = new AlertPreference ()
 			{ 
 				Title = AppResources.SettingsBackupLocallyTitle, 

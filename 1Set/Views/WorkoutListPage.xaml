@@ -92,15 +92,15 @@
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 
-	                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
-		                   	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	                    	<controls:RoundedBoxView WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
+		                   	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
 	                    </Grid>
 
 	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 	                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
-		                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+		                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
 	                    </Grid>
 					</StackLayout>
 				</Grid> 

@@ -15,6 +15,7 @@ namespace Set
 {
 	public class App : Application
 	{
+		public const double ImperialMetricFactor = 2.20462;
 		public static Database Database = new Database ();
 		public static DateTime CurrentDate {get; set;}
 		public static Settings Settings { get; set; }
@@ -80,6 +81,5 @@ namespace Set
 				App.Current.MainPage = mainNav;
 			}
 		}
-
 	}
 }

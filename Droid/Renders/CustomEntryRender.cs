@@ -37,7 +37,14 @@ namespace Set.Droid.Renders
 						view.Gravity = GravityFlags.Center;
 					}
 
-					view.TextSize = (float) entry.FontSize;
+
+
+					double fontSize = 0;
+					if (!double.TryParse (entry.FontSize, out fontSize))
+					{
+						fontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Entry));						
+					}  
+					view.TextSize = (float) fontSize;
 
 				}
 			}

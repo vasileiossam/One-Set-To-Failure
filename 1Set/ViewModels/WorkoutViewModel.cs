@@ -89,7 +89,15 @@ namespace Set.ViewModels
 		{
 			await Workout.Load ();
 			Reps = Workout.Reps;
-			Weight = Workout.Weight;
+
+			if (App.Settings.IsMetric)
+			{
+				Weight = Workout.Weight;
+			} else
+			{
+				// metric to imperial
+				Weight = Math.Round(Workout.Weight * 2.20462, 2);
+			}
 		}
 
 		private bool Validate ()
@@ -124,7 +132,15 @@ namespace Set.ViewModels
 		protected override async Task OnSave () 
 		{
 			Workout.Reps = Reps;
-			Workout.Weight = Weight;
+
+			if (App.Settings.IsMetric)
+			{
+				Workout.Weight = Weight;
+			} else
+			{
+				// imperial to metric - always save in metric
+				Workout.Weight = Weight / 2.20462;
+			}
 
 			if (Validate ())
 			{
@@ -203,7 +219,7 @@ namespace Set.ViewModels
 			await Task.FromResult(0);
 		}
 
-		private float GetStep()
+		private double GetStep()
 		{
 			var step = Workout.Exercise.PlateWeight;
 			if (step <= 0)

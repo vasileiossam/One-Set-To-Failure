@@ -28,9 +28,7 @@
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
 	      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
-	      	<Label x:Name="PlateWeightStepperLabel" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" TextColor="#212121"/>	
-		  	<Stepper Minimum="0" Maximum="50" Increment="1" Value="{Binding PlateWeight}" 
-			  	ValueChanged="OnPlateWeightStepperValueChanged" x:Name="PlateWeightStepper" VerticalOptions="Center"/>
+	 		<controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="#212121" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center"/>
 	      </StackLayout>
 
 		  <ContentView Padding="0, 10, 0, 10">
@@ -72,10 +70,6 @@
 		  <ContentView Padding="0, 10, 0, 10">
 	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="#212121"/>
 		  </ContentView>
-
-<!--		  <ContentView Padding="0, 0, 0, 10">
-		  	<controls:BlueButton Text="Save" TextColor="White" Clicked="OnSaveButtonClicked" x:Name="SaveButton"/>
-		  </ContentView>-->
 
 	    </StackLayout>
 	</ScrollView>

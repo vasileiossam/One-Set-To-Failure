@@ -242,6 +242,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sample data have been loaded.
+        /// </summary>
+        internal static string LoadSampleDataCompleted {
+            get {
+                return ResourceManager.GetString("LoadSampleDataCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string No {
@@ -598,6 +607,24 @@ namespace Set.Resx {
         internal static string SettingsLastBackupDate {
             get {
                 return ResourceManager.GetString("SettingsLastBackupDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load sample data to get you started.
+        /// </summary>
+        internal static string SettingsLoadSampleDataHint {
+            get {
+                return ResourceManager.GetString("SettingsLoadSampleDataHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Sample Data.
+        /// </summary>
+        internal static string SettingsLoadSampleDataTitle {
+            get {
+                return ResourceManager.GetString("SettingsLoadSampleDataTitle", resourceCulture);
             }
         }
         

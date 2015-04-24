@@ -30,7 +30,7 @@
     <ScrollView>
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="10, 10, 10, 10">
   	
-      	<Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#212121"/>
+      	<Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#212121"/>
   	  	<Label IsVisible="{Binding NotesVisible}" Text="{Binding Workout.Exercise.Notes}" FontSize="Small" TextColor="#727272"/>
 
 		<!--  
@@ -57,14 +57,14 @@
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 				            	
 		    	<controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
-		    	<Label Text="{Binding Workout.PreviousReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+		    	<Label Text="{Binding Workout.PreviousReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
 		    </Grid>
 		    <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 		    	
 		    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
-		       	<Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+		       	<Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
 		     </Grid>
 		   </Grid>
 
@@ -84,23 +84,23 @@
 				<ColumnDefinition Width="180" />
 			</Grid.ColumnDefinitions>
 
-     		<Label Grid.Row="0" Grid.Column="1" Text="{i18n:Translate TargetRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+	 		<Label Grid.Row="0" Grid.Column="1" Text="{i18n:Translate TargetRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
 				<Label Grid.Row="0" Grid.Column="2" Text="{Binding TargetWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
-	
+
 			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_bullseye" HorizontalOptions="Center" VerticalOptions="Center"/>
 	        <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 				            	
-       	<controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
-        	<Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	   	<controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
+	    	<Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
 	        </Grid>
- 	        <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+	        <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 	        	
 	        	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
-	           	<Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="32" FontAttributes="Bold" TextColor="#727272"/>
+	           	<Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
 	        </Grid>
 
 			<BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>    
@@ -125,15 +125,15 @@
 	 			Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
-	 			Text="{Binding Weight, Converter={StaticResource weightConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+	 			Text="{Binding Weight}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 		    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
-				<Button Image="ic_fa_caret_up.png" Command="{Binding RepsUpCommand}"/>
-				<Button Image="ic_fa_caret_down.png" Command="{Binding RepsDownCommand}"/>
+				<Button Image="ic_fa_minus" Command="{Binding RepsDownCommand}"/>
+				<Button Image="ic_fa_plus" Command="{Binding RepsUpCommand}"/>
 			</StackLayout>
 		    <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
-				<Button Image="ic_fa_caret_up.png" Command="{Binding WeighUpCommand}"/>
-				<Button Image="ic_fa_caret_down.png" Command="{Binding WeighDownCommand}"/>
+				<Button Image="ic_fa_minus" Command="{Binding WeighDownCommand}"/>
+				<Button Image="ic_fa_plus" Command="{Binding WeighUpCommand}"/>
 			</StackLayout>
 		</Grid> 
 

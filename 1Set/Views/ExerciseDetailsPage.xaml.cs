@@ -65,13 +65,6 @@ namespace Set
 		{
 			base.OnDisappearing();
 		}
-
-		protected void OnPlateWeightStepperValueChanged(object sender, ValueChangedEventArgs args)
-		{
-			PlateWeightStepperLabel.Text = args.NewValue.ToString ();
-		}
-
-
 	}
 }
 

@@ -282,6 +282,9 @@
   <data name="ClearWorkoutDataCompleted" xml:space="preserve">
     <value>Workout data have been cleared</value>
   </data>
+  <data name="LoadSampleDataCompleted" xml:space="preserve">
+    <value>Sample data have been loaded</value>
+  </data>
   <data name="ExercisePageDetails" xml:space="preserve">
     <value>Details</value>
   </data>
@@ -430,5 +433,12 @@
   </data>
   <data name="RestTimerPlaySoundsTitle" xml:space="preserve">
     <value>Sound</value>
+  </data>
+
+  <data name="SettingsLoadSampleDataTitle" xml:space="preserve">
+    <value>Load Sample Data</value>
+  </data>
+  <data name="SettingsLoadSampleDataHint" xml:space="preserve">
+    <value>Load sample data to get you started</value>
   </data>
 </root>

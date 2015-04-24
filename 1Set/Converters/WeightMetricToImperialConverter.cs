@@ -30,7 +30,7 @@ namespace Set
             // 1 Kg = 2.20462 lbs
             double kgs = (double)value;
             double lbs = kgs * 2.20462;
-            return lbs;
+			return Math.Round (lbs, 2);
         }
     
 

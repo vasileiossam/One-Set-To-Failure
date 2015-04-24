@@ -20,7 +20,7 @@ namespace Set.Models
 		public int ExerciseId { get; set; }
         public string Name { get; set; }
 	    public string Notes { get; set; }
-		public float PlateWeight {get; set; }
+		public double PlateWeight {get; set; }
         
         #region settings with global defaults
         

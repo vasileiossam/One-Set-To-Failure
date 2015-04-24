@@ -10,11 +10,11 @@ namespace Set.Controls
 			 
 		}
 
-		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create<CustomEntry, double> (p => p.FontSize, 24);
+		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create<CustomEntry, string>(p => p.FontSize, "24");
 
-		public double FontSize 
+		public string FontSize 
 		{
-			get { return (double)GetValue (FontSizeProperty); }
+			get { return (string)GetValue (FontSizeProperty); }
 			set { SetValue (FontSizeProperty, value); }
 		}
 

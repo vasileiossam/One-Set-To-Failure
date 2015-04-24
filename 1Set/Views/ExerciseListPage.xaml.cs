@@ -53,7 +53,7 @@ namespace Set
 
 		public void OnAddExerciseButtonClicked(object sender, EventArgs args)
 		{
-			var exercisePage = new ExercisePage
+			var exercisePage = new ExerciseDetailsPage
 			{
 				ViewModel = new ExerciseViewModel()
 				{
@@ -71,8 +71,10 @@ namespace Set
 
 			var viewModel = e.SelectedItem as ExerciseViewModel;
 			viewModel.Navigation = Navigation;
-			ViewModel.Title = AppResources.EditExerciseTitle; 
-			await viewModel.Load ();
+			viewModel.Title = AppResources.EditExerciseTitle; 
+
+			// its already loaded, no need to load again because it will duplicate the PlateWeight value
+			//await viewModel.Load ();
 
 			var page = new ExerciseDetailsPage //ExercisePage
 			{
