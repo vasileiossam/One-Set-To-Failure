@@ -18,6 +18,7 @@
       <local:DateTimeToStringConverter x:Key="dateConverter" />
       <local:WeightMetricToImperialConverter x:Key="weightConverter" />
       <local:IntToStringConverter x:Key="intToStringConverter" />
+	  <local:DoubleToStringConverter x:Key="doubleToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 
@@ -125,7 +126,7 @@
 	 			Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
-	 			Text="{Binding Weight}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+	 			Text="{Binding Weight, Converter={StaticResource doubleToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 		    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
 				<Button Image="ic_fa_minus" Command="{Binding RepsDownCommand}"/>

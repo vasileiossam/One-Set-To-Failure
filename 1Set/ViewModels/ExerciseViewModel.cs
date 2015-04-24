@@ -97,15 +97,7 @@ namespace Set.ViewModels
 		public async Task Load()
 		{
 			await LoadRoutine ();
-
-			if (App.Settings.IsMetric)
-			{
-				PlateWeight = Math.Round (PlateWeight, 2);
-			} else
-			{
-				// imperial: database is always metric but we have to convert to imperial
-				PlateWeight = Math.Round (PlateWeight * App.ImperialMetricFactor, 2);
-			}
+			PlateWeight = Units.GetWeight (PlateWeight);
 		}
 
 		private async Task LoadRoutine()
@@ -211,7 +203,7 @@ namespace Set.ViewModels
 				// imperial to metric - always save in metric
 				if (!App.Settings.IsMetric)
 				{
-					exercise.PlateWeight = PlateWeight / App.ImperialMetricFactor;
+					exercise.PlateWeight = PlateWeight / Units.ImperialMetricFactor;
 				}
 
 				ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);

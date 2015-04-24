@@ -22,7 +22,7 @@
   </ContentPage.Resources>
 
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Icon="ic_action_time" Order="Primary" Command="{Binding RestTimerCommand}" Priority="0"/>
+		<ToolbarItem Icon="ic_action_alarms" Order="Primary" Command="{Binding RestTimerCommand}" Priority="0"/>
   		<ToolbarItem Name="{i18n:Translate ExercisesTitle}" Order="Secondary" Clicked="OnExercisesButtonClicked" Priority="0" x:Name = "ExercisesButton"/>
   		<ToolbarItem Name="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Clicked="OnSettingsButtonClicked" Priority="1" x:Name = "SettingsButton"/>
   		<ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>

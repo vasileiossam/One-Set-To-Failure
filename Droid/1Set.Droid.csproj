@@ -218,6 +218,15 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_plus.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_minus.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_plus.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_trophy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6355\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6355\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

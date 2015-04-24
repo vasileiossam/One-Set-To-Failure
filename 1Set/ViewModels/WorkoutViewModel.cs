@@ -89,15 +89,7 @@ namespace Set.ViewModels
 		{
 			await Workout.Load ();
 			Reps = Workout.Reps;
-
-			if (App.Settings.IsMetric)
-			{
-				Weight = Workout.Weight;
-			} else
-			{
-				// metric to imperial
-				Weight = Math.Round(Workout.Weight * 2.20462, 2);
-			}
+			Weight = Units.GetWeight (Workout.Weight);
 		}
 
 		private bool Validate ()
@@ -139,7 +131,7 @@ namespace Set.ViewModels
 			} else
 			{
 				// imperial to metric - always save in metric
-				Workout.Weight = Weight / 2.20462;
+				Workout.Weight = Weight / Units.ImperialMetricFactor;
 			}
 
 			if (Validate ())
@@ -221,7 +213,7 @@ namespace Set.ViewModels
 
 		private double GetStep()
 		{
-			var step = Workout.Exercise.PlateWeight;
+			var step = Units.GetWeight(Workout.Exercise.PlateWeight);
 			if (step <= 0)
 				step = 1;
 			return step;
