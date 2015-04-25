@@ -136,8 +136,12 @@ namespace Set.ViewModels
 
 			if (Validate ())
 			{
-				await App.Database.WorkoutsRepository.SaveAsync(Workout);
+				// invalidate TotalTrophies
+				App.TotalTrophies = null;
 
+				Workout.Trophies = WorkoutRules.GetTrophies(Workout);
+
+				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
 
 				if (App.Settings.RestTimerAutoStart == true)

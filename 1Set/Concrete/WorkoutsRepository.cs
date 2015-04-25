@@ -43,5 +43,15 @@ namespace Set.Concrete
 				return workout;
 			}
         }
+
+		public async Task<int> GetTotalTrophies()
+		{
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{				
+				var sql = @"SELECT SUM(Trophies) AS TotalTrophies FROM Workouts";
+				var totalTrophies = await _connection.ExecuteScalarAsync<int>(sql);
+				return totalTrophies;
+			}
+		}
     }
 }

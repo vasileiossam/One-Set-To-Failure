@@ -29,6 +29,7 @@ namespace Set.Models
 
         public int Reps { get; set; }
         public double Weight { get; set; }
+		public int Trophies { get; set; }
 
         [Ignore]
 		public Workout PreviousWorkout { get; set; }

@@ -18,6 +18,7 @@
       <local:DateTimeToStringConverter x:Key="dateConverter" />
       <local:WeightMetricToImperialConverter x:Key="weightConverter" />
       <local:IntToStringConverter x:Key="intToStringConverter" />
+      <local:TrophiesToStringConverter x:Key="trophiesToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 
@@ -32,7 +33,12 @@
     <controls:GestureFrame x:Name="MainFrame" Padding="10, 10, 10, 10" >
 
     <StackLayout Orientation="Vertical">
-      
+
+      <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
+        <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
+        <Label Text="{Binding TotalTrophies}" FontSize="Large" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#212121"/>
+      </StackLayout>
+
       <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
         <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
         <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="#212121"/>
@@ -80,6 +86,7 @@
 						<ColumnDefinition Width="50" />
 						<ColumnDefinition Width="80*" />
 						<ColumnDefinition Width="145" />
+						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
@@ -87,7 +94,12 @@
 
 					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="#212121"/>
 
-					<StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+					<StackLayout IsVisible="{Binding TrophyVisible}" Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+				        <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
+        				<Label Text="{Binding Workout.Trophies, Converter={StaticResource trophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+					</StackLayout>
+
+					<StackLayout Grid.Row="0" Grid.Column="3" Orientation="Horizontal">
 	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>

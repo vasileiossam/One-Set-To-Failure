@@ -21,6 +21,7 @@ namespace Set
 		public static string Version {get; set;}
 		public static double ScreenWidth {get; set;}
 		public static double ScreenHeight {get; set;}
+		public static int? TotalTrophies {get; set;}
 
 		public App ()
 		{	

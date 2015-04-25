@@ -39,6 +39,13 @@ namespace Set.Models
 			}
 		}
 
+		[Ignore]
+		public bool TrophyVisible {
+			get
+			{
+				return Workout.Trophies != 0;
+			}
+		}
 	}
 }
 

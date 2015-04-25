@@ -112,6 +112,35 @@ namespace Set
 
             return new {TargetReps = targetReps, TargetWeight = targetWeight};
         }
+
+		public static int GetTrophies(Workout workout)
+		{
+			// no previous workout to compare to
+			if (workout.PreviousReps == 0)
+			{
+				return 0;
+			}
+
+			// still on same weight
+			if (Math.Abs (workout.PreviousWeight - workout.Weight) < Units.WeightTolerance)
+			{
+				return workout.Reps - workout.PreviousReps;
+			}
+			else
+				// down to less weight
+				if (workout.PreviousWeight > workout.Weight)
+				{
+					return -10;
+				} 
+				else 
+					// up to more weight
+					if (workout.PreviousWeight < workout.Weight)
+					{
+						return +10;
+					}
+
+			return 0;
+		}
     }
 }
 
