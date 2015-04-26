@@ -19,7 +19,7 @@
   <ContentPage.Content>
   	<ScrollView>
   	<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
-		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="#212121" FontSize="24"/>
+		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="#212121" FontSize="24" Keyboard="Chat"/>
   	</StackLayout>
   	</ScrollView>
   </ContentPage.Content>

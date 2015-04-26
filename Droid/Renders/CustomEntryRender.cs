@@ -45,6 +45,7 @@ namespace Set.Droid.Renders
 						fontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Entry));						
 					}  
 					view.TextSize = (float) fontSize;
+					//view.InputType = Android.Text.InputTypes.TextFlagNoSuggestions;
 
 				}
 			}

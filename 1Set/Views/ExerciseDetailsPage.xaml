@@ -23,7 +23,7 @@
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
 		  <ContentView Padding="0, 10, 0, 0">
-	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="#212121"/>
+	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="#212121" Keyboard="Chat"/>
 		  </ContentView>
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
@@ -68,7 +68,7 @@
 		  </Grid>
 	        
 		  <ContentView Padding="0, 10, 0, 10">
-	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="#212121"/>
+	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="#212121" Keyboard="Chat"/>
 		  </ContentView>
 
 	    </StackLayout>
