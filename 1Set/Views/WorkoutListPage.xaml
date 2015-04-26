@@ -78,16 +78,16 @@
             <ViewCell>
 
       		<ViewCell.View>
-				<Grid Padding="10,0,0,10" VerticalOptions="FillAndExpand">
+
+      		  <StackLayout Orientation="{Binding CellLayoutOrientation}"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" Spacing="0">
+				<Grid Padding="0,0,5,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="50" />
-						<ColumnDefinition Width="80*" />
-						<ColumnDefinition Width="145" />
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="{Binding StateImage}" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -98,25 +98,26 @@
 				        <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
         				<Label Text="{Binding Workout.Trophies, Converter={StaticResource trophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#727272"/>
 					</StackLayout>
-
-					<StackLayout Grid.Row="0" Grid.Column="3" Orientation="Horizontal">
-	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
-							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-
-	                    	<controls:RoundedBoxView WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
-		                   	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
-	                    </Grid>
-
-	                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-							<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
-							<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-	                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
-		                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
-	                    </Grid>
-					</StackLayout>
 				</Grid> 
-                     
+
+				<StackLayout Padding="0, 2, 0, 2" Orientation="Horizontal" HorizontalOptions="End">
+                    <Grid HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+						<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+						<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+
+                		<controls:RoundedBoxView  WidthRequest="90" HeightRequest="35" CornerRadius="32" Color="#D7D7D7" />
+	                   	<Label Text="{Binding Workout.Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+                    </Grid>
+
+                    <Grid HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+						<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
+						<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
+	                   	<Label Text="{Binding Workout.Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+                    </Grid>
+				</StackLayout>
+			  </StackLayout>
+                                                                                    
               </ViewCell.View>
             </ViewCell>
           </DataTemplate>

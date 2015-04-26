@@ -49,8 +49,8 @@ namespace Set.ViewModels
 			}
 		}
 
-		public string PreviousWeightTitle { get { return AppResources.PreviousWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
-		public string TargetWeightTitle { get { return AppResources.TargetWeightTitle + " (" + L10n.GetWeightUnit() + ")"; }}
+		public string PreviousTitle { get { return AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")"; }}
+		public string TargetTitle { get { return AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")"; }}
 
 		public bool NotesVisible
 		{

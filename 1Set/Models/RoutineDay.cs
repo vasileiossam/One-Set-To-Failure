@@ -3,6 +3,7 @@ using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Set.Models
 {
@@ -44,6 +45,25 @@ namespace Set.Models
 			get
 			{
 				return Workout.Trophies != 0;
+			}
+		}
+
+		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
+		protected StackOrientation _cellLayoutOrientation;
+		[Ignore]
+		public StackOrientation CellLayoutOrientation
+		{
+			get
+			{
+				return _cellLayoutOrientation;
+			}
+			set
+			{
+				if (_cellLayoutOrientation != value)
+				{
+					_cellLayoutOrientation = value;
+					//OnPropertyChanged ("CellLayoutOrientation");
+				}
 			}
 		}
 	}

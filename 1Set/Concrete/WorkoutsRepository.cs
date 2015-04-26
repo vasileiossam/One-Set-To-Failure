@@ -49,8 +49,8 @@ namespace Set.Concrete
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{				
 				var sql = @"SELECT SUM(Trophies) AS TotalTrophies FROM Workouts";
-				var totalTrophies = await _connection.ExecuteScalarAsync<int>(sql);
-				return totalTrophies;
+				var totalTrophies = await _connection.ExecuteScalarAsync<int?>(sql);
+				return totalTrophies ?? 0;
 			}
 		}
     }

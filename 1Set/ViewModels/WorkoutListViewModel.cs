@@ -197,7 +197,7 @@ namespace Set.ViewModels
 
 			if (App.TotalTrophies == null)
 			{
-				App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
+  				App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
 				TotalTrophies = (int) App.TotalTrophies;
 			}
 		}
@@ -207,11 +207,13 @@ namespace Set.ViewModels
 			if ((string)s == "Left")
 			{
 				await Load(CurrentDate.AddDays (-1));
+				Page.ChangeOrientation (false);
 				Page.Refresh ();
 			} 
 			else
 			{
 				await Load(CurrentDate.AddDays (1));
+				Page.ChangeOrientation (false);
 				Page.Refresh ();
 			}
 		}

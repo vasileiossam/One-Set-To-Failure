@@ -10,6 +10,7 @@ namespace Set
 	{
 		private double _width = 0.0;
 		private double _height = 0.0;
+		private StackOrientation _stackOrientation;
 
         private WorkoutListViewModel _viewModel;
         public WorkoutListViewModel ViewModel
@@ -32,6 +33,21 @@ namespace Set
         public WorkoutListPage()
 		{
 			this.InitializeComponent ();
+
+			_stackOrientation = StackOrientation.Horizontal;
+			if ((App.ScreenWidth <= 320) || (App.ScreenHeight <= 320))
+			{
+				// landscape
+				if (App.ScreenWidth > App.ScreenHeight)
+				{
+
+				} 
+				// portrait
+				else
+				{
+					_stackOrientation = StackOrientation.Vertical;
+				}
+			}
 		}
 
         protected async override void OnAppearing()
@@ -41,6 +57,7 @@ namespace Set
 			this.BindingContext = ViewModel;
 			await ViewModel.Load (App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
+			ChangeOrientation (true);
 
 			MainFrame.SwipeLeft += OnLeftChevronTapCommand;
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
@@ -115,20 +132,38 @@ namespace Set
 					// landscape
 					if (width > height)
 					{
-						CurrentDate.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));					
-						CalendarNotesButton.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button));		
+						CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Label));					
+						CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Button));		
 						NoDataImage.IsVisible = false;
+						_stackOrientation = StackOrientation.Horizontal;
+						ChangeOrientation (true);
 					} 
 					// portrait
 					else
 					{
-						CurrentDate.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));					
-						CalendarNotesButton.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Button));					
+						CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Default, typeof(Label));					
+						CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Button));					
 						NoDataImage.IsVisible = true;		
+						_stackOrientation = StackOrientation.Vertical;
+						ChangeOrientation (true);
 					}
 				}
 			}
+		}
 
+		// TODO remove this when xamarin forms supports source/relative binding inside a datatemplate
+		public void ChangeOrientation(bool canRefresh)
+		{
+			workoutsList.BeginRefresh ();
+			if (ViewModel.RoutineDays != null)
+			{
+				foreach (var item in ViewModel.RoutineDays)
+				{
+					item.CellLayoutOrientation = _stackOrientation;
+				}
+			}
+			workoutsList.EndRefresh ();
+			Refresh ();
 		}
 	}
 }

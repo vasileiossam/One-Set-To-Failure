@@ -186,17 +186,11 @@
   <data name="RepsIncrementDescription" xml:space="preserve">
     <value>+{0} in every {0} workouts</value>
   </data>
-  <data name="PreviousRepsTitle" xml:space="preserve">
-    <value>Previous Reps</value>
+  <data name="PreviousTitle" xml:space="preserve">
+    <value>Previous Reps / Weight</value>
   </data>
-  <data name="PreviousWeightTitle" xml:space="preserve">
-    <value>Previous Weight</value>
-  </data>
-  <data name="TargetRepsTitle" xml:space="preserve">
-    <value>Target Reps</value>
-  </data>
-  <data name="TargetWeightTitle" xml:space="preserve">
-    <value>Target Weight</value>
+  <data name="TargetTitle" xml:space="preserve">
+    <value>Target Reps / Weight</value>
   </data>
   <data name="RepsIncrementEveryOtherTimeDescription" xml:space="preserve">
     <value>+{0} every other time</value>

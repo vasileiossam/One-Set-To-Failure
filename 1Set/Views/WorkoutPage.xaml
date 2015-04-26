@@ -44,13 +44,12 @@
 				<RowDefinition Height="8" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="140" />
-				<ColumnDefinition Width="180" />
+				<ColumnDefinition Width="48" />
+				<ColumnDefinition Width="122" />
+				<ColumnDefinition Width="122" />
 			</Grid.ColumnDefinitions>
 
-			<Label Grid.Row="0" Grid.Column="1" Text="{i18n:Translate PreviousRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
-			<Label Grid.Row="0" Grid.Column="2" Text="{Binding PreviousWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+			<Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PreviousTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="#727272"/>
 
 			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_calendar" HorizontalOptions="Center" VerticalOptions="Center"/>
 		    <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -80,13 +79,12 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="140" />
-				<ColumnDefinition Width="180" />
+				<ColumnDefinition Width="48" />
+				<ColumnDefinition Width="122" />
+				<ColumnDefinition Width="122" />
 			</Grid.ColumnDefinitions>
 
-	 		<Label Grid.Row="0" Grid.Column="1" Text="{i18n:Translate TargetRepsTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
-				<Label Grid.Row="0" Grid.Column="2" Text="{Binding TargetWeightTitle}" YAlign="Center" XAlign="Center" Font="Large"  TextColor="#727272"/>
+	 		<Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TargetTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="#727272"/>
 
 			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_bullseye" HorizontalOptions="Center" VerticalOptions="Center"/>
 	        <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -116,9 +114,9 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="140" />
-				<ColumnDefinition Width="180" />
+				<ColumnDefinition Width="48" />
+				<ColumnDefinition Width="122" />
+				<ColumnDefinition Width="122"/>
 			</Grid.ColumnDefinitions>
 	 		<Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_android" HorizontalOptions="Center" VerticalOptions="Center"/>
 
@@ -128,13 +126,13 @@
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
 	 			Text="{Binding Weight, Converter={StaticResource doubleToStringConverter}}" TextColor="#212121" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
-		    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
-				<Button Image="ic_fa_minus" Command="{Binding RepsDownCommand}"/>
-				<Button Image="ic_fa_plus" Command="{Binding RepsUpCommand}"/>
+		    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="0, 0, 0, 0">
+				<Button Image="ic_fa_minus" Command="{Binding RepsDownCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>
+				<Button Image="ic_fa_plus" Command="{Binding RepsUpCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>
 			</StackLayout>
-		    <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Padding="0, 0, 0, 0">
-				<Button Image="ic_fa_minus" Command="{Binding WeighDownCommand}"/>
-				<Button Image="ic_fa_plus" Command="{Binding WeighUpCommand}"/>
+		    <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="0, 0, 0, 0">
+				<Button Image="ic_fa_minus" Command="{Binding WeighDownCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>
+				<Button Image="ic_fa_plus" Command="{Binding WeighUpCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>
 			</StackLayout>
 		</Grid> 
 

@@ -341,20 +341,11 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Previous Reps.
+        ///   Looks up a localized string similar to Previous Reps / Weight.
         /// </summary>
-        internal static string PreviousRepsTitle {
+        internal static string PreviousTitle {
             get {
-                return ResourceManager.GetString("PreviousRepsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Previous Weight.
-        /// </summary>
-        internal static string PreviousWeightTitle {
-            get {
-                return ResourceManager.GetString("PreviousWeightTitle", resourceCulture);
+                return ResourceManager.GetString("PreviousTitle", resourceCulture);
             }
         }
         
@@ -773,20 +764,11 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target Reps.
+        ///   Looks up a localized string similar to Target Reps / Weight.
         /// </summary>
-        internal static string TargetRepsTitle {
+        internal static string TargetTitle {
             get {
-                return ResourceManager.GetString("TargetRepsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target Weight.
-        /// </summary>
-        internal static string TargetWeightTitle {
-            get {
-                return ResourceManager.GetString("TargetWeightTitle", resourceCulture);
+                return ResourceManager.GetString("TargetTitle", resourceCulture);
             }
         }
         
