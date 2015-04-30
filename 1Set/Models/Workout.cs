@@ -80,7 +80,7 @@ namespace Set.Models
 					if (targetWorkout != null)
 					{
 						TargetReps = targetWorkout.TargetReps;
-						TargetWeight = targetWorkout.TargetReps;
+						TargetWeight = targetWorkout.TargetWeight;
 					}
 				}
 			}

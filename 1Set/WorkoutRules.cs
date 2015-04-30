@@ -44,7 +44,8 @@ namespace Set
 
         private static async Task<bool> CanCalculateTarget(Workout workout)
         {
-            var workoutCount = workout.Exercise.RepsIncrement.WorkoutCount; 
+			// TODO when I'll implement the settings in the exercise level I have to replace the WorkoutCount with workout.Exercise.RepsIncrement.WorkoutCount 
+			var workoutCount = App.Settings.RepsIncrement.WorkoutCount; 
 
             // target is calculated in every workout
             if (workoutCount == 0) return true;
@@ -65,8 +66,13 @@ namespace Set
         {
             int targetReps = 0;
             double targetWeight = 0;
-			var startingReps = (int) workout.Exercise.MinReps; 
 
+			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
+			var minReps = App.Settings.MinReps; 
+			var maxReps = App.Settings.MaxReps;
+
+			var startingReps = minReps;
+				
             if (workout.PreviousWorkout == null)
             {
 				targetReps = startingReps;
@@ -84,13 +90,13 @@ namespace Set
                 else
                 {
                     // go back to previous Weight
-					if (workout.PreviousWorkout.Reps < workout.Exercise.MinReps)
+					if (workout.PreviousWorkout.Reps < minReps)
                     {
 						targetReps = startingReps;
                         targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
                     }
                     // advance to next Weight
-						else if (targetReps > workout.Exercise.MaxReps)
+						else if (targetReps > maxReps)
                     {
                         targetReps = startingReps;
                         targetWeight = GetNextWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
@@ -98,7 +104,9 @@ namespace Set
                     // stay in same weight but increase Reps
                     else
                     {
-                        targetReps = workout.PreviousWorkout.Reps + workout.Exercise.RepsIncrement.Increment;
+						// TODO when I'll implement the settings in the exercise level I have to replace the increment with workout.Exercise.RepsIncrement.Increment
+							targetReps = workout.PreviousWorkout.Reps + App.Settings.RepsIncrement.Increment;
+					    
                         targetWeight = workout.PreviousWorkout.Weight;
                     }
                 }

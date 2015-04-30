@@ -13,12 +13,12 @@ namespace Set.Models
 		{ 
 			get 
 			{
-                if ((WorkoutCount == 0) && (Increment == 0))
+                if (WorkoutCount == 0)
                 {
                     return AppResources.RepsIncrementDisabledDescr;
                 }
                 else
-				if (WorkoutCount == 0)
+				if (WorkoutCount == 1)
 				{
                     return string.Format(AppResources.RepsIncrementZeroWorkCountDescr, Increment);
 				} 

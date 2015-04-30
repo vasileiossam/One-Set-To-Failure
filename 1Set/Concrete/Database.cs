@@ -68,15 +68,7 @@ namespace Set
 				return _exercisesRepository;
 			}
 		}
-	
-		/// <summary>
-		///    +1
-		///    +2
-		///    +1 every other workout
-        ///    +1 every 3 workouts
-        ///    +1 every 4 workouts
-		/// </summary>
-		/// <value>The rest timers.</value>
+
 		private List<RepsIncrement> _repsIncrements;
 		public List<RepsIncrement> RepsIncrements
 		{
@@ -85,13 +77,15 @@ namespace Set
 				if (_repsIncrements == null)
 				{
 					_repsIncrements = new List<RepsIncrement>();
-                    
+
+					// no increment
                     _repsIncrements.Add(new RepsIncrement(1, 0, 0));
-					_repsIncrements.Add(new RepsIncrement(2, 1, 0));
-					_repsIncrements.Add(new RepsIncrement(3, 2, 0));
-					_repsIncrements.Add(new RepsIncrement(4, 1, 2));
-					_repsIncrements.Add(new RepsIncrement(5, 1, 3));
-					_repsIncrements.Add(new RepsIncrement(6, 1, 4));
+
+					// +1 in every workout
+					_repsIncrements.Add(new RepsIncrement(10, 1, 1));
+
+					// +1 in every other workout
+					_repsIncrements.Add(new RepsIncrement(20, 1, 2));
 				}
 				return _repsIncrements;
 			}

@@ -43,7 +43,12 @@ namespace Set.Models
 		{
 			get
 			{
-				return App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == RepsIncrementId);
+				var repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == RepsIncrementId);
+				if (repsIncrement == null)
+				{
+					repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == 1);
+				}
+				return repsIncrement;
 			}
 		}
 
