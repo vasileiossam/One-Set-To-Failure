@@ -141,7 +141,7 @@ namespace Set
 					// portrait
 					else
 					{
-						CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Default, typeof(Label));					
+						CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label));					
 						CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Button));					
 						NoDataImage.IsVisible = true;		
 						_stackOrientation = StackOrientation.Vertical;

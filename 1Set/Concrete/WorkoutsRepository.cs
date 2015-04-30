@@ -53,5 +53,15 @@ namespace Set.Concrete
 				return totalTrophies ?? 0;
 			}
 		}
+
+		public async Task<int> GetTrophies(DateTime date)
+		{
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{				
+				var sql = @"SELECT SUM(Trophies) AS DayTrophies FROM Workouts WHERE Created = ?";
+				var dayTrophies = await _connection.ExecuteScalarAsync<int?>(sql, date);
+				return dayTrophies ?? 0;
+			}
+		}
     }
 }

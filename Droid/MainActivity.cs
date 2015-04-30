@@ -31,7 +31,7 @@ namespace Set.Droid
 			ToastNotificatorImplementation.Init();
 
 			Context context = this.ApplicationContext;
-			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName;
+			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, PackageInfoFlags.Activities).VersionName;
 
 			LoadApplication(new App ());
 

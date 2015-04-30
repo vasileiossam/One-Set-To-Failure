@@ -12,6 +12,14 @@ using SQLite.Net.Platform.XamarinAndroid;
 
 namespace Set.Droid
 {
+	public class TraceListener : ITraceListener
+	{
+		public void Receive (string message)
+		{
+			Console.WriteLine(message);
+		}
+	}
+
 	public class SQLite_Android : ISQLite
 	{
 		public const string FileName = "OneSet.db3";
@@ -47,9 +55,14 @@ namespace Set.Droid
 				}					
 
 				var platform = new SQLitePlatformAndroid ();
-				var connectionWithLock = new SQLiteConnectionWithLock (
-					platform,
-					new SQLiteConnectionString (pathName, true));
+
+				// storeDateTimeAsTicks  = true
+				// set it to false if I want the date fields to created as string instead of bigint
+				var connectionStr = new SQLiteConnectionString (pathName, true); 
+
+				var listener = new TraceListener();
+				var connectionWithLock = new SQLiteConnectionWithLock (platform, connectionStr);
+				//connectionWithLock.TraceListener = listener;
 
 				var connection = new SQLiteAsyncConnection (() => connectionWithLock);
 
@@ -59,16 +72,6 @@ namespace Set.Droid
 			{
 				throw new Exception ("Cannot get connection", ex);
 			}
-
-//			var connectionParameters = new SQLiteConnectionString(path, false); 
-//			var platform = new SQLitePlatformAndroid();
-//			var sqliteConnectionPool = new SQLiteConnectionPool(platform); 
-//			var conn = new SQLiteAsyncConnection(
-//				() => sqliteConnectionPool.GetConnection(connectionParameters)
-//			); 
-//
-//			// Return the database connection 
-//			return conn;
 		}
 		#endregion
 

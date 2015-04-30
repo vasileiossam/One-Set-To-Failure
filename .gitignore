@@ -180,3 +180,4 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+/Droid/Data/OneSet - Copy.db3

@@ -115,7 +115,7 @@ namespace Set
 
 		public static int GetTrophies(Workout workout)
 		{
-			// no previous workout to compare to
+			// we need at least one previous workout to start collecting trophies
 			if (workout.PreviousReps == 0)
 			{
 				return 0;

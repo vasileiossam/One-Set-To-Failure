@@ -36,7 +36,7 @@
 
       <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
         <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
-        <Label Text="{Binding TotalTrophies}" FontSize="Large" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#212121"/>
+        <Label Text="{Binding Trophies}" FontSize="Large" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#212121"/>
       </StackLayout>
 
       <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >

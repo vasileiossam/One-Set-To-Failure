@@ -1,1 +1,3 @@
-﻿
+﻿- Do not update SQLite.Net-PCL to 3.0.5 because it create all sorts of problems.
+  It errors with "The type  must be a reference type in order to use it as parameter   generic type or method..."
+  in BaseRepository

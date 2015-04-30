@@ -20,19 +20,19 @@ namespace Set.ViewModels
 		// try again in the next xamarin forms update
 		public WorkoutListPage Page { get; set; }
 
-		protected int _totalTrophies;
-		public int TotalTrophies
+		protected string _trophies;
+		public string Trophies
 		{
 			get
 			{
-				return _totalTrophies;
+				return _trophies;
 			}
 			set
 			{
-				if (_totalTrophies != value)
+				if (_trophies != value)
 				{
-					_totalTrophies = value;
-					OnPropertyChanged("TotalTrophies");
+					_trophies = value;
+					OnPropertyChanged("Trophies");
 				}
 			}
 		}
@@ -198,8 +198,9 @@ namespace Set.ViewModels
 			if (App.TotalTrophies == null)
 			{
   				App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
-				TotalTrophies = (int) App.TotalTrophies;
 			}
+			var dayTrophies = await App.Database.WorkoutsRepository.GetTrophies (CurrentDate);
+			Trophies = string.Format("{0} / {1}", dayTrophies, (int) App.TotalTrophies);
 		}
 
 		private async Task OnChevronTapCommand (object s) 
