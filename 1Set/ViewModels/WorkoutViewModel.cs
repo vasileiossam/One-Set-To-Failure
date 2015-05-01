@@ -146,11 +146,11 @@ namespace Set.ViewModels
 
 				if (App.Settings.RestTimerAutoStart == true)
 				{
-					Navigation.PopAsync (false);
-					var viewModel = new RestTimerViewModel () { Navigation = Navigation };
+					await Navigation.PopAsync (false);
+					var viewModel = new RestTimerViewModel () { Navigation = Navigation};
 					var page = new RestTimerPage () { ViewModel = viewModel };
 					await Navigation.PushAsync (page); 	
-					viewModel.OnStartCommand ();
+					await viewModel.OnStartCommand ();
 				} else
 				{
 					await Navigation.PopAsync();					
