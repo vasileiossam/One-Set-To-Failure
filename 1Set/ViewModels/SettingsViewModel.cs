@@ -231,6 +231,28 @@ namespace Set.ViewModels
 			};
 			dataGroup.Add (restorePreference);
 
+			var recalcStatisticsPreference = new AlertPreference ()
+			{ 
+				Title = AppResources.SettingsRecalcStatisticsTitle, 
+				Hint = AppResources.SettingsRecalcStatisticsTitleHint,
+				Clicked = OnClicked
+			};
+			recalcStatisticsPreference.OnExecute += async (sender, args) =>
+			{
+				try
+				{	
+					await App.Database.RecalcStatistics();
+					App.ShowToast (ToastNotificationType.Info, AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);		
+				}
+				catch(Exception ex)
+				{
+					App.ShowToast (ToastNotificationType.Error, AppResources.ToastErrorTitle, ex.Message);		
+				}
+
+			};
+			dataGroup.Add (recalcStatisticsPreference);
+
+
 			#endregion
 
 			#region other group

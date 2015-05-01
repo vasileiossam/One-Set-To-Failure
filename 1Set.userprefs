@@ -1,30 +1,27 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Concrete\Database.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.b4305213b44c" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Resx\AppResources.resx">
     <Files>
-      <File FileName="1Set\Concrete\WorkoutsRepository.cs" Line="1" Column="1" />
-      <File FileName="1Set\Views\WorkoutListPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="1Set\Views\WorkoutListPage.xaml" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\Concrete\BaseRepository.cs" Line="1" Column="1" />
-      <File FileName="README.md" Line="11" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\WorkoutRules.cs" Line="1" Column="1" />
-      <File FileName="1Set\Concrete\RoutineDaysRepository.cs" Line="1" Column="1" />
-      <File FileName="c:\dev\1Set\1Set\AsyncLock.cs" Line="1" Column="1" />
-      <File FileName="1Set\Models\Workout.cs" Line="1" Column="1" />
-      <File FileName="Droid\SQLite_Android.cs" Line="1" Column="1" />
-      <File FileName="Notes.txt" Line="1" Column="1" />
-      <File FileName="1Set\Concrete\Database.cs" Line="98" Column="4" />
+      <File FileName="1Set\Concrete\Database.cs" Line="144" Column="1" />
+      <File FileName="1Set\Concrete\WorkoutsRepository.cs" Line="30" Column="13" />
+      <File FileName="1Set\Models\RestTimer.cs" Line="1" Column="1" />
+      <File FileName="1Set\Models\RepsIncrement.cs" Line="1" Column="1" />
+      <File FileName="1Set\Resx\AppResources.Designer.cs" Line="13" Column="29" />
+      <File FileName="1Set\Models\Settings.cs" Line="52" Column="1" />
+      <File FileName="1Set\Models\Exercise.cs" Line="1" Column="1" />
+      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="143" Column="5" />
+      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="181" Column="1" />
+      <File FileName="c:\dev\1Set\1Set\Models\Workout.cs" Line="65" Column="3" />
+      <File FileName="Droid\MainActivity.cs" Line="42" Column="1" />
+      <File FileName="1Set\App.cs" Line="15" Column="2" />
+      <File FileName="1Set\Resx\AppResources.resx" Line="13" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\dev\1Set\Droid\MainActivity.cs" line="47" column="1" />
       <FunctionBreakpoint line="152" column="1" function="System.Exception" language="C#" />
       <Breakpoint file="c:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="44" column="1" />
-      <Breakpoint file="C:\dev\1Set\1Set\Models\Workout.cs" line="70" column="1" />
-      <Breakpoint file="C:\dev\1Set\1Set\Concrete\WorkoutsRepository.cs" line="30" column="1" />
+      <Breakpoint file="C:\dev\1Set\1Set\ViewModels\WorkoutViewModel.cs" line="90" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

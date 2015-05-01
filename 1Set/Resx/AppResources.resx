@@ -435,4 +435,14 @@
   <data name="SettingsLoadSampleDataHint" xml:space="preserve">
     <value>Load sample data to get you started</value>
   </data>
+
+  <data name="SettingsRecalcStatisticsTitle" xml:space="preserve">
+    <value>Recalculate Statistics</value>
+  </data>
+  <data name="SettingsRecalcStatisticsTitleHint" xml:space="preserve">
+    <value>Recalculate all statistics and trophies</value>
+  </data>
+  <data name="SettingsRecalcStatisticsFinished" xml:space="preserve">
+    <value>Recalculation finished!</value>
+  </data>
 </root>

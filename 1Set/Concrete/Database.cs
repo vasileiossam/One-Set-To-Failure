@@ -139,6 +139,18 @@ namespace Set
 			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Biceps Curl", 7);
 			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Lat Pulldown", 7);
 		}
+
+		public async Task RecalcStatistics()
+		{
+			var workoutsList = await App.Database.WorkoutsRepository.AllAsync ();
+			foreach (var workout in workoutsList)
+			{
+				await workout.Load ();
+				workout.Trophies = WorkoutRules.GetTrophies(workout);
+				await App.Database.WorkoutsRepository.SaveAsync(workout);
+			}
+		}
+
 	}
 }
 

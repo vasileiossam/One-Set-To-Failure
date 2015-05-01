@@ -130,19 +130,19 @@ namespace Set
 			}
 
 			// still on same weight
-			if (Math.Abs (workout.PreviousWeight - workout.Weight) < Units.WeightTolerance)
+			if (Math.Abs (workout.TargetWeight - workout.Weight) < Units.WeightTolerance)
 			{
-				return workout.Reps - workout.PreviousReps;
+				return workout.Reps - workout.TargetReps;
 			}
 			else
 				// down to less weight
-				if (workout.PreviousWeight > workout.Weight)
+				if (workout.TargetWeight > workout.Weight)
 				{
 					return -10;
 				} 
 				else 
 					// up to more weight
-					if (workout.PreviousWeight < workout.Weight)
+					if (workout.TargetWeight < workout.Weight)
 					{
 						return +10;
 					}

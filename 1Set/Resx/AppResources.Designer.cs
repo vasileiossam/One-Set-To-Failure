@@ -665,6 +665,33 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recalculation finished!.
+        /// </summary>
+        internal static string SettingsRecalcStatisticsFinished {
+            get {
+                return ResourceManager.GetString("SettingsRecalcStatisticsFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recalculate Statistics.
+        /// </summary>
+        internal static string SettingsRecalcStatisticsTitle {
+            get {
+                return ResourceManager.GetString("SettingsRecalcStatisticsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recalculate all statistics and trophies.
+        /// </summary>
+        internal static string SettingsRecalcStatisticsTitleHint {
+            get {
+                return ResourceManager.GetString("SettingsRecalcStatisticsTitleHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore your data from a previously created backup.
         /// </summary>
         internal static string SettingsRestoreLocallyHint {
