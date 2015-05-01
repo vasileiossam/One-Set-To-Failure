@@ -149,6 +149,7 @@ namespace Set
 				workout.Trophies = WorkoutRules.GetTrophies(workout);
 				await App.Database.WorkoutsRepository.SaveAsync(workout);
 			}
+			App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
 		}
 
 	}

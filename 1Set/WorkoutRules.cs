@@ -132,7 +132,14 @@ namespace Set
 			// still on same weight
 			if (Math.Abs (workout.TargetWeight - workout.Weight) < Units.WeightTolerance)
 			{
-				return workout.Reps - workout.TargetReps;
+				// calc how many more reps since last time
+				if (Math.Abs (workout.TargetWeight - workout.PreviousWeight) < Units.WeightTolerance)
+				{
+					return (workout.Reps - workout.TargetReps) + (workout.TargetReps - workout.PreviousReps);
+				} else
+				{
+					return 0;
+				}
 			}
 			else
 				// down to less weight
