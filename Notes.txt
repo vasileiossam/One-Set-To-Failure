@@ -4,7 +4,11 @@
 -----------------------------------------
 
 - rest timer on header
-- check target today
+- target calcuation: rule to level up is not working. check also if its > or >=
+- adjust trophies: when level up add plus more than minimum
+- adjust trophies: when level down don't subtract any value
+
+- settings for motivation
 
 -----------------------------------------
 - put new files in csproj
