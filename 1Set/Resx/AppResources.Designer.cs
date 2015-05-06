@@ -656,6 +656,33 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a motivational image pack.
+        /// </summary>
+        internal static string SettingsMotivationalImagePacksHint {
+            get {
+                return ResourceManager.GetString("SettingsMotivationalImagePacksHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Pack.
+        /// </summary>
+        internal static string SettingsMotivationalImagePacksTitle {
+            get {
+                return ResourceManager.GetString("SettingsMotivationalImagePacksTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOTIVATION.
+        /// </summary>
+        internal static string SettingsMotivationTitle {
+            get {
+                return ResourceManager.GetString("SettingsMotivationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OTHER.
         /// </summary>
         internal static string SettingsOtherTitle {
@@ -724,6 +751,24 @@ namespace Set.Resx {
         internal static string SettingsRestoreToastTitleOnSuccess {
             get {
                 return ResourceManager.GetString("SettingsRestoreToastTitleOnSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show motivational images in rest timer page.
+        /// </summary>
+        internal static string SettingsShowImagesInRestTimerTitle {
+            get {
+                return ResourceManager.GetString("SettingsShowImagesInRestTimerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show motivational images in workout tracking page.
+        /// </summary>
+        internal static string SettingsShowImagesPackInWorkoutTitle {
+            get {
+                return ResourceManager.GetString("SettingsShowImagesPackInWorkoutTitle", resourceCulture);
             }
         }
         

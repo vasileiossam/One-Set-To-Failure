@@ -2,17 +2,12 @@
   It errors with "The type  must be a reference type in order to use it as parameter   generic type or method..."
   in BaseRepository
 -----------------------------------------
-
+- find and build the quotes
 - rest timer on header
 - target calcuation: rule to level up is not working. check also if its > or >=
 - adjust trophies: when level up add plus more than minimum
 - adjust trophies: when level down don't subtract any value
-
-- settings for motivation
-
 -----------------------------------------
-- put new files in csproj
-
 motivational quotes
 - unzip service
 - how to load the files in image views 
@@ -23,5 +18,6 @@ motivational quotes
 - prepare the image packs
 
 motivational quotes
+http://wishquotes.com/fitness-quotesi-do-it-because-i-can/
 https://www.pinterest.com/explore/inspirational-quotes/
 http://www.inspireleads.com/motivational-quotes/
