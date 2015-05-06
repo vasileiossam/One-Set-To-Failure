@@ -445,4 +445,20 @@
   <data name="SettingsRecalcStatisticsFinished" xml:space="preserve">
     <value>Recalculation finished!</value>
   </data>
+  
+  <data name="SettingsMotivationTitle" xml:space="preserve">
+    <value>Motivation</value>
+  </data>
+    <data name="SettingsMotivationalImagePacksTitle" xml:space="preserve">
+    <value>Image Pack</value>
+  </data>
+  <data name="SettingsMotivationalImagePacksHint" xml:space="preserve">
+    <value>Select a motivational image pack</value>
+  </data>  
+  <data name="SettingsShowImagesInRestTimerTitle" xml:space="preserve">
+    <value>Show motivational images in rest timer page</value>
+  </data>  
+    <data name="SettingsShowImagesPackInWorkoutTitle" xml:space="preserve">
+    <value>Show motivational images in workout tracking page</value>
+  </data>  
 </root>

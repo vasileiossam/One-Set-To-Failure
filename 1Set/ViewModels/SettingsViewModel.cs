@@ -127,8 +127,63 @@ namespace Set.ViewModels
 
 			#endregion
 
-			#region data group
-			var dataGroup = new PreferenceGroup (){ Title = AppResources.SettingsDataTitle };
+            #region motivation group
+            var motivationGroup = new PreferenceGroup() { Title = AppResources.SettingsMotivationTitle };
+            list.Add(motivationGroup);
+
+            index = 0;
+            options = new String[App.Database.ImagePacks.Count];
+            foreach (var item in App.Database.ImagePacks)
+            {
+                options[index++] = item.Title;
+            }
+            motivationGroup.Add(new ListPreference()
+            {
+                Title = AppResources.SettingsMotivationalImagePacksTitle,
+                Hint = AppResources.SettingsMotivationalImagePacksHint,
+                Options = options,
+                Clicked = OnClicked,
+                Value = App.Settings.ImagePack.Title,
+                OnSave = async (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    App.Settings.ImagePackId = App.Database.ImagePacks.FirstOrDefault(x => x.Title == (string)preference.Value).ImagePackId;
+                    App.SaveSettings();
+                }
+            });
+
+           motivationGroup.Add(new ListPreference()
+            {
+                Title = AppResources.SettingsShowImagesInRestTimerTitle,
+                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInRestTimer),
+                Options = ListPreference.YesNoOptions,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    App.Settings.CanShowImagePackInRestTimer = preference.GetValueAsBool();
+                    App.SaveSettings();
+                }
+            });
+
+            motivationGroup.Add(new ListPreference()
+            {
+                Title = AppResources.SettingsShowImagesPackInWorkoutTitle,
+                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInWorkout),
+                Options = ListPreference.YesNoOptions,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    App.Settings.CanShowImagePackInWorkout = preference.GetValueAsBool();
+                    App.SaveSettings();
+                }
+            });
+
+            #endregion
+
+            #region data group
+            var dataGroup = new PreferenceGroup (){ Title = AppResources.SettingsDataTitle };
 			list.Add (dataGroup);
 
 			dataGroup.Add (new AlertPreference ()

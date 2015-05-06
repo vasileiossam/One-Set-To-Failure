@@ -1,3 +1,23 @@
 ﻿- Do not update SQLite.Net-PCL to 3.0.5 because it create all sorts of problems.
   It errors with "The type  must be a reference type in order to use it as parameter   generic type or method..."
   in BaseRepository
+-----------------------------------------
+
+- rest timer on header
+- check target today
+
+-----------------------------------------
+- put new files in csproj
+
+motivational quotes
+- unzip service
+- how to load the files in image views 
+  - how to have the image scale nice and center?
+    - http://blog.falafel.com/xamarin-forms-storing-and-retrieving-photos/	
+    - place holder: http://forums.xamarin.com/discussion/17729/image-placeholder
+
+- prepare the image packs
+
+motivational quotes
+https://www.pinterest.com/explore/inspirational-quotes/
+http://www.inspireleads.com/motivational-quotes/

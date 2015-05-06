@@ -91,6 +91,22 @@ namespace Set
 			}
 		}
 
+        private List<ImagePack> _imagePack;
+        public List<ImagePack> ImagePacks
+        {
+            get
+            {
+                if (_imagePack == null)
+                {
+                    _imagePack = new List<ImagePack>();
+                    _imagePack.Add(new ImagePack() { ImagePackId = 0, Title = "Disabled" });
+                    _imagePack.Add(new ImagePack() { ImagePackId = 1, Title = "25 Fitness Quotes" });
+                    _imagePack.Add(new ImagePack() { ImagePackId = 2, Title = "10 Life Quotes" });
+                }
+                return _imagePack;
+            }
+        }
+
 		/// <summary>
 		/// if the database doesn't exist, it will create the database and all the tables.
 		/// </summary>

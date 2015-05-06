@@ -13,9 +13,15 @@ namespace Set.Models
 		public int RepsIncrementId { get; set; }
 		public bool PreviousRepsWeightVisible { get; set; }
 		public bool TargetRepsWeightVisible { get; set; }
-
-		#region Rest Timer
-		public bool RestTimerAutoStart { get; set; }
+        
+        #region motivation
+        public int ImagePackId { get; set; }
+        public bool CanShowImagePackInRestTimer { get; set; }
+        public bool CanShowImagePackInWorkout { get; set; }
+        #endregion
+        
+        #region Rest Timer
+        public bool RestTimerAutoStart { get; set; }
 		public bool RestTimerPlaySounds { get; set; }
 		public int RestTimerTotalSeconds { get; set; }
 		#endregion
@@ -29,6 +35,10 @@ namespace Set.Models
 			RepsIncrementId = 1; // +1
 			PreviousRepsWeightVisible = true;
 			TargetRepsWeightVisible = true;
+            
+            ImagePackId = 1;
+            CanShowImagePackInRestTimer = true;
+            CanShowImagePackInWorkout = true;
 
 			#region Rest Timer defaults
 			RestTimerAutoStart = true;
@@ -52,7 +62,19 @@ namespace Set.Models
 			}
 		}
 
-  
+        [JsonIgnore]
+        public ImagePack ImagePack
+        {
+            get
+            {
+                var imagePack = App.Database.ImagePacks.FirstOrDefault(x => x.ImagePackId == ImagePackId);
+                if (imagePack == null)
+                {
+                    imagePack = App.Database.ImagePacks.FirstOrDefault(x => x.ImagePackId == 1);
+                }
+                return imagePack;
+            }
+        }  
 
 	}
 }
