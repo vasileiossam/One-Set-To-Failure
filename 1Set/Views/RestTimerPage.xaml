@@ -69,7 +69,7 @@
 		  <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" WidthRequest="250" HorizontalOptions="Start">
 			<controls:BlueButton Text="{i18n:Translate RestTimerReset}" Command="{Binding ResetCommand}" TextColor="White"/>
 		  </ContentView>
-
+		<Image Source="Quotes_18.png" Aspect="AspectFit" BackgroundColor="Black"/>
   		</StackLayout>
   	</ScrollView>
   </ContentPage.Content>

@@ -1,19 +1,8 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.b4305213b44c" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\SettingsPage.xaml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\RestTimerPage.xaml">
     <Files>
-      <File FileName="Notes.txt" Line="5" Column="1" />
-      <File FileName="1Set\WorkoutRules.cs" Line="1" Column="1" />
-      <File FileName="1Set\Concrete\Database.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutListViewModel.cs" Line="1" Column="1" />
-      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="150" Column="73" />
-      <File FileName="1Set\Views\WorkoutListPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="1Set\Models\Settings.cs" Line="66" Column="16" />
-      <File FileName="README.md" Line="11" Column="1" />
-      <File FileName="1Set\ViewModels\SettingsViewModel.cs" Line="127" Column="4" />
-      <File FileName="1Set\Resx\AppResources.resx" Line="450" Column="22" />
-      <File FileName="1Set\Resx\AppResources.Designer.cs" Line="29" Column="9" />
-      <File FileName="1Set\Views\SettingsPage.xaml" Line="43" Column="88" />
+      <File FileName="1Set\Views\RestTimerPage.xaml" Line="72" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
