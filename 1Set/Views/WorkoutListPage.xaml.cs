@@ -8,8 +8,7 @@ namespace Set
 {
 	public partial class WorkoutListPage : ContentPage
 	{
-		private double _width = 0.0;
-		private double _height = 0.0;
+		private ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
 
         private WorkoutListViewModel _viewModel;
@@ -33,20 +32,13 @@ namespace Set
         public WorkoutListPage()
 		{
 			this.InitializeComponent ();
+			_screenSizeHandler = new ScreenSizeHandler ();
 
 			_stackOrientation = StackOrientation.Horizontal;
-			if ((App.ScreenWidth <= 320) || (App.ScreenHeight <= 320))
+			if ((_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait) 
+				&& (_screenSizeHandler.GetScreenSize() == ScreenSizes.Small) )
 			{
-				// landscape
-				if (App.ScreenWidth > App.ScreenHeight)
-				{
-
-				} 
-				// portrait
-				else
-				{
-					_stackOrientation = StackOrientation.Vertical;
-				}
+				_stackOrientation = StackOrientation.Vertical;
 			}
 		}
 
@@ -121,32 +113,25 @@ namespace Set
 		{
 			base.OnSizeAllocated (width, height);
 
-			if (width != _width || height != _height)
+			if (_screenSizeHandler.GetScreenSize () == ScreenSizes.Small)
 			{
-				_width = width;
-				_height = height;
+				var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
 
-				// small screens
-				if ((width <= 320) || (height <= 320))
+				if (orientation == Orientations.Landscape)
 				{
-					// landscape
-					if (width > height)
-					{
-						CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Label));					
-						CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Button));		
-						NoDataImage.IsVisible = false;
-						_stackOrientation = StackOrientation.Horizontal;
-						ChangeOrientation (true);
-					} 
-					// portrait
-					else
-					{
-						CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label));					
-						CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Button));					
-						NoDataImage.IsVisible = true;		
-						_stackOrientation = StackOrientation.Vertical;
-						ChangeOrientation (true);
-					}
+					CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Label));					
+					CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Button));		
+					NoDataImage.IsVisible = false;
+					_stackOrientation = StackOrientation.Horizontal;
+					ChangeOrientation (true);				
+				}
+				if (orientation == Orientations.Portrait)
+				{
+					CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label));					
+					CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Button));					
+					NoDataImage.IsVisible = true;		
+					_stackOrientation = StackOrientation.Vertical;
+					ChangeOrientation (true);
 				}
 			}
 		}

@@ -863,7 +863,7 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Today.
+        ///   Looks up a localized string similar to TODAY.
         /// </summary>
         internal static string Today {
             get {
@@ -872,7 +872,7 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tomorrow.
+        ///   Looks up a localized string similar to TOMORROW.
         /// </summary>
         internal static string Tomorrow {
             get {
@@ -1007,7 +1007,7 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yesterday.
+        ///   Looks up a localized string similar to YESTERDAY.
         /// </summary>
         internal static string Yesterday {
             get {

@@ -99,9 +99,7 @@ namespace Set
                 if (_imagePack == null)
                 {
                     _imagePack = new List<ImagePack>();
-                    _imagePack.Add(new ImagePack() { ImagePackId = 0, Title = "Disabled" });
                     _imagePack.Add(new ImagePack() { ImagePackId = 1, Title = "25 Fitness Quotes" });
-                    _imagePack.Add(new ImagePack() { ImagePackId = 2, Title = "10 Life Quotes" });
                 }
                 return _imagePack;
             }

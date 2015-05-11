@@ -41,7 +41,7 @@
 
       <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
         <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
-        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="#212121"/>
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="#212121" FontAttributes="Bold"/>
 		<Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"  HorizontalOptions="End"/>
       </StackLayout>
 

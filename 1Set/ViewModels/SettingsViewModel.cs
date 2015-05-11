@@ -166,19 +166,19 @@ namespace Set.ViewModels
                 }
             });
 
-            motivationGroup.Add(new ListPreference()
-            {
-                Title = AppResources.SettingsShowImagesPackInWorkoutTitle,
-                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInWorkout),
-                Options = ListPreference.YesNoOptions,
-                Clicked = OnClicked,
-                OnSave = (sender, args) =>
-                {
-                    var preference = sender as ListPreference;
-                    App.Settings.CanShowImagePackInWorkout = preference.GetValueAsBool();
-                    App.SaveSettings();
-                }
-            });
+//            motivationGroup.Add(new ListPreference()
+//            {
+//                Title = AppResources.SettingsShowImagesPackInWorkoutTitle,
+//                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInWorkout),
+//                Options = ListPreference.YesNoOptions,
+//                Clicked = OnClicked,
+//                OnSave = (sender, args) =>
+//                {
+//                    var preference = sender as ListPreference;
+//                    App.Settings.CanShowImagePackInWorkout = preference.GetValueAsBool();
+//                    App.SaveSettings();
+//                }
+//            });
 
             #endregion
 

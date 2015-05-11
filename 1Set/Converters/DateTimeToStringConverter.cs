@@ -13,28 +13,27 @@ namespace Set
         {
             DateTime date = (DateTime)value;
 			//var fullDay = date.ToString ("ddd") + ", " + date.ToString ("D");
-			var fullDay = date.ToString ("dddd d MMMM");
+			var dayStr = date.ToString ("ddd, d MMMM");
 
             // return today
             if (date.Date == DateTime.Today)
             {
-				return string.Format("{0} ({1})", fullDay, AppResources.Today);
+				return AppResources.Today;
             }
             else
                 // return tomorrow
                 if (date.Date == DateTime.Today.AddDays(1))
                 {
-					return string.Format("{0} ({1})", fullDay, AppResources.Tomorrow);
+					return AppResources.Tomorrow;
                 }
                 // return yesterday
                 else
                     if (date.Date == DateTime.Today.AddDays(-1))
                     {
-						return string.Format("{0} ({1})", fullDay, AppResources.Yesterday);
+						return AppResources.Yesterday;
                     }
 
-            // return date with default culture formatting
-			return fullDay;
+			return dayStr;
         }
 
 

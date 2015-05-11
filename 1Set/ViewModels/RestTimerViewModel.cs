@@ -144,6 +144,24 @@ namespace Set.ViewModels
 
 		protected bool _canSave = false;
 
+		public string MotivationalQuoteImageFile 
+		{
+			get
+			{
+				var r = new Random();
+				int i = r.Next(1, 25);
+				return string.Format("Quotes_{0}.png", i);
+			}
+		}
+
+		public bool MotivationalQuoteImageVisible
+		{
+			get
+			{
+				return App.Settings.CanShowImagePackInRestTimer;
+			}
+		}
+
 		#region commands
 		protected ICommand _startCommand;
 		public ICommand StartCommand

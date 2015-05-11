@@ -121,10 +121,10 @@
     <value>Reps</value>
   </data>
   <data name="Today" xml:space="preserve">
-    <value>Today</value>
+    <value>TODAY</value>
   </data>
   <data name="Tomorrow" xml:space="preserve">
-    <value>Tomorrow</value>
+    <value>TOMORROW</value>
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
@@ -139,7 +139,7 @@
     <value>Exercises</value>
   </data>
   <data name="Yesterday" xml:space="preserve">
-    <value>Yesterday</value>
+    <value>YESTERDAY</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>

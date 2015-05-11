@@ -1,10 +1,6 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.b4305213b44c" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\RestTimerPage.xaml">
-    <Files>
-      <File FileName="1Set\Views\RestTimerPage.xaml" Line="72" Column="27" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <FunctionBreakpoint line="152" column="1" function="System.Exception" language="C#" />
