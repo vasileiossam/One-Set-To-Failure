@@ -66,6 +66,78 @@ namespace Set.Models
 				}
 			}
 		}
+
+        // TODO move this to a new RoutineDayViewModel
+        [Ignore]
+        public int Reps
+        {
+            get
+            {
+                if (Workout != null)
+                {
+                    if (Workout.WorkoutId > 0)
+                    {
+                        return Workout.Reps;
+                    }
+                    else
+                    {
+                        return Workout.TargetReps;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        
+        // TODO move this to a new RoutineDayViewModel
+        [Ignore]
+        public double Weight
+        {
+            get
+            {
+                if (Workout != null)
+                {
+                    if (Workout.WorkoutId > 0)
+                    {
+                        return Workout.Weight;
+                    }
+                    else
+                    {
+                        return Workout.TargetWeight;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        
+        // TODO move this to a new RoutineDayViewModel
+        [Ignore]
+        public Color RepsWeightColor
+        {
+            get
+            {
+                if (Workout != null)
+                {
+                    if (Workout.WorkoutId > 0)
+                    {
+                        return ColorPalette.SecondaryText; 
+                    }
+                    else
+                    {
+                        return ColorPalette.Accent;
+                    }
+                }
+                else
+                {
+                    return ColorPalette.SecondaryText;
+                }
+            }
+        }
 	}
 }
 

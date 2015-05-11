@@ -73,6 +73,8 @@ namespace Set.ViewModels
 		public ICommand RepsDownCommand {get; set;}
 		public ICommand WeighUpCommand {get; set;}
 		public ICommand WeighDownCommand {get; set;}
+        public ICommand PreviousIconCommand { get; set; }
+        public ICommand TargetIconCommand { get; set; }
 		#endregion
 
 		public WorkoutViewModel () : base()
@@ -83,6 +85,8 @@ namespace Set.ViewModels
 			RepsDownCommand = new Command (async() => { await OnRepsDown(); });
 			WeighUpCommand = new Command (async() => { await OnWeighUp(); });
 			WeighDownCommand = new Command (async() => { await OnWeighDown(); });
+            PreviousIconCommand = new Command(() => { OnPreviousIconCommand(); });
+            TargetIconCommand = new Command(() => { OnTargetIconCommand(); });
 		}
 
 		public async Task Load()
@@ -175,6 +179,11 @@ namespace Set.ViewModels
 
 		private async Task OnRepsDown () 
 		{
+            if ((Reps == 0) && (Workout.TargetReps > 0))
+            {
+                Reps = Workout.TargetReps - 1;
+            }
+            else
 			if ((Reps - 1) < 0)
 			{
 				Reps = 0;
@@ -203,6 +212,11 @@ namespace Set.ViewModels
 
 		private async Task OnWeighDown () 
 		{
+            if ((Weight == 0) && (Workout.TargetWeight > 0))
+            {
+                Weight = Workout.TargetWeight;
+            }
+            else
 			if ((Weight - GetStep ()) < 0)
 			{
 				Weight = 0;
@@ -222,6 +236,30 @@ namespace Set.ViewModels
 				step = 1;
 			return step;
 		}
+
+        private void  OnPreviousIconCommand() 
+		{
+            if ((Reps > 0) && (Weight > 0))
+            {
+                if (Workout.PreviousReps > 0)
+                {
+                    Reps = Workout.PreviousReps;
+                    Weight = Workout.PreviousWeight;
+                }
+            }
+        }
+
+        private void OnTargetIconCommand() 
+		{
+            if ((Reps > 0) && (Weight > 0))
+            {
+                if (Workout.TargetReps > 0)
+                {
+                    Reps = Workout.TargetReps;
+                    Weight = Workout.TargetWeight;
+                }
+            }
+        }
 		#endregion
     }
 }

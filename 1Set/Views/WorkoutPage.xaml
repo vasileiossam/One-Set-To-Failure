@@ -50,9 +50,11 @@
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PreviousTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="#727272"/>
-
-			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_calendar" HorizontalOptions="Center" VerticalOptions="Center"/>
-		    <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+      
+      <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="48" WidthRequest="48" 
+              Image="ic_fa_calendar" Command="{Binding PreviousIconCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
+		  
+      <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 				            	
@@ -85,9 +87,11 @@
 			</Grid.ColumnDefinitions>
 
 	 		<Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TargetTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="#727272"/>
-
-			<Image Grid.Row="1" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_bullseye" HorizontalOptions="Center" VerticalOptions="Center"/>
-	        <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+      
+      <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="48" WidthRequest="48"
+              Image="ic_fa_bullseye" Command="{Binding TargetIconCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
+      
+      <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 				            	
