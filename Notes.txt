@@ -1,4 +1,6 @@
 ﻿
+fix timer issue last second 
+setup beta
 
 ----------------------------------------------
 
@@ -7,23 +9,8 @@ resear stats
 - Do not update SQLite.Net-PCL to 3.0.5 because it create all sorts of problems.
   It errors with "The type  must be a reference type in order to use it as parameter   generic type or method..."
   in BaseRepository
------------------------------------------
-- find and build the quotes
+
 - rest timer on header
 - target calcuation: rule to level up is not working. check also if its > or >=
 - adjust trophies: when level up add plus more than minimum
 - adjust trophies: when level down don't subtract any value
------------------------------------------
-motivational quotes
-- unzip service
-- how to load the files in image views 
-  - how to have the image scale nice and center?
-    - http://blog.falafel.com/xamarin-forms-storing-and-retrieving-photos/	
-    - place holder: http://forums.xamarin.com/discussion/17729/image-placeholder
-
-- prepare the image packs
-
-motivational quotes
-http://wishquotes.com/fitness-quotesi-do-it-because-i-can/
-https://www.pinterest.com/explore/inspirational-quotes/
-http://www.inspireleads.com/motivational-quotes/
