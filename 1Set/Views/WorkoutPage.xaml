@@ -44,15 +44,15 @@
 				<RowDefinition Height="8" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="48" />
+				<ColumnDefinition Width="54" />
 				<ColumnDefinition Width="122" />
 				<ColumnDefinition Width="122" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PreviousTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="#727272"/>
       
-      <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="48" WidthRequest="48" 
-              Image="ic_fa_calendar" Command="{Binding PreviousIconCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
+      <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="54" WidthRequest="54" 
+              Image="ic_fa_calendar" Command="{Binding PreviousIconCommand}"  HorizontalOptions="Center" VerticalOptions="Center"/>
 		  
       <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
@@ -81,14 +81,14 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="48" />
+				<ColumnDefinition Width="54" />
 				<ColumnDefinition Width="122" />
 				<ColumnDefinition Width="122" />
 			</Grid.ColumnDefinitions>
 
 	 		<Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TargetTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="#727272"/>
       
-      <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="48" WidthRequest="48"
+      <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="54" WidthRequest="54"
               Image="ic_fa_bullseye" Command="{Binding TargetIconCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
       
       <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -96,14 +96,14 @@
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 				            	
 	   	<controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
-	    	<Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+	    	<Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
 	        </Grid>
 	        <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 				<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 				<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 	        	
 	        	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="#D7D7D7" />
-	           	<Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+	           	<Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
 	        </Grid>
 
 			<BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>    
@@ -118,7 +118,7 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="48" />
+				<ColumnDefinition Width="54" />
 				<ColumnDefinition Width="122" />
 				<ColumnDefinition Width="122"/>
 			</Grid.ColumnDefinitions>

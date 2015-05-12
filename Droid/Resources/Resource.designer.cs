@@ -177,94 +177,154 @@ namespace Set.Droid
 			public const int nosound = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int Quotes_1 = 2130837538;
+			public const int QFitness_1 = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int Quotes_10 = 2130837539;
+			public const int QFitness_10 = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int Quotes_11 = 2130837540;
+			public const int QFitness_11 = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int Quotes_12 = 2130837541;
+			public const int QFitness_12 = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int Quotes_13 = 2130837542;
+			public const int QFitness_13 = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int Quotes_14 = 2130837543;
+			public const int QFitness_14 = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int Quotes_15 = 2130837544;
+			public const int QFitness_15 = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int Quotes_16 = 2130837545;
+			public const int QFitness_16 = 2130837545;
 			
 			// aapt resource value: 0x7f02002a
-			public const int Quotes_17 = 2130837546;
+			public const int QFitness_17 = 2130837546;
 			
 			// aapt resource value: 0x7f02002b
-			public const int Quotes_18 = 2130837547;
+			public const int QFitness_18 = 2130837547;
 			
 			// aapt resource value: 0x7f02002c
-			public const int Quotes_19 = 2130837548;
+			public const int QFitness_19 = 2130837548;
 			
 			// aapt resource value: 0x7f02002d
-			public const int Quotes_2 = 2130837549;
+			public const int QFitness_2 = 2130837549;
 			
 			// aapt resource value: 0x7f02002e
-			public const int Quotes_20 = 2130837550;
+			public const int QFitness_20 = 2130837550;
 			
 			// aapt resource value: 0x7f02002f
-			public const int Quotes_21 = 2130837551;
+			public const int QFitness_21 = 2130837551;
 			
 			// aapt resource value: 0x7f020030
-			public const int Quotes_22 = 2130837552;
+			public const int QFitness_22 = 2130837552;
 			
 			// aapt resource value: 0x7f020031
-			public const int Quotes_23 = 2130837553;
+			public const int QFitness_23 = 2130837553;
 			
 			// aapt resource value: 0x7f020032
-			public const int Quotes_24 = 2130837554;
+			public const int QFitness_24 = 2130837554;
 			
 			// aapt resource value: 0x7f020033
-			public const int Quotes_25 = 2130837555;
+			public const int QFitness_25 = 2130837555;
 			
 			// aapt resource value: 0x7f020034
-			public const int Quotes_3 = 2130837556;
+			public const int QFitness_3 = 2130837556;
 			
 			// aapt resource value: 0x7f020035
-			public const int Quotes_4 = 2130837557;
+			public const int QFitness_4 = 2130837557;
 			
 			// aapt resource value: 0x7f020036
-			public const int Quotes_5 = 2130837558;
+			public const int QFitness_5 = 2130837558;
 			
 			// aapt resource value: 0x7f020037
-			public const int Quotes_6 = 2130837559;
+			public const int QFitness_6 = 2130837559;
 			
 			// aapt resource value: 0x7f020038
-			public const int Quotes_7 = 2130837560;
+			public const int QFitness_7 = 2130837560;
 			
 			// aapt resource value: 0x7f020039
-			public const int Quotes_8 = 2130837561;
+			public const int QFitness_8 = 2130837561;
 			
 			// aapt resource value: 0x7f02003a
-			public const int Quotes_9 = 2130837562;
+			public const int QFitness_9 = 2130837562;
 			
 			// aapt resource value: 0x7f02003b
-			public const int sound = 2130837563;
+			public const int QInspirational_1 = 2130837563;
 			
 			// aapt resource value: 0x7f02003c
-			public const int splash = 2130837564;
+			public const int QInspirational_10 = 2130837564;
 			
 			// aapt resource value: 0x7f02003d
-			public const int SplashScreen = 2130837565;
+			public const int QInspirational_11 = 2130837565;
 			
 			// aapt resource value: 0x7f02003e
-			public const int success = 2130837566;
+			public const int QInspirational_12 = 2130837566;
 			
 			// aapt resource value: 0x7f02003f
-			public const int warning = 2130837567;
+			public const int QInspirational_13 = 2130837567;
+			
+			// aapt resource value: 0x7f020040
+			public const int QInspirational_14 = 2130837568;
+			
+			// aapt resource value: 0x7f020041
+			public const int QInspirational_15 = 2130837569;
+			
+			// aapt resource value: 0x7f020042
+			public const int QInspirational_16 = 2130837570;
+			
+			// aapt resource value: 0x7f020043
+			public const int QInspirational_17 = 2130837571;
+			
+			// aapt resource value: 0x7f020044
+			public const int QInspirational_18 = 2130837572;
+			
+			// aapt resource value: 0x7f020045
+			public const int QInspirational_19 = 2130837573;
+			
+			// aapt resource value: 0x7f020046
+			public const int QInspirational_2 = 2130837574;
+			
+			// aapt resource value: 0x7f020047
+			public const int QInspirational_20 = 2130837575;
+			
+			// aapt resource value: 0x7f020048
+			public const int QInspirational_3 = 2130837576;
+			
+			// aapt resource value: 0x7f020049
+			public const int QInspirational_4 = 2130837577;
+			
+			// aapt resource value: 0x7f02004a
+			public const int QInspirational_5 = 2130837578;
+			
+			// aapt resource value: 0x7f02004b
+			public const int QInspirational_6 = 2130837579;
+			
+			// aapt resource value: 0x7f02004c
+			public const int QInspirational_7 = 2130837580;
+			
+			// aapt resource value: 0x7f02004d
+			public const int QInspirational_8 = 2130837581;
+			
+			// aapt resource value: 0x7f02004e
+			public const int QInspirational_9 = 2130837582;
+			
+			// aapt resource value: 0x7f02004f
+			public const int sound = 2130837583;
+			
+			// aapt resource value: 0x7f020050
+			public const int splash = 2130837584;
+			
+			// aapt resource value: 0x7f020051
+			public const int SplashScreen = 2130837585;
+			
+			// aapt resource value: 0x7f020052
+			public const int success = 2130837586;
+			
+			// aapt resource value: 0x7f020053
+			public const int warning = 2130837587;
 			
 			static Drawable()
 			{

@@ -1,8 +1,4 @@
-﻿+ workout list: display target
-+ when click reps minus, set to target reps - 1
-+ when click weight minus, set to target weight
-+ tap on previous icon to set reps/weight
-+ tap on target icon to set reps/weight
+﻿
 
 ----------------------------------------------
 

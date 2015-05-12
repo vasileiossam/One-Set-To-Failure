@@ -62,7 +62,7 @@ namespace Set.Models
 			}
 		}
 
-		public async Task Load()
+		public async Task LoadAsync()
 		{
 			try
 			{
@@ -76,7 +76,7 @@ namespace Set.Models
 						PreviousWeight = PreviousWorkout.Weight;
 					}
 
-					dynamic targetWorkout = await WorkoutRules.GetTargetWorkout (this);
+					dynamic targetWorkout = await WorkoutRules.GetTargetWorkoutAsync (this);
 					if (targetWorkout != null)
 					{
 						TargetReps = targetWorkout.TargetReps;

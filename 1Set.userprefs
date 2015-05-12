@@ -1,10 +1,18 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Notes.txt">
+    <Files>
+      <File FileName="Notes.txt" Line="6" Column="1" />
+      <File FileName="1Set\Views\WorkoutPage.xaml" Line="107" Column="17" />
+      <File FileName="1Set\ColorPalette.cs" Line="15" Column="54" />
+      <File FileName="1Set\Concrete\Database.cs" Line="102" Column="84" />
+      <File FileName="1Set\ViewModels\SettingsViewModel.cs" Line="136" Column="50" />
+      <File FileName="1Set\ViewModels\RestTimerViewModel.cs" Line="166" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <FunctionBreakpoint line="152" column="1" function="System.Exception" language="C#" />
-      <Breakpoint file="c:\dev\1Set\1Set\Concrete\BaseRepository.cs" line="44" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

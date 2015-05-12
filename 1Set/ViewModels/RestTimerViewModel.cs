@@ -148,9 +148,20 @@ namespace Set.ViewModels
 		{
 			get
 			{
-				var r = new Random();
-				int i = r.Next(1, 25);
-				return string.Format("Quotes_{0}.png", i);
+				if (App.Settings.ImagePackId == 1)
+				{
+					var r = new Random ();
+					int i = r.Next (1, 25);
+					return string.Format ("QFitness_{0}.png", i);
+				}
+				else
+				if (App.Settings.ImagePackId == 2)
+				{
+					var r = new Random ();
+					int i = r.Next (1, 20);
+					return string.Format ("QInspirational_{0}.png", i);
+				}
+				return string.Empty;
 			}
 		}
 

@@ -18,7 +18,7 @@ namespace Set
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-			await ViewModel.Load ();
+			await ViewModel.LoadAsync ();
 			BindingContext = ViewModel;
         }
 

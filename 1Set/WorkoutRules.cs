@@ -42,7 +42,7 @@ namespace Set
             return 0;
         }
 
-        private static async Task<bool> CanCalculateTarget(Workout workout)
+        private static async Task<bool> CanCalculateTargetAsync(Workout workout)
         {
 			// TODO when I'll implement the settings in the exercise level I have to replace the WorkoutCount with workout.Exercise.RepsIncrement.WorkoutCount 
 			var workoutCount = App.Settings.RepsIncrement.WorkoutCount; 
@@ -53,16 +53,14 @@ namespace Set
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-			var list = await App.Database.WorkoutsRepository.AllAsync();
-			var collection = new ObservableCollection<Workout> (list);
-			var count = collection.Where(x => x.ExerciseId == workout.ExerciseId).Count();
+			var count = await App.Database.WorkoutsRepository.Table.Where(x => x.ExerciseId == workout.ExerciseId).CountAsync();
             if (workout.WorkoutId == 0) count++;
 
             return IsDivisible(count, workoutCount);
         }
 
 
-        public static async Task<object> GetTargetWorkout(Workout workout)
+        public static async Task<object> GetTargetWorkoutAsync(Workout workout)
         {
             int targetReps = 0;
             double targetWeight = 0;
@@ -79,7 +77,7 @@ namespace Set
                 targetWeight = 0;
             }
             else
-            if (await CanCalculateTarget(workout))
+            if (await CanCalculateTargetAsync(workout))
             {
                 // no previous workout exist, this is the first workout for this exercise
                 if (workout.PreviousWorkout == null)

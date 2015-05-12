@@ -100,6 +100,7 @@ namespace Set
                 {
                     _imagePack = new List<ImagePack>();
                     _imagePack.Add(new ImagePack() { ImagePackId = 1, Title = "25 Fitness Quotes" });
+					_imagePack.Add(new ImagePack() { ImagePackId = 2, Title = "20 Inspirational and Motivational Quotes" });
                 }
                 return _imagePack;
             }
@@ -159,7 +160,7 @@ namespace Set
 			var workoutsList = await App.Database.WorkoutsRepository.AllAsync ();
 			foreach (var workout in workoutsList)
 			{
-				await workout.Load ();
+				await workout.LoadAsync ();
 				workout.Trophies = WorkoutRules.GetTrophies(workout);
 				await App.Database.WorkoutsRepository.SaveAsync(workout);
 			}

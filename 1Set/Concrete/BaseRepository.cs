@@ -26,6 +26,14 @@ namespace Set.Concrete
 			_connection = connection;
 		}
 
+		public AsyncTableQuery<TEntity> Table
+		{
+			get
+			{
+				return _connection.Table<TEntity>();
+			}
+		}
+
 		public async Task<List<TEntity>> AllAsync()
 		{
 			// http://www.captechconsulting.com/blog/nicholas-cipollina/cross-platform-sqlite-support-%E2%80%93-part-1

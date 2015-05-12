@@ -89,9 +89,9 @@ namespace Set.ViewModels
             TargetIconCommand = new Command(() => { OnTargetIconCommand(); });
 		}
 
-		public async Task Load()
+		public async Task LoadAsync()
 		{
-			await Workout.Load ();
+			await Workout.LoadAsync ();
 			Reps = Workout.Reps;
 			Weight = Units.GetWeight (Workout.Weight);
 		}
@@ -239,7 +239,7 @@ namespace Set.ViewModels
 
         private void  OnPreviousIconCommand() 
 		{
-            if ((Reps > 0) && (Weight > 0))
+            //if ((Reps == 0) && (Weight == 0))
             {
                 if (Workout.PreviousReps > 0)
                 {
@@ -251,7 +251,7 @@ namespace Set.ViewModels
 
         private void OnTargetIconCommand() 
 		{
-            if ((Reps > 0) && (Weight > 0))
+            //if ((Reps == 0) && (Weight == 0))
             {
                 if (Workout.TargetReps > 0)
                 {

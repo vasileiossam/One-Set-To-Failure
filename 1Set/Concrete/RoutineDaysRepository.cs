@@ -69,6 +69,9 @@ namespace Set.Concrete
 					workout = new Workout ();
 					workout.ExerciseId = day.ExerciseId;
 					workout.Created = date;
+
+					// to calculate target reps/weight
+					await workout.LoadAsync ();
 				} 
 
 				day.Workout = workout;
