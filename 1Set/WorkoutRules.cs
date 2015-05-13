@@ -94,7 +94,7 @@ namespace Set
                         targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
                     }
                     // advance to next Weight
-						else if (targetReps > maxReps)
+					else if (workout.PreviousWorkout.Reps >= maxReps)
                     {
                         targetReps = startingReps;
                         targetWeight = GetNextWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
@@ -121,6 +121,10 @@ namespace Set
 
 		public static int GetTrophies(Workout workout)
 		{
+			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
+			var minReps = App.Settings.MinReps; 
+			var maxReps = App.Settings.MaxReps;
+
 			// we need at least one previous workout to start collecting trophies
 			if (workout.PreviousReps == 0)
 			{
@@ -143,13 +147,13 @@ namespace Set
 				// down to less weight
 				if (workout.TargetWeight > workout.Weight)
 				{
-					return -10;
+					return -1;
 				} 
 				else 
-					// up to more weight
+					// level up
 					if (workout.TargetWeight < workout.Weight)
 					{
-						return +10;
+						return workout.Reps - minReps;
 					}
 
 			return 0;

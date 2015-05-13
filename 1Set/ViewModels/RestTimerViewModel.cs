@@ -270,7 +270,7 @@ namespace Set.ViewModels
 			if (State != RestTimerStates.Running)
 				return false;
 			
-			if ((SecondsLeft - 1) < 0)
+			if ((SecondsLeft - 1) <= 0)
 			{
 				OnResetCommand ();
 

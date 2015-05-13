@@ -145,10 +145,12 @@ namespace Set.ViewModels
 
 				Workout.Trophies = WorkoutRules.GetTrophies(Workout);
 
+				var isPersisted = Workout.WorkoutId > 0;
+
 				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
 
-				if (App.Settings.RestTimerAutoStart == true)
+				if ((App.Settings.RestTimerAutoStart == true) && (!isPersisted))
 				{
 					await Navigation.PopAsync (false);
 					var viewModel = new RestTimerViewModel () { Navigation = Navigation};

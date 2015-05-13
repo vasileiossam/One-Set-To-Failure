@@ -40,6 +40,7 @@ namespace Set.Models
 			}
 		}
 
+		// TODO move to viewmodel
 		[Ignore]
 		public bool TrophyVisible {
 			get
@@ -48,6 +49,15 @@ namespace Set.Models
 			}
 		}
 
+		// TODO move to viewmodel
+		[Ignore]
+		public bool LevelUpVisible {
+			get
+			{
+				return (Workout.TargetWeight > 0) && (Workout.PreviousWeight > 0) && (Workout.Weight > Workout.PreviousWeight);
+			}
+		}
+			
 		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
 		protected StackOrientation _cellLayoutOrientation;
 		[Ignore]
