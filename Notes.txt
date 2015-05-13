@@ -1,6 +1,7 @@
-﻿
-fix timer issue last second 
-setup beta
+﻿- install habbit streak?
+- autostart only when first time
+- fix timer issue last second 
+- setup beta
 
 ----------------------------------------------
 
