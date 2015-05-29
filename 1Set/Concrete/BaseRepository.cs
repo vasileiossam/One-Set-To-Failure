@@ -16,7 +16,7 @@ namespace Set.Concrete
 	/// Explanation for : new () 
 	/// http://stackoverflow.com/questions/3056863/class-mapping-error-t-must-be-a-non-abstract-type-with-a-public-parameterless
 	/// </summary>
-	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : new ()
+	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new ()
 	{
 		protected static readonly AsyncLock Mutex = new AsyncLock ();
 		protected readonly SQLiteAsyncConnection _connection;

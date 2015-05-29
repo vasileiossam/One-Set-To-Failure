@@ -25,7 +25,7 @@ namespace Set
 
 		public App ()
 		{	
-			
+			//System.Diagnostics.Debugger.Break ();
 			Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 

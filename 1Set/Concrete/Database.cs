@@ -120,14 +120,15 @@ namespace Set
 
 		public async Task CreateDatabaseAsync ()
 		{
-			//	_connection.DropTable<Exercise> ();
-			//	_connection.DropTable<RoutineDay> ();
-			//await _connection.DropTableAsync<Workout> ();
-
 			try
 			{
 				using (await Mutex.LockAsync ().ConfigureAwait (false)) 
 				{
+					//await _connection.DropTableAsync<Exercise> ().ConfigureAwait (false);
+					//await _connection.DropTableAsync<RoutineDay> ().ConfigureAwait (false);
+					//await _connection.DropTableAsync<Workout> ().ConfigureAwait (false);
+					//await _connection.DropTableAsync<Calendar> ().ConfigureAwait (false);
+
 					await _connection.CreateTableAsync<Exercise> ().ConfigureAwait (false);
 					await _connection.CreateTableAsync<RoutineDay> ().ConfigureAwait (false);
 					await _connection.CreateTableAsync<Workout> ().ConfigureAwait (false);
