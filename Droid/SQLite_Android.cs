@@ -12,13 +12,16 @@ using SQLite.Net.Platform.XamarinAndroid;
 
 namespace Set.Droid
 {
+	#if DEBUG
 	public class TraceListener : ITraceListener
 	{
 		public void Receive (string message)
 		{
 			Console.WriteLine(message);
+			Logger.Info ("TraceListener", message);
 		}
 	}
+	#endif
 
 	public class SQLite_Android : ISQLite
 	{

@@ -58,6 +58,7 @@ namespace Set.Concrete
 		private async Task LoadRelations(List<RoutineDay> list, DateTime date)
 		{
 			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(date);
+			var canCalculateTarget = false;
 
 			foreach (var day in list)
 			{
@@ -69,14 +70,19 @@ namespace Set.Concrete
 					workout = new Workout ();
 					workout.ExerciseId = day.ExerciseId;
 					workout.Created = date;
-
-					// to calculate target reps/weight
-					await workout.LoadAsync ();
+					canCalculateTarget = true;
 				} 
 
 				day.Workout = workout;
 				day.Exercise = await App.Database.ExercisesRepository.FindAsync (day.ExerciseId);
 				day.Workout.Exercise = day.Exercise;
+
+				// to calculate target reps/weight
+				if (canCalculateTarget) 
+				{
+					await workout.LoadAsync ();
+				}
+
 			}
 		}
 

@@ -108,6 +108,7 @@
     <Compile Include="Renders\GestureFrameRenderer.cs" />
     <Compile Include="Renders\CustomGestureListener.cs" />
     <Compile Include="SoundService.cs" />
+    <Compile Include="Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

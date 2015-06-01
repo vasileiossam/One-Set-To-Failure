@@ -25,7 +25,7 @@ namespace Set.Concrete
 				var sql = @"SELECT *  
                     FROM Workouts
                     WHERE Created = ?";
-				var d = new DateTime ((long)635670720000000000);
+	
 				list = await _connection.QueryAsync<Workout> (sql, date);
 				return list;
 			}

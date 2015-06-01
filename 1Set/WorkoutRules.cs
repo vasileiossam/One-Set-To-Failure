@@ -103,7 +103,7 @@ namespace Set
                     else
                     {
 						// TODO when I'll implement the settings in the exercise level I have to replace the increment with workout.Exercise.RepsIncrement.Increment
-							targetReps = workout.PreviousWorkout.Reps + App.Settings.RepsIncrement.Increment;
+						targetReps = workout.PreviousWorkout.Reps + App.Settings.RepsIncrement.Increment;
 					    
                         targetWeight = workout.PreviousWorkout.Weight;
                     }
