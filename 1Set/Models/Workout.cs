@@ -39,7 +39,7 @@ namespace Set.Models
 		public int TargetReps { get; set; }
 		public double TargetWeight { get; set; }
 
-		[Ignore]
+ 		[Ignore]
 		public Exercise Exercise { get; set; }
 
 		[Ignore]

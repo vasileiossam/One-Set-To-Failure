@@ -24,5 +24,6 @@ namespace Set.Concrete
 				return await _connection.DeleteAsync<Exercise> (id);			
 			}
 		}
+
 	}
 }

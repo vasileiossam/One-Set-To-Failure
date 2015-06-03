@@ -49,7 +49,7 @@ namespace Set
         {
             using (var sw = new StreamWriter(FileName, true))
             {
-                var line = string.Format("{0}\t {1}\t {2}\t {3}\r\", DateTime.Now.ToString("s"), messageType, tag, message);
+                var line = string.Format("{0}\t {1}\t {2}\t {3}\r", DateTime.Now.ToString("s"), messageType, tag, message);
                 sw.Write(line);
             }
         }

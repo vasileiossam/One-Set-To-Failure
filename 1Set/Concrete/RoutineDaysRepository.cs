@@ -42,10 +42,11 @@ namespace Set.Concrete
 				{
 					list = await _connection.Table<RoutineDay> ()
 						.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToListAsync ();
-
-					await LoadRelations(list, date);
-					return list;
 				}
+
+				await LoadExercisesAsync (list);
+				await LoadRelations(list, date);
+				return list;
 			}
 			catch(Exception ex)
 			{
@@ -56,8 +57,9 @@ namespace Set.Concrete
 		}
 
 		private async Task LoadRelations(List<RoutineDay> list, DateTime date)
-		{
+		{	
 			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(date);
+				
 			var canCalculateTarget = false;
 
 			foreach (var day in list)
@@ -74,7 +76,6 @@ namespace Set.Concrete
 				} 
 
 				day.Workout = workout;
-				day.Exercise = await App.Database.ExercisesRepository.FindAsync (day.ExerciseId);
 				day.Workout.Exercise = day.Exercise;
 
 				// to calculate target reps/weight
@@ -98,6 +99,33 @@ namespace Set.Concrete
 
 				list = await _connection.QueryAsync<RoutineDay> (sql, exerciseId);
 				return list;
+			}
+		}
+
+		private async Task LoadExercisesAsync(List<RoutineDay> list)
+		{
+			if (list.Count == 0)
+				return;
+			
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{	
+				var condition = string.Empty;
+
+				foreach (var day in list)
+				{
+					condition = condition + day.ExerciseId + ",";
+				}
+				condition = condition.TrimEnd (',');
+
+				var sql = string.Format(@"SELECT *  
+                        FROM Exercises
+                        WHERE ExerciseId IN ({0})", condition);
+				var exercises = await _connection.QueryAsync<Exercise> (sql);
+
+				foreach (var day in list)
+				{
+					day.Exercise = exercises.FirstOrDefault (x => x.ExerciseId == day.ExerciseId);
+				}
 			}
 		}
 	}

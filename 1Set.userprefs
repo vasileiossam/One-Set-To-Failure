@@ -1,11 +1,19 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="c:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Concrete\RoutineDaysRepository.cs">
     <Files>
-      <File FileName="c:\dev\1Set\1Set\WorkoutRules.cs" Line="106" Column="7" />
-      <File FileName="c:\dev\1Set\1Set\Models\Workout.cs" Line="73" Column="13" />
-      <File FileName="c:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs" Line="70" Column="2" />
-      <File FileName="Droid\SQLite_Android.cs" Line="59" Column="28" />
+      <File FileName="Droid\SQLite_Android.cs" Line="21" Column="1" />
+      <File FileName="1Set\Concrete\RoutineDaysRepository.cs" Line="57" Column="4" />
+      <File FileName="1Set\WorkoutRules.cs" Line="159" Column="13" />
+      <File FileName="1Set\Concrete\WorkoutsRepository.cs" Line="36" Column="1" />
+      <File FileName="1Set\Models\Workout.cs" Line="43" Column="1" />
+      <File FileName="Notes.txt" Line="1" Column="1" />
+      <File FileName="README.md" Line="11" Column="1" />
+      <File FileName="1Set\Models\Exercise.cs" Line="11" Column="2" />
+      <File FileName="Droid\MainActivity.cs" Line="51" Column="4" />
+      <File FileName="1Set\App.cs" Line="28" Column="1" />
+      <File FileName="1Set\Concrete\Database.cs" Line="27" Column="54" />
+      <File FileName="1Set\Models\RoutineDay.cs" Line="11" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
