@@ -62,7 +62,7 @@ namespace Set.Droid
 				// storeDateTimeAsTicks  = true
 				// set it to false if I want the date fields to created as string instead of bigint
 				// http://stackoverflow.com/questions/21460271/community-sqlite-not-handling-dates-datetimes-correctly
-				var connectionStr = new SQLiteConnectionString (pathName, false); 
+				var connectionStr = new SQLiteConnectionString (pathName, true); 
 
 				var connectionWithLock = new SQLiteConnectionWithLock (platform, connectionStr);
 
