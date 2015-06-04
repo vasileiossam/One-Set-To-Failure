@@ -1,13 +1,11 @@
 ﻿using System;
-using Set.Models;
-using SQLite.Net;
-using SQLite.Net.Async;
-using Set.Abstract;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using Set.Abstract;
+using Set.Models;
+using SQLite.Net.Async;
 
 namespace Set.Concrete
 {
@@ -37,7 +35,7 @@ namespace Set.Concrete
 		//var k = await _connection.QueryAsync<RoutineDay> ("SELECT * FROM RoutineDays");
 			try
 			{
-				List<RoutineDay> list = new List<RoutineDay> ();
+				var list = new List<RoutineDay> ();
 				using (await Mutex.LockAsync ().ConfigureAwait (false))
 				{
 					list = await _connection.Table<RoutineDay> ()
@@ -69,10 +67,12 @@ namespace Set.Concrete
 				// workout hasn't performed for this exercise
 				if (workout == null)
 				{
-					workout = new Workout ();
-					workout.ExerciseId = day.ExerciseId;
-					workout.Created = date;
-					canCalculateTarget = true;
+				    workout = new Workout
+				    {
+				        ExerciseId = day.ExerciseId,
+				        Created = date
+				    };
+				    canCalculateTarget = true;
 				} 
 
 				day.Workout = workout;
@@ -89,7 +89,7 @@ namespace Set.Concrete
 
 		public async Task<List<RoutineDay>> GetRoutine(int exerciseId)
 		{
-			List<RoutineDay> list = new List<RoutineDay> ();
+			var list = new List<RoutineDay> ();
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{			
 				var sql = @"SELECT *  

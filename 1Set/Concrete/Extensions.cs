@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using SQLite.Net.Attributes;
 
 namespace Set.Concrete
@@ -24,11 +20,11 @@ namespace Set.Concrete
 
         public static string IdentifierPropertyName(this Type type)
         {
-			if (type.GetRuntimeProperties().Any(info => info.PropertyType.AttributeExists<SQLite.Net.Attributes.PrimaryKeyAttribute>()))
+			if (type.GetRuntimeProperties().Any(info => info.PropertyType.AttributeExists<PrimaryKeyAttribute>()))
             {
                 return
 					type.GetRuntimeProperties().First(
-						info => info.PropertyType.AttributeExists<SQLite.Net.Attributes.PrimaryKeyAttribute>())
+						info => info.PropertyType.AttributeExists<PrimaryKeyAttribute>())
                         .Name;
             }
 			else if (type.GetRuntimeProperties().Any(p => p.Name.EndsWith("id", StringComparison.CurrentCultureIgnoreCase)))

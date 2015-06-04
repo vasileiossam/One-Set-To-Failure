@@ -1,11 +1,4 @@
-﻿using System;
-using Set.Resx;
-using Xamarin.Forms;
-using System.Collections.ObjectModel;
-using Set.Models;
-using System.Threading.Tasks;
-using System.Linq;
-using Toasts.Forms.Plugin.Abstractions;
+﻿using Set.Resx;
 
 namespace Set.ViewModels
 {

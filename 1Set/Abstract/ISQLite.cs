@@ -1,5 +1,4 @@
-﻿using System;
-using SQLite.Net.Async;
+﻿using SQLite.Net.Async;
 
 namespace Set.Abstract
 {

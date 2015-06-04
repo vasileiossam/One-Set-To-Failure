@@ -1,5 +1,4 @@
-﻿using System;
-using Set.Resx;
+﻿using Set.Resx;
 
 namespace Set.Models
 {

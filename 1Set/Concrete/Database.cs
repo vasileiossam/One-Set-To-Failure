@@ -1,14 +1,11 @@
 ﻿using System;
-using SQLite.Net.Async;
-using SQLite.Net;
 using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Forms;
-using Set.Abstract;
-using Set.Models;
-using Set.Concrete;
-using Set.Resx;
 using System.Threading.Tasks;
+using Set.Abstract;
+using Set.Concrete;
+using Set.Models;
+using SQLite.Net.Async;
+using Xamarin.Forms;
 
 namespace Set
 {
@@ -20,53 +17,25 @@ namespace Set
         private WorkoutsRepository _workoutRepository;
         public WorkoutsRepository WorkoutsRepository
         {
-            get
-            {
-                if (_workoutRepository == null)
-                {
-                    _workoutRepository = new WorkoutsRepository(_connection);
-                }
-                return _workoutRepository;
-            }
+            get { return _workoutRepository ?? (_workoutRepository = new WorkoutsRepository(_connection)); }
         }
 
 		private RoutineDaysRepository _routineDaysRepository;
 		public RoutineDaysRepository RoutineDaysRepository
 		{
-			get
-			{
-				if (_routineDaysRepository == null)
-				{
-					_routineDaysRepository = new RoutineDaysRepository(_connection);
-				}
-				return _routineDaysRepository;
-			}
+			get { return _routineDaysRepository ?? (_routineDaysRepository = new RoutineDaysRepository(_connection)); }
 		}
 
 		private CalendarRepository _calendarRepository;
 		public CalendarRepository CalendarRepository
 		{
-			get
-			{
-				if (_calendarRepository == null)
-				{
-					_calendarRepository = new CalendarRepository(_connection);
-				}
-				return _calendarRepository;
-			}
+			get { return _calendarRepository ?? (_calendarRepository = new CalendarRepository(_connection)); }
 		}
 
 		private ExercisesRepository _exercisesRepository;
 		public ExercisesRepository ExercisesRepository
 		{
-			get
-			{
-				if (_exercisesRepository == null)
-				{
-					_exercisesRepository = new ExercisesRepository(_connection);
-				}
-				return _exercisesRepository;
-			}
+			get { return _exercisesRepository ?? (_exercisesRepository = new ExercisesRepository(_connection)); }
 		}
 
 		private List<RepsIncrement> _repsIncrements;
@@ -98,21 +67,20 @@ namespace Set
             {
                 if (_imagePack == null)
                 {
-                    _imagePack = new List<ImagePack>();
-                    _imagePack.Add(new ImagePack() { ImagePackId = 1, Title = "25 Fitness Quotes" });
-					_imagePack.Add(new ImagePack() { ImagePackId = 2, Title = "20 Inspirational and Motivational Quotes" });
+                    _imagePack = new List<ImagePack>
+                    {
+                        new ImagePack() {ImagePackId = 1, Title = "25 Fitness Quotes"},
+                        new ImagePack() {ImagePackId = 2, Title = "20 Inspirational and Motivational Quotes"}
+                    };
                 }
                 return _imagePack;
             }
         }
 
-		/// <summary>
-		/// if the database doesn't exist, it will create the database and all the tables.
-		/// </summary>
-		/// <param name='path'>
-		/// Path.
-		/// </param>
-		public Database()
+	    /// <summary>
+	    /// if the database doesn't exist, it will create the database and all the tables.
+	    /// </summary>
+	    public Database()
 		{
 			_connection = DependencyService.Get<ISQLite> ().GetConnection ();
 			CreateDatabaseAsync ();

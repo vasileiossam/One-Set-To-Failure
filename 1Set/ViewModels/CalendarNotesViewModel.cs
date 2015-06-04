@@ -1,14 +1,8 @@
 ﻿using System;
-using SQLite.Net.Attributes;
-using Set.Models;
-using System.Collections.Generic;
-using Set.Resx;
-using Xamarin.Forms;
-using Toasts.Forms.Plugin.Abstractions;
-using Set.Localization;
-using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
+using Set.Models;
+using Set.Resx;
 
 namespace Set.ViewModels
 {

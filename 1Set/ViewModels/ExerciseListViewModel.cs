@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using Set.Models;
-using System.Linq;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using AutoMapper;
 using Set.Resx;
 using Set.ViewModels;
-using Xamarin.Forms;
-using AutoMapper;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Set
 {

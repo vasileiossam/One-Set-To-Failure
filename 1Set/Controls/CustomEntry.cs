@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Set.Controls
 {
@@ -26,11 +25,11 @@ namespace Set.Controls
 			set { SetValue (FontAttributesProperty, value); }
 		}
 
-		public static readonly BindableProperty TextAlignmentProperty = BindableProperty.Create<CustomEntry, Xamarin.Forms.TextAlignment> (p => p.TextAlignment, Xamarin.Forms.TextAlignment.Start);
+		public static readonly BindableProperty TextAlignmentProperty = BindableProperty.Create<CustomEntry, TextAlignment> (p => p.TextAlignment, TextAlignment.Start);
 
-		public Xamarin.Forms.TextAlignment TextAlignment 
+		public TextAlignment TextAlignment 
 		{
-			get { return (Xamarin.Forms.TextAlignment)GetValue (TextAlignmentProperty); }
+			get { return (TextAlignment)GetValue (TextAlignmentProperty); }
 			set { SetValue (TextAlignmentProperty, value); }
 		}
 

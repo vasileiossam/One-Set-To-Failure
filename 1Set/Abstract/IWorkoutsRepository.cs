@@ -1,5 +1,4 @@
-﻿using System;
-using Set.Models;
+﻿using Set.Models;
 
 namespace Set.Abstract
 {

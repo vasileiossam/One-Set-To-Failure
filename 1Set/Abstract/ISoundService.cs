@@ -1,8 +1,4 @@
-﻿using System;
-using Set.Models;
-using System.Threading.Tasks;
-
-namespace Set
+﻿namespace Set
 {
 	public interface ISoundService
 	{

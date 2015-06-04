@@ -1,10 +1,7 @@
 ﻿using System;
-using Set.ViewModels;
-using Xamarin.Forms;
-using System.Threading.Tasks;
-using Set.Resx;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
+using Set.Resx;
+using Xamarin.Forms;
 
 namespace Set.ViewModels
 {

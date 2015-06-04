@@ -1,9 +1,5 @@
 ﻿using System;
 using SQLite.Net.Attributes;
-using System.Collections.Generic;
-using SQLiteNetExtensions.Attributes;
-using System.Linq;
-using AutoMapper;
 
 namespace Set.Models
 {

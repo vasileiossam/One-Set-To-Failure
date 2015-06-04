@@ -1,7 +1,6 @@
 using System;
-using Xamarin.Forms;
-using System.Diagnostics;
 using System.Globalization;
+using Xamarin.Forms;
 
 namespace Set
 {

@@ -1,14 +1,9 @@
 ﻿using System;
-using SQLite.Net.Attributes;
-using Set.Models;
-using System.Windows.Input;
-using Xamarin.Forms;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Set.Models;
+using Xamarin.Forms;
 
 namespace Set.ViewModels
 {

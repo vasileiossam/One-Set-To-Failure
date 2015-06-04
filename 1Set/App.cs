@@ -1,15 +1,13 @@
 ﻿using System;
-using Set.Abstract;
-using Xamarin.Forms;
+using System.Diagnostics;
 using System.Globalization;
-using Set.Models;
-using System.Reflection;
 using Set.Localization;
-using Toasts.Forms.Plugin.Abstractions;
+using Set.Models;
 using Set.Resx;
-using System.Threading.Tasks;
 using Set.ViewModels;
 using Set.Views;
+using Toasts.Forms.Plugin.Abstractions;
+using Xamarin.Forms;
 
 namespace Set
 {
@@ -25,19 +23,21 @@ namespace Set
 
 		public App ()
 		{	
-			System.Diagnostics.Debugger.Break ();
+			Debugger.Break ();
 			Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
-					 
-	    	var mainNav = new NavigationPage (new WorkoutListPage ());
 
-			mainNav.BarBackgroundColor = ColorPalette.Primary;
-			mainNav.BarTextColor = ColorPalette.Icons;
+		    var mainNav = new NavigationPage(new WorkoutListPage())
+		    {
+		        BarBackgroundColor = ColorPalette.Primary,
+		        BarTextColor = ColorPalette.Icons
+		    };
 
-        	MainPage = mainNav;
+
+		    MainPage = mainNav;
 		}
 
 		protected override void OnStart ()
@@ -57,11 +57,11 @@ namespace Set
 
 		public static async void ShowToast(ToastNotificationType type, string header, string message)
 		{
-			var notificator = DependencyService.Get<IToastNotificator>();
-			bool tapped = await notificator.Notify(type, header, message, TimeSpan.FromSeconds(1.5));
+		    var notificator = DependencyService.Get<IToastNotificator>();
+		    await notificator.Notify(type, header, message, TimeSpan.FromSeconds(1.5));
 		}
 
-		public static void SaveSettings()
+	    public static void SaveSettings()
 		{
 			DependencyService.Get<ISettingsStorage> ().Save(Settings);
 		}
@@ -70,7 +70,7 @@ namespace Set
 		{
 			var viewModel = new ErrorViewModel () { Sender = sender, Exception = ex };
 
-			var mainPage = App.Current.MainPage;
+			var mainPage = Current.MainPage;
 			if (mainPage != null)
 			{
 				mainPage.Navigation.PushAsync (new ErrorPage (){ ViewModel = viewModel });
@@ -78,7 +78,7 @@ namespace Set
 			else
 			{
 				var mainNav = new NavigationPage (new ErrorPage (){ ViewModel = viewModel });
-				App.Current.MainPage = mainNav;
+				Current.MainPage = mainNav;
 			}
 		}
 	}

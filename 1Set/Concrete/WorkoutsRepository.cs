@@ -1,11 +1,9 @@
 ﻿using System;
-using Set.Models;
-using SQLite.Net;
-using SQLite.Net.Async;
-using Set.Abstract;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Set.Abstract;
+using Set.Models;
+using SQLite.Net.Async;
 
 namespace Set.Concrete
 {
@@ -19,7 +17,7 @@ namespace Set.Concrete
 
 		public async Task<List<Workout>> GetWorkouts(DateTime date)
 		{
-			List<Workout> list = new List<Workout> ();
+			var list = new List<Workout> ();
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{				
 				var sql = @"SELECT *  

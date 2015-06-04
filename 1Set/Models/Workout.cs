@@ -1,11 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-using Set;
-using System.Threading.Tasks;
-using Set.Concrete;
-using Xamarin.Forms;
-using Set.Abstract;
 
 namespace Set.Models
 {

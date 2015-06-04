@@ -1,11 +1,6 @@
 using System;
-using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Set.Models;
-using System.Linq;
 using System.Threading.Tasks;
+using Set.Models;
 
 namespace Set
 {

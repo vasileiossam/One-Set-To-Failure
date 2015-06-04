@@ -1,9 +1,7 @@
-﻿using System;
-using Set.Models;
-using SQLite.Net;
-using SQLite.Net.Async;
+﻿using System.Threading.Tasks;
 using Set.Abstract;
-using System.Threading.Tasks;
+using Set.Models;
+using SQLite.Net.Async;
 
 namespace Set.Concrete
 {

@@ -1,13 +1,9 @@
 ﻿using System;
-using Set.Abstract;
-using SQLite.Net;
-using SQLite.Net.Async;
 using System.Collections.Generic;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using Set.Models;
+using System.Threading.Tasks;
+using Set.Abstract;
+using SQLite.Net.Async;
 
 namespace Set.Concrete
 {

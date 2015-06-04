@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Set.Models;
-using System.Collections.ObjectModel;
-using Set.Resx;
-using Xamarin.Forms;
-using Toasts.Forms.Plugin.Abstractions;
-using AutoMapper;
-using System.Linq;
-using System.Windows.Input;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using AutoMapper;
+using Set.Models;
+using Set.Resx;
+using Toasts.Forms.Plugin.Abstractions;
+using Xamarin.Forms;
 
 namespace Set.ViewModels
 {

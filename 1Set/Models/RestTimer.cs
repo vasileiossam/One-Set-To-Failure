@@ -1,9 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Collections.Generic;
-using Set.Resx;
-
-namespace Set.Models
+﻿namespace Set.Models
 {
 	public class RestTimer
 	{

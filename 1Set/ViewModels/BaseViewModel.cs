@@ -1,10 +1,8 @@
-using System;
-using SQLite.Net.Attributes;
 using System.ComponentModel;
-using Xamarin.Forms;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using AutoMapper;
-using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Set.ViewModels
 {
