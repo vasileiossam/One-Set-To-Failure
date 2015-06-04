@@ -65,6 +65,16 @@ namespace Set.ViewModels
 			}
 		}
 
+		public bool LevelUpVisible
+		{
+			get
+			{
+				if (Workout == null)
+					return false;
+				return Workout.TargetWeight > Workout.PreviousWeight;
+			}
+		}
+
 		public bool TargetRepsWeightVisible { get { return App.Settings.TargetRepsWeightVisible;} }
 		public bool PreviousRepsWeightVisible { get { return App.Settings.PreviousRepsWeightVisible;} }
 
