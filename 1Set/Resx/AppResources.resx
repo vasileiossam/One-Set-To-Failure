@@ -461,4 +461,17 @@
     <data name="SettingsShowImagesPackInWorkoutTitle" xml:space="preserve">
     <value>Show motivational images in workout tracking page</value>
   </data>  
+
+  <data name="SettingsExportWorkoutDataTitle" xml:space="preserve">
+    <value>Export Workout Data</value>
+  </data>
+  <data name="SettingsExportWorkoutDataHint" xml:space="preserve">
+    <value>Export your workout data to a popular file format</value>
+  </data>
+  <data name="SettingsExportWorkoutDataOption1" xml:space="preserve">
+    <value>Export as .CSV (view in a spreasheet application)</value>
+  </data>
+  <data name="SettingsExportWorkoutDataCompleted" xml:space="preserve">
+    <value>Data exported to {0}</value>
+  </data>
 </root>

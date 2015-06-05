@@ -584,6 +584,42 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data exported to {0}.
+        /// </summary>
+        internal static string SettingsExportWorkoutDataCompleted {
+            get {
+                return ResourceManager.GetString("SettingsExportWorkoutDataCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export your workout data to a popular file format.
+        /// </summary>
+        internal static string SettingsExportWorkoutDataHint {
+            get {
+                return ResourceManager.GetString("SettingsExportWorkoutDataHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export as .CSV (view in a spreasheet application).
+        /// </summary>
+        internal static string SettingsExportWorkoutDataOption1 {
+            get {
+                return ResourceManager.GetString("SettingsExportWorkoutDataOption1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Workout Data.
+        /// </summary>
+        internal static string SettingsExportWorkoutDataTitle {
+            get {
+                return ResourceManager.GetString("SettingsExportWorkoutDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GENERAL.
         /// </summary>
         internal static string SettingsGeneralTitle {

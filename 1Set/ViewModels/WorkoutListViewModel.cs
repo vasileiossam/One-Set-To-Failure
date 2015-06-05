@@ -15,7 +15,7 @@ namespace Set.ViewModels
 		// try again in the next xamarin forms update
 		public WorkoutListPage Page { get; set; }
 
-		protected string _trophies;
+        private string _trophies;
 		public string Trophies
 		{
 			get
@@ -24,15 +24,13 @@ namespace Set.ViewModels
 			}
 			set
 			{
-				if (_trophies != value)
-				{
-					_trophies = value;
-					OnPropertyChanged("Trophies");
-				}
+			    if (_trophies == value) return;
+			    _trophies = value;
+			    OnPropertyChanged("Trophies");
 			}
 		}
 
-		protected string _calendarNotes;
+        private string _calendarNotes;
 		public string CalendarNotes
 		{
 			get
@@ -49,7 +47,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		protected bool _calendarNotesVisible;
+        private bool _calendarNotesVisible;
 		public bool CalendarNotesVisible 
 		{ 
 			get
@@ -66,7 +64,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		protected bool _workoutsListVisible;
+        private bool _workoutsListVisible;
 		public bool WorkoutsListVisible
 		{
 			get
@@ -83,7 +81,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		protected bool _noWorkoutDataVisible;
+		private bool _noWorkoutDataVisible;
 		public bool NoWorkoutDataVisible
 		{
 			get
@@ -100,7 +98,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		private ICommand _chevronTapCommand;
+		private readonly ICommand _chevronTapCommand;
 		public ICommand ChevronTapCommand
 		{
 			get
@@ -109,7 +107,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		private ICommand _calendarNotesCommand;
+		private readonly ICommand _calendarNotesCommand;
 		public ICommand CalendarNotesCommand
 		{
 			get
@@ -118,7 +116,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		private ICommand _restTimerCommand;
+		private readonly ICommand _restTimerCommand;
 		public ICommand RestTimerCommand
 		{
 			get
@@ -127,7 +125,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		protected DateTime _currentDate;
+        private DateTime _currentDate;
         public DateTime CurrentDate
         {
 			get
@@ -136,16 +134,14 @@ namespace Set.ViewModels
 			}
 			set
             {
-                if (_currentDate != value)
-                {
-                    _currentDate = value;
-					App.CurrentDate = value;
-                    OnPropertyChanged("CurrentDate");
-                }
+                if (_currentDate == value) return;
+                _currentDate = value;
+                App.CurrentDate = value;
+                OnPropertyChanged("CurrentDate");
             }
         }
 
-		protected ObservableCollection<RoutineDay> _routineDays;
+        private ObservableCollection<RoutineDay> _routineDays;
 		public ObservableCollection<RoutineDay> RoutineDays
 		{
 			get
@@ -162,7 +158,7 @@ namespace Set.ViewModels
 			}
 		}
 
-		public WorkoutListViewModel () : base()
+		public WorkoutListViewModel ()
 		{
 			Title = "One Set To Fatigue";
 

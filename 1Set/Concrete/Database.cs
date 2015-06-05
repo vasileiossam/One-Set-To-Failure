@@ -6,6 +6,9 @@ using Set.Concrete;
 using Set.Models;
 using SQLite.Net.Async;
 using Xamarin.Forms;
+using System.Text;
+using System.Linq;
+using System.Diagnostics;
 
 namespace Set
 {
@@ -136,6 +139,54 @@ namespace Set
 			App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
 		}
 
+		public async Task<string> ExportToCsv()
+		{
+			try
+			{
+				var sb = new StringBuilder();
+				var workouts = await WorkoutsRepository.AllAsync();
+				workouts = workouts.OrderBy(x => x.Created).ToList();
+				var exercises = await ExercisesRepository.AllAsync();
+
+				sb.AppendLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\"", 
+					"Date",
+					"Exercise",
+					"Reps",
+					"Weight",
+					"Target Reps",
+					"Target Weight",
+					"Trophies",
+					"Workout Notes"
+				));
+
+				foreach(Workout workout in workouts)
+				{
+					workout.Exercise = exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
+					if (workout.Exercise == null) continue;
+
+					var line = string.Format("{0},\"{1}\",{2},{3},{4},{5},{6},\"{7}\"", 
+						workout.Created.Date.ToString("d"),
+						workout.Exercise.Name,
+						workout.Reps,
+						workout.Weight,
+						workout.TargetReps,
+						workout.TargetWeight,
+						workout.Trophies,
+						workout.Notes
+					);
+
+					sb.AppendLine(line);
+				}
+
+				return DependencyService.Get<IExporter> ().ExportToCsv (sb);
+			}
+			catch(Exception ex)
+			{
+				App.ShowErrorPage (this, ex);				
+			}
+
+			return string.Empty;
+		}
 	}
 }
 

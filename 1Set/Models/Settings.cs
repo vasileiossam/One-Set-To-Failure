@@ -52,12 +52,9 @@ namespace Set.Models
 		{
 			get
 			{
-				var repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == RepsIncrementId);
-				if (repsIncrement == null)
-				{
-					repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == 1);
-				}
-				return repsIncrement;
+				var repsIncrement = App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == RepsIncrementId) ??
+				                    App.Database.RepsIncrements.FirstOrDefault (x => x.RepsIncrementId == 1);
+			    return repsIncrement;
 			}
 		}
 
@@ -66,11 +63,8 @@ namespace Set.Models
         {
             get
             {
-                var imagePack = App.Database.ImagePacks.FirstOrDefault(x => x.ImagePackId == ImagePackId);
-                if (imagePack == null)
-                {
-                    imagePack = App.Database.ImagePacks.FirstOrDefault(x => x.ImagePackId == 1);
-                }
+                var imagePack = App.Database.ImagePacks.FirstOrDefault(x => x.ImagePackId == ImagePackId) ??
+                                App.Database.ImagePacks.FirstOrDefault(x => x.ImagePackId == 1);
                 return imagePack;
             }
         }  

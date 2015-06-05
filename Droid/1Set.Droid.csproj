@@ -109,6 +109,7 @@
     <Compile Include="Renders\CustomGestureListener.cs" />
     <Compile Include="SoundService.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Exporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

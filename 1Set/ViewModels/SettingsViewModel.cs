@@ -15,7 +15,7 @@ namespace Set.ViewModels
 		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
 		public SettingsPage Page { get; set; }
 
-		protected ObservableCollection<PreferenceGroup> _settings;
+        private ObservableCollection<PreferenceGroup> _settings;
 		public ObservableCollection<PreferenceGroup> Settings
 		{
 			get
@@ -24,16 +24,14 @@ namespace Set.ViewModels
 				return _settings;
 			}
 			set
-			{ 
-				if (_settings != value)
-				{
-					_settings = value;
-					OnPropertyChanged("Settings");
-				}
+			{
+			    if (_settings == value) return;
+			    _settings = value;
+			    OnPropertyChanged("Settings");
 			}
 		}
 
-		public SettingsViewModel  () : base()
+		public SettingsViewModel  ()
 		{
 			Title = AppResources.SettingsTitle;
 		}
@@ -283,6 +281,26 @@ namespace Set.ViewModels
 
 			};
 			dataGroup.Add (restorePreference);
+
+			options = new String[1];
+			options[0] = AppResources.SettingsExportWorkoutDataOption1;
+			dataGroup.Add (new ListPreference ()
+			{ 
+				Title = AppResources.SettingsExportWorkoutDataTitle, 
+				Hint = AppResources.SettingsExportWorkoutDataHint,
+				Options = options,
+				Clicked = OnClicked,
+				IsValueVisible = false,
+				OnSave = async(sender, args) =>
+				{
+					var preference = sender as Preference;
+					var pathName = await App.Database.ExportToCsv();
+					if (pathName != string.Empty)
+					{
+						App.ShowToast (ToastNotificationType.Info, preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
+					}
+				}
+			});
 
 			var recalcStatisticsPreference = new AlertPreference ()
 			{ 
