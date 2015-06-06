@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
-namespace Set
+﻿namespace Set
 {
 	public enum Orientations  
 	{
@@ -18,8 +15,8 @@ namespace Set
 
 	public class ScreenSizeHandler
 	{
-		private double _width = 0.0;
-		private double _height = 0.0;
+		private double _width;
+		private double _height;
 
 		public ScreenSizeHandler ()
 		{

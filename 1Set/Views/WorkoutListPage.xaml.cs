@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using Set.ViewModels;
 using Set.Models;
+using Set.ViewModels;
 using Xamarin.Forms;
 
 namespace Set
@@ -18,8 +17,11 @@ namespace Set
             {
                 if (_viewModel == null)
                 {
-					_viewModel =  new WorkoutListViewModel(){Navigation = this.Navigation};
-					_viewModel.Page = this;
+                    _viewModel = new WorkoutListViewModel
+                    {
+                        Navigation = Navigation,
+                        Page = this
+                    };
                 }
 				return _viewModel;
             }
@@ -31,7 +33,7 @@ namespace Set
 
         public WorkoutListPage()
 		{
-			this.InitializeComponent ();
+			InitializeComponent ();
 			_screenSizeHandler = new ScreenSizeHandler ();
 
 			_stackOrientation = StackOrientation.Horizontal;
@@ -46,7 +48,7 @@ namespace Set
         {
             base.OnAppearing();
 
-			this.BindingContext = ViewModel;
+			BindingContext = ViewModel;
 			await ViewModel.Load (App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
 			ChangeOrientation (true);
@@ -79,7 +81,7 @@ namespace Set
 			var viewModel = new WorkoutViewModel()
             {
                 Workout = (e.SelectedItem as RoutineDay).Workout,
-				Navigation = this.Navigation
+				Navigation = Navigation
             };
 
             var workoutPage = new WorkoutPage

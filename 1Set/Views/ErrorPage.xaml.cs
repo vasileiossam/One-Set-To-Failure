@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Set.ViewModels;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace Set.Views
 {

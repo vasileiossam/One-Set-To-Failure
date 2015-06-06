@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Set.ViewModels;
+﻿using Set.ViewModels;
 using Xamarin.Forms;
-using Set.Resx;
 
 namespace Set
 {
@@ -11,15 +8,8 @@ namespace Set
 		private ExerciseViewModel _viewModel;
 		public ExerciseViewModel ViewModel
 		{
-			get
-			{
-				if (_viewModel == null)
-				{
-					_viewModel =  new ExerciseViewModel(){Navigation = this.Navigation};
-				}
-				return _viewModel;
-			}
-			set
+			get { return _viewModel ?? (_viewModel = new ExerciseViewModel() {Navigation = Navigation}); }
+		    set
 			{
 				_viewModel = value;
 			}

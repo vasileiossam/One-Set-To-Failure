@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Set.ViewModels;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace Set
 {
@@ -28,8 +26,8 @@ namespace Set
 
 		public SettingsPage()
 		{
-			this.InitializeComponent ();
-			this.BindingContext = ViewModel;
+			InitializeComponent ();
+			BindingContext = ViewModel;
 		}
 
 		protected async override void OnAppearing()

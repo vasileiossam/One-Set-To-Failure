@@ -57,8 +57,8 @@ namespace Set
 
         public static async Task<object> GetTargetWorkoutAsync(Workout workout)
         {
-            int targetReps = 0;
-            double targetWeight = 0;
+            int targetReps;
+            double targetWeight;
 
 			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
 			var minReps = App.Settings.MinReps; 
@@ -117,10 +117,9 @@ namespace Set
 		public static int GetTrophies(Workout workout)
 		{
 			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
-			var minReps = App.Settings.MinReps; 
-			var maxReps = App.Settings.MaxReps;
+			var minReps = App.Settings.MinReps;
 
-			// we need at least one previous workout to start collecting trophies
+		    // we need at least one previous workout to start collecting trophies
 			if (workout.PreviousReps == 0)
 			{
 				return 0;

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Set.ViewModels;
+﻿using Set.ViewModels;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace Set
 {

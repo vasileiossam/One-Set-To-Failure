@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Set.ViewModels;
-using Set.Models;
 using Xamarin.Forms;
-using Set.Resx;
-using System.Threading.Tasks;
 
 namespace Set
 {
