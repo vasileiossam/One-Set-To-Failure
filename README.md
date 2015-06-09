@@ -18,3 +18,6 @@ https://github.com/EgorBo/Toasts.Forms.Plugin
 
 Xamarin-Forms-Labs
 https://github.com/XLabs/Xamarin-Forms-Labs/
+
+OxyPlot.Core (Charting)
+http://oxyplot.org/
