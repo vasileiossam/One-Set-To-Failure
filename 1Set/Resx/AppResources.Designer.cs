@@ -80,6 +80,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analysis.
+        /// </summary>
+        internal static string AnalysisTitle {
+            get {
+                return ResourceManager.GetString("AnalysisTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to and.
         /// </summary>
         internal static string And {
@@ -103,6 +112,15 @@ namespace Set.Resx {
         internal static string CancelButton {
             get {
                 return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charts.
+        /// </summary>
+        internal static string ChartsTitle {
+            get {
+                return ResourceManager.GetString("ChartsTitle", resourceCulture);
             }
         }
         

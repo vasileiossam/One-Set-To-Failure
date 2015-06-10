@@ -116,6 +116,15 @@ namespace Set.ViewModels
 			}
 		}
 
+		private readonly ICommand _analysisCommand;
+		public ICommand AnalysisCommand
+		{
+			get
+			{
+				return _analysisCommand;
+			}
+		}
+
 		private readonly ICommand _restTimerCommand;
 		public ICommand RestTimerCommand
 		{
@@ -165,6 +174,7 @@ namespace Set.ViewModels
 			_chevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
 			_calendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
 			_restTimerCommand = new Command (async() => { await OnRestTimerCommand(); });
+			_analysisCommand = new Command (async() => { await OnAnalysisCommand(); });
 		}
 
 		public async Task Load(DateTime date)
@@ -217,6 +227,13 @@ namespace Set.ViewModels
 
 			var page = new CalendarNotesPage () {ViewModel = viewModel};
 
+			await Navigation.PushAsync(page); 	
+		}
+
+		private async Task OnAnalysisCommand()
+		{
+			var viewModel = new AnalysisViewModel() {Navigation = Page.Navigation};
+			var page = new AnalysisPage () {ViewModel = viewModel};
 			await Navigation.PushAsync(page); 	
 		}
 

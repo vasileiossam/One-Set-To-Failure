@@ -318,7 +318,12 @@
   <data name="CommentWorkoutTitle" xml:space="preserve">
     <value>Comment Workout</value>
   </data>
-
+  <data name="AnalysisTitle" xml:space="preserve">
+    <value>Analysis</value>
+  </data>  
+  <data name="ChartsTitle" xml:space="preserve">
+    <value>Charts</value>
+  </data>  
   <data name="NoWorkoutDataTitle" xml:space="preserve">
     <value>No training today!</value>
   </data>

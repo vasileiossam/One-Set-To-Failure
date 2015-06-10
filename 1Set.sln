@@ -32,7 +32,7 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = Flat
+		$1.DirectoryNamespaceAssociation = Hierarchical
 		$1.ResourceNamePolicy = MSBuild
 		version = 0.2.0
 	EndGlobalSection

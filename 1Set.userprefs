@@ -1,10 +1,16 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\ChartsPage.xaml">
+    <Files>
+      <File FileName="1Set\Views\ChartsPage.xaml" Line="16" Column="15" />
+      <File FileName="1Set\ViewModels\ChartsViewModel.cs" Line="1" Column="1" />
+      <File FileName="1Set\Views\ChartsPage.xaml.cs" Line="25" Column="1" />
+      <File FileName="1Set\Views\AnalysisPage.xaml" Line="1" Column="1" />
+      <File FileName="1Set\Views\AnalysisPage.xaml.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\dev\1Set\1Set\Views\ExercisePage.xaml.cs" line="30" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="1Set\Pages\SettingsPage.xaml.cs" line="49" offsetX="494" offsetY="768" expression="settingItem" liveUpdate="False" />

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Toasts.Forms.Plugin.Droid;
+using OxyPlot.Xamarin.Forms;
 
 namespace Set.Droid
 {
@@ -25,6 +26,8 @@ namespace Set.Droid
 
 			var bootstrapper = new Bootstrapper ();
 			bootstrapper.Automapper ();
+
+			OxyPlot.Xamarin.Forms.Platform.Android.Forms.Init();
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
