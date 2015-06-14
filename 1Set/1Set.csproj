@@ -132,10 +132,10 @@
     <Compile Include="Views\AnalysisPage.xaml.cs">
       <DependentUpon>AnalysisPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChartsPage.xaml.cs">
+    <Compile Include="ViewModels\ChartsViewModel.cs" />
+    <Compile Include="ChartsPage.xaml.cs">
       <DependentUpon>ChartsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ChartsViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -239,7 +239,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChartsPage.xaml">
+    <EmbeddedResource Include="ChartsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
