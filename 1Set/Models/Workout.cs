@@ -58,7 +58,7 @@ namespace Set.Models
 			}
 		}
 
-		public async Task LoadAsync()
+		public async Task<bool> LoadAsync()
 		{
 			try
 			{
@@ -79,10 +79,13 @@ namespace Set.Models
 						TargetWeight = targetWorkout.TargetWeight;
 					}
 				}
+
+				return true;
 			}
 			catch(Exception ex)
 			{
 				App.ShowErrorPage (this, ex);
+				return false;
 			}
 		}
 	}

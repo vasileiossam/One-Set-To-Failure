@@ -17,30 +17,8 @@ namespace Importer
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            var importer = new Importer();
+            var importer = new Importer(chkDeleteWorkouts.Checked);
             importer.Start(textBox1);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var d1 = new DateTime(635696280000000000);
-            var utc = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
-            var d2 = new DateTime(635696640000000000);
-
-            var today = new DateTime(2015, 6, 12, 0, 0, 0, DateTimeKind.Unspecified);
-            var todayticks = today.Ticks;
-
-
-            var sqliteTicks = todayticks / TimeSpan.TicksPerSecond;
-            textBox1.AppendText("635696280000000000\n");
-            textBox1.AppendText("------------------\n");
-            textBox1.AppendText(DateTime.Today.Ticks.ToString() + "\n");
-            textBox1.AppendText(today.ToString() + "\n");
-
-
-            
-            var time = DateTime.Today.Date;
-
         }
     }
 }
