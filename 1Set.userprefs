@@ -1,13 +1,10 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Concrete\Database.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\ViewModels\ChartsViewModel.cs">
     <Files>
-      <File FileName="Droid\SQLite_Android.cs" Line="22" Column="4" />
-      <File FileName="c:\dev\1Set\1Set\Concrete\RoutineDaysRepository.cs" Line="120" Column="41" />
-      <File FileName="c:\dev\1Set\1Set\Concrete\WorkoutsRepository.cs" Line="33" Column="10" />
-      <File FileName="1Set\WorkoutRules.cs" Line="95" Column="66" />
-      <File FileName="1Set\Concrete\Database.cs" Line="140" Column="6" />
-      <File FileName="c:\dev\1Set\1Set\Models\Workout.cs" Line="68" Column="1" />
+      <File FileName="1Set\ViewModels\ChartsViewModel.cs" Line="64" Column="44" />
+      <File FileName="1Set\Views\ChartsPage.xaml" Line="17" Column="41" />
+      <File FileName="1Set\Views\ChartsPage.xaml.cs" Line="23" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

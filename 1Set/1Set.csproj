@@ -133,7 +133,7 @@
       <DependentUpon>AnalysisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ChartsViewModel.cs" />
-    <Compile Include="ChartsPage.xaml.cs">
+    <Compile Include="Views\ChartsPage.xaml.cs">
       <DependentUpon>ChartsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -239,7 +239,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChartsPage.xaml">
+    <EmbeddedResource Include="Views\ChartsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

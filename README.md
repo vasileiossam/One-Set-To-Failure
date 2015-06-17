@@ -23,3 +23,4 @@ OxyPlot.Core (Charting)
 https://www.nuget.org/packages/OxyPlot.Xamarin.Forms
 http://docs.oxyplot.org/en/latest/getting-started/hello-xamarin-forms.html
 http://oxyplot.org/
+https://github.com/conceptdev/xamarin-forms-samples/tree/master/OxyPlotDemo

@@ -14,8 +14,8 @@
 
 	<ContentPage.Content>
 	  <ScrollView>
-	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
-			<oxy:PlotView  Model="{Binding PlotModel}" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="300"/>
+	    <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
+<!--			<oxy:PlotView  Model="{Binding PlotModel}" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="300"/>-->
 		</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

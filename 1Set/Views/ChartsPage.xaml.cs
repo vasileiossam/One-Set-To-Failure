@@ -20,6 +20,8 @@ namespace Set
 		{
 			base.OnAppearing ();
 			var viewModel = new ChartsViewModel ();
+			viewModel.OxyPlotsLayout = OxyPlotsLayout;
+
 			await viewModel.Load ();
 			BindingContext = viewModel;
 		}
