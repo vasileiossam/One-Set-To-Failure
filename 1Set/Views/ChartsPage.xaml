@@ -3,7 +3,9 @@
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
-	x:Class="Set.ChartsPage">
+	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
+	x:Class="Set.ChartsPage"
+	>
 
 	<ContentPage.Padding>
 	<OnPlatform x:TypeArguments="Thickness"
@@ -14,8 +16,20 @@
 
 	<ContentPage.Content>
 	  <ScrollView>
-	    <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
-<!--			<oxy:PlotView  Model="{Binding PlotModel}" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="300"/>-->
+	  	<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
+	  		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+	        	<Label Text="{i18n:Translate ChartsTitle}" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+
+			     <Picker x:Name="ChartsPicker" Title="{i18n:Translate ChartsTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged">
+			        <Picker.Items>
+			            <x:String>Weight per workout</x:String> 
+			            <x:String>Reps per workout</x:String>
+			        </Picker.Items>
+			    </Picker> 
+			</StackLayout>
+
+		    <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
+			</StackLayout>
 		</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

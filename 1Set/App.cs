@@ -36,7 +36,6 @@ namespace Set
 		        BarTextColor = ColorPalette.Icons
 		    };
 
-
 		    MainPage = mainNav;
 		}
 

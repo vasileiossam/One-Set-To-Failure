@@ -479,4 +479,10 @@
   <data name="SettingsExportWorkoutDataCompleted" xml:space="preserve">
     <value>Data exported to {0}</value>
   </data>
+  <data name="ChartsType1Title" xml:space="preserve">
+    <value>Weight per workout</value>
+  </data>
+  <data name="ChartsType2Title" xml:space="preserve">
+    <value>Reps per workout</value>
+  </data>
 </root>

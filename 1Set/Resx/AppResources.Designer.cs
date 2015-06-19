@@ -125,6 +125,24 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Weight per workout.
+        /// </summary>
+        internal static string ChartsType1Title {
+            get {
+                return ResourceManager.GetString("ChartsType1Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reps per workout.
+        /// </summary>
+        internal static string ChartsType2Title {
+            get {
+                return ResourceManager.GetString("ChartsType2Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workout data have been cleared.
         /// </summary>
         internal static string ClearWorkoutDataCompleted {

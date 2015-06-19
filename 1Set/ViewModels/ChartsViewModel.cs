@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Set.Models;
+using Set.Localization;
 
 namespace Set.ViewModels
 {
-
 	public class ChartsViewModel : BaseViewModel
 	{
 		public StackLayout OxyPlotsLayout { get; set; }
+		private List<Exercise> _exercises;
+		private List<Workout> _workouts;
 
 		public ChartsViewModel ()
 		{
@@ -23,14 +25,67 @@ namespace Set.ViewModels
 
 		public async Task Load()
 		{
-			var workouts = await App.Database.WorkoutsRepository.AllAsync ();
-			var exercises = await App.Database.ExercisesRepository.AllAsync ();
+			_workouts = await App.Database.WorkoutsRepository.AllAsync ();
+			_exercises = await App.Database.ExercisesRepository.AllAsync ();
+
+			foreach (var workout in _workouts)
+			{
+				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
+				workout.Exercise = exercise;
+			}
+		}
+
+		public async Task SelectChart(int selectedChartIndex)
+		{
+			switch(selectedChartIndex)
+			{
+				case 0:
+				BuildWeightPerWorkout ();
+				break;
+
+				case 1:
+				BuildRepsPerWorkout ();
+				break;
+			}
+		}
+
+		public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
+		{
+			//await Task.Run (() =>
+			//{
+				// create plot model
+				var plotModel = new PlotModel {
+					Title = item.Key.Name,
+					Background = OxyColors.LightYellow,
+					PlotAreaBackground = OxyColors.LightGray,
+				};
+
+				var series = new LineSeries ();
+				series.ItemsSource = item.Value;
+				plotModel.Series.Add (series);
+
+				// setup axis
+				var dateAxis = new DateTimeAxis { Position = AxisPosition.Bottom };
+				dateAxis.StringFormat = "MMM dd";
+
+				var valueAxis = new LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0 };
+				valueAxis.Title = "Weight";
+
+				plotModel.Axes.Add (dateAxis);
+				plotModel.Axes.Add (valueAxis);
+
+				return plotModel; 
+			//});
+		}
+
+		private void BuildWeightPerWorkout ()
+		{
 			var data = new Dictionary<Exercise, List<DataPoint>> ();
 
 			// prepare data
-			foreach (var workout in workouts)
+			foreach (var workout in _workouts)
 			{
-				var exercise = exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
+				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
 				if (exercise == null)
 					continue;
 
@@ -58,39 +113,64 @@ namespace Set.ViewModels
 				};
 
 				OxyPlotsLayout.Children.Add(plotView);		
-			}
+			}			
 		}
 
-		public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
+		private void BuildRepsPerWorkout ()
 		{
-			//await Task.Run (() =>
-			//{
-				// create plot model
+			var data = 
+				from w in _workouts
+				group w by w.ExerciseId into workoutsPerExercise
+				from nestedGroup in
+					(
+						from a in workoutsPerExercise
+						group a by a.Weight
+					)
+				group nestedGroup by workoutsPerExercise.Key;
+
+			foreach (var exerciseGroup in data)
+			{
+				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == exerciseGroup.Key);
 				var plotModel = new PlotModel {
-					Title = "Weight per workout",
+					Title = exercise.Name,
 					Background = OxyColors.LightYellow,
 					PlotAreaBackground = OxyColors.LightGray,
 				};
 
-				var series = new LineSeries ();
-				series.Title = item.Key.Name;
-				series.ItemsSource = item.Value;
-				plotModel.Series.Add (series);
+				foreach (var weightGroup in exerciseGroup)
+				{
+					var series = new LineSeries ();
+					series.Title = string.Format("{0} {1}", weightGroup.Key, L10n.GetWeightUnit());
+					plotModel.Series.Add (series);
 
-				// setup axis
+					var weightData =  new List<DataPoint>();
+					foreach (var workout in weightGroup)
+					{
+						weightData.Add(new DataPoint (DateTimeAxis.ToDouble (workout.Created), workout.Reps));						
+					}
+
+					series.ItemsSource = weightData;
+				}
+
 				var dateAxis = new DateTimeAxis { Position = AxisPosition.Bottom };
 				dateAxis.StringFormat = "MMM dd";
-
 				var valueAxis = new LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0 };
-				valueAxis.Title = "Weight";
+				valueAxis.Title = "Resps";
 
 				plotModel.Axes.Add (dateAxis);
-				plotModel.Axes.Add (valueAxis);
+				plotModel.Axes.Add (valueAxis);		
 
-				return plotModel; 
-			//});
+				var plotView = new PlotView ()
+				{
+					HeightRequest = 300,
+					Model = plotModel,
+					VerticalOptions = LayoutOptions.Fill,
+					HorizontalOptions = LayoutOptions.Fill
+				};
+
+				OxyPlotsLayout.Children.Add(plotView);		
+			}
 		}
-
 	}
 }
 

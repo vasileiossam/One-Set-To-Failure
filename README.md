@@ -20,7 +20,7 @@ Xamarin-Forms-Labs
 https://github.com/XLabs/Xamarin-Forms-Labs/
 
 OxyPlot.Core (Charting)
-https://www.nuget.org/packages/OxyPlot.Xamarin.Forms
+http://docs.oxyplot.org/en/latest/models/axes/TimeSpanAxis.html
 http://docs.oxyplot.org/en/latest/getting-started/hello-xamarin-forms.html
 http://oxyplot.org/
 https://github.com/conceptdev/xamarin-forms-samples/tree/master/OxyPlotDemo
