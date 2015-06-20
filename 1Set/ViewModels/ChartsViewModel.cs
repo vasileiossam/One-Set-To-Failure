@@ -97,7 +97,9 @@ namespace Set.ViewModels
 					item = data.FirstOrDefault (x => x.Key == exercise);
 				} 
 
-				item.Value.Add(new DataPoint (DateTimeAxis.ToDouble (workout.Created), workout.Weight));
+				item.Value.Add(
+					new DataPoint (DateTimeAxis.ToDouble (workout.Created), WeightMetricToImperialConverter.GetWeightAsDouble(workout.Weight))
+				);
 			}
 
 			// create charts
@@ -140,7 +142,7 @@ namespace Set.ViewModels
 				foreach (var weightGroup in exerciseGroup)
 				{
 					var series = new LineSeries ();
-					series.Title = string.Format("{0} {1}", weightGroup.Key, L10n.GetWeightUnit());
+					series.Title = string.Format("{0} {1}", WeightMetricToImperialConverter.GetWeightAsDouble(weightGroup.Key), L10n.GetWeightUnit());
 					plotModel.Series.Add (series);
 
 					var weightData =  new List<DataPoint>();

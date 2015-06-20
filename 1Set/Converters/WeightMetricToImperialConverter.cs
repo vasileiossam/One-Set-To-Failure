@@ -46,6 +46,14 @@ namespace Set
 			var converter = new WeightMetricToImperialConverter ();
 			return converter.Convert (weight, typeof(double), null, CultureInfo.CurrentCulture);
 		}
+
+		public static double GetWeightAsDouble(double weight)
+		{
+			var converter = new WeightMetricToImperialConverter ();
+			var value = converter.Convert (weight, typeof(double), null, CultureInfo.CurrentCulture);
+			if (value is double) return (double) value;
+			return 0;
+		}
 	}
 
 }
