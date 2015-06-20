@@ -1,21 +1,9 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\SettingsPage.xaml">
-    <Files>
-      <File FileName="1Set\ViewModels\ExerciseAnalysisViewModel.cs" Line="15" Column="22" />
-      <File FileName="1Set\Views\ExerciseAnalysis.xaml" Line="22" Column="79" />
-      <File FileName="1Set\Views\ExerciseAnalysis.xaml.cs" Line="19" Column="22" />
-      <File FileName="1Set\Views\ChartsPage.xaml.cs" Line="22" Column="1" />
-      <File FileName="1Set\ViewModels\ChartsViewModel.cs" Line="18" Column="37" />
-      <File FileName="1Set\Resx\AppResources.resx" Line="138" Column="29" />
-      <File FileName="1Set\Views\ChartsPage.xaml" Line="25" Column="25" />
-      <File FileName="1Set\App.cs" Line="23" Column="3" />
-      <File FileName="1Set\Views\SettingsPage.xaml" Line="29" Column="111" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\dev\1Set\1Set\Concrete\Database.cs" line="175" column="22" />
+      <Breakpoint file="C:\dev\1Set\1Set\Concrete\Database.cs" line="184" column="22" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

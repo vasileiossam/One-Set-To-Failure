@@ -47,9 +47,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Forms.Labs">
-      <HintPath>..\packages\Xamarin.Forms.Labs.1.0.1.5\lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.Labs.dll</HintPath>
-    </Reference>
     <Reference Include="Toasts.Forms.Plugin.Abstractions">
       <HintPath>..\packages\Toasts.Forms.Plugin.1.0.6.18\lib\MonoAndroid10\Toasts.Forms.Plugin.Abstractions.dll</HintPath>
     </Reference>
