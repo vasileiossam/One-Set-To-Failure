@@ -404,7 +404,7 @@ namespace Set.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to +{0} in every {0} workouts.
+        ///   Looks up a localized string similar to +{0} in every {1} workouts.
         /// </summary>
         internal static string RepsIncrementDescription {
             get {

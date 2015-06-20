@@ -58,6 +58,15 @@ namespace Set
 
 					// +1 in every other workout
 					_repsIncrements.Add(new RepsIncrement(20, 1, 2));
+
+					// +1 in every three workouts
+					_repsIncrements.Add(new RepsIncrement(30, 1, 3));
+
+					// +1 in every four workout
+					_repsIncrements.Add(new RepsIncrement(40, 1, 4));
+
+					// +1 in every five workout
+					_repsIncrements.Add(new RepsIncrement(50, 1, 5));
 				}
 				return _repsIncrements;
 			}

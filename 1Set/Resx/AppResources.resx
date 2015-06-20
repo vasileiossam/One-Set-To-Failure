@@ -184,7 +184,7 @@
     <value>Settings</value>
   </data>
   <data name="RepsIncrementDescription" xml:space="preserve">
-    <value>+{0} in every {0} workouts</value>
+    <value>+{0} in every {1} workouts</value>
   </data>
   <data name="PreviousTitle" xml:space="preserve">
     <value>Previous Reps / Weight</value>
