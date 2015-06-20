@@ -8,5 +8,6 @@
 	>
   <TabbedPage.Children>
     <local:ChartsPage Title="{i18n:Translate ChartsTitle}"/>
+    <local:ExerciseAnalysis Title="{i18n:Translate ExerciseAnalysisTitle}"/>
   </TabbedPage.Children>
 </TabbedPage>

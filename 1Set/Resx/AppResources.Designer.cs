@@ -206,6 +206,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stats.
+        /// </summary>
+        internal static string ExerciseAnalysisTitle {
+            get {
+                return ResourceManager.GetString("ExerciseAnalysisTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this exercise? Any workout data for this exercise will be deleted as well..
         /// </summary>
         internal static string ExerciseDeleteQuestion {

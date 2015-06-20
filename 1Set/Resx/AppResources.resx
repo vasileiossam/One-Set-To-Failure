@@ -485,4 +485,7 @@
   <data name="ChartsType2Title" xml:space="preserve">
     <value>Reps per workout</value>
   </data>
+  <data name="ExerciseAnalysisTitle" xml:space="preserve">
+    <value>Stats</value>
+  </data>
 </root>

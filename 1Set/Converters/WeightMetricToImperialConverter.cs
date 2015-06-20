@@ -17,26 +17,35 @@ namespace Set
         {
             if (value == null) return string.Empty;
 			if ((double) value == 0) return string.Empty;
-
-            // metric to metric
-            // we always store weight in metric (Kg), if we are already in metric no conversion is needed
-			if (App.Settings.IsMetric)
-            {
-                return value;
-            }
-            
-            // metric to imperial
-            // 1 Kg = 2.20462 lbs
-            double kgs = (double)value;
-            double lbs = kgs * 2.20462;
-			return Math.Round (lbs, 2);
+			return GetWeight (value);
         }
     
+		public object GetWeight(object value)
+		{
+			// metric to metric
+			// we always store weight in metric (Kg), if we are already in metric no conversion is needed
+			if (App.Settings.IsMetric)
+			{
+				return value;
+			}
+
+			// metric to imperial
+			// 1 Kg = 2.20462 lbs
+			double kgs = (double)value;
+			double lbs = kgs * 2.20462;
+			return Math.Round (lbs, 2);
+		}
 
 		public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
 		{
 				return value;
 		}
 
+		public static object GetWeight(double weight)
+		{
+			var converter = new WeightMetricToImperialConverter ();
+			return converter.Convert (weight, typeof(double), null, CultureInfo.CurrentCulture);
+		}
 	}
+
 }
