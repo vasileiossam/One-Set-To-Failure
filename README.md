@@ -16,9 +16,6 @@ http://www.newtonsoft.com/json
 Toasts.Forms.Plugin
 https://github.com/EgorBo/Toasts.Forms.Plugin
 
-Xamarin-Forms-Labs
-https://github.com/XLabs/Xamarin-Forms-Labs/
-
 OxyPlot.Core (Charting)
 http://docs.oxyplot.org/en/latest/models/axes/TimeSpanAxis.html
 http://docs.oxyplot.org/en/latest/getting-started/hello-xamarin-forms.html
