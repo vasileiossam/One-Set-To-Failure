@@ -26,6 +26,7 @@ namespace Set
 			// we always store weight in metric (Kg), if we are already in metric no conversion is needed
 			if (App.Settings.IsMetric)
 			{
+				value = Math.Round ((double) value, 2);
 				return value;
 			}
 
