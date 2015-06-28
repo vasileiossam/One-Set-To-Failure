@@ -184,9 +184,9 @@ namespace Set
 						workout.Created.Date.ToString("d"),
 						workout.Exercise.Name,
 						workout.Reps,
-						workout.Weight,
+						WeightMetricToImperialConverter.GetWeightAsDouble(workout.Weight),
 						workout.TargetReps,
-						workout.TargetWeight,
+						WeightMetricToImperialConverter.GetWeightAsDouble(workout.TargetWeight),
 						workout.Trophies,
 						workout.Notes
 					);

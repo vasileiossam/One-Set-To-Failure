@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Set.Models;
 using Xamarin.Forms;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Set.ViewModels
 {
@@ -180,7 +183,24 @@ namespace Set.ViewModels
 		public async Task Load(DateTime date)
 		{
 			CurrentDate = date;
+
 			CalendarNotes = await App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
+			if (CalendarNotes != null)
+			{
+				CalendarNotes = CalendarNotes.Trim ();
+
+				// trim to two lines
+				var countLines = CalendarNotes.ToCharArray ().Count (c => c == '\n');
+				if (countLines > 2)
+				{
+					var lines = CalendarNotes.Split (new[]{ '\n' });
+					if (lines.Count () >= 2)
+					{
+						CalendarNotes = string.Format ("{0}\n{1}...", lines [0].Trim (), lines [1].Trim ());
+					}
+				}
+			}
+
 			CalendarNotesVisible = !string.IsNullOrEmpty (CalendarNotes);
 
 			var list = await App.Database.RoutineDaysRepository.GetRoutine (_currentDate);

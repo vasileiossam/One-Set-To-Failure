@@ -60,7 +60,7 @@ namespace Set.ViewModels
 		{
 			if (Validate ())
 			{
-				var calendar = new Calendar (){ CalendarId = CalendarId, Date = Date, Notes = Notes };
+				var calendar = new Calendar (){ CalendarId = CalendarId, Date = Date, Notes = Notes.Trim() };
 				await App.Database.CalendarRepository.SaveAsync(calendar);
 				await Navigation.PopAsync();
 			}
