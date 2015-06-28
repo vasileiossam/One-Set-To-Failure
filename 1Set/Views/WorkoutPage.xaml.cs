@@ -24,6 +24,20 @@ namespace Set
             base.OnDisappearing();
         }
 
+		void OnTextChanged(object sender, TextChangedEventArgs  e)
+		{
+			var entry = sender as Entry;
+			var value = entry.Text;
+
+			// max length = 3
+			if(value.Length > 3)
+			{
+				// Remove Last character 
+				value = value.Remove(value.Length - 1);
+				// Set the Old value
+				entry.Text = value; 
+			}
+		}
 	}
 }
 

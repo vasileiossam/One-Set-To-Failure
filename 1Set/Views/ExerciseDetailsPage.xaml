@@ -28,7 +28,7 @@
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
 	      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
-	 		<controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="#212121" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center"/>
+	 		<controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="#212121" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center" TextChanged="OnTextChanged"/>
 	      </StackLayout>
 
 		  <ContentView Padding="0, 10, 0, 10">
