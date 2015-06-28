@@ -5,7 +5,8 @@
 	x:Class="Set.AnalysisPage"
 	xmlns:local="clr-namespace:Set;assembly=1Set"
 	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
-	>
+	Title="{Binding Title}">
+
   <TabbedPage.Children>
     <local:ChartsPage Title="{i18n:Translate ChartsTitle}"/>
     <local:ExerciseAnalysis Title="{i18n:Translate ExerciseAnalysisTitle}"/>

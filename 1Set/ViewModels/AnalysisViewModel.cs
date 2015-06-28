@@ -19,7 +19,7 @@ namespace Set.ViewModels
 
 		public AnalysisViewModel () : base()
 		{
-		    
+			Title = AppResources.AnalysisTitle;
 		}
 	}
 }
