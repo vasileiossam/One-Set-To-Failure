@@ -11,6 +11,12 @@ namespace Set
 		{
 			InitializeComponent ();
 		}
+
+		protected async override void OnAppearing()
+		{
+			base.OnAppearing();
+			this.BindingContext = ViewModel;
+		}
 	}
 }
 

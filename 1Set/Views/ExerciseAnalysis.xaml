@@ -27,7 +27,7 @@
 	          <DataTemplate>
 	            <ViewCell>
 	      		  <ViewCell.View>
-	      			<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="20, 10, 10, 10">
+	      			<StackLayout Orientation="{Binding CellLayoutOrientation}" HorizontalOptions="FillAndExpand" Padding="20, 10, 10, 10">
 		    			<Label Text="{Binding Title}" FontSize="Medium" HorizontalOptions="Start" TextColor="#727272"/>	
 						<Label Text="{Binding Value}" FontSize="Medium" HorizontalOptions="EndAndExpand" TextColor="#212121"/>	
 	    			</StackLayout>

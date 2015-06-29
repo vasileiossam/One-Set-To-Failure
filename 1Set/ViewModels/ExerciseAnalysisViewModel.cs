@@ -16,11 +16,29 @@ namespace Set.ViewModels
 	{
 		public string Title {get; set;}
 		public string Value {get; set;}
+
+		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
+		protected StackOrientation _cellLayoutOrientation;
+		public StackOrientation CellLayoutOrientation
+		{
+			get
+			{
+				return _cellLayoutOrientation;
+			}
+			set
+			{
+				if (_cellLayoutOrientation != value)
+				{
+					_cellLayoutOrientation = value;
+				}
+			}
+		}
 	}
 
 	public class ExerciseAnalysisViewModel : BaseViewModel
 	{
 		public Picker ExercisesPicker { get; set; }
+		public List<ExerciseStat> Stats {get; set;}
 		private List<Exercise> _exercises;
 		private List<Workout> _workouts;
 		private List<Exercise> _exercisesInWorkouts { get; set;}

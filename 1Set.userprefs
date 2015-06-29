@@ -1,14 +1,6 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\ViewModels\WorkoutViewModel.cs">
-    <Files>
-      <File FileName="1Set\ViewModels\AnalysisViewModel.cs" Line="21" Column="4" />
-      <File FileName="1Set\Views\WorkoutPage.xaml.cs" Line="8" Column="19" />
-      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="83" Column="58" />
-      <File FileName="1Set\Views\AnalysisPage.xaml" Line="8" Column="1" />
-      <File FileName="1Set\Views\ChartsPage.xaml" Line="8" Column="2" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.015d4a5f202bfe09" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -23,7 +23,7 @@
 	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
 		  <ContentView Padding="0, 10, 0, 0">
-	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="#212121" Keyboard="Chat"/>
+	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="#212121" FontSize="Medium" Keyboard="Chat"/>
 		  </ContentView>
 
 	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
