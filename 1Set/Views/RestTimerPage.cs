@@ -39,7 +39,7 @@ namespace Set
 		{
 			if (ViewModel != null)
 			{
-				ViewModel.StopTimers ();
+				ViewModel.StopTimer ();
 			}
 			base.OnDisappearing();
 		}

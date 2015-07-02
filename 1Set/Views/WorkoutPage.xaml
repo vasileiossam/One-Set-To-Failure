@@ -23,6 +23,7 @@
   </ContentPage.Resources>
 
   <ContentPage.ToolbarItems>
+  	<ToolbarItem Text="{Binding RestTimerToolbarItem.Text}" Icon="{Binding RestTimerToolbarItem.Icon}" Order="Primary" Command="{Binding RestTimerToolbarItem.Command}" Priority="0"/>
     <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
   </ContentPage.ToolbarItems>
 

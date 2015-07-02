@@ -20,7 +20,8 @@ namespace Set
                     _viewModel = new WorkoutListViewModel
                     {
                         Navigation = Navigation,
-                        Page = this
+                        Page = this,
+						RestTimerToolbarItem = new RestTimerToolbarItem() {Navigation = Navigation}
                     };
                 }
 				return _viewModel;
@@ -81,7 +82,8 @@ namespace Set
 			var viewModel = new WorkoutViewModel()
             {
                 Workout = (e.SelectedItem as RoutineDay).Workout,
-				Navigation = Navigation
+				Navigation = Navigation,
+				RestTimerToolbarItem = ViewModel.RestTimerToolbarItem
             };
 
             var workoutPage = new WorkoutPage

@@ -21,6 +21,8 @@ namespace Set
 		public static double ScreenHeight {get; set;}
 		public static int? TotalTrophies {get; set;}
 
+		public static int RestTimerSecondsLeft { get; set; }
+			
 		public App ()
 		{	
 			//Debugger.Break ();
@@ -42,6 +44,7 @@ namespace Set
 		protected override void OnStart ()
 		{
 			CurrentDate = DateTime.Today;
+			RestTimerSecondsLeft = 0;
 		}
 
 		protected override void OnSleep ()

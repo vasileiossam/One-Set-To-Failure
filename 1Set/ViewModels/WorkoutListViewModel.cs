@@ -101,6 +101,8 @@ namespace Set.ViewModels
 			}
 		}
 
+		public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
+
 		private readonly ICommand _chevronTapCommand;
 		public ICommand ChevronTapCommand
 		{
@@ -125,15 +127,6 @@ namespace Set.ViewModels
 			get
 			{
 				return _analysisCommand;
-			}
-		}
-
-		private readonly ICommand _restTimerCommand;
-		public ICommand RestTimerCommand
-		{
-			get
-			{
-				return _restTimerCommand;
 			}
 		}
 
@@ -176,12 +169,13 @@ namespace Set.ViewModels
 
 			_chevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
 			_calendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
-			_restTimerCommand = new Command (async() => { await OnRestTimerCommand(); });
 			_analysisCommand = new Command (async() => { await OnAnalysisCommand(); });
 		}
 
 		public async Task Load(DateTime date)
 		{
+			RestTimerToolbarItem.Update();
+
 			CurrentDate = date;
 
 			CalendarNotes = await App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
@@ -256,14 +250,6 @@ namespace Set.ViewModels
 			var page = new AnalysisPage () {ViewModel = viewModel};
 			await Navigation.PushAsync(page); 	
 		}
-
-		private async Task OnRestTimerCommand()
-		{
-			var viewModel = new RestTimerViewModel() {Navigation = Page.Navigation};
-			var page = new RestTimerPage () {ViewModel = viewModel};
-			await Navigation.PushAsync(page); 	
-		}
-
     }
 }
 

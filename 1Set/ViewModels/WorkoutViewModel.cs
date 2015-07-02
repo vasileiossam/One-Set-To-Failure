@@ -11,6 +11,7 @@ namespace Set.ViewModels
     public class WorkoutViewModel : BaseViewModel
     {
 		public Workout Workout {get; set; }
+		public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
 
 		protected int _reps;
 		public int Reps
@@ -98,6 +99,8 @@ namespace Set.ViewModels
 
 		public async Task LoadAsync()
 		{
+			RestTimerToolbarItem.Update();
+
 			await Workout.LoadAsync ();
 			Reps = Workout.Reps;
 			Weight = Units.GetWeight (Workout.Weight);
@@ -160,10 +163,7 @@ namespace Set.ViewModels
 				if ((App.Settings.RestTimerAutoStart == true) && (!isPersisted))
 				{
 					await Navigation.PopAsync (false);
-					var viewModel = new RestTimerViewModel () { Navigation = Navigation};
-					var page = new RestTimerPage () { ViewModel = viewModel };
-					await Navigation.PushAsync (page); 	
-					await viewModel.OnStartCommand ();
+					await RestTimerToolbarItem.AutoStart ();
 				} else
 				{
 					await Navigation.PopAsync();					

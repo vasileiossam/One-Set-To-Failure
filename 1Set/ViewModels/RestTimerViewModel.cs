@@ -240,12 +240,19 @@ namespace Set.ViewModels
 			PlaySounds = App.Settings.RestTimerPlaySounds;
 			TotalSeconds = App.Settings.RestTimerTotalSeconds;
 
-			await OnResetCommand ();
+			// rest timer already running
+			if (App.RestTimerSecondsLeft > 0)
+			{
+				var seconds = App.RestTimerSecondsLeft; 
+				await OnResetCommand ();
+				SecondsLeft = seconds;
+				await OnStartCommand ();
+			} else
+			{
+				await OnResetCommand ();
+			}
 
 			_canSave = true;
-
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
 		}
 
 		protected void Save()
@@ -273,6 +280,7 @@ namespace Set.ViewModels
 					soundService.Play ("Bleep");
 				}
 
+				App.RestTimerSecondsLeft = 0;
 				return false;
 			}
 
@@ -288,6 +296,7 @@ namespace Set.ViewModels
 				ProgressBar.Progress = progress;
 			}
 
+			App.RestTimerSecondsLeft = SecondsLeft;
 			return State == RestTimerStates.Running;	
 		}
 
@@ -309,6 +318,7 @@ namespace Set.ViewModels
 
 		private async Task OnPauseCommand()
 		{
+			App.RestTimerSecondsLeft = 0;
 			State = RestTimerStates.Paused;
 
 			// following statement will prevent a compiler warning about async method lacking await
@@ -317,6 +327,7 @@ namespace Set.ViewModels
 
 		private async Task OnResetCommand()
 		{
+			App.RestTimerSecondsLeft = 0;
 			State = RestTimerStates.Paused;
 			SecondsLeft = TotalSeconds;
 			ProgressBar.Progress = 0;
@@ -337,14 +348,9 @@ namespace Set.ViewModels
 			}			
 		}
 
-		public void StopTimers()
+		public void StopTimer()
 		{
 			State = RestTimerStates.Paused;
-		}
-
-		public void Start()
-		{
-			
 		}
 	}
 }
