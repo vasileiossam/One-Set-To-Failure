@@ -28,6 +28,10 @@
 			    </Picker> 
 			</StackLayout>
 
+		    <Label IsVisible="{Binding NoChartsDataVisible}" Text="{i18n:Translate NoChartsData}" FontSize="Large" TextColor="#727272"/>
+
+		    <Label IsVisible="{Binding ChartsPinchToZoomVisible}" Text="{i18n:Translate ChartsPinchToZoom}" FontSize="Large" TextColor="#727272"/>
+
 		    <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
 			</StackLayout>
 		</StackLayout>

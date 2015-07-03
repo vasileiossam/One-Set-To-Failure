@@ -491,4 +491,10 @@
   <data name="GotoDateTitle" xml:space="preserve">
     <value>Go to date</value>
   </data>
+  <data name="NoChartsData" xml:space="preserve">
+    <value>No workout data yet!</value>
+  </data>
+  <data name="ChartsPinchToZoom" xml:space="preserve">
+    <value>Pinch charts to zoom in and out</value>
+  </data>
 </root>

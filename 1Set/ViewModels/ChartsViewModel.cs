@@ -15,18 +15,57 @@ namespace Set.ViewModels
 	public class ChartsViewModel : BaseViewModel
 	{
 		public StackLayout OxyPlotsLayout { get; set; }
+
 		private List<Exercise> _exercises;
 		private List<Workout> _workouts;
 
+		private bool _noChartsDataVisible;
+		public bool NoChartsDataVisible 
+		{ 
+			get
+			{
+				return _noChartsDataVisible;
+			}
+			set
+			{
+				if (_noChartsDataVisible != value)
+				{
+					_noChartsDataVisible = value;
+					OnPropertyChanged("NoChartsDataVisible");
+				}
+			}
+		}
+
+		private bool _chartsPinchToZoomVisible;
+		public bool ChartsPinchToZoomVisible 
+		{ 
+			get
+			{
+				return _chartsPinchToZoomVisible;
+			}
+			set
+			{
+				if (_chartsPinchToZoomVisible != value)
+				{
+					_chartsPinchToZoomVisible = value;
+					OnPropertyChanged("ChartsPinchToZoomVisible");
+				}
+			}
+		}
+
 		public ChartsViewModel ()
 		{
-			
+			NoChartsDataVisible = false;
+			ChartsPinchToZoomVisible = false;			
 		}
 
 		public async Task Load()
 		{
 			_workouts = await App.Database.WorkoutsRepository.AllAsync ();
 			_exercises = await App.Database.ExercisesRepository.AllAsync ();
+
+			NoChartsDataVisible = _workouts.Count == 0;
+			ChartsPinchToZoomVisible = !NoChartsDataVisible;
 
 			foreach (var workout in _workouts)
 			{

@@ -116,6 +116,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pinch charts to zoom in and out.
+        /// </summary>
+        internal static string ChartsPinchToZoom {
+            get {
+                return ResourceManager.GetString("ChartsPinchToZoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Charts.
         /// </summary>
         internal static string ChartsTitle {
@@ -310,6 +319,15 @@ namespace Set.Resx {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No workout data yet!.
+        /// </summary>
+        internal static string NoChartsData {
+            get {
+                return ResourceManager.GetString("NoChartsData", resourceCulture);
             }
         }
         
