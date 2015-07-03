@@ -287,6 +287,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to date.
+        /// </summary>
+        internal static string GotoDateTitle {
+            get {
+                return ResourceManager.GetString("GotoDateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sample data have been loaded.
         /// </summary>
         internal static string LoadSampleDataCompleted {

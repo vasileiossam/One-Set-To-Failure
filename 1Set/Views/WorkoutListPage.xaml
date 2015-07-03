@@ -28,6 +28,7 @@
   		<ToolbarItem Name="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Clicked="OnSettingsButtonClicked" Priority="1" x:Name = "SettingsButton"/>
   		<ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>
   		<ToolbarItem Name="{i18n:Translate AnalysisTitle}" Order="Secondary" Command="{Binding AnalysisCommand}" Priority="1"/>
+  		<ToolbarItem Name="{i18n:Translate GotoDateTitle}" Order="Secondary" Command="{Binding GotoDateCommand}" Priority="1"/>
 	</ContentPage.ToolbarItems>
 
   <ContentPage.Content>

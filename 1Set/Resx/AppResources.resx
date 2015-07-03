@@ -488,4 +488,7 @@
   <data name="ExerciseAnalysisTitle" xml:space="preserve">
     <value>Stats</value>
   </data>
+  <data name="GotoDateTitle" xml:space="preserve">
+    <value>Go to date</value>
+  </data>
 </root>

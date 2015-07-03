@@ -375,7 +375,7 @@ namespace Set.ViewModels
 			if (sender is ListPreference)
 			{
 				var preference = sender as ListPreference;
-				var action = await Page.DisplayActionSheet (preference.Title, AppResources.CancelButton, null, preference.Options);
+				var action = await Page.DisplayActionSheet(preference.Title, AppResources.CancelButton, null, preference.Options);
 
 				if ((action != null) && (action != AppResources.CancelButton))
 				{

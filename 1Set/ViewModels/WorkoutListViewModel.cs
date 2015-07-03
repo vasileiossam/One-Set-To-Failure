@@ -130,6 +130,15 @@ namespace Set.ViewModels
 			}
 		}
 
+		private readonly ICommand _gotoDateCommand;
+		public ICommand GotoDateCommand
+		{
+			get
+			{
+				return _gotoDateCommand;
+			}
+		}
+
         private DateTime _currentDate;
         public DateTime CurrentDate
         {
@@ -170,6 +179,8 @@ namespace Set.ViewModels
 			_chevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
 			_calendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
 			_analysisCommand = new Command (async() => { await OnAnalysisCommand(); });
+			_gotoDateCommand = new Command (async() => { await OnGotoDateCommand(); });
+
 		}
 
 		public async Task Load(DateTime date)
@@ -250,6 +261,26 @@ namespace Set.ViewModels
 			var page = new AnalysisPage () {ViewModel = viewModel};
 			await Navigation.PushAsync(page); 	
 		}
+
+		private async Task OnGotoDateCommand()
+		{
+			DependencyService.Get<IDatePickerDialog>().Show(OnGetDate);
+		}
+
+		private async void OnGetDate(object sender, EventArgs args)
+		{
+			if (sender is DateTime)
+			{
+				await Load ((DateTime) sender);
+
+				Device.BeginInvokeOnMainThread (() =>
+				{
+					Page.ChangeOrientation (false);
+					Page.Refresh ();
+				});
+			}
+		}
+
     }
 }
 
