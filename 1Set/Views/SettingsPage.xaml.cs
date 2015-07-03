@@ -33,10 +33,9 @@ namespace Set
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-			settingsList.ItemsSource = ViewModel.Settings;
 
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
+			await ViewModel.Load();
+			settingsList.ItemsSource = ViewModel.Settings;
 		}
 
 		protected override void OnDisappearing()
@@ -53,8 +52,9 @@ namespace Set
 			((ListView)sender).SelectedItem = null;
 		}
 
-		public void Refresh()
+		public async Task Refresh()
 		{
+			await ViewModel.Load();
 			settingsList.ItemsSource = null;
 			settingsList.ItemsSource = ViewModel.Settings;
 		}

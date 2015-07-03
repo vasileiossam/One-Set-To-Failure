@@ -20,7 +20,6 @@ namespace Set.ViewModels
 		{
 			get
 			{
-				_settings = LoadSettings().Result;
 				return _settings;
 			}
 			set
@@ -36,7 +35,7 @@ namespace Set.ViewModels
 			Title = AppResources.SettingsTitle;
 		}
 
-		protected async Task<ObservableCollection<PreferenceGroup>> LoadSettings()
+		public async Task Load()
 		{
 			var list = new ObservableCollection<PreferenceGroup>();
 
@@ -268,7 +267,7 @@ namespace Set.ViewModels
 
 							// reload settings
 							App.Settings = DependencyService.Get<ISettingsStorage>().Load();
-							Page.Refresh();
+							await Page.Refresh();
 
 							App.ShowToast (ToastNotificationType.Info, AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);		
 						}
@@ -367,7 +366,7 @@ namespace Set.ViewModels
 			});
 			#endregion
 
-			return list;
+			Settings = list;
 		}
 
 		public async void OnClicked(object sender, EventArgs args)
