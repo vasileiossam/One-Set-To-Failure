@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Set.Abstract;
 using Set.Models;
 using SQLite.Net.Async;
+using System.Diagnostics;
 
 namespace Set.Concrete
 {
@@ -60,6 +61,26 @@ namespace Set.Concrete
 				var dayTrophies = await _connection.ExecuteScalarAsync<int?>(sql, date);
 				return dayTrophies ?? 0;
 			}
+		}
+
+		public override async Task<List<Workout>> AllAsync()
+		{
+			// http://www.captechconsulting.com/blog/nicholas-cipollina/cross-platform-sqlite-support-%E2%80%93-part-1
+			try
+			{
+				List<Workout> list = new List<Workout> ();
+				using (await Mutex.LockAsync ().ConfigureAwait (false)) 
+				{
+					list = await _connection.Table<Workout> ().OrderBy(x=>x.Created).ToListAsync ().ConfigureAwait (false);
+				}
+
+				return list;
+			}
+			catch(Exception ex)
+			{
+				Debug.WriteLine (ex.Message);
+			}
+			return null;
 		}
     }
 }

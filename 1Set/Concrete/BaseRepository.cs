@@ -30,7 +30,7 @@ namespace Set.Concrete
 			}
 		}
 
-		public async Task<List<TEntity>> AllAsync()
+		public virtual async Task<List<TEntity>> AllAsync()
 		{
 			// http://www.captechconsulting.com/blog/nicholas-cipollina/cross-platform-sqlite-support-%E2%80%93-part-1
 			try
