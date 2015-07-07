@@ -10,7 +10,7 @@
 	public enum ScreenSizes
 	{
 		Default,
-		Small
+		Small,
 	}
 
 	public class ScreenSizeHandler
@@ -37,7 +37,7 @@
 
 		public ScreenSizes GetScreenSize()
 		{
-			if ((App.ScreenWidth <= 320) || (App.ScreenHeight <= 320))
+			if ((App.ScreenWidth <= 480) || (App.ScreenHeight <= 480))
 			{
 				return ScreenSizes.Small;
 			}

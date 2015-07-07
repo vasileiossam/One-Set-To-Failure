@@ -37,7 +37,7 @@ namespace Set.Droid
 			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, PackageInfoFlags.Activities).VersionName;
 			App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
 			App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
-
+		
 			LoadApplication(new App ());
 
 			bootstrapper.CheckMapper ();

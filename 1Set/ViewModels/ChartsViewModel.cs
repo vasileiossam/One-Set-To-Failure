@@ -88,6 +88,32 @@ namespace Set.ViewModels
 			}
 		}
 
+		private DateTimeAxis GetDateTimeAxis(int count)
+		{
+			var dateAxis = new DateTimeAxis { Position = AxisPosition.Bottom };
+
+			dateAxis.StringFormat = "MMM dd";
+			dateAxis.IsPanEnabled = true;
+			dateAxis.IsZoomEnabled = true;
+			dateAxis.IntervalType = DateTimeIntervalType.Days;
+			dateAxis.MinorIntervalType = DateTimeIntervalType.Days;
+			dateAxis.MinorStep = 1;
+
+			// when one workout it display a black mark in the begining of the axis; like minor and major to print in the same area
+			if (count == 1)
+			{
+				dateAxis.IsAxisVisible = false;
+			}
+			else
+			// in the begining when there aren't many workouts, this will avoid displaying the same date more than once in the axis
+			if (count <= 7)
+			{
+				dateAxis.MajorStep = 1;
+			}
+
+			return dateAxis;
+		}
+
 		public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
 		{
 			//await Task.Run (() =>
@@ -103,14 +129,11 @@ namespace Set.ViewModels
 				series.ItemsSource = item.Value;
 				plotModel.Series.Add (series);
 
-				// setup axis
-				var dateAxis = new DateTimeAxis { Position = AxisPosition.Bottom };
-				dateAxis.StringFormat = "MMM dd";
+				var dateAxis = GetDateTimeAxis (item.Value.Count());
+				plotModel.Axes.Add (dateAxis);
 
 				var valueAxis = new LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0 };
 				valueAxis.Title = "Weight";
-
-				plotModel.Axes.Add (dateAxis);
 				plotModel.Axes.Add (valueAxis);
 
 				return plotModel; 
@@ -178,6 +201,7 @@ namespace Set.ViewModels
 					PlotAreaBackground = OxyColors.LightGray,
 				};
 
+				int count = 0;
 				foreach (var weightGroup in exerciseGroup)
 				{
 					var series = new LineSeries ();
@@ -188,17 +212,17 @@ namespace Set.ViewModels
 					foreach (var workout in weightGroup)
 					{
 						weightData.Add(new DataPoint (DateTimeAxis.ToDouble (workout.Created), workout.Reps));						
+						count++;
 					}
 
 					series.ItemsSource = weightData;
 				}
 
-				var dateAxis = new DateTimeAxis { Position = AxisPosition.Bottom };
-				dateAxis.StringFormat = "MMM dd";
+				var dateAxis = GetDateTimeAxis (count);
+				plotModel.Axes.Add (dateAxis);
+
 				var valueAxis = new LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0 };
 				valueAxis.Title = "Resps";
-
-				plotModel.Axes.Add (dateAxis);
 				plotModel.Axes.Add (valueAxis);		
 
 				var plotView = new PlotView ()
@@ -207,6 +231,7 @@ namespace Set.ViewModels
 					Model = plotModel,
 					VerticalOptions = LayoutOptions.Fill,
 					HorizontalOptions = LayoutOptions.Fill
+						
 				};
 
 				OxyPlotsLayout.Children.Add(plotView);		

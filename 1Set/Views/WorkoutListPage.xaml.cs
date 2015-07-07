@@ -117,6 +117,7 @@ namespace Set
 		{
 			base.OnSizeAllocated (width, height);
 
+
 			if (_screenSizeHandler.GetScreenSize () == ScreenSizes.Small)
 			{
 				var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
