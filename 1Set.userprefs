@@ -1,13 +1,10 @@
 ﻿<Properties StartupItem="Droid\1Set.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.86.101:5555" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\Views\ExerciseDetailsPage.xaml.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="1Set\ViewModels\ExerciseViewModel.cs">
     <Files>
-      <File FileName="1Set\Views\WorkoutPage.xaml.cs" Line="31" Column="1" />
-      <File FileName="1Set\Views\ExerciseDetailsPage.xaml.cs" Line="64" Column="4" />
-      <File FileName="1Set\Models\Workout.cs" Line="1" Column="1" />
-      <File FileName="1Set\WorkoutRules.cs" Line="1" Column="1" />
-      <File FileName="1Set\Models\Exercise.cs" Line="1" Column="1" />
-      <File FileName="1Set\Units.cs" Line="1" Column="1" />
+      <File FileName="1Set\ViewModels\ExerciseViewModel.cs" Line="195" Column="16" />
+      <File FileName="1Set\ViewModels\WorkoutViewModel.cs" Line="130" Column="95" />
+      <File FileName="1Set\Resx\AppResources.resx" Line="178" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

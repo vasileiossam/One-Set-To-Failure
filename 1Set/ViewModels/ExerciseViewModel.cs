@@ -189,6 +189,13 @@ namespace Set.ViewModels
 				return false;
 			}
 
+			if ((PlateWeight < 0 ) || (PlateWeight > 999))
+			{
+				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseInvalidPlateWeight);
+				PlateWeight = 0;
+				return false;
+			}
+
 			return true;
 		}
 

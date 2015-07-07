@@ -242,6 +242,15 @@ namespace Set.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Plate Weight value.
+        /// </summary>
+        internal static string ExerciseInvalidPlateWeight {
+            get {
+                return ResourceManager.GetString("ExerciseInvalidPlateWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exercise or weight machine name.
         /// </summary>
         internal static string ExerciseLabel {

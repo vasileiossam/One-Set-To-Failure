@@ -34,6 +34,6 @@ Global
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = Flat
 		$1.ResourceNamePolicy = MSBuild
-		version = 0.2.2
+		version = 0.2.3
 	EndGlobalSection
 EndGlobal
