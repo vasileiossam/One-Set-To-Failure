@@ -103,7 +103,7 @@ namespace Set.ViewModels
 
 			await Workout.LoadAsync ();
 			Reps = Workout.Reps;
-			Weight = Units.GetWeight (Workout.Weight);
+			Weight = Workout.ConvertedWeight;
 		}
 
 		private bool Validate ()
@@ -209,7 +209,7 @@ namespace Set.ViewModels
 		{
 			if ((Weight == 0) && (Workout.TargetWeight > 0))
 			{
-				Weight = Workout.TargetWeight;
+				Weight = Workout.ConvertedTargetWeight;
 			} else
 			{			
 				Weight = Weight + GetStep ();
@@ -223,7 +223,7 @@ namespace Set.ViewModels
 		{
             if ((Weight == 0) && (Workout.TargetWeight > 0))
             {
-                Weight = Workout.TargetWeight;
+                Weight = Workout.ConvertedTargetWeight;
             }
             else
 			if ((Weight - GetStep ()) < 0)
@@ -240,7 +240,7 @@ namespace Set.ViewModels
 
 		private double GetStep()
 		{
-			var step = Units.GetWeight(Workout.Exercise.PlateWeight);
+			var step = Workout.Exercise.ConvertedPlateWeight;
 			if (step <= 0)
 				step = 1;
 			return step;
@@ -253,7 +253,7 @@ namespace Set.ViewModels
                 if (Workout.PreviousReps > 0)
                 {
                     Reps = Workout.PreviousReps;
-                    Weight = Workout.PreviousWeight;
+                    Weight = Workout.ConvertedPreviousWeight;
                 }
             }
         }
@@ -265,7 +265,7 @@ namespace Set.ViewModels
                 if (Workout.TargetReps > 0)
                 {
                     Reps = Workout.TargetReps;
-                    Weight = Workout.TargetWeight;
+                    Weight = Workout.ConvertedTargetWeight;
                 }
             }
         }

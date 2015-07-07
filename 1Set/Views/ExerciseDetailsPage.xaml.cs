@@ -58,17 +58,22 @@ namespace Set
 
 		void OnTextChanged(object sender, TextChangedEventArgs  e)
 		{
-			var entry = sender as Entry;
-			var value = entry.Text;
+			// fires multiple times and can go to infinite loop
+			// example: when in the workout list we have a workout with weight 500.1
+			// when we will tap this workout app will crash
 
-			// max length = 3
-			if(value.Length > 3)
-			{
-				// Remove Last character 
-				value = value.Remove(value.Length - 1);
-				// Set the Old value
-				entry.Text = value; 
-			}
+//			var entry = sender as Entry;
+//			if (entry == null) return;
+//			var value = entry.Text;
+//
+//			// max length = 4
+//			if(value.Length > 4)
+//			{
+//				// Remove Last character 
+//				value = value.Remove(value.Length - 1);
+//				// Set the Old value
+//				entry.Text = value; 
+//			}
 		}
 	}
 }

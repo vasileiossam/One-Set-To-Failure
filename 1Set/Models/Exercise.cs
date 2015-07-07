@@ -112,6 +112,15 @@ namespace Set.Models
 		[IgnoreMap]
         public byte[] Image { get; set; }
 
+		[Ignore]
+		[IgnoreMap]
+		public double ConvertedPlateWeight 
+		{
+			get
+			{
+				return Units.GetWeight(PlateWeight);
+			}
+		}
 
 	}
 }

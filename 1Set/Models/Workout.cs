@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
+using AutoMapper;
 
 namespace Set.Models
 {
@@ -86,6 +87,33 @@ namespace Set.Models
 			{
 				App.ShowErrorPage (this, ex);
 				return false;
+			}
+		}
+
+		[Ignore]
+		[IgnoreMap]
+		public double ConvertedWeight {
+			get
+			{
+				return Units.GetWeight(Weight);
+			}
+		}
+
+		[Ignore]
+		[IgnoreMap]
+		public double ConvertedPreviousWeight {
+			get
+			{
+				return Units.GetWeight(PreviousWeight);
+			}
+		}
+
+		[Ignore]
+		[IgnoreMap]
+		public double ConvertedTargetWeight {
+			get
+			{
+				return Units.GetWeight(TargetWeight);
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using Set.ViewModels;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Set
 {
@@ -15,6 +16,7 @@ namespace Set
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
 			await ViewModel.LoadAsync ();
 			BindingContext = ViewModel;
         }
@@ -26,17 +28,27 @@ namespace Set
 
 		void OnTextChanged(object sender, TextChangedEventArgs  e)
 		{
-			var entry = sender as Entry;
-			var value = entry.Text;
+			// fires multiple times and can go to infinite loop
+			// example: when in the workout list we have a workout with weight 500.1
+			// when we will tap this workout app will crash
 
-			// max length = 3
-			if(value.Length > 3)
-			{
-				// Remove Last character 
-				value = value.Remove(value.Length - 1);
-				// Set the Old value
-				entry.Text = value; 
-			}
+//			var entry = sender as Entry;
+//			if (entry == null) return;
+//			var value = entry.Text;
+//
+//			// max length = 4
+//			if(value.Length > 4)
+//			{
+//				// Remove Last character 
+//				value = value.Remove(value.Length - 1);
+//
+//				// https://forums.xamarin.com/discussion/44018/removing-and-adding-of-textchanged-event-handler
+//				entry.TextChanged -= OnTextChanged;
+//				entry.Text = value; 
+//				Task.Yield();
+//				entry.TextChanged += OnTextChanged;
+//
+//			}
 		}
 	}
 }
