@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Set.Abstract;
-using Set.Models;
-using SQLite.Net.Async;
+using Set.Entities;
+using SQLite;
 
 namespace Set.Concrete
 {
@@ -42,8 +42,8 @@ namespace Set.Concrete
 						.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToListAsync ();
 				}
 
-				await LoadExercisesAsync (list);
-				await LoadRelations(list, date);
+				//await LoadExercisesAsync (list);
+				//await LoadRelations(list, date);
 				return list;
 			}
 			catch(Exception ex)
@@ -56,35 +56,7 @@ namespace Set.Concrete
 
 		private async Task LoadRelations(List<RoutineDay> list, DateTime date)
 		{	
-			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(date);
-				
-			var canCalculateTarget = false;
-
-			foreach (var day in list)
-			{
-				var workout = workouts.Find (x => x.ExerciseId == day.ExerciseId);
-
-				// workout hasn't performed for this exercise
-				if (workout == null)
-				{
-				    workout = new Workout
-				    {
-				        ExerciseId = day.ExerciseId,
-				        Created = date
-				    };
-				    canCalculateTarget = true;
-				} 
-
-				day.Workout = workout;
-				day.Workout.Exercise = day.Exercise;
-
-				// to calculate target reps/weight
-				if (canCalculateTarget) 
-				{
-					await workout.LoadAsync ();
-				}
-
-			}
+			
 		}
 
 		public async Task<List<RoutineDay>> GetRoutine(int exerciseId)
@@ -102,31 +74,5 @@ namespace Set.Concrete
 			}
 		}
 
-		private async Task LoadExercisesAsync(List<RoutineDay> list)
-		{
-			if (list.Count == 0)
-				return;
-			
-			using (await Mutex.LockAsync ().ConfigureAwait (false))
-			{	
-				var condition = string.Empty;
-
-				foreach (var day in list)
-				{
-					condition = condition + day.ExerciseId + ",";
-				}
-				condition = condition.TrimEnd (',');
-
-				var sql = string.Format(@"SELECT *  
-                        FROM Exercises
-                        WHERE ExerciseId IN ({0})", condition);
-				var exercises = await _connection.QueryAsync<Exercise> (sql);
-
-				foreach (var day in list)
-				{
-					day.Exercise = exercises.FirstOrDefault (x => x.ExerciseId == day.ExerciseId);
-				}
-			}
-		}
 	}
 }

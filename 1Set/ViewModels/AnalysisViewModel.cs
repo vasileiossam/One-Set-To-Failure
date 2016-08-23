@@ -5,7 +5,6 @@ using System.Windows.Input;
 using AutoMapper;
 using Set.Models;
 using Set.Resx;
-using Toasts.Forms.Plugin.Abstractions;
 using Xamarin.Forms;
 
 namespace Set.ViewModels

@@ -7,7 +7,7 @@ using OxyPlot.Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
-using Set.Models;
+using Set.Entities;
 using Set.Localization;
 
 namespace Set.ViewModels
@@ -70,7 +70,7 @@ namespace Set.ViewModels
 			foreach (var workout in _workouts)
 			{
 				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
-				workout.Exercise = exercise;
+				//workout.Exercise = exercise;
 			}
 		}
 

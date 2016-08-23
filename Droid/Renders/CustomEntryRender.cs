@@ -36,11 +36,9 @@ namespace Set.Droid.Renders
 						view.TextAlignment = Android.Views.TextAlignment.Center;
 						view.Gravity = GravityFlags.Center;
 					}
-
-
-
-					double fontSize = 0;
-					if (!double.TryParse (entry.FontSize, out fontSize))
+                    
+					var fontSize = entry.FontSize;
+					if (fontSize <= 0)
 					{
 						fontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Entry));						
 					}  

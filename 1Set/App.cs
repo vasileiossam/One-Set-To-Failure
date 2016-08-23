@@ -6,8 +6,8 @@ using Set.Models;
 using Set.Resx;
 using Set.ViewModels;
 using Set.Views;
-using Toasts.Forms.Plugin.Abstractions;
 using Xamarin.Forms;
+using Plugin.Toasts;
 
 namespace Set
 {
@@ -24,9 +24,12 @@ namespace Set
 		public static int RestTimerSecondsLeft { get; set; }
 			
 		public App ()
-		{	
-			//Debugger.Break ();
-			Settings = DependencyService.Get<ISettingsStorage>().Load();
+		{
+#if DEBUG
+            // That's the only way to have the breakpoints working...
+            Debugger.Break ();
+#endif
+            Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();

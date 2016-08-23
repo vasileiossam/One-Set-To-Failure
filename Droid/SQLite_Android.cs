@@ -4,23 +4,21 @@ using Set;
 using Xamarin.Forms;
 using System.IO;
 using Set.Droid;
-using SQLite.Net.Async;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
+using SQLite;
 
 [assembly: Dependency (typeof (SQLite_Android))]
 
 namespace Set.Droid
 {
 	#if DEBUG
-	public class TraceListener : ITraceListener
-	{
-		public void Receive (string message)
-		{
-			Console.WriteLine(message);
-			Logger.Info ("TraceListener", message);
-		}
-	}
+	//public class TraceListener : ITraceListener
+	//{
+	//	public void Receive (string message)
+	//	{
+	//		Console.WriteLine(message);
+	//		Logger.Info ("TraceListener", message);
+	//	}
+	//}
 	#endif
 
 	public class SQLite_Android : ISQLite
@@ -57,22 +55,19 @@ namespace Set.Droid
 					ReadWriteStream(s, writeStream);
 				}					
 
-				var platform = new SQLitePlatformAndroid ();
-
+				// var platform = new SQLitePlatformAndroid ();
 				// storeDateTimeAsTicks  = false
 				// set it to false if I want the date fields to created as string instead of bigint
 				// http://stackoverflow.com/questions/21460271/community-sqlite-not-handling-dates-datetimes-correctly
-				var connectionStr = new SQLiteConnectionString (pathName, false); 
-
-				var connectionWithLock = new SQLiteConnectionWithLock (platform, connectionStr);
+				// var connectionStr = new SQLiteConnectionString (pathName, false); 
+				// var connectionWithLock = new SQLiteConnectionWithLock (platform, connectionStr);
 
 				#if DEBUG
-				var listener = new TraceListener();
-				connectionWithLock.TraceListener = listener;
+				//var listener = new TraceListener();
+				//connectionWithLock.TraceListener = listener;
 				#endif
 
-				var connection = new SQLiteAsyncConnection (() => connectionWithLock);
-
+				var connection = new SQLiteAsyncConnection(pathName, false);
 				return connection;
 			}
 			catch(Exception ex)

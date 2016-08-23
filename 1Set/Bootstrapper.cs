@@ -2,6 +2,7 @@
 using AutoMapper;
 using Set.Models;
 using Set.ViewModels;
+using Set.Entities;
 
 namespace Set
 {
@@ -9,11 +10,12 @@ namespace Set
 	{
 		public void Automapper()
 		{
-			Mapper.CreateMap<Exercise, ExerciseViewModel> ();
-			Mapper.CreateMap<ExerciseViewModel, Exercise> ();
-		}
+            	Mapper.CreateMap<RoutineDay, RoutineDayViewModel> ();
+            //	Mapper.CreateMap<Exercise, ExerciseViewModel> ();
+            //Mapper.CreateMap<ExerciseViewModel, Exercise> ();
+        }
 
-		public void CheckMapper()
+        public void CheckMapper()
 		{
 			try
 			{

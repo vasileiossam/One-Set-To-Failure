@@ -6,8 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Toasts.Forms.Plugin.Droid;
 using OxyPlot.Xamarin.Forms;
+using Plugin.Toasts;
+using Xamarin.Forms;
 
 namespace Set.Droid
 {
@@ -31,9 +32,10 @@ namespace Set.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
-			ToastNotificatorImplementation.Init();
+            DependencyService.Register<ToastNotificatorImplementation>();
+            ToastNotificatorImplementation.Init(this);
 
-			Context context = this.ApplicationContext;
+            Context context = this.ApplicationContext;
 			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, PackageInfoFlags.Activities).VersionName;
 			App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
 			App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;

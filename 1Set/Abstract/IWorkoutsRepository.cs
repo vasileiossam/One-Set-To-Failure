@@ -1,4 +1,4 @@
-﻿using Set.Models;
+﻿using Set.Entities;
 
 namespace Set.Abstract
 {

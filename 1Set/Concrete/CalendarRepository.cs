@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Set.Abstract;
-using Set.Models;
-using SQLite.Net.Async;
+using Set.Entities;
+using SQLite;
 
 namespace Set.Concrete
 {
@@ -20,7 +20,7 @@ namespace Set.Concrete
 			{
 				var entity = await _connection.Table<Calendar> ()
 					.Where (x => x.Date == date)
-					.FirstOrDefaultAsync ().ConfigureAwait(false);
+					.FirstOrDefaultAsync ();
 
 				return entity;
 			}

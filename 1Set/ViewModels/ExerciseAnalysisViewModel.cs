@@ -7,7 +7,7 @@ using OxyPlot.Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
-using Set.Models;
+using Set.Entities;
 using Set.Localization;
 
 namespace Set.ViewModels

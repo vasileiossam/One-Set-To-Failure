@@ -3,10 +3,12 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Set.Models;
+using Set.Entities;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using AutoMapper;
 
 namespace Set.ViewModels
 {
@@ -155,8 +157,8 @@ namespace Set.ViewModels
             }
         }
 
-        private ObservableCollection<RoutineDay> _routineDays;
-		public ObservableCollection<RoutineDay> RoutineDays
+        private ObservableCollection<RoutineDayViewModel> _routineDays;
+		public ObservableCollection<RoutineDayViewModel> RoutineDays
 		{
 			get
 			{
@@ -209,7 +211,7 @@ namespace Set.ViewModels
 			CalendarNotesVisible = !string.IsNullOrEmpty (CalendarNotes);
 
 			var list = await App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
-			RoutineDays = new ObservableCollection<RoutineDay>(list);
+            RoutineDays = Mapper.Map<ObservableCollection<RoutineDayViewModel>>(list);
 
 			if (RoutineDays == null)
 			{

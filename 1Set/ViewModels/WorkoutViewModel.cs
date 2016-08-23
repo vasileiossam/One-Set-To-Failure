@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Set.Localization;
-using Set.Models;
+using Set.Entities;
 using Set.Resx;
-using Toasts.Forms.Plugin.Abstractions;
 using Xamarin.Forms;
+using Plugin.Toasts;
 
 namespace Set.ViewModels
 {
@@ -76,8 +76,32 @@ namespace Set.ViewModels
 		public bool TargetRepsWeightVisible { get { return App.Settings.TargetRepsWeightVisible;} }
 		public bool PreviousRepsWeightVisible { get { return App.Settings.PreviousRepsWeightVisible;} }
 
-		#region commands
-		public ICommand RepsUpCommand {get; set;}
+        public double ConvertedWeight
+        {
+            get
+            {
+                return Units.GetWeight(Workout.Weight);
+            }
+        }
+
+        public double ConvertedPreviousWeight
+        {
+            get
+            {
+                return Units.GetWeight(Workout.PreviousWeight);
+            }
+        }
+
+        public double ConvertedTargetWeight
+        {
+            get
+            {
+                return Units.GetWeight(Workout.TargetWeight);
+            }
+        }
+
+        #region commands
+        public ICommand RepsUpCommand {get; set;}
 		public ICommand RepsDownCommand {get; set;}
 		public ICommand WeighUpCommand {get; set;}
 		public ICommand WeighDownCommand {get; set;}
@@ -100,10 +124,6 @@ namespace Set.ViewModels
 		public async Task LoadAsync()
 		{
 			RestTimerToolbarItem.Update();
-
-			await Workout.LoadAsync ();
-			Reps = Workout.Reps;
-			Weight = Workout.ConvertedWeight;
 		}
 
 		private bool Validate ()
@@ -209,7 +229,7 @@ namespace Set.ViewModels
 		{
 			if ((Weight == 0) && (Workout.TargetWeight > 0))
 			{
-				Weight = Workout.ConvertedTargetWeight;
+				Weight = ConvertedTargetWeight;
 			} else
 			{			
 				Weight = Weight + GetStep ();
@@ -223,7 +243,7 @@ namespace Set.ViewModels
 		{
             if ((Weight == 0) && (Workout.TargetWeight > 0))
             {
-                Weight = Workout.ConvertedTargetWeight;
+                Weight = ConvertedTargetWeight;
             }
             else
 			if ((Weight - GetStep ()) < 0)
@@ -240,8 +260,8 @@ namespace Set.ViewModels
 
 		private double GetStep()
 		{
-			var step = Workout.Exercise.ConvertedPlateWeight;
-			if (step <= 0)
+            var step = Units.GetWeight(Workout.Exercise.PlateWeight);
+            if (step <= 0)
 				step = 1;
 			return step;
 		}
@@ -253,7 +273,7 @@ namespace Set.ViewModels
                 if (Workout.PreviousReps > 0)
                 {
                     Reps = Workout.PreviousReps;
-                    Weight = Workout.ConvertedPreviousWeight;
+                    Weight = ConvertedPreviousWeight;
                 }
             }
         }
@@ -265,7 +285,7 @@ namespace Set.ViewModels
                 if (Workout.TargetReps > 0)
                 {
                     Reps = Workout.TargetReps;
-                    Weight = Workout.ConvertedTargetWeight;
+                    Weight = ConvertedTargetWeight;
                 }
             }
         }

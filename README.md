@@ -4,11 +4,8 @@
 AutoMapper
 https://github.com/AutoMapper/AutoMapper
 
-SQLite-Net Extensions
-https://bitbucket.org/twincoders/sqlite-net-extensions
-
-SQLite.Net-PCL
-https://github.com/oysteinkrog/SQLite.Net-PCL
+SQLite-net PCL (Frank A. Krueger)
+https://www.nuget.org/packages/sqlite-net-pcl/
 
 Json.NET
 http://www.newtonsoft.com/json

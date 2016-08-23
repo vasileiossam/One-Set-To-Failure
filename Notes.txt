@@ -1,1 +1,112 @@
-﻿
+﻿workout
+------
+public async Task<bool> LoadAsync()
+		{
+			try
+			{
+				// update previous and target workout only when adding a new workout
+				// if (WorkoutId == 0)
+				{
+					PreviousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout (null);
+					if (PreviousWorkout != null)
+					{
+						PreviousReps = PreviousWorkout.Reps;
+						PreviousWeight = PreviousWorkout.Weight;
+					}
+
+					dynamic targetWorkout = await WorkoutRules.GetTargetWorkoutAsync (this);
+					if (targetWorkout != null)
+					{
+						TargetReps = targetWorkout.TargetReps;
+						TargetWeight = targetWorkout.TargetWeight;
+					}
+				}
+
+				return true;
+			}
+			catch(Exception ex)
+			{
+				App.ShowErrorPage (this, ex);
+				return false;
+			}
+		}
+
+
+
+routinedaysrepo
+---------------------
+	private async Task LoadRelations(List<RoutineDay> list, DateTime date)
+		{	
+			var workouts = await App.Database.WorkoutsRepository.GetWorkouts(date);
+				
+			var canCalculateTarget = false;
+
+			foreach (var day in list)
+			{
+				var workout = workouts.Find (x => x.ExerciseId == day.ExerciseId);
+
+				// workout hasn't performed for this exercise
+				if (workout == null)
+				{
+				    workout = new Workout
+				    {
+				        ExerciseId = day.ExerciseId,
+				        Created = date
+				    };
+				    canCalculateTarget = true;
+				} 
+
+				day.Workout = workout;
+				day.Workout.Exercise = day.Exercise;
+
+				// to calculate target reps/weight
+				if (canCalculateTarget) 
+				{
+					await workout.LoadAsync ();
+				}
+
+			}
+		}
+
+
+		private async Task LoadExercisesAsync(List<RoutineDay> list)
+		{
+			if (list.Count == 0)
+				return;
+			
+			using (await Mutex.LockAsync ().ConfigureAwait (false))
+			{	
+				var condition = string.Empty;
+
+				foreach (var day in list)
+				{
+					condition = condition + day.ExerciseId + ",";
+				}
+				condition = condition.TrimEnd (',');
+
+				var sql = string.Format(@"SELECT *  
+                        FROM Exercises
+                        WHERE ExerciseId IN ({0})", condition);
+				var exercises = await _connection.QueryAsync<Exercise> (sql);
+
+				foreach (var day in list)
+				{
+					day.Exercise = exercises.FirstOrDefault (x => x.ExerciseId == day.ExerciseId);
+				}
+			}
+		}
+
+		uncomment in GetRoutine()
+						//await LoadExercisesAsync (list);
+				//await LoadRelations(list, date);
+
+
+WorkoutViewModel
+		public async Task LoadAsync()
+		{
+			RestTimerToolbarItem.Update();
+
+			await Workout.LoadAsync ();
+			Reps = Workout.Reps;
+			Weight = Workout.ConvertedWeight;
+		}

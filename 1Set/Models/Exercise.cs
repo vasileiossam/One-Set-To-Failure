@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using AutoMapper;
-using SQLite.Net.Attributes;
+using SQLite;
 
-namespace Set.Models
+namespace Set.Models1
 {
 	[Table("Exercises")]
 	public class Exercise
@@ -98,16 +98,6 @@ namespace Set.Models
         #endregion
 
 
-        [Ignore]
-		[IgnoreMap]
-		public RepsIncrement RepsIncrement
-        {
-            get
-            {
-				var repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x=> x.RepsIncrementId == RepsIncrementId);
-				return repsIncrement;
-            }
-        } 
 
 		[IgnoreMap]
         public byte[] Image { get; set; }

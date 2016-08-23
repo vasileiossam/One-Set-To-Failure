@@ -18,7 +18,7 @@
       <local:DateTimeToStringConverter x:Key="dateConverter" />
       <local:WeightMetricToImperialConverter x:Key="weightConverter" />
       <local:IntToStringConverter x:Key="intToStringConverter" />
-	  <local:DoubleToStringConverter x:Key="doubleToStringConverter" />
+	    <local:DoubleToStringConverter x:Key="doubleToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 

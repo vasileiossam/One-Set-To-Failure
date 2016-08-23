@@ -54,7 +54,7 @@ namespace Set
 			};
 
 			Navigation.PushAsync(exercisePage);
-		}
+         }
 
 		public async Task OnExerciseSelected(object sender, SelectedItemChangedEventArgs e)
 		{

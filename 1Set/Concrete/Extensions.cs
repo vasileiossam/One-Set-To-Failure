@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using SQLite.Net.Attributes;
+using SQLite;
 
 namespace Set.Concrete
 {

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Set.Abstract;
 using Set.Resx;
-using Toasts.Forms.Plugin.Abstractions;
 using Xamarin.Forms;
+using Plugin.Toasts;
 
 namespace Set.ViewModels
 {

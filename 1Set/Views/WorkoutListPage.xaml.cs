@@ -2,6 +2,7 @@
 using Set.Models;
 using Set.ViewModels;
 using Xamarin.Forms;
+using Set.Entities;
 
 namespace Set
 {
@@ -81,7 +82,7 @@ namespace Set
 
 			var viewModel = new WorkoutViewModel()
             {
-                Workout = (e.SelectedItem as RoutineDay).Workout,
+                Workout = (e.SelectedItem as RoutineDayViewModel).Workout,
 				Navigation = Navigation,
 				RestTimerToolbarItem = ViewModel.RestTimerToolbarItem
             };

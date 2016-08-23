@@ -1,29 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
 using AutoMapper;
+using SQLite;
 
-namespace Set.Models
+namespace Set.Models1
 {
-	[Table("Workouts")]
 	public class Workout
 	{
 		public Workout ()
 		{
-            Created = DateTime.Today;
 		}
 
-		[PrimaryKey, AutoIncrement]
 		public int WorkoutId { get; set; }
-
-		[Indexed]
-		[ForeignKey(typeof(Exercise))]
         public int ExerciseId { get; set; }
-
 		public DateTime Created { get; set; }
         public string Notes { get; set; }
-
         public int Reps { get; set; }
         public double Weight { get; set; }
 		public int Trophies { get; set; }
@@ -59,63 +50,9 @@ namespace Set.Models
 			}
 		}
 
-		public async Task<bool> LoadAsync()
-		{
-			try
-			{
-				// update previous and target workout only when adding a new workout
-				// if (WorkoutId == 0)
-				{
-					PreviousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout (ExerciseId, Created);
-					if (PreviousWorkout != null)
-					{
-						PreviousReps = PreviousWorkout.Reps;
-						PreviousWeight = PreviousWorkout.Weight;
-					}
+		
 
-					dynamic targetWorkout = await WorkoutRules.GetTargetWorkoutAsync (this);
-					if (targetWorkout != null)
-					{
-						TargetReps = targetWorkout.TargetReps;
-						TargetWeight = targetWorkout.TargetWeight;
-					}
-				}
 
-				return true;
-			}
-			catch(Exception ex)
-			{
-				App.ShowErrorPage (this, ex);
-				return false;
-			}
-		}
-
-		[Ignore]
-		[IgnoreMap]
-		public double ConvertedWeight {
-			get
-			{
-				return Units.GetWeight(Weight);
-			}
-		}
-
-		[Ignore]
-		[IgnoreMap]
-		public double ConvertedPreviousWeight {
-			get
-			{
-				return Units.GetWeight(PreviousWeight);
-			}
-		}
-
-		[Ignore]
-		[IgnoreMap]
-		public double ConvertedTargetWeight {
-			get
-			{
-				return Units.GetWeight(TargetWeight);
-			}
-		}
 	}
 }
 

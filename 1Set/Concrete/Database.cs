@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Set.Abstract;
 using Set.Concrete;
+using Set.Entities;
 using Set.Models;
-using SQLite.Net.Async;
 using Xamarin.Forms;
 using System.Text;
 using System.Linq;
-using System.Diagnostics;
+using SQLite;
 
 namespace Set
 {
@@ -138,17 +138,10 @@ namespace Set
 
 		public async Task RecalcStatistics()
 		{
-			var exersisesList = await App.Database.ExercisesRepository.AllAsync ();
 			var workoutsList = await App.Database.WorkoutsRepository.AllAsync ();
 
 			foreach (var workout in workoutsList)
 			{
-				workout.Exercise = exersisesList.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
-
-				if (!await workout.LoadAsync ())
-				{
-					break;
-				}
 				workout.Trophies = WorkoutRules.GetTrophies(workout);
 				await App.Database.WorkoutsRepository.SaveAsync(workout);
 			}

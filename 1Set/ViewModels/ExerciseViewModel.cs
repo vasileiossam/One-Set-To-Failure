@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AutoMapper;
-using Set.Models;
+using Set.Entities;
 using Set.Resx;
-using Toasts.Forms.Plugin.Abstractions;
 using Xamarin.Forms;
+using Plugin.Toasts;
+using Set.Models;
+using System.Linq;
 
 namespace Set.ViewModels
 {
@@ -22,9 +24,20 @@ namespace Set.ViewModels
 		public string Name { get; set; }
 		public string Notes { get; set; }
 		public double PlateWeight {get; set; }
-		#endregion
+        public int? RepsIncrementId { get; set; }
+        #endregion
 
-		public bool NotesVisible { get { return !string.IsNullOrEmpty (Notes); }}
+        [IgnoreMap]
+        public RepsIncrement RepsIncrement
+        {
+            get
+            {
+                var repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x => x.RepsIncrementId == RepsIncrementId);
+                return repsIncrement;
+            }
+        }
+        
+        public bool NotesVisible { get { return !string.IsNullOrEmpty (Notes); }}
 
 		private List<RoutineDay> _routineDays;
 

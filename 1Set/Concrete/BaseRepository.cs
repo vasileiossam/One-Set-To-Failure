@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Set.Abstract;
-using SQLite.Net.Async;
+using SQLite;
 
 namespace Set.Concrete
 {
@@ -22,13 +22,13 @@ namespace Set.Concrete
 			_connection = connection;
 		}
 
-		public AsyncTableQuery<TEntity> Table
-		{
-			get
-			{
-				return _connection.Table<TEntity>();
-			}
-		}
+		//public AsyncTableQuery<TEntity> Table
+		//{
+		//	get
+		//	{
+		//		return _connection.Table<TEntity>();
+		//	}
+		//}
 
 		public virtual async Task<List<TEntity>> AllAsync()
 		{
@@ -50,7 +50,7 @@ namespace Set.Concrete
 			return null;
 		}
 
-		public async Task<TEntity> FindAsync (int id) 
+		public virtual async Task<TEntity> FindAsync (int id) 
 		{
 			using (await Mutex.LockAsync ().ConfigureAwait (false)) 
 			{
@@ -88,13 +88,21 @@ namespace Set.Concrete
 			}
 		}
 
-		public virtual async Task<int> DeleteAsync(int id)
+		public virtual async Task<int> DeleteAsync(object item)
 		{
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{
-				return await _connection.DeleteAsync<TEntity> (id).ConfigureAwait(false);
+				return await _connection.DeleteAsync(item).ConfigureAwait(false);
 			}
 		}
 
-	}
+        public virtual async Task<int> DeleteAsync(int id)
+        {
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                var item = FindAsync(id);
+                return await _connection.DeleteAsync(item).ConfigureAwait(false);
+            }
+        }
+    }
 }

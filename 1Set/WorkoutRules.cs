@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Set.Models;
+using Set.Entities;
 
 namespace Set
 {
@@ -48,7 +48,7 @@ namespace Set
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-			var count = await App.Database.WorkoutsRepository.Table.Where(x => x.ExerciseId == workout.ExerciseId).CountAsync();
+            var count = await App.Database.WorkoutsRepository.GetWorkoutsCount(workout.ExerciseId);
             if (workout.WorkoutId == 0) count++;
 
             return IsDivisible(count, workoutCount);
@@ -57,6 +57,8 @@ namespace Set
 
         public static async Task<object> GetTargetWorkoutAsync(Workout workout)
         {
+            var previousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout(workout);
+
             int targetReps;
             double targetWeight;
 
@@ -66,7 +68,7 @@ namespace Set
 
 			var startingReps = minReps;
 				
-            if (workout.PreviousWorkout == null)
+            if (previousWorkout == null)
             {
 				targetReps = startingReps;
                 targetWeight = 0;
@@ -75,7 +77,7 @@ namespace Set
             if (await CanCalculateTargetAsync(workout))
             {
                 // no previous workout exist, this is the first workout for this exercise
-                if (workout.PreviousWorkout == null)
+                if (previousWorkout == null)
                 {
 					targetReps = startingReps;
                     targetWeight = 0;
@@ -83,32 +85,32 @@ namespace Set
                 else
                 {
                     // go back to previous Weight
-					if (workout.PreviousWorkout.Reps < minReps)
+					if (previousWorkout.Reps < minReps)
                     {
 						targetReps = startingReps;
-                        targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
+                        targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, previousWorkout.Weight);
                     }
                     // advance to next Weight
-					else if (workout.PreviousWorkout.Reps >= maxReps)
+					else if (previousWorkout.Reps >= maxReps)
                     {
                         targetReps = startingReps;
-                        targetWeight = GetNextWeight(workout.Exercise.PlateWeight, workout.PreviousWorkout.Weight);
+                        targetWeight = GetNextWeight(workout.Exercise.PlateWeight, previousWorkout.Weight);
                     }
                     // stay in same weight but increase Reps
                     else
                     {
 						// TODO when I'll implement the settings in the exercise level I have to replace the increment with workout.Exercise.RepsIncrement.Increment
-						targetReps = workout.PreviousWorkout.Reps + App.Settings.RepsIncrement.Increment;
+						targetReps = previousWorkout.Reps + App.Settings.RepsIncrement.Increment;
 					    
-                        targetWeight = workout.PreviousWorkout.Weight;
+                        targetWeight = previousWorkout.Weight;
                     }
                 }
             }
             else
             {
                 // suggest previous workout Reps and Weight
-                targetReps = workout.PreviousWorkout.Reps;
-                targetWeight = workout.PreviousWorkout.Weight;
+                targetReps = previousWorkout.Reps;
+                targetWeight = previousWorkout.Weight;
             }
 
             return new {TargetReps = targetReps, TargetWeight = targetWeight};
