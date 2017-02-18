@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="OneSet.ExerciseRulesPage">
+
+	<ContentPage.Padding>
+	<OnPlatform x:TypeArguments="Thickness"
+	            iOS="5, 20, 5, 0"
+	            Android="5, 0, 5, 0"
+	            WinPhone="5, 0, 5, 0" />
+	</ContentPage.Padding>
+
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
+		   <ListView ItemTapped="OnSettingTapped" x:Name="settingsList" HasUnevenRows="true">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	      		  <ViewCell.View>
+
+	      			<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="20, 10, 10, 10" Spacing="5">
+		    			<Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
+						<Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
+						<Label Text="{Binding Value}" FontSize="Small" VerticalOptions="Center" TextColor="#212121"/>	
+	    			</StackLayout>
+	                     
+	              </ViewCell.View>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

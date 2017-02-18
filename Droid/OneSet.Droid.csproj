@@ -164,7 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\1Set\OneSet.csproj">
+    <ProjectReference Include="..\OneSet\OneSet.csproj">
       <Project>{F8A3A16E-8B73-4FF9-B257-1D07B1EE3DCC}</Project>
       <Name>OneSet</Name>
     </ProjectReference>
