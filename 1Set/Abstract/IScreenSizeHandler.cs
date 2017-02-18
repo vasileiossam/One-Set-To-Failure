@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Set.Abstract
+namespace OneSet.Abstract
 {
 	public interface IScreenSizeHandler
 	{

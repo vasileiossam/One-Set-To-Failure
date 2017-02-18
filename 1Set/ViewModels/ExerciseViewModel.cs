@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AutoMapper;
-using Set.Entities;
-using Set.Resx;
 using Xamarin.Forms;
 using Plugin.Toasts;
-using Set.Models;
 using System.Linq;
+using OneSet.Entities;
+using OneSet.Models;
+using OneSet.Resx;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class ExerciseViewModel : BaseViewModel
 	{

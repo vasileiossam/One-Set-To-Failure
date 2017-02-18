@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Set.Models
+namespace OneSet.Models
 {
 	public class Settings
     {

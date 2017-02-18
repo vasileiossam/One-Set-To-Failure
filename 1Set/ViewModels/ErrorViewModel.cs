@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class ErrorViewModel : BaseViewModel
 	{

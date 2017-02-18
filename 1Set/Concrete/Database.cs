@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Set.Abstract;
-using Set.Concrete;
-using Set.Entities;
-using Set.Models;
 using Xamarin.Forms;
 using System.Text;
 using System.Linq;
+using OneSet.Abstract;
+using OneSet.Concrete;
+using OneSet.Entities;
+using OneSet.Models;
 using SQLite;
 
-namespace Set
+namespace OneSet
 {
 	public class Database 
 	{

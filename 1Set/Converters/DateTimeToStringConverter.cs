@@ -2,9 +2,9 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 using System.Diagnostics;
-using Set.Resx;
+using OneSet.Resx;
 
-namespace Set
+namespace OneSet
 {
     public class DateTimeToStringConverter : IValueConverter
     {

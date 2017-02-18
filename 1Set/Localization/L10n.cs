@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Resources;
 using System.Threading;
 using System.Globalization;
+using OneSet.Resx;
 using Xamarin.Forms;
-using Set.Resx;
 
-namespace Set.Localization
+namespace OneSet.Localization
 {
 	public class L10n
 	{

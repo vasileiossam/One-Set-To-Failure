@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using SQLite;
 
-namespace Set.Concrete
+namespace OneSet.Concrete
 {
     public static class Extensions
     {

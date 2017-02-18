@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	/// <summary>
 	/// http://www.materialpalette.com/light-blue/blue

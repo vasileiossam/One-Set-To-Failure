@@ -2,15 +2,15 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Set.Models;
-using Set.Entities;
+using OneSet.Models;
+using OneSet.Entities;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using AutoMapper;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class WorkoutListViewModel : BaseViewModel
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Set.Abstract;
-using Set.Entities;
 using System.Diagnostics;
 using SQLite;
 using System.Linq;
+using OneSet.Abstract;
+using OneSet.Entities;
 
-namespace Set.Concrete
+namespace OneSet.Concrete
 {
 	public class WorkoutsRepository : BaseRepository<Workout>, IWorkoutsRepository
 	{

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public partial class ExerciseRulesPage : ContentPage
 	{

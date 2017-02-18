@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AutoMapper;
-using Set.Models;
-using Set.Resx;
+using OneSet.Resx;
+using OneSet.Models;
 using Xamarin.Forms;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class AnalysisViewModel : BaseViewModel
 	{

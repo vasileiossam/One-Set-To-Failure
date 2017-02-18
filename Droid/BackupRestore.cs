@@ -1,13 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Threading.Tasks;
-using Set.Abstract;
-using Set.Models;
 using System.IO;
+using OneSet.Abstract;
+using OneSet.Models;
 
-[assembly:Dependency(typeof(Set.Droid.BackupRestore))]
+[assembly:Dependency(typeof(OneSet.Droid.BackupRestore))]
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	public class BackupRestore : IBackupRestore
 	{

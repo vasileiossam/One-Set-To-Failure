@@ -1,7 +1,7 @@
-﻿using Set.Entities;
+﻿using OneSet.Entities;
 using Xamarin.Forms;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class RoutineDayViewModel
     {

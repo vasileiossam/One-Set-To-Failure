@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Set.Controls
+namespace OneSet.Controls
 {
 	public class GestureFrame : Frame
 	{

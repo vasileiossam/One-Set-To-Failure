@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Set.Entities;
+using OneSet.Entities;
 
-namespace Set
+namespace OneSet
 {
     public class WorkoutRules
     {

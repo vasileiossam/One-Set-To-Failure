@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Set.Entities;
-using Set.Resx;
+using OneSet.Entities;
+using OneSet.Resx;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class CalendarNotesViewModel : BaseViewModel
 	{

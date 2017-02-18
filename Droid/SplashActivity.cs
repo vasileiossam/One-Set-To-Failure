@@ -12,7 +12,7 @@ using System.Threading;
 using Android.Content.PM;
 using System.Threading.Tasks;
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	[Activity(Label = "One Set To Fatigue", Icon = "@drawable/icon", Theme = "@style/Theme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, MainLauncher = true, NoHistory = true)]
 	public class SplashActivity : Activity

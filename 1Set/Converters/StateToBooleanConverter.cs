@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public class StateToBooleanConverter : IValueConverter
 	{

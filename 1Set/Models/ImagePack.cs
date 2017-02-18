@@ -1,4 +1,4 @@
-﻿namespace Set.Models
+﻿namespace OneSet.Models
 {
 	public class ImagePack
 	{

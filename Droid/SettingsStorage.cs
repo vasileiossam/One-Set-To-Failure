@@ -1,14 +1,14 @@
 ﻿using System;
-using Set.Models;
 using System.Threading.Tasks;
-using Set.Droid;
+using OneSet.Droid;
 using Xamarin.Forms;
 using System.IO;
 using Newtonsoft.Json;
+using OneSet.Models;
 
 [assembly: Dependency (typeof (SettingsStorage))]
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	public class SettingsStorage : ISettingsStorage
 	{

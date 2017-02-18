@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Set.Resx;
+using OneSet.Resx;
 using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public enum RestTimerStates 
 	{
@@ -14,7 +14,7 @@ namespace Set
 	};
 }
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class RestTimerViewModel : BaseViewModel
 	{

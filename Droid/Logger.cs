@@ -4,7 +4,7 @@ using Android.Content;
 using Android.Util;
 using Android.App;
 
-namespace Set
+namespace OneSet
 {
     public class Logger
     {

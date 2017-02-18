@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
-	xmlns:controls="clr-namespace:Set.Controls;assembly=1Set"
-	x:Class="Set.CalendarNotesPage"
+	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=1Set"
+	xmlns:controls="clr-namespace:OneSet.Controls;assembly=1Set"
+	x:Class="OneSet.CalendarNotesPage"
     Title="{Binding Title}">
 
   <ContentPage.Padding>

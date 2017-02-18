@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using Set.Resx;
+using OneSet.Resx;
 using Xamarin.Forms;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class Preference : INotifyPropertyChanged
 	{

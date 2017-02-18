@@ -1,6 +1,6 @@
-﻿using Set.Entities;
+﻿using OneSet.Entities;
 
-namespace Set.Abstract
+namespace OneSet.Abstract
 {
     public interface IExercisesRepository : IBaseRepository<Exercise>
 	{

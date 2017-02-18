@@ -2,13 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Set.Abstract;
-using Set.Resx;
+using OneSet.Abstract;
+using OneSet.Models;
+using OneSet.Resx;
 using Xamarin.Forms;
 using Plugin.Toasts;
-using Set.Models;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class SettingsViewModel : BaseViewModel
 	{

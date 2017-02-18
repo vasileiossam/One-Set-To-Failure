@@ -1,4 +1,4 @@
-﻿namespace Set
+﻿namespace OneSet
 {
 	using System;
 	using System.Threading;

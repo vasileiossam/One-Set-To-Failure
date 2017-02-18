@@ -1,14 +1,14 @@
 ﻿using System;
-using Set.Models;
+using OneSet.Models;
 using System.Threading.Tasks;
-using Set.Droid;
+using OneSet.Droid;
 using Xamarin.Forms;
 using System.IO;
 using Android.Media;
 
 [assembly: Dependency (typeof (SoundService))]
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	public class SoundService : ISoundService
 	{

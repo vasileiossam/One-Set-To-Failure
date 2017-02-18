@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Set.ViewModels;
+using OneSet.Abstract;
+using OneSet.ViewModels;
 using Xamarin.Forms;
-using Set.Abstract;
 
-namespace Set
+namespace OneSet
 {
 	public partial class ExerciseAnalysis : ContentPage, IScreenSizeHandler
 	{

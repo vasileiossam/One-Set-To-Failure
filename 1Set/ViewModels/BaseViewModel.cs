@@ -4,7 +4,7 @@ using System.Windows.Input;
 using AutoMapper;
 using Xamarin.Forms;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

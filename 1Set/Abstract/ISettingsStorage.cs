@@ -1,6 +1,6 @@
-﻿using Set.Models;
+﻿using OneSet.Models;
 
-namespace Set
+namespace OneSet
 {
 	public interface ISettingsStorage
 	{

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Set.ViewModels;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using OxyPlot.Xamarin.Forms;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using OneSet.ViewModels;
 
-namespace Set
+namespace OneSet
 {
 	public partial class ChartsPage : ContentPage
 	{

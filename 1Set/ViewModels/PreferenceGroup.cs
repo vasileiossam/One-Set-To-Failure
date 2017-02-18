@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class PreferenceGroup : ObservableCollection<Preference>
 	{

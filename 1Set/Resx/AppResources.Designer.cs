@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Set.Resx {
+namespace OneSet.Resx {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace Set.Resx {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Set.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OneSet.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

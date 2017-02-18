@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Set.ViewModels;
+using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace Set.Views
+namespace OneSet.Views
 {
 	public partial class ErrorPage : ContentPage
 	{

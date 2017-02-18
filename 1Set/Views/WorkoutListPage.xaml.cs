@@ -1,10 +1,10 @@
 ﻿using System;
-using Set.Models;
-using Set.ViewModels;
+using OneSet.ViewModels;
+using OneSet.Models;
 using Xamarin.Forms;
-using Set.Entities;
+using OneSet.Entities;
 
-namespace Set
+namespace OneSet
 {
 	public partial class WorkoutListPage : ContentPage
 	{

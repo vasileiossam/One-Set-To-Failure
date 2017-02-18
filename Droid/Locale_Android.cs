@@ -1,11 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Threading;
-using Set.Localization;
+using OneSet.Localization;
 
-[assembly:Dependency(typeof(Set.Locale_Android))]
+[assembly:Dependency(typeof(OneSet.Locale_Android))]
 
-namespace Set
+namespace OneSet
 {
 	public class Locale_Android : ILocale
 	{

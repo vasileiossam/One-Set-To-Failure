@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Set.Controls
+namespace OneSet.Controls
 {
 	public class CustomEntry : Entry
 	{

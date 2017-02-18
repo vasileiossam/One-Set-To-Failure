@@ -3,8 +3,8 @@
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
-	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
-	x:Class="Set.ChartsPage"
+	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=1Set"
+	x:Class="OneSet.ChartsPage"
 	>
 
 	<ContentPage.Padding>

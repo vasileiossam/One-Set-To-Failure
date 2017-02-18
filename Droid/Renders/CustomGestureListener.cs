@@ -1,7 +1,7 @@
 ﻿using Android.Views;
 using System;
 
-namespace Set.Droid.Renders
+namespace OneSet.Droid.Renders
 {
 	public class CustomGestureListener : GestureDetector.SimpleOnGestureListener
 	{

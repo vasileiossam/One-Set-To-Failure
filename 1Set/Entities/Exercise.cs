@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Set.Entities
+namespace OneSet.Entities
 {
 	[Table("Exercises")]
 	public class Exercise

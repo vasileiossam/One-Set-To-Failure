@@ -10,7 +10,7 @@ using OxyPlot.Xamarin.Forms;
 using Plugin.Toasts;
 using Xamarin.Forms;
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	[Activity (Label = "One Set To Fatigue", Icon = "@drawable/icon",  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity

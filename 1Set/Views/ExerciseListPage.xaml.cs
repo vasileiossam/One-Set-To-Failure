@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Set.Resx;
-using Set.ViewModels;
+using OneSet.Resx;
+using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public partial class ExerciseListPage : ContentPage
 	{

@@ -1,14 +1,14 @@
 ﻿using System;
-using Set.Abstract;
-using Set;
+using OneSet;
 using Xamarin.Forms;
 using System.IO;
-using Set.Droid;
+using OneSet.Abstract;
+using OneSet.Droid;
 using SQLite;
 
 [assembly: Dependency (typeof (SQLite_Android))]
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	#if DEBUG
 	//public class TraceListener : ITraceListener
@@ -46,7 +46,7 @@ namespace Set.Droid
 
 				if (!File.Exists(pathName))
 				{
-					var s = Forms.Context.Resources.OpenRawResource(Set.Droid.Resource.Raw.OneSet);  // RESOURCE NAME ###
+					var s = Forms.Context.Resources.OpenRawResource(Resource.Raw.OneSet);  // RESOURCE NAME ###
 
 					// create a write stream
 					var writeStream = new FileStream(pathName, FileMode.OpenOrCreate, FileAccess.Write);

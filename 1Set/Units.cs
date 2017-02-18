@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Set
+namespace OneSet
 {
 	public class Units
 	{

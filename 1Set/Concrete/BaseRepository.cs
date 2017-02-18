@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Set.Abstract;
+using OneSet.Abstract;
 using SQLite;
 
-namespace Set.Concrete
+namespace OneSet.Concrete
 {
 	/// <summary>
 	/// End to End Mvvm with Xamarin: http://arteksoftware.com/end-to-end-mvvm-with-xamarin/

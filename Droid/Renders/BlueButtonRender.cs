@@ -1,12 +1,12 @@
 ﻿using System;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
-using Set.Droid.Renders;
-using Set.Controls;
+using OneSet.Droid.Renders;
+using OneSet.Controls;
 
 [assembly: ExportRenderer (typeof (BlueButton), typeof (BlueButtonRender))]
 
-namespace Set.Droid.Renders
+namespace OneSet.Droid.Renders
 {
 	public class BlueButtonRender : ButtonRenderer
 	{

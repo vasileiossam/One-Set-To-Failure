@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Set
+namespace OneSet
 {
 	public interface IExporter
 	{

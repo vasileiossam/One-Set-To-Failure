@@ -1,6 +1,6 @@
-﻿using Set.Resx;
+﻿using OneSet.Resx;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class AboutViewModel : BaseViewModel
 	{

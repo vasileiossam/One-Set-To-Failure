@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Set.ViewModels;
+using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public partial class AboutPage : ContentPage
 	{

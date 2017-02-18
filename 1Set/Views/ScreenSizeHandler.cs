@@ -1,4 +1,4 @@
-﻿namespace Set
+﻿namespace OneSet
 {
 	public enum Orientations  
 	{

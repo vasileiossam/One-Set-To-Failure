@@ -2,10 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AutoMapper;
-using Set.Resx;
-using Set.ViewModels;
+using OneSet.Resx;
+using OneSet.ViewModels;
 
-namespace Set
+namespace OneSet
 {
 	public class ExerciseListViewModel : BaseViewModel
 	{

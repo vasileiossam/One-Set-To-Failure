@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Set.Abstract
+namespace OneSet.Abstract
 {
 	public interface IBaseRepository<T> 
 	{        

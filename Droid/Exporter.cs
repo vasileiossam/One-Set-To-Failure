@@ -1,14 +1,14 @@
 ﻿using System;
-using Set.Models;
+using OneSet.Models;
 using System.Threading.Tasks;
-using Set.Droid;
+using OneSet.Droid;
 using Xamarin.Forms;
 using System.IO;
 using System.Text;
 
 [assembly: Dependency (typeof (Exporter))]
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	public class Exporter : IExporter
     {

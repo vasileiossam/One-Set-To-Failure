@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Set.Localization;
-using Set.Entities;
-using Set.Resx;
+using OneSet.Entities;
+using OneSet.Localization;
+using OneSet.Models;
+using OneSet.Resx;
 using Xamarin.Forms;
 using Plugin.Toasts;
-using Set.Models;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
     public class WorkoutViewModel : BaseViewModel
     {

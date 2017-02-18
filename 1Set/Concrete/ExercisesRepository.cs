@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Set.Abstract;
-using Set.Entities;
+using OneSet.Abstract;
+using OneSet.Entities;
 using SQLite;
 
-namespace Set.Concrete
+namespace OneSet.Concrete
 {
 	public class ExercisesRepository : BaseRepository<Exercise>, IExercisesRepository
 	{

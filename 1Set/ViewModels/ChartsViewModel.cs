@@ -7,10 +7,10 @@ using OxyPlot.Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
-using Set.Entities;
-using Set.Localization;
+using OneSet.Entities;
+using OneSet.Localization;
 
-namespace Set.ViewModels
+namespace OneSet.ViewModels
 {
 	public class ChartsViewModel : BaseViewModel
 	{

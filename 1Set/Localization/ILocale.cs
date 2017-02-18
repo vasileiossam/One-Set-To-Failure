@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Set.Localization
+namespace OneSet.Localization
 {
 	public interface ILocale
 	{

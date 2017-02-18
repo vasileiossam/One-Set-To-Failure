@@ -6,8 +6,8 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{F8A3A16E-8B73-4FF9-B257-1D07B1EE3DCC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Set</RootNamespace>
-    <AssemblyName>1Set</AssemblyName>
+    <RootNamespace>OneSet</RootNamespace>
+    <AssemblyName>OneSet</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
     <ReleaseVersion>0.2.3</ReleaseVersion>

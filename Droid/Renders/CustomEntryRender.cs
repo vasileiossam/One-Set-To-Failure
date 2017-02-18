@@ -1,14 +1,14 @@
 ﻿using System;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
-using Set.Droid.Renders;
+using OneSet.Droid.Renders;
 using Android.Views;
 using Android.Widget;
-using Set.Controls;
+using OneSet.Controls;
 
 [assembly: ExportRenderer (typeof (CustomEntry), typeof (CustomEntryRender))]
 
-namespace Set.Droid.Renders
+namespace OneSet.Droid.Renders
 {
 	public class CustomEntryRender : EntryRenderer
 	{

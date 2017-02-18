@@ -2,9 +2,9 @@
 <TabbedPage 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="Set.AnalysisPage"
-	xmlns:local="clr-namespace:Set;assembly=1Set"
-	xmlns:i18n="clr-namespace:Set.Localization;assembly=1Set"
+	x:Class="OneSet.AnalysisPage"
+	xmlns:local="clr-namespace:OneSet;assembly=1Set"
+	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=1Set"
 	Title="{Binding Title}">
 
   <TabbedPage.Children>

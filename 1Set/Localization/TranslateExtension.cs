@@ -2,9 +2,9 @@
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms;
 using System.Diagnostics;
-using Set.Concrete;
+using OneSet.Concrete;
 
-namespace Set.Localization
+namespace OneSet.Localization
 {
 	// You exclude the 'Extension' suffix when using in Xaml markup
 	[ContentProperty ("Text")]

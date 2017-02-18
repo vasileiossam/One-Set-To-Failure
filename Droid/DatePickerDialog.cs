@@ -1,14 +1,14 @@
 ﻿using System;
-using Set.Models;
+using OneSet.Models;
 using System.Threading.Tasks;
-using Set.Droid;
+using OneSet.Droid;
 using Xamarin.Forms;
 using System.IO;
 using Android.App;
 
-[assembly: Dependency (typeof (Set.Droid.DatePickerDialog))]
+[assembly: Dependency (typeof (OneSet.Droid.DatePickerDialog))]
 
-namespace Set.Droid
+namespace OneSet.Droid
 {
 	public class DatePickerDialog : IDatePickerDialog
 	{

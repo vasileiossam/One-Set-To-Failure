@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Set.Abstract
+namespace OneSet.Abstract
 {
 	public interface ISQLite
 	{

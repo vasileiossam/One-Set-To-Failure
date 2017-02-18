@@ -2,7 +2,7 @@
 using AutoMapper;
 using SQLite;
 
-namespace Set.Models1
+namespace OneSet.Models1
 {
 	[Table("Exercises")]
 	public class Exercise

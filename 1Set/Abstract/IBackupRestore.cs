@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Set.Models;
+using OneSet.Models;
 
-namespace Set.Abstract
+namespace OneSet.Abstract
 {
 	public interface IBackupRestore
 	{

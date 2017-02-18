@@ -1,15 +1,15 @@
 ﻿using System;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
-using Set.Droid.Renders;
+using OneSet.Droid.Renders;
 using Android.Views;
 using Android.Widget;
-using Set.Controls;
 using Android.Graphics;
+using OneSet.Controls;
 
 [assembly: ExportRenderer (typeof (RoundedBoxView), typeof (RoundedBoxViewRenderer))]
 
-namespace Set.Droid.Renders
+namespace OneSet.Droid.Renders
 {
 	/// <summary>
 	/// http://forums.xamarin.com/discussion/17792/video-on-making-custom-renderers

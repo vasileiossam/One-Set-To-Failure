@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using Set.Localization;
-using Set.Models;
-using Set.Resx;
-using Set.ViewModels;
-using Set.Views;
+using OneSet.Localization;
+using OneSet.Models;
+using OneSet.Resx;
+using OneSet.ViewModels;
+using OneSet.Views;
 using Xamarin.Forms;
 using Plugin.Toasts;
 
-namespace Set
+namespace OneSet
 {
 	public class App : Application
 	{

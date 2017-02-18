@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using SQLite;
 
-namespace Set.Models1
+namespace OneSet.Models1
 {
 	public class Workout
 	{

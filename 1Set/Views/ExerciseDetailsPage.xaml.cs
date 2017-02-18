@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Set.Localization;
-using Set.Resx;
-using Set.ViewModels;
+using OneSet.Localization;
+using OneSet.Resx;
+using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public partial class ExerciseDetailsPage : ContentPage
 	{

@@ -1,8 +1,8 @@
-﻿using Set.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using System.Threading.Tasks;
+using OneSet.ViewModels;
 
-namespace Set
+namespace OneSet
 {
 	public partial class WorkoutPage : ContentPage
 	{

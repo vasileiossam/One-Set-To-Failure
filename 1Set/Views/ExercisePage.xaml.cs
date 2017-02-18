@@ -1,7 +1,7 @@
-﻿using Set.ViewModels;
+﻿using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace Set
+namespace OneSet
 {
 	public partial class ExercisePage : TabbedPage
 	{

@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{0CB0BA5D-2E73-4D29-AC0A-FD483D8F7540}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OneSet.Droid</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AssemblyName>OneSet.Droid</AssemblyName>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <ReleaseVersion>0.2.3</ReleaseVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.3.1\lib\netstandard1.1\SQLite-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCL.batteries, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCL.bundle_green.0.9.3\lib\MonoAndroid\SQLitePCL.batteries.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCL.raw, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCL.raw.0.9.3\lib\MonoAndroid\SQLitePCL.raw.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLPlugin_esqlite3, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCL.plugin.sqlite3.android.0.9.3\lib\MonoAndroid\SQLitePCLPlugin_esqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.2\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="ExifLib">
+      <HintPath>..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2015.1.889-alpha\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+Xamarin.iOS10\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xamarin.Android">
+      <HintPath>..\packages\OxyPlot.Xamarin.Android.2015.1.889-alpha\lib\MonoAndroid\OxyPlot.Xamarin.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xamarin.Forms">
+      <HintPath>..\packages\OxyPlot.Xamarin.Forms.2015.1.889-alpha\lib\MonoAndroid10\OxyPlot.Xamarin.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xamarin.Forms.Platform.Android">
+      <HintPath>..\packages\OxyPlot.Xamarin.Forms.2015.1.889-alpha\lib\MonoAndroid10\OxyPlot.Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Toasts.Forms.Plugin.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toasts.Forms.Plugin.3.1.4\lib\MonoAndroid10\Toasts.Forms.Plugin.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toasts.Forms.Plugin.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toasts.Forms.Plugin.3.1.4\lib\MonoAndroid10\Toasts.Forms.Plugin.Droid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Design, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Design.23.3.0\lib\MonoAndroid43\Xamarin.Android.Support.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\1Set\OneSet.csproj">
+      <Project>{F8A3A16E-8B73-4FF9-B257-1D07B1EE3DCC}</Project>
+      <Name>OneSet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLite_Android.cs" />
+    <Compile Include="Locale_Android.cs" />
+    <Compile Include="SettingsStorage.cs" />
+    <Compile Include="Renders\BlueButtonRender.cs" />
+    <Compile Include="Renders\RoundedBoxViewRenderer.cs" />
+    <Compile Include="Renders\CustomEntryRender.cs" />
+    <Compile Include="SplashActivity.cs" />
+    <Compile Include="BackupRestore.cs" />
+    <Compile Include="Renders\GestureFrameRenderer.cs" />
+    <Compile Include="Renders\CustomGestureListener.cs" />
+    <Compile Include="SoundService.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Exporter.cs" />
+    <Compile Include="DatePickerDialog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\android-pull-database.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\layout\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\raw\OneSet.db3" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable\ButtonBlue.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_settings.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_settings.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_settings.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_settings.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_left.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_left.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_left.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_left.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_left.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_circle.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_circle_o.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_circle_right.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_circle_right.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_circle_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_circle_right.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_circle_right.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_star.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_calendar.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_bullseye.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_android.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_check.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_check_circle_o.png" />
+    <AndroidResource Include="Resources\drawable\ic_fa_check_circle_action.png" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\color.xml" />
+    <AndroidResource Include="Resources\drawable\ic_fa_play_circle_action.png" />
+    <AndroidResource Include="Resources\drawable\comfortable.png" />
+    <AndroidResource Include="Resources\drawable\splash.png" />
+    <AndroidResource Include="Resources\drawable\SplashScreen.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_comment_o.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_comment_o.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_comment_o.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_comment_o.png" />
+    <AndroidResource Include="Resources\drawable\gymnast21.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_circle_down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_chevron_circle_up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_caret_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_caret_up.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_time.png" />
+    <AndroidResource Include="Resources\drawable\nosound.png" />
+    <AndroidResource Include="Resources\drawable\sound.png" />
+    <AndroidResource Include="Resources\raw\Bleep.mp3" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_minus.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_plus.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_minus.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_plus.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_minus.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_plus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_minus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_plus.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_minus.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_plus.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_alarms.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_trophy.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_1.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_2.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_3.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_4.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_5.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_6.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_7.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_8.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_9.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_10.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_11.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_12.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_13.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_14.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_15.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_16.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_17.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_18.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_19.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_20.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_21.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_22.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_23.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_24.png" />
+    <AndroidResource Include="Resources\drawable\QFitness_25.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_1.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_2.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_3.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_4.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_5.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_6.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_7.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_8.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_9.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_10.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_11.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_12.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_13.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_14.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_15.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_16.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_17.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_18.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_19.png" />
+    <AndroidResource Include="Resources\drawable\QInspirational_20.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_arrow_up.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_fa_arrow_up_orange.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_fa_arrow_up_orange.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_fa_arrow_up_orange.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_fa_arrow_up_orange.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_fa_arrow_up_orange.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
+  </Target>
+  <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+</Project>

@@ -1,10 +1,10 @@
 ﻿using System;
 using AutoMapper;
-using Set.Models;
-using Set.ViewModels;
-using Set.Entities;
+using OneSet.Entities;
+using OneSet.ViewModels;
+using OneSet.Models;
 
-namespace Set
+namespace OneSet
 {
 	public class Bootstrapper
 	{

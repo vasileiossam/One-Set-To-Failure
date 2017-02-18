@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Set.Controls
+namespace OneSet.Controls
 {
 	/// <summary>
 	/// http://forums.xamarin.com/discussion/17792/video-on-making-custom-renderers

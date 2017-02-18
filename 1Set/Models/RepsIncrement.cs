@@ -1,6 +1,6 @@
-﻿using Set.Resx;
+﻿using OneSet.Resx;
 
-namespace Set.Models
+namespace OneSet.Models
 {
 	public class RepsIncrement
 	{
