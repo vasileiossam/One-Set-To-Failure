@@ -15,8 +15,8 @@ namespace Set.ViewModels
         public int RowNumber { get; set; }
 		public int IsActive {get; set;}
  
-		//public Exercise Exercise { get; set; }
-		//public Workout Workout {get; set;}
+		public Exercise Exercise { get; set; }
+		public Workout Workout {get; set;}
 
 		public string StateImage {
 			get
