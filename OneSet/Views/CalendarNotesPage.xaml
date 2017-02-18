@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=1Set"
-	xmlns:controls="clr-namespace:OneSet.Controls;assembly=1Set"
+	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
+	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
 	x:Class="OneSet.CalendarNotesPage"
     Title="{Binding Title}">
 
