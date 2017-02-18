@@ -32,8 +32,8 @@ namespace Set.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
-            DependencyService.Register<ToastNotificatorImplementation>();
-            ToastNotificatorImplementation.Init(this);
+            DependencyService.Register<ToastNotification>();
+            ToastNotification.Init(this, new PlatformOptions() { SmallIconDrawable = Android.Resource.Drawable.IcDialogInfo });
 
             Context context = this.ApplicationContext;
 			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, PackageInfoFlags.Activities).VersionName;

@@ -5,6 +5,7 @@ using Set.Entities;
 using Set.Resx;
 using Xamarin.Forms;
 using Plugin.Toasts;
+using Set.Models;
 
 namespace Set.ViewModels
 {

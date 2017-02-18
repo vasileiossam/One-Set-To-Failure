@@ -59,11 +59,17 @@ namespace Set
 		{
 			// Handle when your app resumes
 		}
-
-		public static async void ShowToast(ToastNotificationType type, string header, string message)
+ 
+        public static async void ShowToast(ToastNotificationType type, string title, string message)
 		{
 		    var notificator = DependencyService.Get<IToastNotificator>();
-		    await notificator.Notify(type, header, message, TimeSpan.FromSeconds(1.5));
+            var options = new NotificationOptions()
+            {
+                Title = title,
+                Description = message,
+                IsClickable = true,
+            };
+            await notificator.Notify(options);
 		}
 
 	    public static void SaveSettings()
