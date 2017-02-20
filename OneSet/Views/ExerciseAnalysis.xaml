@@ -18,7 +18,7 @@
 	  <ScrollView>
 	  	<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
 	  		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-	        	<Label Text="{i18n:Translate ExercisesTitle}" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+	        	<Label Text="{i18n:Translate ExercisesTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
 			     <Picker x:Name="ExercisesPicker" Title="{i18n:Translate ExercisesTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged"/>
 			</StackLayout>
 
@@ -28,8 +28,8 @@
 	            <ViewCell>
 	      		  <ViewCell.View>
 	      			<StackLayout Orientation="{Binding CellLayoutOrientation}" HorizontalOptions="FillAndExpand" Padding="20, 10, 10, 10">
-		    			<Label Text="{Binding Title}" FontSize="Medium" HorizontalOptions="Start" TextColor="#727272"/>	
-						<Label Text="{Binding Value}" FontSize="Medium" HorizontalOptions="EndAndExpand" TextColor="#212121"/>	
+		    			<Label Text="{Binding Title}" FontSize="Medium" HorizontalOptions="Start" TextColor="{StaticResource secondaryText}"/>	
+						<Label Text="{Binding Value}" FontSize="Medium" HorizontalOptions="EndAndExpand" TextColor="{StaticResource primaryText}"/>	
 	    			</StackLayout>
 	              </ViewCell.View>
 	            </ViewCell>

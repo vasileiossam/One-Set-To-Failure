@@ -18,7 +18,7 @@
 	  <ScrollView>
 	  	<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
 	  		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-	        	<Label Text="{i18n:Translate ChartsTitle}" FontSize="Large" FontAttributes="Bold" TextColor="#727272"/>
+	        	<Label Text="{i18n:Translate ChartsTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
 
 			     <Picker x:Name="ChartsPicker" Title="{i18n:Translate ChartsTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged">
 			        <Picker.Items>
@@ -28,9 +28,9 @@
 			    </Picker> 
 			</StackLayout>
 
-		    <Label IsVisible="{Binding NoChartsDataVisible}" Text="{i18n:Translate NoChartsData}" FontSize="Large" TextColor="#727272"/>
+		    <Label IsVisible="{Binding NoChartsDataVisible}" Text="{i18n:Translate NoChartsData}" FontSize="Large" TextColor="{StaticResource secondaryText}"/>
 
-		    <Label IsVisible="{Binding ChartsPinchToZoomVisible}" Text="{i18n:Translate ChartsPinchToZoom}" FontSize="Large" TextColor="#727272"/>
+		    <Label IsVisible="{Binding ChartsPinchToZoomVisible}" Text="{i18n:Translate ChartsPinchToZoom}" FontSize="Large" TextColor="{StaticResource secondaryText}"/>
 
 		    <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
 			</StackLayout>

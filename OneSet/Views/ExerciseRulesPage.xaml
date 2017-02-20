@@ -20,9 +20,9 @@
 	      		  <ViewCell.View>
 
 	      			<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="20, 10, 10, 10" Spacing="5">
-		    			<Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="#212121"/>	
-						<Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="#727272"/>	
-						<Label Text="{Binding Value}" FontSize="Small" VerticalOptions="Center" TextColor="#212121"/>	
+		    			<Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>	
+						<Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>	
+						<Label Text="{Binding Value}" FontSize="Small" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>	
 	    			</StackLayout>
 	                     
 	              </ViewCell.View>

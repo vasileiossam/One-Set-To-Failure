@@ -13,15 +13,15 @@
 		<ScrollView>
 			<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
 
-			<Label Text="Error" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			<Label Text="Error" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
 
-			<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
-			<Label Text="Sender" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
-			<Label Text="{Binding SenderToString}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			<BoxView HeightRequest="2" Color="{StaticResource divider}"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+			<Label Text="Sender" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
+			<Label Text="{Binding SenderToString}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
 
-			<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
-			<Label Text="Exception" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
-			<Label Text="{Binding ExceptionToString}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			<BoxView HeightRequest="2" Color="{StaticResource divider}"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+			<Label Text="Exception" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
+			<Label Text="{Binding ExceptionToString}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
 
 			</StackLayout>
 		</ScrollView>

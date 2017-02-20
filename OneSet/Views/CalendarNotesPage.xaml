@@ -19,7 +19,7 @@
   <ContentPage.Content>
   	<ScrollView>
   	<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
-<!--		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="#212121" FontSize="24" Keyboard="Chat"/>-->
+<!--		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" FontSize="24" Keyboard="Chat"/>-->
 		<Editor x:Name="CommentEditor" Text="{Binding Notes}" Keyboard="Chat" HeightRequest="250" VerticalOptions="FillAndExpand"/>
   	</StackLayout>
   	</ScrollView>

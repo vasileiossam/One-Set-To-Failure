@@ -8,10 +8,13 @@ using OneSet.ViewModels;
 using OneSet.Views;
 using Xamarin.Forms;
 using Plugin.Toasts;
+using Xamarin.Forms.Xaml;
+
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace OneSet
 {
-	public class App : Application
+	public partial class App : Application
 	{
 		public static Database Database = new Database ();
 		public static DateTime CurrentDate {get; set;}
@@ -25,6 +28,8 @@ namespace OneSet
 			
 		public App ()
 		{
+            InitializeComponent();
+
             Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 

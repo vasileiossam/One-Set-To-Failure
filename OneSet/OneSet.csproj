@@ -44,7 +44,6 @@
     <Compile Include="Models\RestTimer.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="App.cs" />
     <Compile Include="Concrete\Database.cs" />
     <Compile Include="Abstract\IBaseRepository.cs" />
     <Compile Include="Concrete\BaseRepository.cs" />
@@ -88,6 +87,9 @@
     </Compile>
     <Compile Include="Views\WorkoutListPage.xaml.cs">
       <DependentUpon>WorkoutListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -269,6 +271,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

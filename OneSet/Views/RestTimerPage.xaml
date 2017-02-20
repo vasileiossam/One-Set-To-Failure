@@ -27,14 +27,14 @@
 
 		  <StackLayout Orientation="Horizontal" Padding="0, 0, 20, 0">
 			  <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Editing}}" HorizontalOptions="Start" WidthRequest="172">
-          <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="72" FontAttributes="Bold" TextColor="#727272" TextChanged="OnTextChanged"/>
+          <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}" TextChanged="OnTextChanged"/>
 			  </ContentView>
 
 			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
-				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="#727272"/>
+				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
 			  </ContentView>
 			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
-				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="#727272"/>
+				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
 			  </ContentView>
 
 			  <Button BackgroundColor="Transparent" Image="{Binding PlaySoundsImage}" Command="{Binding PlaySoundsCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -54,7 +54,7 @@
 			  <ColumnDefinition Width="150" />
 			</Grid.ColumnDefinitions>
 
-			<Label Text="{i18n:Translate RestTimerAutoStartTitle}" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="#727272"/>
+			<Label Text="{i18n:Translate RestTimerAutoStartTitle}" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
 			<Switch IsToggled="{Binding AutoStart}" Grid.Row="0" Grid.Column="1" />
 		  </Grid>
 

@@ -38,20 +38,20 @@
 
       <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
         <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
-        <Label Text="{Binding Trophies}" FontSize="Large" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#212121"/>
+        <Label Text="{Binding Trophies}" FontSize="Large" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="{StaticResource primaryText}"/>
       </StackLayout>
 
       <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
         <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
-        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="#212121" FontAttributes="Bold"/>
+        <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold"/>
 		<Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"  HorizontalOptions="End"/>
       </StackLayout>
 
-      <BoxView HeightRequest="2" Color="#B6B6B6"/>
+      <BoxView HeightRequest="2" Color="{StaticResource divider}"/>
 
      <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 0, 0, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Spacing="0">
       	<Button BackgroundColor="Transparent" Image="drawable-hdpi/ic_fa_comment_o.png"  Command="{Binding CalendarNotesCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
-      	<Button x:Name="CalendarNotesButton" BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="#727272" />
+      	<Button x:Name="CalendarNotesButton" BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="{StaticResource secondaryText}" />
 	  </StackLayout>
 
 	  <!-- No data -->
@@ -61,16 +61,16 @@
 
 		<ContentView Padding="0, 0, 0, 0">
     		<Label Text="{i18n:Translate NoWorkoutDataTitle}" 
-    			FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+    			FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
 		</ContentView>
 	
 		<ContentView Padding="0, 10, 0, 0">
         	<Label Text="{i18n:Translate NoWorkoutDataLine1}" 
-        		FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+        		FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
 		</ContentView>
 		<ContentView Padding="0, 10, 0, 0">
 			<Label Text="{i18n:Translate NoWorkoutDataLine2}" 
-				FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+				FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
 		</ContentView>
       </StackLayout>
 
@@ -94,11 +94,11 @@
 
 					<Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="{Binding StateImage}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="#212121"/>
+					<Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="{StaticResource primaryText}"/>
 
 					<StackLayout IsVisible="{Binding TrophyVisible}" Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
 				        <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
-        				<Label Text="{Binding Workout.Trophies, Converter={StaticResource trophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="#727272"/>
+        				<Label Text="{Binding Workout.Trophies, Converter={StaticResource trophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
 					</StackLayout>
 				</Grid> 
 
@@ -112,7 +112,7 @@
 						<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 						<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
 
-                		<controls:RoundedBoxView  WidthRequest="90" HeightRequest="35" CornerRadius="32" Color="#D7D7D7" />
+                		<controls:RoundedBoxView  WidthRequest="90" HeightRequest="35" CornerRadius="32" Color="{StaticResource box}" />
 	                   	<Label Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" 
 	                   		TextColor="{Binding RepsWeightColor}"/>
                     </Grid>
@@ -120,7 +120,7 @@
                     <Grid HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
 						<Grid.RowDefinitions><RowDefinition Height="*" /></Grid.RowDefinitions>
 						<Grid.ColumnDefinitions><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="#D7D7D7" />
+                    	<controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="{StaticResource box}" />
 	                   	<Label Text="{Binding Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" 
 	                   		TextColor="{Binding RepsWeightColor}"/>
                     </Grid>
