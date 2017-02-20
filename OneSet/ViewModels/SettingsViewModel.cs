@@ -3,10 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using OneSet.Abstract;
-using OneSet.Models;
 using OneSet.Resx;
 using Xamarin.Forms;
-using Plugin.Toasts;
 
 namespace OneSet.ViewModels
 {
@@ -193,7 +191,7 @@ namespace OneSet.ViewModels
 				{
 					var preference = sender as AlertPreference;
 					await App.Database.ClearWorkoutData ();
-					App.ShowToast (ToastNotificationType.Info, preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
+					await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
 				}
 			});
 
@@ -210,7 +208,7 @@ namespace OneSet.ViewModels
 				{
 					var preference = sender as Preference;
 					await App.Database.LoadLifeFitnessData ();
-					App.ShowToast (ToastNotificationType.Info, preference.Title, AppResources.LoadSampleDataCompleted);
+					await App.ShowToast(preference.Title, AppResources.LoadSampleDataCompleted);
 				}
 			});
 
@@ -230,14 +228,14 @@ namespace OneSet.ViewModels
 					await backupService.Backup();
 
 					var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();				
-					App.ShowToast (ToastNotificationType.Info, AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));		
+					await App.ShowToast(AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));		
 
 					var preference = sender as AlertPreference;
 					preference.Value = await GetLastBackupDate();
 				}
 				catch(Exception ex)
 				{
-					App.ShowToast (ToastNotificationType.Error, AppResources.ToastErrorTitle, ex.Message);		
+					await App.ShowError(AppResources.ToastErrorTitle, ex.Message);		
 				}
 			};
 			dataGroup.Add (backupPreference);
@@ -270,13 +268,13 @@ namespace OneSet.ViewModels
 							App.Settings = DependencyService.Get<ISettingsStorage>().Load();
 							await Page.Refresh();
 
-							App.ShowToast (ToastNotificationType.Info, AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);		
+							await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);		
 						}
 					}
 				}
 				catch(Exception ex)
 				{
-					App.ShowToast (ToastNotificationType.Error, AppResources.ToastErrorTitle, ex.Message);		
+					await App.ShowError(AppResources.ToastErrorTitle, ex.Message);		
 				}
 
 			};
@@ -297,7 +295,7 @@ namespace OneSet.ViewModels
 					var pathName = await App.Database.ExportToCsv();
 					if (pathName != string.Empty)
 					{
-						App.ShowToast (ToastNotificationType.Info, preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
+						await App.ShowToast(preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
 					}
 				}
 			});
@@ -313,11 +311,11 @@ namespace OneSet.ViewModels
 				try
 				{	
 					await App.Database.RecalcStatistics();
-					App.ShowToast (ToastNotificationType.Info, AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);		
+					await App.ShowToast(AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);		
 				}
 				catch(Exception ex)
 				{
-					App.ShowToast (ToastNotificationType.Error, AppResources.ToastErrorTitle, ex.Message);		
+					await App.ShowError(AppResources.ToastErrorTitle, ex.Message);		
 				}
 
 			};

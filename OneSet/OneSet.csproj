@@ -37,7 +37,6 @@
     <Compile Include="Entities\Exercise.cs" />
     <Compile Include="Entities\RoutineDay.cs" />
     <Compile Include="Entities\Workout.cs" />
-    <Compile Include="Models\ToastNotificationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkoutRules.cs" />
     <Compile Include="Models\Exercise.cs" />

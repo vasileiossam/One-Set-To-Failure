@@ -980,6 +980,33 @@ namespace OneSet.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string ToastInfoTitle {
+            get {
+                return ResourceManager.GetString("ToastInfoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string ToastSuccessTitle {
+            get {
+                return ResourceManager.GetString("ToastSuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        internal static string ToastWarningTitle {
+            get {
+                return ResourceManager.GetString("ToastWarningTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TODAY.
         /// </summary>
         internal static string Today {

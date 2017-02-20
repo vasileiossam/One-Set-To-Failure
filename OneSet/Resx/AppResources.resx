@@ -323,10 +323,10 @@
   </data>
   <data name="AnalysisTitle" xml:space="preserve">
     <value>Analysis</value>
-  </data>  
+  </data>
   <data name="ChartsTitle" xml:space="preserve">
     <value>Charts</value>
-  </data>  
+  </data>
   <data name="NoWorkoutDataTitle" xml:space="preserve">
     <value>No training today!</value>
   </data>
@@ -336,7 +336,6 @@
   <data name="NoWorkoutDataLine2" xml:space="preserve">
     <value>You also need to rest. If this is your rest day, enjoy it!</value>
   </data>
-
   <data name="NoExerciseDataTitle" xml:space="preserve">
     <value>No Exercises here yet!</value>
   </data>
@@ -344,106 +343,83 @@
     <value>Tap the + button to create an Exercise</value>
   </data>
   <data name="NoExerciseDataLine2" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
-
   <data name="ShowPreviousRepsWeight" xml:space="preserve">
-	<value>Show the previous Reps and Weight in the exercise workout page</value>
+    <value>Show the previous Reps and Weight in the exercise workout page</value>
   </data>
-
   <data name="ShowTargetRepsWeight" xml:space="preserve">
     <value>Show the target Reps and Weight in the exercise workout page</value>
   </data>
-
   <data name="SettingsBackupLocallyTitle" xml:space="preserve">
     <value>Backup</value>
   </data>
-
   <data name="SettingsBackupLocallyHint" xml:space="preserve">
     <value>Backup your data locally to SD Card</value>
   </data>
-
   <data name="SettingsBackupToastTitleOnSuccess" xml:space="preserve">
     <value>Backup</value>
   </data>
-
   <data name="SettingsBackupToastMessageOnSuccess" xml:space="preserve">
     <value>Backup created at {0}</value>
   </data>
   <data name="SettingsLastBackupDate" xml:space="preserve">
     <value>Last backup on {0}</value>
   </data>
-
   <data name="SettingsRestoreLocallyTitle" xml:space="preserve">
     <value>Restore</value>
   </data>
-
   <data name="SettingsRestoreLocallyHint" xml:space="preserve">
     <value>Restore your data from a previously created backup</value>
   </data>
-
   <data name="ToastErrorTitle" xml:space="preserve">
     <value>Error</value>
   </data>
-
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
-
   <data name="RestoreNoBackupTitle" xml:space="preserve">
     <value>Restore</value>
   </data>
-
   <data name="RestoreNoBackupMessage" xml:space="preserve">
     <value>There are no backups available</value>
   </data>
-
   <data name="RestoreQuestionTitle" xml:space="preserve">
     <value>Restore</value>
   </data>
-
   <data name="RestoreQuestionMessage" xml:space="preserve">
     <value>Would you like to restore the {0} backup? </value>
   </data>
-
   <data name="SettingsRestoreToastTitleOnSuccess" xml:space="preserve">
     <value>Restore</value>
   </data>
-
   <data name="SettingsRestoreToastMessageOnSuccess" xml:space="preserve">
     <value>Your data restored successfully</value>
   </data>
-
   <data name="NotesLabel" xml:space="preserve">
     <value>Notes</value>
   </data>
-
   <data name="RestTimerStart" xml:space="preserve">
     <value>Start</value>
   </data>
-
   <data name="RestTimerPause" xml:space="preserve">
     <value>Pause</value>
   </data>
-
   <data name="RestTimerReset" xml:space="preserve">
     <value>Reset</value>
   </data>
-
   <data name="RestTimerAutoStartTitle" xml:space="preserve">
     <value>Auto Start</value>
   </data>
   <data name="RestTimerPlaySoundsTitle" xml:space="preserve">
     <value>Sound</value>
   </data>
-
   <data name="SettingsLoadSampleDataTitle" xml:space="preserve">
     <value>Load Sample Data</value>
   </data>
   <data name="SettingsLoadSampleDataHint" xml:space="preserve">
     <value>Load sample data to get you started</value>
   </data>
-
   <data name="SettingsRecalcStatisticsTitle" xml:space="preserve">
     <value>Recalculate Statistics</value>
   </data>
@@ -453,23 +429,21 @@
   <data name="SettingsRecalcStatisticsFinished" xml:space="preserve">
     <value>Recalculation finished!</value>
   </data>
-  
   <data name="SettingsMotivationTitle" xml:space="preserve">
     <value>MOTIVATION</value>
   </data>
-    <data name="SettingsMotivationalImagePacksTitle" xml:space="preserve">
+  <data name="SettingsMotivationalImagePacksTitle" xml:space="preserve">
     <value>Image Pack</value>
   </data>
   <data name="SettingsMotivationalImagePacksHint" xml:space="preserve">
     <value>Select a motivational image pack</value>
-  </data>  
+  </data>
   <data name="SettingsShowImagesInRestTimerTitle" xml:space="preserve">
     <value>Show motivational images in rest timer page</value>
-  </data>  
-    <data name="SettingsShowImagesPackInWorkoutTitle" xml:space="preserve">
+  </data>
+  <data name="SettingsShowImagesPackInWorkoutTitle" xml:space="preserve">
     <value>Show motivational images in workout tracking page</value>
-  </data>  
-
+  </data>
   <data name="SettingsExportWorkoutDataTitle" xml:space="preserve">
     <value>Export Workout Data</value>
   </data>
@@ -499,5 +473,14 @@
   </data>
   <data name="ChartsPinchToZoom" xml:space="preserve">
     <value>Pinch charts to zoom in and out</value>
+  </data>
+  <data name="ToastInfoTitle" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ToastSuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="ToastWarningTitle" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>

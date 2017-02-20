@@ -127,28 +127,28 @@ namespace OneSet.ViewModels
 			RestTimerToolbarItem.Update();
 		}
 
-		private bool Validate ()
+		private async Task<bool> Validate ()
 		{
 			if (Workout.Reps == 0)
 			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutRepsIsRequired);
+				await App.ShowWarning(AppResources.WorkoutRepsIsRequired);
 				return false;
 			}
 			if (Workout.Weight == 0)
 			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutWeightIsRequired);
+				await App.ShowWarning(AppResources.WorkoutWeightIsRequired);
 				return false;
 			}
 
-			if ((Workout.Reps <= 0) || (Workout.Reps > 100))
+			if (Workout.Reps <= 0 || Workout.Reps > 100)
 			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutInvalidReps);
+				await App.ShowWarning(AppResources.WorkoutInvalidReps);
 				Workout.Reps = 0;
 				return false;
 			}
-			if ((Workout.Weight <= 0) || (Workout.Weight > 1000))
+			if (Workout.Weight <= 0 || Workout.Weight > 1000)
 			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.WorkoutInvalidWeight);
+				await App.ShowWarning(AppResources.WorkoutInvalidWeight);
 				Workout.Weight = 0;
 				return false;
 			}
@@ -169,7 +169,7 @@ namespace OneSet.ViewModels
 				Workout.Weight = Weight / Units.ImperialMetricFactor;
 			}
 
-			if (Validate ())
+			if (await Validate ())
 			{
 				// invalidate TotalTrophies
 				App.TotalTrophies = null;
@@ -179,7 +179,7 @@ namespace OneSet.ViewModels
 				var isPersisted = Workout.WorkoutId > 0;
 
 				await App.Database.WorkoutsRepository.SaveAsync(Workout);
-				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.WorkoutSaved);
+				await App.ShowSuccess(AppResources.WorkoutSaved);
 
 				if ((App.Settings.RestTimerAutoStart == true) && (!isPersisted))
 				{

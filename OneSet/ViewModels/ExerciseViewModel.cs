@@ -201,13 +201,13 @@ namespace OneSet.ViewModels
 		{
 			if (string.IsNullOrWhiteSpace (Name))
 			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseNameIsRequired);
+				App.ShowWarning(AppResources.ExerciseNameIsRequired);
 				return false;
 			}
 
 			if ((PlateWeight < 0 ) || (PlateWeight > 999))
 			{
-				App.ShowToast (ToastNotificationType.Warning, "Warning", AppResources.ExerciseInvalidPlateWeight);
+				App.ShowWarning(AppResources.ExerciseInvalidPlateWeight);
 				PlateWeight = 0;
 				return false;
 			}
@@ -230,8 +230,7 @@ namespace OneSet.ViewModels
                 ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);
                 await SaveRoutine();
 
-                App.ShowToast(ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
-
+                await App.ShowSuccess(AppResources.ExerciseSaved);
                 await Navigation.PopAsync();
             }
         }

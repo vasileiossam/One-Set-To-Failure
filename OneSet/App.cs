@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using OneSet.Localization;
 using OneSet.Models;
 using OneSet.Resx;
@@ -49,11 +50,32 @@ namespace OneSet
 		{
 			// Handle when your app resumes
 		}
- 
-        public static async void ShowToast(ToastNotificationType type, string title, string message)
+
+        #region Toast messages
+        public static async Task ShowWarning(string message)
+	    {
+	        await ShowToast(AppResources.ToastWarningTitle, message);
+	    }
+        public static async Task ShowError(string title, string message)
+        {
+            await ShowToast($"{AppResources.ToastErrorTitle}: {title}", message);
+        }
+        public static async Task ShowError(string message)
+        {
+            await ShowToast(AppResources.ToastErrorTitle, message);
+        }
+        public static async Task ShowInfo(string message)
+        {
+            await ShowToast(AppResources.ToastInfoTitle, message);
+        }
+        public static async Task ShowSuccess(string message)
+        {
+            await ShowToast(AppResources.ToastSuccessTitle, message);
+        }
+        public static async Task ShowToast(string title, string message)
 		{
 		    var notificator = DependencyService.Get<IToastNotificator>();
-            var options = new NotificationOptions()
+            var options = new NotificationOptions
             {
                 Title = title,
                 Description = message,
@@ -61,8 +83,9 @@ namespace OneSet
             };
             await notificator.Notify(options);
 		}
+        #endregion
 
-	    public static void SaveSettings()
+        public static void SaveSettings()
 		{
 			DependencyService.Get<ISettingsStorage> ().Save(Settings);
 		}
