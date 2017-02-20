@@ -25,6 +25,9 @@ namespace OneSet.ViewModels
 		public string Notes { get; set; }
 		public double PlateWeight {get; set; }
         public int? RepsIncrementId { get; set; }
+        public int? MaxReps { get; set; }
+        public int? MinReps { get; set; }
+        public int? RestTimerId { get; set; }
         #endregion
 
         [IgnoreMap]
@@ -214,24 +217,24 @@ namespace OneSet.ViewModels
 
 		protected override async Task OnSave () 
 		{
-			if (Validate ())
-			{
-				var exercise = Mapper.Map<Exercise>(this);
+            if (Validate())
+            {
+                var exercise = Mapper.Map<Exercise>(this);
 
-				// imperial to metric - always save in metric
-				if (!App.Settings.IsMetric)
-				{
-					exercise.PlateWeight = PlateWeight / Units.ImperialMetricFactor;
-				}
+                // imperial to metric - always save in metric
+                if (!App.Settings.IsMetric)
+                {
+                    exercise.PlateWeight = PlateWeight / Units.ImperialMetricFactor;
+                }
 
-				ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);
-				await SaveRoutine ();
+                ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);
+                await SaveRoutine();
 
-				App.ShowToast (ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
+                App.ShowToast(ToastNotificationType.Success, "Success", AppResources.ExerciseSaved);
 
-				await Navigation.PopAsync();
-			}
-		}
+                await Navigation.PopAsync();
+            }
+        }
 
 		protected virtual async Task OnDelete () 
 		{

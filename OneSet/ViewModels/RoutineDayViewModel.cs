@@ -1,4 +1,5 @@
-﻿using OneSet.Entities;
+﻿using AutoMapper;
+using OneSet.Entities;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
@@ -14,14 +15,17 @@ namespace OneSet.ViewModels
 		public int DayOfWeek { get; set; }
         public int RowNumber { get; set; }
 		public int IsActive {get; set;}
- 
-		public Exercise Exercise { get; set; }
-		public Workout Workout {get; set;}
+
+        [IgnoreMap]
+        public Exercise Exercise { get; set; }
+
+        [IgnoreMap]
+        public Workout Workout {get; set;}
 
 		public string StateImage {
 			get
 			{
-				if ((Workout.Reps == 0) || (Workout.Weight == 0))
+                if (Workout != null && (Workout.Reps == 0 || Workout.Weight == 0))
 					return "ic_fa_play_circle_action";
 				return "ic_fa_check_circle_o";
 			}
@@ -30,20 +34,25 @@ namespace OneSet.ViewModels
 		public bool TrophyVisible {
 			get
 			{
-				return Workout.Trophies != 0;
+                if (Workout != null)
+                    return Workout.Trophies != 0;
+			    return false;
 			}
 		}
 
 		public bool LevelUpVisible {
 			get
 			{
-				return (Workout.TargetWeight > 0) && (Workout.PreviousWeight > 0) && (Workout.Weight > Workout.PreviousWeight);
+                if (Workout != null)
+                    return (Workout.TargetWeight > 0) && (Workout.PreviousWeight > 0) && (Workout.Weight > Workout.PreviousWeight);
+			    return false;
 			}
 		}
 			
 		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
 		protected StackOrientation _cellLayoutOrientation;
-		public StackOrientation CellLayoutOrientation
+        [IgnoreMap]
+        public StackOrientation CellLayoutOrientation
 		{
 			get
 			{

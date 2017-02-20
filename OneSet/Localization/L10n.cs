@@ -29,7 +29,7 @@ namespace OneSet.Localization
 			var netLanguage = Locale ();
 
 			// Platform-specific
-			ResourceManager temp = new ResourceManager("Set.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
+			ResourceManager temp = new ResourceManager("OneSet.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
 			string result = temp.GetString (key, new CultureInfo (netLanguage));
 
 			return result; 

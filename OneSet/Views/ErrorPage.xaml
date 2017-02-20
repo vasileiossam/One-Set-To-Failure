@@ -21,7 +21,7 @@
 
 			<BoxView HeightRequest="2" Color="#B6B6B6"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
 			<Label Text="Exception" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
-			<Label Text="{Binding ExceptionToString}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
+			<Label Text="{Binding ExceptionToString}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#212121"/>
 
 			</StackLayout>
 		</ScrollView>

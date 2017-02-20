@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using OneSet.Localization;
 using OneSet.Models;
@@ -25,22 +24,13 @@ namespace OneSet
 			
 		public App ()
 		{
-#if DEBUG
-            // That's the only way to have the breakpoints working...
-            Debugger.Break ();
-#endif
             Settings = DependencyService.Get<ISettingsStorage>().Load();
 			L10n.SetLocale ();
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-		    var mainNav = new NavigationPage(new WorkoutListPage())
-		    {
-		        BarBackgroundColor = ColorPalette.Primary,
-		        BarTextColor = ColorPalette.Icons
-		    };
-
+		    var mainNav = new NavigationPage(new WorkoutListPage());
 		    MainPage = mainNav;
 		}
 

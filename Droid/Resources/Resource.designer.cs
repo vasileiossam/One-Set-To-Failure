@@ -2654,32 +2654,32 @@ namespace OneSet.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c0049
-			public const int abc_background_cache_hint_selector_material_dark = 2131492937;
+			// aapt resource value: 0x7f0c004c
+			public const int abc_background_cache_hint_selector_material_dark = 2131492940;
 			
-			// aapt resource value: 0x7f0c004a
-			public const int abc_background_cache_hint_selector_material_light = 2131492938;
+			// aapt resource value: 0x7f0c004d
+			public const int abc_background_cache_hint_selector_material_light = 2131492941;
 			
-			// aapt resource value: 0x7f0c004b
-			public const int abc_color_highlight_material = 2131492939;
+			// aapt resource value: 0x7f0c004e
+			public const int abc_color_highlight_material = 2131492942;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int abc_input_method_navigation_guard = 2131492868;
 			
-			// aapt resource value: 0x7f0c004c
-			public const int abc_primary_text_disable_only_material_dark = 2131492940;
-			
-			// aapt resource value: 0x7f0c004d
-			public const int abc_primary_text_disable_only_material_light = 2131492941;
-			
-			// aapt resource value: 0x7f0c004e
-			public const int abc_primary_text_material_dark = 2131492942;
-			
 			// aapt resource value: 0x7f0c004f
-			public const int abc_primary_text_material_light = 2131492943;
+			public const int abc_primary_text_disable_only_material_dark = 2131492943;
 			
 			// aapt resource value: 0x7f0c0050
-			public const int abc_search_url_text = 2131492944;
+			public const int abc_primary_text_disable_only_material_light = 2131492944;
+			
+			// aapt resource value: 0x7f0c0051
+			public const int abc_primary_text_material_dark = 2131492945;
+			
+			// aapt resource value: 0x7f0c0052
+			public const int abc_primary_text_material_light = 2131492946;
+			
+			// aapt resource value: 0x7f0c0053
+			public const int abc_search_url_text = 2131492947;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int abc_search_url_text_normal = 2131492869;
@@ -2690,20 +2690,20 @@ namespace OneSet.Droid
 			// aapt resource value: 0x7f0c0007
 			public const int abc_search_url_text_selected = 2131492871;
 			
-			// aapt resource value: 0x7f0c0051
-			public const int abc_secondary_text_material_dark = 2131492945;
+			// aapt resource value: 0x7f0c0054
+			public const int abc_secondary_text_material_dark = 2131492948;
 			
-			// aapt resource value: 0x7f0c0052
-			public const int abc_secondary_text_material_light = 2131492946;
+			// aapt resource value: 0x7f0c0055
+			public const int abc_secondary_text_material_light = 2131492949;
+			
+			// aapt resource value: 0x7f0c004a
+			public const int accent = 2131492938;
 			
 			// aapt resource value: 0x7f0c0008
 			public const int accent_material_dark = 2131492872;
 			
 			// aapt resource value: 0x7f0c0009
 			public const int accent_material_light = 2131492873;
-			
-			// aapt resource value: 0x7f0c0048
-			public const int apptheme_color = 2131492936;
 			
 			// aapt resource value: 0x7f0c000a
 			public const int background_floating_material_dark = 2131492874;
@@ -2849,6 +2849,12 @@ namespace OneSet.Droid
 			// aapt resource value: 0x7f0c002b
 			public const int material_grey_900 = 2131492907;
 			
+			// aapt resource value: 0x7f0c0048
+			public const int primary = 2131492936;
+			
+			// aapt resource value: 0x7f0c0049
+			public const int primaryDark = 2131492937;
+			
 			// aapt resource value: 0x7f0c002c
 			public const int primary_dark_material_dark = 2131492908;
 			
@@ -2897,17 +2903,20 @@ namespace OneSet.Droid
 			// aapt resource value: 0x7f0c003b
 			public const int switch_thumb_disabled_material_light = 2131492923;
 			
-			// aapt resource value: 0x7f0c0053
-			public const int switch_thumb_material_dark = 2131492947;
+			// aapt resource value: 0x7f0c0056
+			public const int switch_thumb_material_dark = 2131492950;
 			
-			// aapt resource value: 0x7f0c0054
-			public const int switch_thumb_material_light = 2131492948;
+			// aapt resource value: 0x7f0c0057
+			public const int switch_thumb_material_light = 2131492951;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int switch_thumb_normal_material_dark = 2131492924;
 			
 			// aapt resource value: 0x7f0c003d
 			public const int switch_thumb_normal_material_light = 2131492925;
+			
+			// aapt resource value: 0x7f0c004b
+			public const int window_background = 2131492939;
 			
 			static Color()
 			{
@@ -4400,6 +4409,9 @@ namespace OneSet.Droid
 			// aapt resource value: 0x7f080013
 			public const int showTitle = 2131230739;
 			
+			// aapt resource value: 0x7f080098
+			public const int sliding_tabs = 2131230872;
+			
 			// aapt resource value: 0x7f08006c
 			public const int snackbar_action = 2131230828;
 			
@@ -4453,6 +4465,9 @@ namespace OneSet.Droid
 			
 			// aapt resource value: 0x7f080048
 			public const int title_template = 2131230792;
+			
+			// aapt resource value: 0x7f080099
+			public const int toolbar = 2131230873;
 			
 			// aapt resource value: 0x7f080032
 			public const int top = 2131230770;
@@ -4720,6 +4735,12 @@ namespace OneSet.Droid
 			
 			// aapt resource value: 0x7f030036
 			public const int support_simple_spinner_dropdown_item = 2130903094;
+			
+			// aapt resource value: 0x7f030037
+			public const int tabs = 2130903095;
+			
+			// aapt resource value: 0x7f030038
+			public const int toolbar = 2130903096;
 			
 			static Layout()
 			{
@@ -5279,6 +5300,9 @@ namespace OneSet.Droid
 			// aapt resource value: 0x7f0b015a
 			public const int Animation_Design_BottomSheetDialog = 2131427674;
 			
+			// aapt resource value: 0x7f0b0175
+			public const int AppCompatDialogStyle = 2131427701;
+			
 			// aapt resource value: 0x7f0b00a5
 			public const int Base_AlertDialog_AppCompat = 2131427493;
 			
@@ -5720,6 +5744,15 @@ namespace OneSet.Droid
 			// aapt resource value: 0x7f0b001a
 			public const int CardView_Light = 2131427354;
 			
+			// aapt resource value: 0x7f0b0172
+			public const int MyTheme = 2131427698;
+			
+			// aapt resource value: 0x7f0b0174
+			public const int MyTheme_Base = 2131427700;
+			
+			// aapt resource value: 0x7f0b0173
+			public const int MyTheme_Splash = 2131427699;
+			
 			// aapt resource value: 0x7f0b0032
 			public const int Platform_AppCompat = 2131427378;
 			
@@ -6061,9 +6094,6 @@ namespace OneSet.Droid
 			
 			// aapt resource value: 0x7f0b0003
 			public const int Theme_MediaRouter_LightControlPanel = 2131427331;
-			
-			// aapt resource value: 0x7f0b0172
-			public const int Theme_Splash = 2131427698;
 			
 			// aapt resource value: 0x7f0b010e
 			public const int ThemeOverlay_AppCompat = 2131427598;

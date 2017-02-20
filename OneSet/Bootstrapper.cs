@@ -10,9 +10,9 @@ namespace OneSet
 	{
 		public void Automapper()
 		{
-            	Mapper.CreateMap<RoutineDay, RoutineDayViewModel> ();
-            //	Mapper.CreateMap<Exercise, ExerciseViewModel> ();
-            //Mapper.CreateMap<ExerciseViewModel, Exercise> ();
+            Mapper.CreateMap<RoutineDay, RoutineDayViewModel> ();
+            Mapper.CreateMap<Exercise, ExerciseViewModel> ();
+            Mapper.CreateMap<ExerciseViewModel, Exercise> ();
         }
 
         public void CheckMapper()
