@@ -78,15 +78,9 @@ namespace OneSet.ViewModels
                     {
                         return Workout.Reps;
                     }
-                    else
-                    {
-                        return Workout.TargetReps;
-                    }
+                    return Workout.TargetReps;
                 }
-                else
-                {
-                    return 0;
-                }
+                return 0;
             }
         }
         
@@ -100,15 +94,9 @@ namespace OneSet.ViewModels
                     {
                         return Workout.Weight;
                     }
-                    else
-                    {
-                        return Workout.TargetWeight;
-                    }
+                    return Workout.TargetWeight;
                 }
-                else
-                {
-                    return 0;
-                }
+                return 0;
             }
         }
 
@@ -122,15 +110,9 @@ namespace OneSet.ViewModels
                     {
                         return ColorPalette.SecondaryText; 
                     }
-                    else
-                    {
-                        return ColorPalette.Accent;
-                    }
+                    return ColorPalette.Accent;
                 }
-                else
-                {
-                    return ColorPalette.SecondaryText;
-                }
+                return ColorPalette.SecondaryText;
             }
         }
 	}
