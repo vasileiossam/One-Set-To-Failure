@@ -187,3 +187,6 @@ FakesAssemblies/
 Thumbs.db
 *.jar
 *.apk
+
+#testfairy
+RunInfo.ini
