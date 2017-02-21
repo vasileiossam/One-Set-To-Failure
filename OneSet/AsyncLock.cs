@@ -29,16 +29,16 @@
 
 		private sealed class Releaser : IDisposable
 		{
-			private readonly AsyncLock m_toRelease;
+			private readonly AsyncLock _toRelease;
 
 			internal Releaser (AsyncLock toRelease)
 			{
-				m_toRelease = toRelease;
+				_toRelease = toRelease;
 			}
 
 			public void Dispose ()
 			{
-				m_toRelease._semaphore.Release ();
+				_toRelease._semaphore.Release ();
 			}
 		}
 	}

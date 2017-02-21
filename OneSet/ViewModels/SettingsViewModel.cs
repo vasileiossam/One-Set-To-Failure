@@ -12,7 +12,7 @@ namespace OneSet.ViewModels
 	{
 		// TODO replace this with MessagingCenter
 		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
-		public SettingsPage Page { get; set; }
+		public Views.SettingsPage Page { get; set; }
 
         private ObservableCollection<PreferenceGroup> _settings;
 		public ObservableCollection<PreferenceGroup> Settings
@@ -39,7 +39,7 @@ namespace OneSet.ViewModels
 			var list = new ObservableCollection<PreferenceGroup>();
 
 			#region general group
-			var generalGroup = new PreferenceGroup (){ Title = AppResources.SettingsGeneralTitle };
+			var generalGroup = new PreferenceGroup { Title = AppResources.SettingsGeneralTitle };
 			list.Add (generalGroup);
 
 			var options = new string[2];
@@ -48,7 +48,7 @@ namespace OneSet.ViewModels
 			var value = options [1];
 			if (App.Settings.IsMetric)
 				value = options [0];
-			generalGroup.Add (new ListPreference ()
+			generalGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.SettingsUnitSystemTitle, 
 				Hint = "",
@@ -58,17 +58,17 @@ namespace OneSet.ViewModels
 				OnSave = (sender, args) =>
 				{
 					var preference = sender as ListPreference;
-					App.Settings.IsMetric = ((string)preference.Value == AppResources.UnitSystemMetric);
-					App.SaveSettings();
+				    if (preference != null) App.Settings.IsMetric = ((string)preference.Value == AppResources.UnitSystemMetric);
+				    App.SaveSettings();
 				}
 			});
 			#endregion
 
 			#region rules group
-			var rulesGroup = new PreferenceGroup (){ Title = AppResources.SettingsTrainingRulesTitle, Hint = AppResources.SettingsTrainingRulesHint };
+			var rulesGroup = new PreferenceGroup { Title = AppResources.SettingsTrainingRulesTitle, Hint = AppResources.SettingsTrainingRulesHint };
 			list.Add (rulesGroup);
 
-			rulesGroup.Add (new ListPreference ()
+			rulesGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.SettingsMaxRepsTitle, 
 				Hint = AppResources.SettingsMaxRepsHint,
@@ -78,12 +78,12 @@ namespace OneSet.ViewModels
 				OnSave = (sender, args) =>
 				{
 					var preference = sender as ListPreference;
-					App.Settings.MaxReps = int.Parse((string) preference.Value);
-					App.SaveSettings();
+				    if (preference != null) App.Settings.MaxReps = int.Parse((string) preference.Value);
+				    App.SaveSettings();
 				}
 			});
 
-			rulesGroup.Add (new ListPreference ()
+			rulesGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.SettingsMinRepsTitle, 
 				Hint = AppResources.SettingsMinRepsHint,
@@ -93,18 +93,18 @@ namespace OneSet.ViewModels
 				OnSave = (sender, args) =>
 				{
 					var preference = sender as ListPreference;
-					App.Settings.MinReps = int.Parse((string) preference.Value);
-					App.SaveSettings();
+				    if (preference != null) App.Settings.MinReps = int.Parse((string) preference.Value);
+				    App.SaveSettings();
 				}
 			});
 
 			var index = 0;
-			options = new String[App.Database.RepsIncrements.Count];
+			options = new string[App.Database.RepsIncrements.Count];
 			foreach(var item in App.Database.RepsIncrements)
 			{
 				options[index++] = item.Description;
 			}
-			rulesGroup.Add (new ListPreference ()
+			rulesGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.SettingsExerciseGoalTitle, 
 				Hint = AppResources.SettingsExerciseGoalHint,
@@ -122,16 +122,16 @@ namespace OneSet.ViewModels
 			#endregion
 
             #region motivation group
-            var motivationGroup = new PreferenceGroup() { Title = AppResources.SettingsMotivationTitle };
+            var motivationGroup = new PreferenceGroup { Title = AppResources.SettingsMotivationTitle };
             list.Add(motivationGroup);
 
             index = 0;
-            options = new String[App.Database.ImagePacks.Count];
+            options = new string[App.Database.ImagePacks.Count];
             foreach (var item in App.Database.ImagePacks)
             {
                 options[index++] = item.Title;
             }
-            motivationGroup.Add(new ListPreference()
+            motivationGroup.Add(new ListPreference
             {
                 Title = AppResources.SettingsMotivationalImagePacksTitle,
                 Hint = AppResources.SettingsMotivationalImagePacksHint,
@@ -141,13 +141,15 @@ namespace OneSet.ViewModels
                 OnSave = async (sender, args) =>
                 {
                     var preference = sender as ListPreference;
-                    App.Settings.ImagePackId = App.Database.ImagePacks.FirstOrDefault(x => x.Title == (string)preference.Value).ImagePackId;
+                    if (preference == null) throw new ArgumentNullException(nameof(preference));
+                    if (App.Settings != null)
+                        App.Settings.ImagePackId = App.Database.ImagePacks.FirstOrDefault(x => x.Title == (string)preference.Value).ImagePackId;
                     App.SaveSettings();
                 }
             });
 
-           motivationGroup.Add(new ListPreference()
-            {
+           motivationGroup.Add(new ListPreference
+           {
                 Title = AppResources.SettingsShowImagesInRestTimerTitle,
                 Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInRestTimer),
                 Options = ListPreference.YesNoOptions,
@@ -155,7 +157,7 @@ namespace OneSet.ViewModels
                 OnSave = (sender, args) =>
                 {
                     var preference = sender as ListPreference;
-                    App.Settings.CanShowImagePackInRestTimer = preference.GetValueAsBool();
+                    if (preference != null) App.Settings.CanShowImagePackInRestTimer = preference.GetValueAsBool();
                     App.SaveSettings();
                 }
             });
@@ -177,10 +179,10 @@ namespace OneSet.ViewModels
             #endregion
 
             #region data group
-            var dataGroup = new PreferenceGroup (){ Title = AppResources.SettingsDataTitle };
+            var dataGroup = new PreferenceGroup { Title = AppResources.SettingsDataTitle };
 			list.Add (dataGroup);
 
-			dataGroup.Add (new AlertPreference ()
+			dataGroup.Add (new AlertPreference
 			{ 
 				Title = AppResources.SettingsClearWorkoutDataTitle, 
 				Hint = AppResources.SettingsClearWorkoutDataHint,
@@ -191,13 +193,13 @@ namespace OneSet.ViewModels
 				{
 					var preference = sender as AlertPreference;
 					await App.Database.ClearWorkoutData ();
-					await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
+				    if (preference != null) await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
 				}
 			});
 
-			options = new String[1];
+			options = new string[1];
 			options[0] = "Life Fitness equipment";
-			dataGroup.Add (new ListPreference ()
+			dataGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.SettingsLoadSampleDataTitle, 
 				Hint = AppResources.SettingsLoadSampleDataHint,
@@ -208,11 +210,11 @@ namespace OneSet.ViewModels
 				{
 					var preference = sender as Preference;
 					await App.Database.LoadLifeFitnessData ();
-					await App.ShowToast(preference.Title, AppResources.LoadSampleDataCompleted);
+				    if (preference != null) await App.ShowToast(preference.Title, AppResources.LoadSampleDataCompleted);
 				}
 			});
 
-			var backupPreference = new AlertPreference ()
+			var backupPreference = new AlertPreference
 			{ 
 				Title = AppResources.SettingsBackupLocallyTitle, 
 				Hint = AppResources.SettingsBackupLocallyHint,
@@ -231,7 +233,7 @@ namespace OneSet.ViewModels
 					await App.ShowToast(AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));		
 
 					var preference = sender as AlertPreference;
-					preference.Value = await GetLastBackupDate();
+				    if (preference != null) preference.Value = await GetLastBackupDate();
 				}
 				catch(Exception ex)
 				{
@@ -240,7 +242,7 @@ namespace OneSet.ViewModels
 			};
 			dataGroup.Add (backupPreference);
 
-			var restorePreference = new AlertPreference ()
+			var restorePreference = new AlertPreference
 			{ 
 				Title = AppResources.SettingsRestoreLocallyTitle, 
 				Hint = AppResources.SettingsRestoreLocallyHint,
@@ -260,16 +262,14 @@ namespace OneSet.ViewModels
 					else
 					{
 						var answer = await Page.DisplayAlert (AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
-						if (answer)
-						{
-							await backupService.Restore();	
+					    if (!answer) return;
+					    await backupService.Restore();	
 
-							// reload settings
-							App.Settings = DependencyService.Get<ISettingsStorage>().Load();
-							await Page.Refresh();
+					    // reload settings
+					    App.Settings = DependencyService.Get<ISettingsStorage>().Load();
+					    await Page.Refresh();
 
-							await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);		
-						}
+					    await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);
 					}
 				}
 				catch(Exception ex)
@@ -280,9 +280,9 @@ namespace OneSet.ViewModels
 			};
 			dataGroup.Add (restorePreference);
 
-			options = new String[1];
+			options = new string[1];
 			options[0] = AppResources.SettingsExportWorkoutDataOption1;
-			dataGroup.Add (new ListPreference ()
+			dataGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.SettingsExportWorkoutDataTitle, 
 				Hint = AppResources.SettingsExportWorkoutDataHint,
@@ -295,12 +295,13 @@ namespace OneSet.ViewModels
 					var pathName = await App.Database.ExportToCsv();
 					if (pathName != string.Empty)
 					{
-						await App.ShowToast(preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
+					    if (preference != null)
+					        await App.ShowToast(preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
 					}
 				}
 			});
 
-			var recalcStatisticsPreference = new AlertPreference ()
+			var recalcStatisticsPreference = new AlertPreference
 			{ 
 				Title = AppResources.SettingsRecalcStatisticsTitle, 
 				Hint = AppResources.SettingsRecalcStatisticsTitleHint,
@@ -325,10 +326,10 @@ namespace OneSet.ViewModels
 			#endregion
 
 			#region other group
-			var otherGroup = new PreferenceGroup (){ Title = AppResources.SettingsOtherTitle };
+			var otherGroup = new PreferenceGroup { Title = AppResources.SettingsOtherTitle };
 			list.Add (otherGroup);
 
-			otherGroup.Add (new ListPreference ()
+			otherGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.ShowPreviousRepsWeight,
 				Value = ListPreference.GetBoolAsString(App.Settings.PreviousRepsWeightVisible),
@@ -337,12 +338,12 @@ namespace OneSet.ViewModels
 				OnSave = (sender, args) =>
 				{
 					var preference = sender as ListPreference;
-					App.Settings.PreviousRepsWeightVisible = preference.GetValueAsBool();
-					App.SaveSettings();
+				    if (preference != null) App.Settings.PreviousRepsWeightVisible = preference.GetValueAsBool();
+				    App.SaveSettings();
 				}
 			});
 
-			otherGroup.Add (new ListPreference ()
+			otherGroup.Add (new ListPreference
 			{ 
 				Title = AppResources.ShowTargetRepsWeight,
 				Value = ListPreference.GetBoolAsString(App.Settings.TargetRepsWeightVisible),
@@ -351,17 +352,17 @@ namespace OneSet.ViewModels
 				OnSave = (sender, args) =>
 				{
 					var preference = sender as ListPreference;
-					App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
-					App.SaveSettings();
+				    if (preference != null) App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
+				    App.SaveSettings();
 				}
 			});
 
-			otherGroup.Add (new PagePreference ()
+			otherGroup.Add (new PagePreference
 			{ 
 				Title = AppResources.SettingsAboutTitle,
 				Hint = AppResources.SettingsAboutHint,
 				Navigation = Page.Navigation,
-				NavigateToPage = typeof(AboutPage) 
+				NavigateToPage = typeof(Views.AboutPage) 
 			});
 			#endregion
 
@@ -370,37 +371,39 @@ namespace OneSet.ViewModels
 
 		public async void OnClicked(object sender, EventArgs args)
 		{
-			if (sender is ListPreference)
+		    var listPreference = sender as ListPreference;
+		    if (listPreference != null)
 			{
-				var preference = sender as ListPreference;
+				var preference = listPreference;
 				var action = await Page.DisplayActionSheet(preference.Title, AppResources.CancelButton, null, preference.Options);
 
 				if ((action != null) && (action != AppResources.CancelButton))
 				{
 					preference.Value = action;
-					preference.OnSave (sender, args);
+					preference.OnSave (listPreference, args);
 				}
 			}
 
-			if (sender is AlertPreference)
-			{
-				var preference = sender as AlertPreference;
+            var alertPreference = sender as AlertPreference;
+            if (alertPreference == null) return;
+            {
+                var preference = alertPreference;
 
-				if (!string.IsNullOrEmpty (preference.PopupMessage))
-				{
-					var answer = await Page.DisplayAlert (preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
+                if (!string.IsNullOrEmpty(preference.PopupMessage))
+                {
+                    var answer = await Page.DisplayAlert(preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
 
-					if (answer)
-					{
-						preference.OnExecute (sender, args);
-					}
-				} 
-				else
-				{
-					preference.OnExecute (sender, args);
-				}
-			}
-		}
+                    if (answer)
+                    {
+                        preference.OnExecute(alertPreference, args);
+                    }
+                }
+                else
+                {
+                    preference.OnExecute(alertPreference, args);
+                }
+            }
+        }
 
 		public async Task<string> GetLastBackupDate()
 		{

@@ -1,10 +1,7 @@
 ﻿using System;
-using OneSet.Models;
 using System.Threading.Tasks;
-using OneSet.Droid;
+using OneSet.Abstract;
 using Xamarin.Forms;
-using System.IO;
-using Android.App;
 
 [assembly: Dependency (typeof (OneSet.Droid.DatePickerDialog))]
 
@@ -14,12 +11,7 @@ namespace OneSet.Droid
 	{
 		private EventHandler _callback;
 
-		public DatePickerDialog ()
-		{
-
-		}
-
-		public void Show(EventHandler callback)		
+	    public void Show(EventHandler callback)		
 		{
 			_callback = callback;
 			var today = DateTime.Today;

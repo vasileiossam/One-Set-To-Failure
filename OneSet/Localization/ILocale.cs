@@ -1,11 +1,8 @@
-﻿using System;
-
-namespace OneSet.Localization
+﻿namespace OneSet.Localization
 {
 	public interface ILocale
 	{
 		string GetCurrent();
-
 		void SetLocale();
 	}
 }

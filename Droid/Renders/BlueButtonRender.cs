@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms.Platform.Android;
+﻿using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using OneSet.Droid.Renders;
 using OneSet.Controls;
@@ -14,10 +13,7 @@ namespace OneSet.Droid.Renders
 		{
 			base.OnElementChanged (e);
 
-			if (Control != null) 
-			{ 
-				Control.SetBackgroundResource (Resource.Drawable.ButtonBlue);
-			}
+		    Control?.SetBackgroundResource (Resource.Drawable.ButtonBlue);
 		}
 
 	}

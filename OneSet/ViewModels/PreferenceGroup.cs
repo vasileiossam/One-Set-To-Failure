@@ -7,13 +7,7 @@ namespace OneSet.ViewModels
 		public string Title { get; set; }
 		public string Hint { get; set; }
 
-		public bool IsHintVisible
-		{
-			get
-			{
-				return !string.IsNullOrEmpty (Hint);
-			}
-		}
+		public bool IsHintVisible => !string.IsNullOrEmpty (Hint);
 	}
 }
 

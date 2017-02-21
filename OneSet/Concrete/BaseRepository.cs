@@ -35,7 +35,7 @@ namespace OneSet.Concrete
 			// http://www.captechconsulting.com/blog/nicholas-cipollina/cross-platform-sqlite-support-%E2%80%93-part-1
 			try
 			{
-				List<TEntity> list = new List<TEntity> ();
+				List<TEntity> list;
 				using (await Mutex.LockAsync ().ConfigureAwait (false)) 
 				{
 					list = await _connection.Table<TEntity> ().ToListAsync ().ConfigureAwait (false);
@@ -56,10 +56,10 @@ namespace OneSet.Concrete
 			{
 				try
 				{
-					List<TEntity> list = new List<TEntity> ();
-
-					var sql = string.Format (@"SELECT * FROM {0} WHERE {1} = ?", Extensions.GetTableName(typeof(TEntity)), Extensions.IdentifierPropertyName (typeof(TEntity)));
-					list = await _connection.QueryAsync<TEntity> (sql, id);
+				    var sql =
+				        $@"SELECT * FROM {Extensions.GetTableName(typeof(TEntity))} WHERE {Extensions.IdentifierPropertyName(
+				            typeof(TEntity))} = ?";
+					var list = await _connection.QueryAsync<TEntity> (sql, id);
 
 					if (list.Count > 0)	return list [0];
 				}
@@ -79,12 +79,9 @@ namespace OneSet.Concrete
 				{
 					await _connection.UpdateAsync (entity).ConfigureAwait (false);
 					return (int)entity.GetId ();
-				} 
-				else
-				{
-					await _connection.InsertAsync (entity);
-					return (int)entity.GetId ();
 				}
+			    await _connection.InsertAsync (entity);
+			    return (int)entity.GetId ();
 			}
 		}
 

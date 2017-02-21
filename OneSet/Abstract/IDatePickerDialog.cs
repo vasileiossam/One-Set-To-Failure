@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OneSet
+namespace OneSet.Abstract
 {
 	public interface IDatePickerDialog
 	{

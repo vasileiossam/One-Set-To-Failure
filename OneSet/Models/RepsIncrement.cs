@@ -10,26 +10,22 @@ namespace OneSet.Models
 
 		public string Description 
 		{ 
-			get 
+			get
 			{
-                if (WorkoutCount == 0)
-                {
-                    return AppResources.RepsIncrementDisabledDescr;
-                }
-                else
-				if (WorkoutCount == 1)
-				{
-                    return string.Format(AppResources.RepsIncrementZeroWorkCountDescr, Increment);
-				} 
-				else
-				{
-                    if (WorkoutCount == 2)
-                    {
-                        return string.Format(AppResources.RepsIncrementEveryOtherTimeDescription, Increment);
-                    }
+			    switch (WorkoutCount)
+			    {
+			        case 0:
+			            return AppResources.RepsIncrementDisabledDescr;
+			        case 1:
+			            return string.Format(AppResources.RepsIncrementZeroWorkCountDescr, Increment);
+			        default:
+			            if (WorkoutCount == 2)
+			            {
+			                return string.Format(AppResources.RepsIncrementEveryOtherTimeDescription, Increment);
+			            }
                         
-					return string.Format (AppResources.RepsIncrementDescription, Increment, WorkoutCount);
-				}
+			            return string.Format (AppResources.RepsIncrementDescription, Increment, WorkoutCount);
+			    }
 			} 
 		}
 

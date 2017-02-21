@@ -3,7 +3,8 @@
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
 	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
 	xmlns:local="clr-namespace:OneSet;assembly=OneSet"
-	x:Class="OneSet.RestTimerPage"
+	xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+	x:Class="OneSet.Views.RestTimerPage"
     Title="{Binding Title}">
 
   <ContentPage.Padding>
@@ -15,7 +16,7 @@
 
   <ContentPage.Resources>
     <ResourceDictionary>
-      <local:StateToBooleanConverter x:Key="stateToBooleanConverter" />
+      <converters:StateToBooleanConverter x:Key="stateToBooleanConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 

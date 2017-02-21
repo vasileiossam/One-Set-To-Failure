@@ -39,8 +39,6 @@
     <Compile Include="Entities\Workout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkoutRules.cs" />
-    <Compile Include="Models\Exercise.cs" />
-    <Compile Include="Models\Workout.cs" />
     <Compile Include="Models\RestTimer.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
     <Compile Include="Models\Settings.cs" />

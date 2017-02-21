@@ -2,10 +2,8 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Converters
 {
-
-   
     /// <summary>
     /// http://stackoverflow.com/questions/12977021/best-practice-for-storing-weights-in-a-sql-database
     ///	https://msdn.microsoft.com/en-us/library/windows/apps/hh969150.aspx
@@ -32,8 +30,8 @@ namespace OneSet
 
 			// metric to imperial
 			// 1 Kg = 2.20462 lbs
-			double kgs = (double)value;
-			double lbs = kgs * 2.20462;
+			var kgs = (double)value;
+			var lbs = kgs * 2.20462;
 			return Math.Round (lbs, 2);
 		}
 

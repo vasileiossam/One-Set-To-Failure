@@ -4,10 +4,6 @@
 	{
 		public int ImagePackId { get; set; }
         public string Title { get; set; }
-
-        public ImagePack()
-		{
-		}
 	}
 }
 

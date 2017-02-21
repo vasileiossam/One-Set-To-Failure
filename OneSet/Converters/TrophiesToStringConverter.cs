@@ -4,8 +4,6 @@ using Xamarin.Forms;
 
 namespace OneSet
 {
-
-   
     /// <summary>
     /// http://stackoverflow.com/questions/12977021/best-practice-for-storing-weights-in-a-sql-database
     ///	https://msdn.microsoft.com/en-us/library/windows/apps/hh969150.aspx
@@ -20,11 +18,9 @@ namespace OneSet
 
 			if ((int)value > 0)
 			{
-				return "+" + ((int)value).ToString ();
-			} else
-			{
-				return ((int)value).ToString ();
+				return "+" + ((int)value);
 			}
+            return ((int)value).ToString ();
         }
     
 
@@ -32,6 +28,5 @@ namespace OneSet
 		{
 			return value;
 		}
-
 	}
 }

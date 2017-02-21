@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:OneSet;assembly=OneSet"
 			 xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-             x:Class="OneSet.WorkoutPage"
+             x:Class="OneSet.Views.WorkoutPage"
 			 xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
-             Title="{Binding Title}">
+			 xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+			 Title="{Binding Title}">
 
   <ContentPage.Padding>
     <OnPlatform x:TypeArguments="Thickness"
@@ -15,10 +16,10 @@
 
   <ContentPage.Resources>
     <ResourceDictionary>
-      <local:DateTimeToStringConverter x:Key="dateConverter" />
-      <local:WeightMetricToImperialConverter x:Key="weightConverter" />
-      <local:IntToStringConverter x:Key="intToStringConverter" />
-	    <local:DoubleToStringConverter x:Key="doubleToStringConverter" />
+      <converters:DateTimeToStringConverter x:Key="dateConverter" />
+      <converters:WeightMetricToImperialConverter x:Key="weightConverter" />
+      <converters:IntToStringConverter x:Key="intToStringConverter" />
+	    <converters:DoubleToStringConverter x:Key="doubleToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 

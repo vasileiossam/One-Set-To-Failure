@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using OneSet.Abstract;
 using OneSet.Entities;
@@ -35,7 +34,7 @@ namespace OneSet.Concrete
 		//var k = await _connection.QueryAsync<RoutineDay> ("SELECT * FROM RoutineDays");
 			try
 			{
-				var list = new List<RoutineDay> ();
+				List<RoutineDay> list;
 				using (await Mutex.LockAsync ().ConfigureAwait (false))
 				{
 					list = await _connection.Table<RoutineDay> ()
@@ -61,15 +60,14 @@ namespace OneSet.Concrete
 
 		public async Task<List<RoutineDay>> GetRoutine(int exerciseId)
 		{
-			var list = new List<RoutineDay> ();
-			using (await Mutex.LockAsync ().ConfigureAwait (false))
+		    using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{			
-				var sql = @"SELECT *  
+				const string sql = @"SELECT *  
                         FROM RoutineDays
                         WHERE (RoutineDays.ExerciseId = ?)
                         ORDER BY RoutineDays.DayOfWeek";
 
-				list = await _connection.QueryAsync<RoutineDay> (sql, exerciseId);
+				var list = await _connection.QueryAsync<RoutineDay> (sql, exerciseId);
 				return list;
 			}
 		}

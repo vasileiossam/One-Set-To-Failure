@@ -3,9 +3,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AutoMapper;
 using OneSet.Resx;
-using OneSet.ViewModels;
 
-namespace OneSet
+namespace OneSet.ViewModels
 {
 	public class ExerciseListViewModel : BaseViewModel
 	{
@@ -17,12 +16,10 @@ namespace OneSet
 				return _exercises;
 			}
 			set
-			{ 
-				if (_exercises != value)
-				{				
-					_exercises = value;
-					OnPropertyChanged ("Exercises");
-				}
+			{
+			    if (_exercises == value) return;
+			    _exercises = value;
+			    OnPropertyChanged ("Exercises");
 			}
 		}
 
@@ -35,11 +32,9 @@ namespace OneSet
 			}
 			set
 			{
-				if (_listVisible != value)
-				{
-					_listVisible = value;
-					OnPropertyChanged("ListVisible");
-				}
+			    if (_listVisible == value) return;
+			    _listVisible = value;
+			    OnPropertyChanged("ListVisible");
 			}
 		}
 
@@ -52,11 +47,9 @@ namespace OneSet
 			}
 			set
 			{
-				if (_noDataVisible != value)
-				{
-					_noDataVisible = value;
-					OnPropertyChanged("NoDataVisible");
-				}
+			    if (_noDataVisible == value) return;
+			    _noDataVisible = value;
+			    OnPropertyChanged("NoDataVisible");
 			}
 		}
 

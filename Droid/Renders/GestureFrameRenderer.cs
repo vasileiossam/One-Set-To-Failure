@@ -3,7 +3,6 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using OneSet.Droid.Renders;
 using Android.Views;
-using Android.Widget;
 using OneSet.Controls;
 
 [assembly: ExportRenderer(typeof(GestureFrame), typeof(GestureFrameRenderer))]
@@ -26,23 +25,21 @@ namespace OneSet.Droid.Renders
 
 			if (e.NewElement == null)
 			{
-				this.GenericMotion -= HandleGenericMotion;
-				this.Touch -= HandleTouch;
+				GenericMotion -= HandleGenericMotion;
+				Touch -= HandleTouch;
 				_listener.OnSwipeLeft -= HandleOnSwipeLeft;
 				_listener.OnSwipeRight -= HandleOnSwipeRight;
 				_listener.OnSwipeTop -= HandleOnSwipeTop;
 				_listener.OnSwipeDown -= HandleOnSwipeDown;
 			}
 
-			if (e.OldElement == null)
-			{
-				this.GenericMotion += HandleGenericMotion;
-				this.Touch += HandleTouch;
-				_listener.OnSwipeLeft += HandleOnSwipeLeft;
-				_listener.OnSwipeRight += HandleOnSwipeRight;
-				_listener.OnSwipeTop += HandleOnSwipeTop;
-				_listener.OnSwipeDown += HandleOnSwipeDown;
-			}
+		    if (e.OldElement != null) return;
+		    GenericMotion += HandleGenericMotion;
+		    Touch += HandleTouch;
+		    _listener.OnSwipeLeft += HandleOnSwipeLeft;
+		    _listener.OnSwipeRight += HandleOnSwipeRight;
+		    _listener.OnSwipeTop += HandleOnSwipeTop;
+		    _listener.OnSwipeDown += HandleOnSwipeDown;
 		}
 
 		void HandleTouch(object sender, TouchEventArgs e)
@@ -57,26 +54,26 @@ namespace OneSet.Droid.Renders
 
 		void HandleOnSwipeLeft(object sender, EventArgs e)
 		{
-			GestureFrame _gi = (GestureFrame)this.Element;
-			_gi.OnSwipeLeft();
+			var gi = (GestureFrame)Element;
+			gi.OnSwipeLeft();
 		}
 
 		void HandleOnSwipeRight(object sender, EventArgs e)
 		{
-			GestureFrame _gi = (GestureFrame)this.Element;
-			_gi.OnSwipeRight();
+			var gi = (GestureFrame)Element;
+			gi.OnSwipeRight();
 		}
 
 		void HandleOnSwipeTop(object sender, EventArgs e)
 		{
-			GestureFrame _gi = (GestureFrame)this.Element;
-			_gi.OnSwipeTop();
+			var gi = (GestureFrame)Element;
+			gi.OnSwipeTop();
 		}
 
 		void HandleOnSwipeDown(object sender, EventArgs e)
 		{
-			GestureFrame _gi = (GestureFrame)this.Element;
-			_gi.OnSwipeDown();
+			var gi = (GestureFrame)Element;
+			gi.OnSwipeDown();
 		}
 	}
 }

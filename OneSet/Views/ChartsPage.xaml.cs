@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using OxyPlot.Xamarin.Forms;
-using Xamarin.Forms;
-using System.Threading.Tasks;
 using OneSet.ViewModels;
+using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class ChartsPage : ContentPage
 	{
@@ -17,14 +11,10 @@ namespace OneSet
 		{
 			get
 			{
-				if (_viewModel == null)
-				{
-					_viewModel = new ChartsViewModel
-					{
-						Navigation = Navigation,
-					};
-				}
-				return _viewModel;
+			    return _viewModel ?? (_viewModel = new ChartsViewModel
+			    {
+			        Navigation = Navigation,
+			    });
 			}
 			set
 			{
@@ -37,7 +27,7 @@ namespace OneSet
 			InitializeComponent ();
 		}
 
-		protected async override void OnAppearing()
+		protected override async void OnAppearing()
 		{
 			base.OnAppearing ();
 
@@ -48,14 +38,18 @@ namespace OneSet
 
 		private async void OnSelectedIndexChanged(object sender, EventArgs eventArgs)
 		{
-			var selectedIndex = (sender as Picker).SelectedIndex;
-			if (selectedIndex > -1)
-			{
-				OxyPlotsLayout.Children.Clear ();
-				BindingContext = null;
-				await ViewModel.SelectChart (selectedIndex);
-				BindingContext = ViewModel;
-			}
+		    var picker = sender as Picker;
+		    if (picker != null)
+		    {
+		        var selectedIndex = picker.SelectedIndex;
+		        if (selectedIndex > -1)
+		        {
+		            OxyPlotsLayout.Children.Clear ();
+		            BindingContext = null;
+		            await ViewModel.SelectChart (selectedIndex);
+		            BindingContext = ViewModel;
+		        }
+		    }
 		}
 	}
 }

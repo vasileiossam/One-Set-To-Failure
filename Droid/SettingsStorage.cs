@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using OneSet.Droid;
 using Xamarin.Forms;
 using System.IO;
 using Newtonsoft.Json;
+using OneSet.Abstract;
 using OneSet.Models;
 
 [assembly: Dependency (typeof (SettingsStorage))]
@@ -14,12 +14,7 @@ namespace OneSet.Droid
 	{
 		public const string FileName = "settings.json";
 
-		public SettingsStorage ()
-		{
-
-		}
-
-		public static string GetPathName()
+	    public static string GetPathName()
 		{
 			var folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			var pathName = Path.Combine(folder, FileName);
@@ -30,7 +25,7 @@ namespace OneSet.Droid
 		{
 			var pathName = GetPathName ();
 
-			using (StreamWriter sw = File.CreateText (pathName)) {
+			using (var sw = File.CreateText (pathName)) {
 				var json = JsonConvert.SerializeObject (settings);
 				sw.Write (json);
 			}
@@ -38,29 +33,22 @@ namespace OneSet.Droid
 
 		public Settings Load()
 		{
-			try
-			{
-				Settings settings;
-				var pathName = GetPathName ();
+		    Settings settings;
+		    var pathName = GetPathName ();
 
-				if (File.Exists (pathName)) {
-					using (StreamReader sr = File.OpenText (pathName)) {
-						var json = sr.ReadLine ();
-						settings = JsonConvert.DeserializeObject<Settings> (json);
+		    if (File.Exists (pathName)) {
+		        using (var sr = File.OpenText (pathName)) {
+		            var json = sr.ReadLine ();
+		            settings = JsonConvert.DeserializeObject<Settings> (json);
 
-					}
-				} 
-				else 
-				{
-					settings = new Settings ();
-				}
+		        }
+		    } 
+		    else 
+		    {
+		        settings = new Settings ();
+		    }
 
-				return settings;
-			}
-			catch(Exception ex)
-			{
-				throw ex; 
-			}
+		    return settings;
 		}
 	}
 }

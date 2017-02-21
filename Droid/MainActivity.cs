@@ -34,9 +34,9 @@ namespace OneSet.Droid
 			Forms.Init (this, bundle);
 
             DependencyService.Register<ToastNotification>();
-            ToastNotification.Init(this, new PlatformOptions() { SmallIconDrawable = Android.Resource.Drawable.IcDialogInfo });
+            ToastNotification.Init(this, new PlatformOptions { SmallIconDrawable = Android.Resource.Drawable.IcDialogInfo });
 
-            var context = this.ApplicationContext;
+            var context = ApplicationContext;
 			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, PackageInfoFlags.Activities).VersionName;
 			App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
 			App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
@@ -46,7 +46,7 @@ namespace OneSet.Droid
 			bootstrapper.CheckMapper ();
 		}
 
-		static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
 		{
             // TODO handle exception
 		}

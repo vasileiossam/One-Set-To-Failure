@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using static Xamarin.Forms.BindableProperty;
 
 namespace OneSet.Controls
 {
@@ -8,7 +9,7 @@ namespace OneSet.Controls
 	public class RoundedBoxView : BoxView
 	{
 			public static readonly BindableProperty CornerRadiusProperty =
-				BindableProperty.Create<RoundedBoxView, double>(p => p.CornerRadius, 0);
+				Create<RoundedBoxView, double>(p => p.CornerRadius, 0);
 
 			public double CornerRadius
 			{
@@ -17,7 +18,7 @@ namespace OneSet.Controls
 			}
 
 			public static readonly BindableProperty StrokeProperty = 
-				BindableProperty.Create<RoundedBoxView,Color>(
+				Create<RoundedBoxView,Color>(
 					p => p.Stroke, Color.Transparent);
 
 			public Color Stroke {
@@ -26,7 +27,7 @@ namespace OneSet.Controls
 			}
 
 			public static readonly BindableProperty StrokeThicknessProperty = 
-				BindableProperty.Create<RoundedBoxView,double>(
+				Create<RoundedBoxView,double>(
 					p => p.StrokeThickness, default(double));
 
 			public double StrokeThickness {
@@ -35,7 +36,7 @@ namespace OneSet.Controls
 			}
 
 			public static readonly BindableProperty HasShadowProperty = 
-				BindableProperty.Create<RoundedBoxView,bool>(
+				Create<RoundedBoxView,bool>(
 					p => p.HasShadow, default(bool));
 
 			public bool HasShadow {

@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -7,6 +6,7 @@ using OxyPlot.Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using OneSet.Converters;
 using OneSet.Entities;
 using OneSet.Localization;
 
@@ -28,11 +28,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_noChartsDataVisible != value)
-				{
-					_noChartsDataVisible = value;
-					OnPropertyChanged("NoChartsDataVisible");
-				}
+			    if (_noChartsDataVisible == value) return;
+			    _noChartsDataVisible = value;
+			    OnPropertyChanged("NoChartsDataVisible");
 			}
 		}
 
@@ -45,11 +43,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_chartsPinchToZoomVisible != value)
-				{
-					_chartsPinchToZoomVisible = value;
-					OnPropertyChanged("ChartsPinchToZoomVisible");
-				}
+			    if (_chartsPinchToZoomVisible == value) return;
+			    _chartsPinchToZoomVisible = value;
+			    OnPropertyChanged("ChartsPinchToZoomVisible");
 			}
 		}
 
@@ -90,16 +86,19 @@ namespace OneSet.ViewModels
 
 		private DateTimeAxis GetDateTimeAxis(int count)
 		{
-			var dateAxis = new DateTimeAxis { Position = AxisPosition.Bottom };
+		    var dateAxis = new DateTimeAxis
+		    {
+		        Position = AxisPosition.Bottom,
+		        StringFormat = "MMM dd",
+		        IsPanEnabled = true,
+		        IsZoomEnabled = true,
+		        IntervalType = DateTimeIntervalType.Days,
+		        MinorIntervalType = DateTimeIntervalType.Days,
+		        MinorStep = 1
+		    };
 
-			dateAxis.StringFormat = "MMM dd";
-			dateAxis.IsPanEnabled = true;
-			dateAxis.IsZoomEnabled = true;
-			dateAxis.IntervalType = DateTimeIntervalType.Days;
-			dateAxis.MinorIntervalType = DateTimeIntervalType.Days;
-			dateAxis.MinorStep = 1;
 
-			// when one workout it display a black mark in the begining of the axis; like minor and major to print in the same area
+		    // when one workout it display a black mark in the begining of the axis; like minor and major to print in the same area
 			if (count == 1)
 			{
 				dateAxis.IsAxisVisible = false;
@@ -116,31 +115,35 @@ namespace OneSet.ViewModels
 
 		public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
 		{
-			//await Task.Run (() =>
-			//{
-				// create plot model
-				var plotModel = new PlotModel {
-					Title = item.Key.Name,
-					Background = OxyColors.LightYellow,
-					PlotAreaBackground = OxyColors.LightGray,
-				};
+            //await Task.Run (() =>
+            //{
+            // create plot model
+            var plotModel = new PlotModel
+            {
+                Title = item.Key.Name,
+                Background = OxyColors.LightYellow,
+                PlotAreaBackground = OxyColors.LightGray,
+            };
 
-				var series = new LineSeries ();
-				series.ItemsSource = item.Value;
-				plotModel.Series.Add (series);
+            var series = new LineSeries { ItemsSource = item.Value };
+            plotModel.Series.Add(series);
 
-				var dateAxis = GetDateTimeAxis (item.Value.Count());
-				plotModel.Axes.Add (dateAxis);
+            var dateAxis = GetDateTimeAxis(item.Value.Count);
+            plotModel.Axes.Add(dateAxis);
 
-				var valueAxis = new LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0 };
-				valueAxis.Title = "Weight";
-				plotModel.Axes.Add (valueAxis);
+            var valueAxis = new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                MinimumPadding = 0,
+                Title = "Weight"
+            };
+            plotModel.Axes.Add(valueAxis);
 
-				return plotModel; 
-			//});
-		}
+            return plotModel;
+            //});
+        }
 
-		private void BuildWeightPerWorkout ()
+        private void BuildWeightPerWorkout ()
 		{
 			var data = new Dictionary<Exercise, List<DataPoint>> ();
 
@@ -204,9 +207,11 @@ namespace OneSet.ViewModels
 				int count = 0;
 				foreach (var weightGroup in exerciseGroup)
 				{
-					var series = new LineSeries ();
-					series.Title = string.Format("{0} {1}", WeightMetricToImperialConverter.GetWeightAsDouble(weightGroup.Key), L10n.GetWeightUnit());
-					plotModel.Series.Add (series);
+				    var series = new LineSeries
+				    {
+				        Title = $"{WeightMetricToImperialConverter.GetWeightAsDouble(weightGroup.Key)} {L10n.GetWeightUnit()}"
+				    };
+				    plotModel.Series.Add (series);
 
 					var weightData =  new List<DataPoint>();
 					foreach (var workout in weightGroup)
@@ -221,11 +226,15 @@ namespace OneSet.ViewModels
 				var dateAxis = GetDateTimeAxis (count);
 				plotModel.Axes.Add (dateAxis);
 
-				var valueAxis = new LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0 };
-				valueAxis.Title = "Resps";
-				plotModel.Axes.Add (valueAxis);		
+			    var valueAxis = new LinearAxis
+			    {
+			        Position = AxisPosition.Left,
+			        MinimumPadding = 0,
+			        Title = "Resps"
+			    };
+			    plotModel.Axes.Add (valueAxis);		
 
-				var plotView = new PlotView ()
+				var plotView = new PlotView
 				{
 					HeightRequest = 300,
 					Model = plotModel,

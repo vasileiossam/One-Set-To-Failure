@@ -1,9 +1,6 @@
-﻿using System;
-using Xamarin.Forms.Platform.Android;
+﻿using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using OneSet.Droid.Renders;
-using Android.Views;
-using Android.Widget;
 using Android.Graphics;
 using OneSet.Controls;
 
@@ -23,15 +20,16 @@ namespace OneSet.Droid.Renders
 
 		public override void Draw(Canvas canvas)
 		{
-			RoundedBoxView rbv = (RoundedBoxView)this.Element;
+			var rbv = (RoundedBoxView)Element;
 
-			Rect rc = new Rect();
+			var rc = new Rect();
 			GetDrawingRect(rc);
 
-			Rect interior = rc;
+			var interior = rc;
 			interior.Inset((int)rbv.StrokeThickness, (int)rbv.StrokeThickness);
 
-			Paint p = new Paint() {
+			var p = new Paint
+			{
 				Color = rbv.Color.ToAndroid(),
 				AntiAlias = true,
 			};
@@ -44,8 +42,6 @@ namespace OneSet.Droid.Renders
 
 			canvas.DrawRoundRect(new RectF(rc), (float)rbv.CornerRadius, (float)rbv.CornerRadius, p);
 		}
-
-
 	}
 }
 

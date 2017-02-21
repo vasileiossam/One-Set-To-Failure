@@ -3,7 +3,8 @@
              xmlns:local="clr-namespace:OneSet;assembly=OneSet"
 			 xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
 			 xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-             x:Class="OneSet.WorkoutListPage"
+			 xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+			 x:Class="OneSet.Views.WorkoutListPage"
              Title="{Binding Title}">
 
   <ContentPage.Padding>
@@ -15,9 +16,9 @@
 
   <ContentPage.Resources>
     <ResourceDictionary>
-      <local:DateTimeToStringConverter x:Key="dateConverter" />
-      <local:WeightMetricToImperialConverter x:Key="weightConverter" />
-      <local:IntToStringConverter x:Key="intToStringConverter" />
+      <converters:DateTimeToStringConverter x:Key="dateConverter" />
+      <converters:WeightMetricToImperialConverter x:Key="weightConverter" />
+      <converters:IntToStringConverter x:Key="intToStringConverter" />
       <local:TrophiesToStringConverter x:Key="trophiesToStringConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>

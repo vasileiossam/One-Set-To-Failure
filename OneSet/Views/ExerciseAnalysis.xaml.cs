@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using OneSet.Abstract;
 using OneSet.ViewModels;
+using OneSet.Views;
 using Xamarin.Forms;
 
 namespace OneSet
@@ -16,14 +16,10 @@ namespace OneSet
 		{
 			get
 			{
-				if (_viewModel == null)
-				{
-					_viewModel = new ExerciseAnalysisViewModel
-					{
-						Navigation = Navigation,
-					};
-				}
-				return _viewModel;
+			    return _viewModel ?? (_viewModel = new ExerciseAnalysisViewModel
+			    {
+			        Navigation = Navigation,
+			    });
 			}
 			set
 			{
@@ -37,7 +33,7 @@ namespace OneSet
 			InitScreenSizeHandler ();
 		}
 
-		protected async override void OnAppearing()
+		protected override async void OnAppearing()
 		{
 			base.OnAppearing ();
 			ViewModel.ExercisesPicker = ExercisesPicker;
@@ -48,12 +44,12 @@ namespace OneSet
 
 		private async void OnSelectedIndexChanged(object sender, EventArgs eventArgs)
 		{
-			var selectedIndex = (sender as Picker).SelectedIndex;
-			if (selectedIndex > -1)
-			{
-				ViewModel.Stats = await ViewModel.GetStats(selectedIndex);
-				ChangeOrientation ();
-			}
+		    var picker = sender as Picker;
+		    if (picker == null) return;
+		    var selectedIndex = picker.SelectedIndex;
+		    if (selectedIndex <= -1) return;
+		    ViewModel.Stats = await ViewModel.GetStats(selectedIndex);
+		    ChangeOrientation ();
 		}
 
 		public void Refresh()
@@ -69,8 +65,8 @@ namespace OneSet
 			_screenSizeHandler = new ScreenSizeHandler ();
 
 			_stackOrientation = StackOrientation.Horizontal;
-			if ((_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait) 
-				&& (_screenSizeHandler.GetScreenSize() == ScreenSizes.Small) )
+			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait 
+				&& _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
 			{
 				_stackOrientation = StackOrientation.Vertical;
 			}
@@ -80,21 +76,17 @@ namespace OneSet
 		{
 			base.OnSizeAllocated (width, height);
 
-			if (_screenSizeHandler.GetScreenSize () == ScreenSizes.Small)
-			{
-				var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
+		    if (_screenSizeHandler.GetScreenSize() != ScreenSizes.Small) return;
+		    var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
 
-				if (orientation == Orientations.Landscape)
-				{
-					_stackOrientation = StackOrientation.Horizontal;
-					ChangeOrientation ();				
-				}
-				if (orientation == Orientations.Portrait)
-				{
-					_stackOrientation = StackOrientation.Vertical;
-					ChangeOrientation ();
-				}
-			}
+		    if (orientation == Orientations.Landscape)
+		    {
+		        _stackOrientation = StackOrientation.Horizontal;
+		        ChangeOrientation ();				
+		    }
+		    if (orientation != Orientations.Portrait) return;
+		    _stackOrientation = StackOrientation.Vertical;
+		    ChangeOrientation ();
 		}
 
 		// TODO remove this when xamarin forms supports source/relative binding inside a datatemplate
@@ -105,8 +97,8 @@ namespace OneSet
 			{
 				foreach (var item in StatsList.ItemsSource)
 				{
-					var stat = item as ExerciseStat;
-					stat.CellLayoutOrientation = _stackOrientation;
+				    var stat = item as ExerciseStat;
+				    if (stat != null) stat.CellLayoutOrientation = _stackOrientation;
 				}
 			}
 			StatsList.EndRefresh ();

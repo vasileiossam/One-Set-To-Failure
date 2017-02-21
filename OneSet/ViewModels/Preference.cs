@@ -21,23 +21,15 @@ namespace OneSet.ViewModels
 				return _value;
 			}
 			set
-			{ 
-				if (_value != value)
-				{
-					_value = value;
-					OnPropertyChanged("Value");
-				}
+			{
+			    if (_value == value) return;
+			    _value = value;
+			    OnPropertyChanged("Value");
 			}
 		}
 
-		public bool IsHintVisible
-		{
-			get
-			{
-				return !string.IsNullOrEmpty (Hint);
-			}
-		}
-		public bool IsValueVisible { get; set; }
+		public bool IsHintVisible => !string.IsNullOrEmpty (Hint);
+	    public bool IsValueVisible { get; set; }
 
 		public EventHandler Clicked {get; set;}
 		public EventHandler OnSave {get; set;}
@@ -49,25 +41,17 @@ namespace OneSet.ViewModels
 
 		protected void OnPropertyChanged(string propertyName)
 		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 
 	public class ListPreference : Preference
 	{
-		public static string[] YesNoOptions = new string[2]{"No", "Yes"};
+		public static string[] YesNoOptions = {"No", "Yes"};
 
 		public string[] Options {get; set;}
 
-		public ListPreference()
-		{
-
-		}
-
-		public bool GetValueAsBool()
+	    public bool GetValueAsBool()
 		{
 			if (Value == null)
 			{
@@ -75,14 +59,12 @@ namespace OneSet.ViewModels
 			}
 
 			var s = (string)Value;
-			return String.Equals (s, AppResources.Yes, StringComparison.OrdinalIgnoreCase);
+			return string.Equals (s, AppResources.Yes, StringComparison.OrdinalIgnoreCase);
 		}
 
 		public static string GetBoolAsString(bool b)
 		{
-			if (b)
-				return AppResources.Yes;
-			return AppResources.No;
+		    return b ? AppResources.Yes : AppResources.No;
 		}
 
 		public static string[] GetOptionsList(int startNum, int finishNum, bool includeZero)

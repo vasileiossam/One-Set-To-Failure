@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using Android.Content;
-using Android.Util;
-using Android.App;
 
-namespace OneSet
+namespace OneSet.Droid
 {
     public class Logger
     {
@@ -23,15 +20,9 @@ namespace OneSet
 			Log("error", "OneSet", message);
         }
 
-        private static string FileName 
-        {
-            get
-            {
-				return Path.Combine (PersonalFolder, "OneSet.log");
-            }
-        }
+        private static string FileName => Path.Combine (PersonalFolder, "OneSet.log");
 
-        private static String PersonalFolder
+        private static string PersonalFolder
         {
             get
             {
@@ -49,7 +40,7 @@ namespace OneSet
         {
             using (var sw = new StreamWriter(FileName, true))
             {
-                var line = string.Format("{0}\t {1}\t {2}\t {3}\r", DateTime.Now.ToString("s"), messageType, tag, message);
+                var line = $"{DateTime.Now:s}\t {messageType}\t {tag}\t {message}\r";
                 sw.Write(line);
             }
         }

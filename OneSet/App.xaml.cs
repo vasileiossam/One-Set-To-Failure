@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
+using OneSet.Abstract;
+using OneSet.Concrete;
 using OneSet.Localization;
 using OneSet.Models;
 using OneSet.Resx;
@@ -36,7 +38,7 @@ namespace OneSet
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-		    var mainNav = new NavigationPage(new WorkoutListPage());
+		    var mainNav = new NavigationPage(new Views.WorkoutListPage());
 		    MainPage = mainNav;
 		}
 
@@ -102,11 +104,11 @@ namespace OneSet
 			var mainPage = Current.MainPage;
 			if (mainPage != null)
 			{
-				mainPage.Navigation.PushAsync (new ErrorPage (){ ViewModel = viewModel });
+				mainPage.Navigation.PushAsync (new ErrorPage { ViewModel = viewModel });
 			} 
 			else
 			{
-				var mainNav = new NavigationPage (new ErrorPage (){ ViewModel = viewModel });
+				var mainNav = new NavigationPage (new ErrorPage { ViewModel = viewModel });
 				Current.MainPage = mainNav;
 			}
 		}

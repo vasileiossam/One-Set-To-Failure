@@ -6,11 +6,7 @@ namespace OneSet.ViewModels
 {
 	public class RoutineDayViewModel
     {
-		public RoutineDayViewModel()
-		{
-		}
-
-		public int RoutineDayId { get; set; }
+        public int RoutineDayId { get; set; }
         public int ExerciseId { get; set; }        
 		public int DayOfWeek { get; set; }
         public int RowNumber { get; set; }
@@ -72,15 +68,8 @@ namespace OneSet.ViewModels
         {
             get
             {
-                if (Workout != null)
-                {
-                    if (Workout.WorkoutId > 0)
-                    {
-                        return Workout.Reps;
-                    }
-                    return Workout.TargetReps;
-                }
-                return 0;
+                if (Workout == null) return 0;
+                return Workout.WorkoutId > 0 ? Workout.Reps : Workout.TargetReps;
             }
         }
         
@@ -88,15 +77,8 @@ namespace OneSet.ViewModels
         {
             get
             {
-                if (Workout != null)
-                {
-                    if (Workout.WorkoutId > 0)
-                    {
-                        return Workout.Weight;
-                    }
-                    return Workout.TargetWeight;
-                }
-                return 0;
+                if (Workout == null) return 0;
+                return Workout.WorkoutId > 0 ? Workout.Weight : Workout.TargetWeight;
             }
         }
 
@@ -104,15 +86,8 @@ namespace OneSet.ViewModels
         {
             get
             {
-                if (Workout != null)
-                {
-                    if (Workout.WorkoutId > 0)
-                    {
-                        return ColorPalette.SecondaryText; 
-                    }
-                    return ColorPalette.Accent;
-                }
-                return ColorPalette.SecondaryText;
+                if (Workout == null) return ColorPalette.SecondaryText;
+                return Workout.WorkoutId > 0 ? ColorPalette.SecondaryText : ColorPalette.Accent;
             }
         }
 	}

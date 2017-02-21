@@ -2,7 +2,6 @@
 using AutoMapper;
 using OneSet.Entities;
 using OneSet.ViewModels;
-using OneSet.Models;
 
 namespace OneSet
 {

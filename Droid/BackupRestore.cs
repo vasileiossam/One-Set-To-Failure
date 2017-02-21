@@ -15,8 +15,8 @@ namespace OneSet.Droid
 		public async Task Backup()
 		{
 			// backup SQLITE
-			var source = SQLite_Android.GetPathName ();
-			var dest = Path.Combine(GetBackupFolder(), SQLite_Android.FileName); 
+			var source = SQLiteAndroid.GetPathName ();
+			var dest = Path.Combine(GetBackupFolder(), SQLiteAndroid.FileName); 
 			File.Copy (source, dest, true);
 
 			// backup settings
@@ -34,8 +34,8 @@ namespace OneSet.Droid
 		public async Task Restore()
 		{
 			// restore SQLITE
-			var source = Path.Combine(GetBackupFolder(), SQLite_Android.FileName); 
-			var dest = SQLite_Android.GetPathName ();
+			var source = Path.Combine(GetBackupFolder(), SQLiteAndroid.FileName); 
+			var dest = SQLiteAndroid.GetPathName ();
 			File.Copy (source, dest, true);
 
 			// restore settings
@@ -55,7 +55,8 @@ namespace OneSet.Droid
 			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);
 
-			return new BackupInfo () {
+			return new BackupInfo
+			{
 				BackupFolder = GetBackupFolder(),
 				LastBackupDate = GetLastBackupDate()
 			};
@@ -64,7 +65,7 @@ namespace OneSet.Droid
 		private string GetBackupFolder()
 		{
 			var rootPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-			var backupFolder = System.IO.Path.Combine(rootPath, "OneSet");
+			var backupFolder = Path.Combine(rootPath, "OneSet");
 
 			if (!Directory.Exists(backupFolder))
 			{
@@ -76,7 +77,7 @@ namespace OneSet.Droid
 
 		private DateTime? GetLastBackupDate()
 		{
-			var pathName = Path.Combine(GetBackupFolder(), SQLite_Android.FileName); 
+			var pathName = Path.Combine(GetBackupFolder(), SQLiteAndroid.FileName); 
 			if (!File.Exists (pathName))
 				return null;
 			return File.GetLastWriteTime (pathName);

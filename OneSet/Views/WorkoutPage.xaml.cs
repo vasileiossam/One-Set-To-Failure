@@ -1,8 +1,7 @@
-﻿using Xamarin.Forms;
-using System.Threading.Tasks;
-using OneSet.ViewModels;
+﻿using OneSet.ViewModels;
+using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class WorkoutPage : ContentPage
 	{
@@ -13,7 +12,7 @@ namespace OneSet
 			InitializeComponent ();
 		}
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -21,12 +20,7 @@ namespace OneSet
 			BindingContext = ViewModel;
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-        }
-
-		void OnTextChanged(object sender, TextChangedEventArgs  e)
+	    void OnTextChanged(object sender, TextChangedEventArgs  e)
 		{
 			// fires multiple times and can go to infinite loop
 			// example: when in the workout list we have a workout with weight 500.1

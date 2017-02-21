@@ -5,14 +5,14 @@ using OneSet.Resx;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class ExerciseDetailsPage : ContentPage
 	{
 		private ExerciseViewModel _viewModel;
 		public ExerciseViewModel ViewModel
 		{
-			get { return _viewModel ?? (_viewModel = new ExerciseViewModel() {Navigation = Navigation}); }
+			get { return _viewModel ?? (_viewModel = new ExerciseViewModel {Navigation = Navigation}); }
 		    set
 			{
 				_viewModel = value;
@@ -24,7 +24,7 @@ namespace OneSet
 			InitializeComponent ();
 		}
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 			BindingContext = ViewModel;
@@ -40,9 +40,9 @@ namespace OneSet
             SunLabel.Text = dayNames[0];
 
 			var deleteItem = ToolbarItems.FirstOrDefault (x => x.Icon == "ic_action_discard");
-			if ((ViewModel.ExerciseId > 0) && (deleteItem == null))
+			if (ViewModel.ExerciseId > 0 && deleteItem == null)
 			{
-				deleteItem = new ToolbarItem (){ Order = ToolbarItemOrder.Primary, Icon = "ic_action_discard" };
+				deleteItem = new ToolbarItem { Order = ToolbarItemOrder.Primary, Icon = "ic_action_discard" };
 				deleteItem.SetBinding<ExerciseViewModel> (ToolbarItem.CommandProperty, x => x.DeleteCommand);
 				ToolbarItems.Insert (0, deleteItem);
 			}
@@ -51,12 +51,7 @@ namespace OneSet
 			await Task.FromResult(0);
         }
 
-		protected override void OnDisappearing()
-		{
-			base.OnDisappearing();
-		}
-
-		void OnTextChanged(object sender, TextChangedEventArgs  e)
+	    void OnTextChanged(object sender, TextChangedEventArgs  e)
 		{
 			// fires multiple times and can go to infinite loop
 			// example: when in the workout list we have a workout with weight 500.1

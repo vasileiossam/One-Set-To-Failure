@@ -6,10 +6,5 @@ namespace OneSet.Models
 	{
 		public string BackupFolder {get; set;}
 		public DateTime? LastBackupDate { get; set;}
-
-		public BackupInfo ()
-		{
-		}
 	}
 }
-

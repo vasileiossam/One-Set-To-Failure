@@ -1,4 +1,4 @@
-﻿namespace OneSet
+﻿namespace OneSet.Views
 {
 	public enum Orientations  
 	{
@@ -18,26 +18,18 @@
 		private double _width;
 		private double _height;
 
-		public ScreenSizeHandler ()
-		{
-
-		}
-
-		public Orientations GetStartingOrientation()
-		{
-			if (App.ScreenWidth > App.ScreenHeight)
+	    public Orientations GetStartingOrientation()
+	    {
+	        if (App.ScreenWidth > App.ScreenHeight)
 			{
 				return Orientations.Landscape;
-			} 
-			else
-			{
-				return Orientations.Portrait;
 			}
-		}
+	        return Orientations.Portrait;
+	    }
 
 		public ScreenSizes GetScreenSize()
 		{
-			if ((App.ScreenWidth <= 480) || (App.ScreenHeight <= 480))
+			if (App.ScreenWidth <= 480 || App.ScreenHeight <= 480)
 			{
 				return ScreenSizes.Small;
 			}
@@ -55,11 +47,8 @@
 				if (width > height)
 				{
 					return Orientations.Landscape;
-				} 
-				else
-				{
-					return Orientations.Portrait;
 				}
+			    return Orientations.Portrait;
 			} 
 
 			return Orientations.Default;

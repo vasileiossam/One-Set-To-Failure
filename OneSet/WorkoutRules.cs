@@ -6,20 +6,14 @@ namespace OneSet
 {
     public class WorkoutRules
     {
-        public WorkoutRules()
+        private static bool IsDivisible(int x, int n)
         {
-
-        }
-
-
-		private static bool IsDivisible(int x, int n)
-        {
-           return (x % n) == 0;
+           return x % n == 0;
         }        
 
         private static double GetNextWeight(double plateWeight, double previousWorkoutWeight)
         {
-            if ((previousWorkoutWeight > 0) && (plateWeight > 0)) 
+            if (previousWorkoutWeight > 0 && plateWeight > 0) 
             {
                 return previousWorkoutWeight + plateWeight;
             }
@@ -28,13 +22,9 @@ namespace OneSet
         
         private static double GetPreviousWeight(double plateWeight, double previousWorkoutWeight)
         {
-            if ((previousWorkoutWeight > 0) && (plateWeight > 0)) 
-            {
-                var weight = previousWorkoutWeight - plateWeight;
-                if (weight < 0) return 0;
-                return weight;
-            }
-            return 0;
+            if (!(previousWorkoutWeight > 0) || !(plateWeight > 0)) return 0;
+            var weight = previousWorkoutWeight - plateWeight;
+            return weight < 0 ? 0 : weight;
         }
 
         private static async Task<bool> CanCalculateTargetAsync(Workout workout)
@@ -130,14 +120,12 @@ namespace OneSet
 			// still on same weight
 			if (Math.Abs (workout.TargetWeight - workout.Weight) < Units.WeightTolerance)
 			{
-				// calc how many more reps since last time
+			    // calc how many more reps since last time
 				if (Math.Abs (workout.TargetWeight - workout.PreviousWeight) < Units.WeightTolerance)
 				{
-					return (workout.Reps - workout.TargetReps) + (workout.TargetReps - workout.PreviousReps);
-				} else
-				{
-					return 0;
+					return workout.Reps - workout.TargetReps + (workout.TargetReps - workout.PreviousReps);
 				}
+			    return 0;
 			}
 			else
 				// down to less weight

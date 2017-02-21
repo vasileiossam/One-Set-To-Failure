@@ -2,7 +2,7 @@
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class CalendarNotesPage : ContentPage
 	{
@@ -13,7 +13,7 @@ namespace OneSet
 			InitializeComponent ();
 		}
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             BindingContext = ViewModel;

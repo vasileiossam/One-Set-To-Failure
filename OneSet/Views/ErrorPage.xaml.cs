@@ -13,7 +13,7 @@ namespace OneSet.Views
 			InitializeComponent ();
 		}
 
-		protected async override void OnAppearing()
+		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
 			BindingContext = ViewModel;

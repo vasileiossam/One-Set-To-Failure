@@ -1,7 +1,7 @@
 ﻿using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class AnalysisPage : TabbedPage
 	{
@@ -12,10 +12,10 @@ namespace OneSet
 			InitializeComponent ();
 		}
 
-		protected async override void OnAppearing()
+		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
-			this.BindingContext = ViewModel;
+			BindingContext = ViewModel;
 		}
 	}
 }

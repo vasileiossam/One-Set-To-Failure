@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AutoMapper;
 using Xamarin.Forms;
-using Plugin.Toasts;
 using System.Linq;
 using OneSet.Entities;
 using OneSet.Models;
@@ -17,7 +16,7 @@ namespace OneSet.ViewModels
 		// TODO replace this with MessagingCenter
 		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
 		[IgnoreMap]
-    	public ExerciseDetailsPage Page { get; set; }
+    	public Views.ExerciseDetailsPage Page { get; set; }
 
 		#region Exercice model
 		public int ExerciseId { get; set; }
@@ -40,9 +39,9 @@ namespace OneSet.ViewModels
             }
         }
         
-        public bool NotesVisible { get { return !string.IsNullOrEmpty (Notes); }}
+        public bool NotesVisible => !string.IsNullOrEmpty (Notes);
 
-		private List<RoutineDay> _routineDays;
+	    private List<RoutineDay> _routineDays;
 
 		[IgnoreMap]
         public bool DoOnMon { get; set; }
@@ -77,30 +76,21 @@ namespace OneSet.ViewModels
 				var s = string.Join(", ", list);
                 
                 // replace last , with 'and'
-                if (s != string.Empty)
+                if (s == string.Empty) return s;
+                var place = s.LastIndexOf(",", StringComparison.Ordinal);
+                if (place >= 0)
                 {
-                    var place = s.LastIndexOf(",");
-                    if (place >= 0)
-                    {
-						s = s.Remove(place, 1).Insert(place, " " + AppResources.And);
-                    }
+                    s = s.Remove(place, 1).Insert(place, " " + AppResources.And);
                 }
 
-				return s;
+                return s;
             }
         }
-		public bool TrainingDaysVisible { get { return !string.IsNullOrEmpty (TrainingDays); }}
+		public bool TrainingDaysVisible => !string.IsNullOrEmpty (TrainingDays);
 
-		protected ICommand _deleteCommand;
+	    protected ICommand _deleteCommand;
 		public ICommand DeleteCommand { 
-			get 
-			{ 
-				if (_deleteCommand == null)
-				{
-					_deleteCommand = new Command (() => OnDelete ());
-				}
-				return _deleteCommand;
-			}
+			get { return _deleteCommand ?? (_deleteCommand = new Command(() => OnDelete())); }
 		}   
 
 		public ExerciseViewModel () : base()
@@ -153,7 +143,7 @@ namespace OneSet.ViewModels
 
 		public async Task CreateRoutineDay(int exerciseId, int dayOfWeek, bool isActive)
 		{
-			var routineDay = new RoutineDay()
+			var routineDay = new RoutineDay
 			{
 				ExerciseId = exerciseId,
 				DayOfWeek = dayOfWeek,
@@ -166,7 +156,7 @@ namespace OneSet.ViewModels
 
 		public int GetActive(int dayOfWeek)
 		{
-			bool day = false;
+			var day = false;
 
 			switch (dayOfWeek)
 			{
@@ -193,8 +183,7 @@ namespace OneSet.ViewModels
 					break;
 			}
 
-			if (day) return 1;
-			return 0;
+			return day ? 1 : 0;
 		}
 
 		private bool Validate ()
@@ -205,7 +194,7 @@ namespace OneSet.ViewModels
 				return false;
 			}
 
-			if ((PlateWeight < 0 ) || (PlateWeight > 999))
+			if (PlateWeight < 0 || PlateWeight > 999)
 			{
 				App.ShowWarning(AppResources.ExerciseInvalidPlateWeight);
 				PlateWeight = 0;

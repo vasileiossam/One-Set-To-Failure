@@ -1,10 +1,8 @@
-﻿using System;
-using OneSet.Models;
-using System.Threading.Tasks;
-using OneSet.Droid;
+﻿using OneSet.Droid;
 using Xamarin.Forms;
 using System.IO;
 using System.Text;
+using OneSet.Abstract;
 
 [assembly: Dependency (typeof (Exporter))]
 
@@ -12,7 +10,7 @@ namespace OneSet.Droid
 {
 	public class Exporter : IExporter
     {
-        private String PersonalFolder
+        private static string PersonalFolder
         {
             get
             {

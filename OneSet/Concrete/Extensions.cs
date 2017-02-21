@@ -13,7 +13,7 @@ namespace OneSet.Concrete
 			return id;
         }
 
-        public static string IdentifierPropertyName(this Object model)
+        public static string IdentifierPropertyName(this object model)
         {
             return IdentifierPropertyName(model.GetType());
         }
@@ -39,9 +39,7 @@ namespace OneSet.Concrete
 		public static string GetTableName(Type type)
 		{
 			var attribute = type.GetAttribute<TableAttribute> ();
-
-			if (attribute == null) return string.Empty;
-			return (attribute as TableAttribute).Name;
+			return attribute == null ? string.Empty : attribute.Name;
 		}
     }
 

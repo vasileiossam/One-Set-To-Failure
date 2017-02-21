@@ -1,14 +1,12 @@
-﻿using System;
-using System.Reflection;
-using System.Diagnostics;
+﻿using System.Reflection;
 using System.Resources;
-using System.Threading;
 using System.Globalization;
 using OneSet.Resx;
 using Xamarin.Forms;
 
 namespace OneSet.Localization
 {
+    // ReSharper disable once InconsistentNaming
 	public class L10n
 	{
 		public static void SetLocale ()

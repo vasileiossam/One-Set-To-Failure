@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using OneSet.Abstract;
 using OneSet.Resx;
 using Xamarin.Forms;
 
@@ -30,11 +31,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_state != value)
-				{
-					_state = value;
-					OnPropertyChanged ("State");
-				}
+			    if (_state == value) return;
+			    _state = value;
+			    OnPropertyChanged ("State");
 			}
 		}
 
@@ -47,12 +46,10 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_totalSeconds != value)
-				{
-					_totalSeconds = value;
-					Save ();
-					OnPropertyChanged ("TotalSeconds");
-				}
+			    if (_totalSeconds == value) return;
+			    _totalSeconds = value;
+			    Save ();
+			    OnPropertyChanged ("TotalSeconds");
 			}
 		}
 
@@ -65,11 +62,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_secondsLeft != value)
-				{
-					_secondsLeft = value;
-					OnPropertyChanged ("SecondsLeft");
-				}
+			    if (_secondsLeft == value) return;
+			    _secondsLeft = value;
+			    OnPropertyChanged ("SecondsLeft");
 			}
 		}
 
@@ -82,21 +77,12 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_playSounds != value)
-				{
-					_playSounds = value;
-					OnPropertyChanged("PlaySounds");
+			    if (_playSounds == value) return;
+			    _playSounds = value;
+			    OnPropertyChanged("PlaySounds");
 
-					if (_playSounds == true)
-					{
-						_playSoundsImage = "sound";
-					}
-					else
-					{
-						_playSoundsImage = "nosound";
-					}
-					OnPropertyChanged("PlaySoundsImage");
-				}
+			    _playSoundsImage = _playSounds == true ? "sound" : "nosound";
+			    OnPropertyChanged("PlaySoundsImage");
 			}
 		}
 
@@ -109,11 +95,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_playSoundsImage != value)
-				{
-					_playSoundsImage = value;
-					OnPropertyChanged("PlaySoundsImage");
-				}
+			    if (_playSoundsImage == value) return;
+			    _playSoundsImage = value;
+			    OnPropertyChanged("PlaySoundsImage");
 			}
 		}
 
@@ -126,93 +110,57 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_autoStart != value)
-				{
-					_autoStart = value;
-					Save ();
-					OnPropertyChanged("AutoStart");
-				}
+			    if (_autoStart == value) return;
+			    _autoStart = value;
+			    Save ();
+			    OnPropertyChanged("AutoStart");
 			}
 		}
 
-		protected bool _canSave = false;
+		protected bool _canSave;
 
 		public string MotivationalQuoteImageFile 
 		{
 			get
 			{
-				if (App.Settings.ImagePackId == 1)
-				{
-					var r = new Random ();
-					int i = r.Next (1, 25);
-					return string.Format ("QFitness_{0}.png", i);
-				}
-				else
-				if (App.Settings.ImagePackId == 2)
-				{
-					var r = new Random ();
-					int i = r.Next (1, 20);
-					return string.Format ("QInspirational_{0}.png", i);
-				}
-				return string.Empty;
+			    switch (App.Settings.ImagePackId)
+			    {
+			        case 1:
+			        {
+			            var r = new Random ();
+			            int i = r.Next (1, 25);
+			            return $"QFitness_{i}.png";
+			        }
+			        case 2:
+			        {
+			            var r = new Random ();
+			            int i = r.Next (1, 20);
+			            return $"QInspirational_{i}.png";
+			        }
+			    }
+			    return string.Empty;
 			}
 		}
 
-		public bool MotivationalQuoteImageVisible
-		{
-			get
-			{
-				return App.Settings.CanShowImagePackInRestTimer;
-			}
-		}
+		public bool MotivationalQuoteImageVisible => App.Settings.CanShowImagePackInRestTimer;
 
-		#region commands
+	    #region commands
 		protected ICommand _startCommand;
-		public ICommand StartCommand
-		{
-			get
-			{
-				return _startCommand;
-			}
-		}
+		public ICommand StartCommand => _startCommand;
 
-		protected ICommand _pauseCommand;
-		public ICommand PauseCommand
-		{
-			get
-			{
-				return _pauseCommand;
-			}
-		}
+	    protected ICommand _pauseCommand;
+		public ICommand PauseCommand => _pauseCommand;
 
-		protected ICommand _resetCommand;
-		public ICommand ResetCommand
-		{
-			get
-			{
-				return _resetCommand;
-			}
-		}
+	    protected ICommand _resetCommand;
+		public ICommand ResetCommand => _resetCommand;
 
-		protected ICommand _playSoundsCommand;
-		public ICommand PlaySoundsCommand
-		{
-			get
-			{
-				return _playSoundsCommand;
-			}
-		}
+	    protected ICommand _playSoundsCommand;
+		public ICommand PlaySoundsCommand => _playSoundsCommand;
 
-		protected ICommand _editingModeCommand;
-		public ICommand EditingModeCommand
-		{
-			get
-			{
-				return _editingModeCommand;
-			}
-		}
+	    protected ICommand _editingModeCommand;
+		public ICommand EditingModeCommand => _editingModeCommand;
 
-		#endregion
+	    #endregion
 
 		public RestTimerViewModel()
 			: base()
@@ -287,14 +235,7 @@ namespace OneSet.ViewModels
 			SecondsLeft = SecondsLeft - 1;
 
 			var progress = ProgressBar.Progress + _progressStep;
-			if (progress >= 1)
-			{
-				ProgressBar.Progress = 1;
-			}
-			else
-			{
-				ProgressBar.Progress = progress;
-			}
+			ProgressBar.Progress = progress >= 1 ? 1 : progress;
 
 			App.RestTimerSecondsLeft = SecondsLeft;
 			return State == RestTimerStates.Running;	

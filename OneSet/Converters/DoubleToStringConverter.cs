@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Converters
 {
 	public class DoubleToStringConverter : IValueConverter
     {

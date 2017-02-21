@@ -1,12 +1,11 @@
 ﻿using System;
-using OneSet;
 using Xamarin.Forms;
 using System.IO;
 using OneSet.Abstract;
 using OneSet.Droid;
 using SQLite;
 
-[assembly: Dependency (typeof (SQLite_Android))]
+[assembly: Dependency (typeof (SQLiteAndroid))]
 
 namespace OneSet.Droid
 {
@@ -21,15 +20,12 @@ namespace OneSet.Droid
 	//}
 	#endif
 
-	public class SQLite_Android : ISQLite
+    // ReSharper disable once InconsistentNaming
+	public class SQLiteAndroid : ISQLite
 	{
 		public const string FileName = "OneSet.db3";
 
-		public SQLite_Android ()
-		{
-		}
-
-		#region ISQLite implementation
+	    #region ISQLite implementation
 
 		public static string GetPathName()
 		{
@@ -82,14 +78,14 @@ namespace OneSet.Droid
 		/// </summary>
 		void ReadWriteStream(Stream readStream, Stream writeStream)
 		{
-			int Length = 256;
-			Byte[] buffer = new Byte[Length];
-			int bytesRead = readStream.Read(buffer, 0, Length);
+			const int length = 256;
+			var buffer = new byte[length];
+			var bytesRead = readStream.Read(buffer, 0, length);
 			// write the required bytes
 			while (bytesRead > 0)
 			{
 				writeStream.Write(buffer, 0, bytesRead);
-				bytesRead = readStream.Read(buffer, 0, Length);
+				bytesRead = readStream.Read(buffer, 0, length);
 			}
 			readStream.Close();
 			writeStream.Close();

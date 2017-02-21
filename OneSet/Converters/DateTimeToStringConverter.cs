@@ -1,17 +1,17 @@
 using System;
-using System.Globalization;
-using Xamarin.Forms;
 using System.Diagnostics;
+using System.Globalization;
 using OneSet.Resx;
+using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Converters
 {
     public class DateTimeToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
                               object parameter, CultureInfo culture)
         {
-            DateTime date = (DateTime)value;
+            var date = (DateTime)value;
 			//var fullDay = date.ToString ("ddd") + ", " + date.ToString ("D");
 			var dayStr = date.ToString ("ddd, d MMMM");
 

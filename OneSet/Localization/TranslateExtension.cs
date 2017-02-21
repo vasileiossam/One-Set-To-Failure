@@ -1,8 +1,6 @@
 ﻿using System;
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms;
-using System.Diagnostics;
-using OneSet.Concrete;
 
 namespace OneSet.Localization
 {

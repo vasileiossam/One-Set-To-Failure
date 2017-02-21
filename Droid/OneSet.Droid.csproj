@@ -45,6 +45,7 @@
       <HintPath>..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Java.Interop" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -176,8 +177,8 @@
     <AndroidResource Include="Resources\values-v21\style.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <Compile Include="SQLite_Android.cs" />
-    <Compile Include="Locale_Android.cs" />
+    <Compile Include="SQLiteAndroid.cs" />
+    <Compile Include="Locale.cs" />
     <Compile Include="SettingsStorage.cs" />
     <Compile Include="Renders\BlueButtonRender.cs" />
     <Compile Include="Renders\RoundedBoxViewRenderer.cs" />
@@ -201,7 +202,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Data\android-pull-database.bat" />
     <AndroidResource Include="Resources\layout\tabs.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

@@ -20,11 +20,9 @@ namespace OneSet.ViewModels
             }
             set
             {
-                if (_date != value)
-                {
-                    _date = value;
-                    OnPropertyChanged("Date");
-                }
+                if (_date == value) return;
+                _date = value;
+                OnPropertyChanged("Date");
             }
         }
 
@@ -60,7 +58,7 @@ namespace OneSet.ViewModels
 		{
 			if (Validate ())
 			{
-				var calendar = new Calendar (){ CalendarId = CalendarId, Date = Date, Notes = Notes.Trim() };
+				var calendar = new Calendar { CalendarId = CalendarId, Date = Date, Notes = Notes.Trim() };
 				await App.Database.CalendarRepository.SaveAsync(calendar);
 				await Navigation.PopAsync();
 			}

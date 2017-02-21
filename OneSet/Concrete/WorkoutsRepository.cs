@@ -36,7 +36,7 @@ namespace OneSet.Concrete
             // http://www.captechconsulting.com/blog/nicholas-cipollina/cross-platform-sqlite-support-%E2%80%93-part-1
             try
             {
-                List<Workout> list = new List<Workout>();
+                List<Workout> list;
                 using (await Mutex.LockAsync().ConfigureAwait(false))
                 {
                     list = await _connection.Table<Workout>().OrderBy(x => x.Created).ToListAsync().ConfigureAwait(false);
@@ -61,14 +61,13 @@ namespace OneSet.Concrete
 
         public async Task<List<Workout>> GetWorkouts(DateTime date)
 		{
-			var list = new List<Workout> ();
-			using (await Mutex.LockAsync ().ConfigureAwait (false))
+		    using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{				
-				var sql = @"SELECT *  
+				const string sql = @"SELECT *  
                     FROM Workouts
                     WHERE Created = ?";
 	
-				list = await _connection.QueryAsync<Workout> (sql, date);
+				var list = await _connection.QueryAsync<Workout> (sql, date);
                 await LoadRelations(list);
                 return list;
 			}

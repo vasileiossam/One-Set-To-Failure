@@ -5,38 +5,29 @@ namespace OneSet.Controls
 {
 	public class GestureFrame : Frame
 	{
-		public GestureFrame()
-		{
-
-		}
-
-		public event EventHandler SwipeDown;
+	    public event EventHandler SwipeDown;
 		public event EventHandler SwipeTop;
 		public event EventHandler SwipeLeft;
 		public event EventHandler SwipeRight;
 
 		public void OnSwipeDown()
 		{
-			if (SwipeDown != null)
-				SwipeDown(this, null);
-		}
+            SwipeDown?.Invoke(this, null);
+        }
 
 		public void OnSwipeTop()
 		{
-			if (SwipeTop != null)
-				SwipeTop(this, null);
-		}
+            SwipeTop?.Invoke(this, null);
+        }
 
 		public void OnSwipeLeft()
 		{
-			if (SwipeLeft != null)
-				SwipeLeft(this, null);
-		}
+            SwipeLeft?.Invoke(this, null);
+        }
 
 		public void OnSwipeRight()
 		{
-			if (SwipeRight != null)
-				SwipeRight(this, null);
-		}
+            SwipeRight?.Invoke(this, null);
+        }
 	}
 }

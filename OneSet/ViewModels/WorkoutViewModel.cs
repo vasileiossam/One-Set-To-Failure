@@ -2,10 +2,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using OneSet.Entities;
 using OneSet.Localization;
-using OneSet.Models;
 using OneSet.Resx;
 using Xamarin.Forms;
-using Plugin.Toasts;
 
 namespace OneSet.ViewModels
 {
@@ -23,11 +21,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_reps != value)
-				{
-					_reps = value;
-					OnPropertyChanged("Reps");
-				}
+			    if (_reps == value) return;
+			    _reps = value;
+			    OnPropertyChanged("Reps");
 			}
 		}
 
@@ -40,66 +36,21 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_weight != value)
-				{
-					_weight = value;
-					OnPropertyChanged("Weight");
-				}
+			    if (_weight == value) return;
+			    _weight = value;
+			    OnPropertyChanged("Weight");
 			}
 		}
 
-		public string PreviousTitle { get { return AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")"; }}
-		public string TargetTitle { get { return AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")"; }}
-
-		public bool NotesVisible
-		{
-			get
-			{
-				if (Workout == null)
-					return false;
-				if (Workout.Exercise == null)
-					return false;
-
-				return !string.IsNullOrEmpty (Workout.Exercise.Notes);
-			}
-		}
-
-		public bool LevelUpVisible
-		{
-			get
-			{
-				if (Workout == null)
-					return false;
-				return Workout.TargetWeight > Workout.PreviousWeight;
-			}
-		}
-
-		public bool TargetRepsWeightVisible { get { return App.Settings.TargetRepsWeightVisible;} }
-		public bool PreviousRepsWeightVisible { get { return App.Settings.PreviousRepsWeightVisible;} }
-
-        public double ConvertedWeight
-        {
-            get
-            {
-                return Units.GetWeight(Workout.Weight);
-            }
-        }
-
-        public double ConvertedPreviousWeight
-        {
-            get
-            {
-                return Units.GetWeight(Workout.PreviousWeight);
-            }
-        }
-
-        public double ConvertedTargetWeight
-        {
-            get
-            {
-                return Units.GetWeight(Workout.TargetWeight);
-            }
-        }
+		public string PreviousTitle => AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")";
+        public string TargetTitle => AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")";
+        public bool NotesVisible => !string.IsNullOrEmpty (Workout?.Exercise?.Notes);
+        public bool LevelUpVisible => Workout != null && Workout?.TargetWeight > Workout.PreviousWeight;
+        public bool TargetRepsWeightVisible => App.Settings.TargetRepsWeightVisible;
+        public bool PreviousRepsWeightVisible => App.Settings.PreviousRepsWeightVisible;
+        public double ConvertedWeight => Units.GetWeight(Workout.Weight);
+        public double ConvertedPreviousWeight => Units.GetWeight(Workout.PreviousWeight);
+        public double ConvertedTargetWeight => Units.GetWeight(Workout.TargetWeight);
 
         #region commands
         public ICommand RepsUpCommand {get; set;}
@@ -110,7 +61,7 @@ namespace OneSet.ViewModels
         public ICommand TargetIconCommand { get; set; }
 		#endregion
 
-		public WorkoutViewModel () : base()
+		public WorkoutViewModel ()
 		{
 			Title = AppResources.WorkoutTitle;
 
@@ -181,7 +132,7 @@ namespace OneSet.ViewModels
 				await App.Database.WorkoutsRepository.SaveAsync(Workout);
 				await App.ShowSuccess(AppResources.WorkoutSaved);
 
-				if ((App.Settings.RestTimerAutoStart == true) && (!isPersisted))
+				if (App.Settings.RestTimerAutoStart && !isPersisted)
 				{
 					await Navigation.PopAsync (false);
 					await RestTimerToolbarItem.AutoStart ();
@@ -195,7 +146,7 @@ namespace OneSet.ViewModels
 		#region commands
 		private async Task OnRepsUp () 
 		{
-			if ((Reps == 0) && (Workout.TargetReps > 0))
+			if (Reps == 0 && Workout.TargetReps > 0)
 			{
 				Reps = Workout.TargetReps;
 			} else
@@ -228,7 +179,7 @@ namespace OneSet.ViewModels
 
 		private async Task OnWeighUp () 
 		{
-			if ((Weight == 0) && (Workout.TargetWeight > 0))
+			if ((Weight == 0) && Workout.TargetWeight > 0)
 			{
 				Weight = ConvertedTargetWeight;
 			} else
@@ -242,12 +193,12 @@ namespace OneSet.ViewModels
 
 		private async Task OnWeighDown () 
 		{
-            if ((Weight == 0) && (Workout.TargetWeight > 0))
+            if ((Weight == 0) && Workout.TargetWeight > 0)
             {
                 Weight = ConvertedTargetWeight;
             }
             else
-			if ((Weight - GetStep ()) < 0)
+			if (Weight - GetStep () < 0)
 			{
 				Weight = 0;
 			} else
@@ -271,11 +222,9 @@ namespace OneSet.ViewModels
 		{
             //if ((Reps == 0) && (Weight == 0))
             {
-                if (Workout.PreviousReps > 0)
-                {
-                    Reps = Workout.PreviousReps;
-                    Weight = ConvertedPreviousWeight;
-                }
+                if (Workout.PreviousReps <= 0) return;
+                Reps = Workout.PreviousReps;
+                Weight = ConvertedPreviousWeight;
             }
         }
 
@@ -283,11 +232,9 @@ namespace OneSet.ViewModels
 		{
             //if ((Reps == 0) && (Weight == 0))
             {
-                if (Workout.TargetReps > 0)
-                {
-                    Reps = Workout.TargetReps;
-                    Weight = ConvertedTargetWeight;
-                }
+                if (Workout.TargetReps <= 0) return;
+                Reps = Workout.TargetReps;
+                Weight = ConvertedTargetWeight;
             }
         }
 		#endregion

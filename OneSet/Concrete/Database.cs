@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using OneSet.Abstract;
-using OneSet.Concrete;
+using OneSet.Converters;
 using OneSet.Entities;
 using OneSet.Models;
 using SQLite;
+using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Concrete
 {
 	public class Database 
 	{
@@ -18,30 +18,18 @@ namespace OneSet
 		private readonly SQLiteAsyncConnection _connection;
 
         private WorkoutsRepository _workoutRepository;
-        public WorkoutsRepository WorkoutsRepository
-        {
-            get { return _workoutRepository ?? (_workoutRepository = new WorkoutsRepository(_connection)); }
-        }
+        public WorkoutsRepository WorkoutsRepository => _workoutRepository ?? (_workoutRepository = new WorkoutsRepository(_connection));
 
-		private RoutineDaysRepository _routineDaysRepository;
-		public RoutineDaysRepository RoutineDaysRepository
-		{
-			get { return _routineDaysRepository ?? (_routineDaysRepository = new RoutineDaysRepository(_connection)); }
-		}
+	    private RoutineDaysRepository _routineDaysRepository;
+		public RoutineDaysRepository RoutineDaysRepository => _routineDaysRepository ?? (_routineDaysRepository = new RoutineDaysRepository(_connection));
 
-		private CalendarRepository _calendarRepository;
-		public CalendarRepository CalendarRepository
-		{
-			get { return _calendarRepository ?? (_calendarRepository = new CalendarRepository(_connection)); }
-		}
+	    private CalendarRepository _calendarRepository;
+		public CalendarRepository CalendarRepository => _calendarRepository ?? (_calendarRepository = new CalendarRepository(_connection));
 
-		private ExercisesRepository _exercisesRepository;
-		public ExercisesRepository ExercisesRepository
-		{
-			get { return _exercisesRepository ?? (_exercisesRepository = new ExercisesRepository(_connection)); }
-		}
+	    private ExercisesRepository _exercisesRepository;
+		public ExercisesRepository ExercisesRepository => _exercisesRepository ?? (_exercisesRepository = new ExercisesRepository(_connection));
 
-		private List<RepsIncrement> _repsIncrements;
+	    private List<RepsIncrement> _repsIncrements;
 		public List<RepsIncrement> RepsIncrements
 		{
 			get
@@ -73,21 +61,11 @@ namespace OneSet
 		}
 
         private List<ImagePack> _imagePack;
-        public List<ImagePack> ImagePacks
+        public List<ImagePack> ImagePacks => _imagePack ?? (_imagePack = new List<ImagePack>
         {
-            get
-            {
-                if (_imagePack == null)
-                {
-                    _imagePack = new List<ImagePack>
-                    {
-                        new ImagePack() {ImagePackId = 1, Title = "25 Fitness Quotes"},
-                        new ImagePack() {ImagePackId = 2, Title = "20 Inspirational and Motivational Quotes"}
-                    };
-                }
-                return _imagePack;
-            }
-        }
+            new ImagePack {ImagePackId = 1, Title = "25 Fitness Quotes"},
+            new ImagePack {ImagePackId = 2, Title = "20 Inspirational and Motivational Quotes"}
+        });
 
 	    /// <summary>
 	    /// if the database doesn't exist, it will create the database and all the tables.

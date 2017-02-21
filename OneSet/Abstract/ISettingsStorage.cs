@@ -1,6 +1,6 @@
 ﻿using OneSet.Models;
 
-namespace OneSet
+namespace OneSet.Abstract
 {
 	public interface ISettingsStorage
 	{

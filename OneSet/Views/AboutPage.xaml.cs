@@ -2,21 +2,14 @@
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class AboutPage : ContentPage
 	{
         protected AboutViewModel _viewModel;
         public AboutViewModel ViewModel
         {
-            get
-            {
-                if (_viewModel == null)
-                {
-					_viewModel = new AboutViewModel(){Navigation = this.Navigation};
-                }
-                return _viewModel;
-            }
+            get { return _viewModel ?? (_viewModel = new AboutViewModel {Navigation = this.Navigation}); }
             set
             {
                 _viewModel = value;
@@ -29,18 +22,13 @@ namespace OneSet
 			this.BindingContext = ViewModel;
 		}
 
-		protected async override void OnAppearing()
+		protected override async void OnAppearing()
 		{
             base.OnAppearing();
             BindingContext = ViewModel;
 
 			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);
-		}
-
-		protected override void OnDisappearing()
-		{
-			base.OnDisappearing();
 		}
 	}
 }

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using OneSet.Models;
 using Xamarin.Forms;
-using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
+using OneSet.Abstract;
 
 namespace OneSet.ViewModels
 {
@@ -24,11 +20,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_text != value)
-				{
-					_text = value;
-					OnPropertyChanged("Text");
-				}
+			    if (_text == value) return;
+			    _text = value;
+			    OnPropertyChanged("Text");
 			}
 		}
 
@@ -41,24 +35,16 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_icon != value)
-				{
-					_icon = value;
-					OnPropertyChanged("Icon");
-				}
+			    if (_icon == value) return;
+			    _icon = value;
+			    OnPropertyChanged("Icon");
 			}
 		}
 
 		private readonly ICommand _command;
-		public ICommand Command
-		{
-			get
-			{
-				return _command;
-			}
-		}
+		public ICommand Command => _command;
 
-		public RestTimerToolbarItem()
+	    public RestTimerToolbarItem()
 			: base()
 		{
 			_command = new Command (async() => { await OnRestTimerCommand(); });
@@ -68,8 +54,8 @@ namespace OneSet.ViewModels
 		private async Task OnRestTimerCommand()
 		{
 			_terminated = true;
-			var viewModel = new RestTimerViewModel() {Navigation = Navigation};
-			var page = new RestTimerPage () {ViewModel = viewModel};
+			var viewModel = new RestTimerViewModel {Navigation = Navigation};
+			var page = new Views.RestTimerPage {ViewModel = viewModel};
 			await Navigation.PushAsync(page); 	
 		}
 
@@ -78,8 +64,8 @@ namespace OneSet.ViewModels
 			if (!_isRunning)
 			{
 				_terminated = true;
-				var viewModel = new RestTimerViewModel () { Navigation = Navigation };
-				var page = new RestTimerPage () { ViewModel = viewModel };
+				var viewModel = new RestTimerViewModel { Navigation = Navigation };
+				var page = new Views.RestTimerPage { ViewModel = viewModel };
 				await Navigation.PushAsync (page); 	
 				await viewModel.OnStartCommand ();
 			}

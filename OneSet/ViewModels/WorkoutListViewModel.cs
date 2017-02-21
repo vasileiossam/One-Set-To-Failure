@@ -2,13 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using OneSet.Models;
-using OneSet.Entities;
 using Xamarin.Forms;
 using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
 using AutoMapper;
+using OneSet.Abstract;
 
 namespace OneSet.ViewModels
 {
@@ -18,7 +15,7 @@ namespace OneSet.ViewModels
 		// very bad to reference the view here but I need a way to refresh 
 		// ListView which doesn't gets update when LoadRoutineDays()
 		// try again in the next xamarin forms update
-		public WorkoutListPage Page { get; set; }
+		public Views.WorkoutListPage Page { get; set; }
 
         private string _trophies;
 		public string Trophies
@@ -44,11 +41,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_calendarNotes != value)
-				{
-					_calendarNotes = value;
-					OnPropertyChanged("CalendarNotes");
-				}
+			    if (_calendarNotes == value) return;
+			    _calendarNotes = value;
+			    OnPropertyChanged("CalendarNotes");
 			}
 		}
 
@@ -61,11 +56,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_calendarNotesVisible != value)
-				{
-					_calendarNotesVisible = value;
-					OnPropertyChanged("CalendarNotesVisible");
-				}
+			    if (_calendarNotesVisible == value) return;
+			    _calendarNotesVisible = value;
+			    OnPropertyChanged("CalendarNotesVisible");
 			}
 		}
 
@@ -78,11 +71,9 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_workoutsListVisible != value)
-				{
-					_workoutsListVisible = value;
-					OnPropertyChanged("WorkoutsListVisible");
-				}
+			    if (_workoutsListVisible == value) return;
+			    _workoutsListVisible = value;
+			    OnPropertyChanged("WorkoutsListVisible");
 			}
 		}
 
@@ -95,51 +86,21 @@ namespace OneSet.ViewModels
 			}
 			set
 			{
-				if (_noWorkoutDataVisible != value)
-				{
-					_noWorkoutDataVisible = value;
-					OnPropertyChanged("NoWorkoutDataVisible");
-				}
+			    if (_noWorkoutDataVisible == value) return;
+			    _noWorkoutDataVisible = value;
+			    OnPropertyChanged("NoWorkoutDataVisible");
 			}
 		}
 
 		public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
 
-		private readonly ICommand _chevronTapCommand;
-		public ICommand ChevronTapCommand
-		{
-			get
-			{
-				return _chevronTapCommand;
-			}
-		}
+        public ICommand ChevronTapCommand { get; }
 
-		private readonly ICommand _calendarNotesCommand;
-		public ICommand CalendarNotesCommand
-		{
-			get
-			{
-				return _calendarNotesCommand;
-			}
-		}
+        public ICommand CalendarNotesCommand { get; }
 
-		private readonly ICommand _analysisCommand;
-		public ICommand AnalysisCommand
-		{
-			get
-			{
-				return _analysisCommand;
-			}
-		}
+        public ICommand AnalysisCommand { get; }
 
-		private readonly ICommand _gotoDateCommand;
-		public ICommand GotoDateCommand
-		{
-			get
-			{
-				return _gotoDateCommand;
-			}
-		}
+        public ICommand GotoDateCommand { get; }
 
         private DateTime _currentDate;
         public DateTime CurrentDate
@@ -165,12 +126,10 @@ namespace OneSet.ViewModels
 				return _routineDays;
 			}
 			set
-			{ 
-				if (_routineDays != value)
-				{				
-					_routineDays = value;
-					OnPropertyChanged ("RoutineDays");
-				}
+			{
+			    if (_routineDays == value) return;
+			    _routineDays = value;
+			    OnPropertyChanged ("RoutineDays");
 			}
 		}
 
@@ -178,10 +137,10 @@ namespace OneSet.ViewModels
 		{
 			Title = "One Set To Fatigue";
 
-			_chevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
-			_calendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
-			_analysisCommand = new Command (async() => { await OnAnalysisCommand(); });
-			_gotoDateCommand = new Command (async() => { await OnGotoDateCommand(); });
+			ChevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
+			CalendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
+			AnalysisCommand = new Command (async() => { await OnAnalysisCommand(); });
+			GotoDateCommand = new Command (async() => { await OnGotoDateCommand(); });
 
 		}
 
@@ -203,7 +162,7 @@ namespace OneSet.ViewModels
 					var lines = CalendarNotes.Split (new[]{ '\n' });
 					if (lines.Count () >= 2)
 					{
-						CalendarNotes = string.Format ("{0}\n{1}...", lines [0].Trim (), lines [1].Trim ());
+						CalendarNotes = $"{lines[0].Trim()}\n{lines[1].Trim()}...";
 					}
 				}
 			}
@@ -228,7 +187,7 @@ namespace OneSet.ViewModels
   				App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
 			}
 			var dayTrophies = await App.Database.WorkoutsRepository.GetTrophies (CurrentDate);
-			Trophies = string.Format("{0} / {1}", dayTrophies, (int) App.TotalTrophies);
+		    if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int) App.TotalTrophies}";
 		}
 
 		private async Task OnChevronTapCommand (object s) 
@@ -249,18 +208,18 @@ namespace OneSet.ViewModels
 
 		private async Task OnCalendarNotesCommand()
 		{
-			var viewModel = new CalendarNotesViewModel() {Navigation = Page.Navigation, Date = CurrentDate };
+			var viewModel = new CalendarNotesViewModel {Navigation = Page.Navigation, Date = CurrentDate };
 			await viewModel.Load ();
 
-			var page = new CalendarNotesPage () {ViewModel = viewModel};
+			var page = new Views.CalendarNotesPage {ViewModel = viewModel};
 
 			await Navigation.PushAsync(page); 	
 		}
 
 		private async Task OnAnalysisCommand()
 		{
-			var viewModel = new AnalysisViewModel() {Navigation = Page.Navigation};
-			var page = new AnalysisPage () {ViewModel = viewModel};
+			var viewModel = new AnalysisViewModel {Navigation = Page.Navigation};
+			var page = new Views.AnalysisPage {ViewModel = viewModel};
 			await Navigation.PushAsync(page); 	
 		}
 
@@ -271,16 +230,14 @@ namespace OneSet.ViewModels
 
 		private async void OnGetDate(object sender, EventArgs args)
 		{
-			if (sender is DateTime)
-			{
-				await Load ((DateTime) sender);
+		    if (!(sender is DateTime)) return;
+		    await Load ((DateTime) sender);
 
-				Device.BeginInvokeOnMainThread (() =>
-				{
-					Page.ChangeOrientation (false);
-					Page.Refresh ();
-				});
-			}
+		    Device.BeginInvokeOnMainThread (() =>
+		    {
+		        Page.ChangeOrientation (false);
+		        Page.Refresh ();
+		    });
 		}
 
     }

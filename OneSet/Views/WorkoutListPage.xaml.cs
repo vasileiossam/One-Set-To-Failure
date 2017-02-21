@@ -1,32 +1,26 @@
 ﻿using System;
 using OneSet.ViewModels;
-using OneSet.Models;
 using Xamarin.Forms;
-using OneSet.Entities;
 
-namespace OneSet
+namespace OneSet.Views
 {
 	public partial class WorkoutListPage : ContentPage
 	{
-		private ScreenSizeHandler _screenSizeHandler;
+		private readonly ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
 
         private WorkoutListViewModel _viewModel;
         public WorkoutListViewModel ViewModel
         {
 			get
-            {
-                if (_viewModel == null)
-                {
-                    _viewModel = new WorkoutListViewModel
-                    {
-                        Navigation = Navigation,
-                        Page = this,
-						RestTimerToolbarItem = new RestTimerToolbarItem() {Navigation = Navigation}
-                    };
-                }
-				return _viewModel;
-            }
+			{
+			    return _viewModel ?? (_viewModel = new WorkoutListViewModel
+			    {
+			        Navigation = Navigation,
+			        Page = this,
+			        RestTimerToolbarItem = new RestTimerToolbarItem {Navigation = Navigation}
+			    });
+			}
 			set
             {
 				_viewModel = value;
@@ -46,7 +40,7 @@ namespace OneSet
 			}
 		}
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -59,12 +53,12 @@ namespace OneSet
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
         }
 
-		private async void OnLeftChevronTapCommand(object sender, EventArgs args)
+		private void OnLeftChevronTapCommand(object sender, EventArgs args)
 		{
 			ViewModel.ChevronTapCommand.Execute("Left");
 		}
 
-		private async void OnRightChevronTapCommand(object sender, EventArgs args)
+		private void OnRightChevronTapCommand(object sender, EventArgs args)
 		{
 			ViewModel.ChevronTapCommand.Execute("Right");
 		}
@@ -80,21 +74,25 @@ namespace OneSet
         {
             if (((ListView)sender).SelectedItem == null) return;
 
-			var viewModel = new WorkoutViewModel()
+            var routineDayViewModel = e.SelectedItem as RoutineDayViewModel;
+            if (routineDayViewModel != null)
             {
-                Workout = (e.SelectedItem as RoutineDayViewModel).Workout,
-				Navigation = Navigation,
-				RestTimerToolbarItem = ViewModel.RestTimerToolbarItem
-            };
+                var viewModel = new WorkoutViewModel()
+                {
+                    Workout = routineDayViewModel.Workout,
+                    Navigation = Navigation,
+                    RestTimerToolbarItem = ViewModel.RestTimerToolbarItem
+                };
 
-            var workoutPage = new WorkoutPage
-            {
-                ViewModel = viewModel
-            };
+                var workoutPage = new WorkoutPage
+                {
+                    ViewModel = viewModel
+                };
 
-            Navigation.PushAsync(workoutPage);
+                Navigation.PushAsync(workoutPage);
+            }
 
-			// deselect row
+            // deselect row
 			((ListView)sender).SelectedItem = null;
         }
 

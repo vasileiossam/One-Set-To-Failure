@@ -2,13 +2,13 @@
 <TabbedPage 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="OneSet.ExercisePage"
+	x:Class="OneSet.Views.ExercisePage"
 	xmlns:local="clr-namespace:OneSet;assembly=OneSet"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-	>
+	xmlns:views="clr-namespace:OneSet.Views;assembly=OneSet">
 
   <TabbedPage.Children>
-    <local:ExerciseDetailsPage Title="{i18n:Translate ExercisePageDetails}"/>
-    <local:ExerciseRulesPage Title="{i18n:Translate ExercisePageTrainingRules}"/>
+    <views:ExerciseDetailsPage Title="{i18n:Translate ExercisePageDetails}"/>
+    <views:ExerciseRulesPage Title="{i18n:Translate ExercisePageTrainingRules}"/>
   </TabbedPage.Children>
 </TabbedPage>

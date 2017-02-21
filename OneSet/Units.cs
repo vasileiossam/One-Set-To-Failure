@@ -12,11 +12,9 @@ namespace OneSet
 			if (App.Settings.IsMetric)
 			{
 				return Math.Round (value, 2);
-			} else
-			{
-				// metric to imperial
-				return Math.Round (value * ImperialMetricFactor, 2);
 			}
+		    // metric to imperial
+		    return Math.Round (value * ImperialMetricFactor, 2);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace OneSet
+﻿namespace OneSet.Abstract
 {
 	public interface ISoundService
 	{

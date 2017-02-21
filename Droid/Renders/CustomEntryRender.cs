@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms.Platform.Android;
+﻿using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using OneSet.Droid.Renders;
 using Android.Views;
@@ -26,34 +25,35 @@ namespace OneSet.Droid.Renders
 				{
 					var entry = e.NewElement as CustomEntry;
 
-					if (entry.FontAttributes == FontAttributes.Bold)
+					if (entry != null && entry.FontAttributes == FontAttributes.Bold)
 					{
 						view.SetTypeface (view.Typeface, Android.Graphics.TypefaceStyle.Bold);
 					}
 
-					if (entry.TextAlignment == Xamarin.Forms.TextAlignment.Center)
+					if (entry != null && entry.TextAlignment == Xamarin.Forms.TextAlignment.Center)
 					{
 						view.TextAlignment = Android.Views.TextAlignment.Center;
 						view.Gravity = GravityFlags.Center;
 					}
-                    
-					var fontSize = entry.FontSize;
-					if (fontSize <= 0)
-					{
-						fontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Entry));						
-					}  
-					view.TextSize = (float) fontSize;
-					//view.InputType = Android.Text.InputTypes.TextFlagNoSuggestions;
+
+				    if (entry != null)
+				    {
+				        var fontSize = entry.FontSize;
+				        if (fontSize <= 0)
+				        {
+				            fontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Entry));						
+				        }  
+				        view.TextSize = (float) fontSize;
+				    }
+				    //view.InputType = Android.Text.InputTypes.TextFlagNoSuggestions;
 
 				}
 			}
 
 			// autoselect text on focus
-			if (e.OldElement == null) 
-			{
-				var nativeEditText = (global::Android.Widget.EditText)Control;
-				nativeEditText.SetSelectAllOnFocus (true);
-			}
+		    if (e.OldElement != null) return;
+		    var nativeEditText = (EditText)Control;
+		    nativeEditText?.SetSelectAllOnFocus (true);
 		}
 	}
 }
