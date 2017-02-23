@@ -2,8 +2,8 @@
 
 namespace OneSet.Abstract
 {
-    public interface IExporter
+    public interface ΙStatistics
     {
-        Task<string> ExportToCsv();
+        Task Recalc();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Autofac;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -11,11 +12,11 @@ namespace OneSet.Views
 		{
 			get
 			{
-			    return _viewModel ?? (_viewModel = new SettingsViewModel
-			    {
-			        Navigation = this.Navigation,
-			        Page = this
-			    });
+			    return _viewModel ?? (_viewModel = App.Container.Resolve<SettingsViewModel>());
+                //{
+			        //Navigation = this.Navigation,
+			        //Page = this
+			    //});
 			}
 			set
 			{

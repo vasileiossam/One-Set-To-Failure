@@ -1,15 +1,39 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
+using OneSet.Abstract;
 using OneSet.Localization;
 using OneSet.Models;
 using OneSet.Resx;
+using OneSet.Services;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
     public class WorkoutViewModel : BaseViewModel
     {
-		public Workout Workout {get; set; }
+        private readonly IUnitsService _units;
+        private readonly IWorkoutRules _workoutRules;
+        private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly IExercisesRepository _exercisesRepository;
+
+        public WorkoutViewModel(IUnitsService units, IWorkoutRules workoutRules, 
+            IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
+        {
+            _exercisesRepository = exercisesRepository;
+            _workoutsRepository = workoutsRepository;
+            _units = units;
+            _workoutRules = workoutRules;
+            Title = AppResources.WorkoutTitle;
+
+            RepsUpCommand = new Command(async () => { await OnRepsUp(); });
+            RepsDownCommand = new Command(async () => { await OnRepsDown(); });
+            WeighUpCommand = new Command(async () => { await OnWeighUp(); });
+            WeighDownCommand = new Command(async () => { await OnWeighDown(); });
+            PreviousIconCommand = new Command(() => { OnPreviousIconCommand(); });
+            TargetIconCommand = new Command(() => { OnTargetIconCommand(); });
+        }
+
+        public Workout Workout {get; set; }
 		public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
 
 		protected int _reps;
@@ -44,13 +68,14 @@ namespace OneSet.ViewModels
 
 		public string PreviousTitle => AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")";
         public string TargetTitle => AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")";
-        public bool NotesVisible => !string.IsNullOrEmpty (Workout?.Exercise?.Notes);
+        public bool NotesVisible => !string.IsNullOrEmpty (Exercise?.Notes);
         public bool LevelUpVisible => Workout != null && Workout?.TargetWeight > Workout.PreviousWeight;
         public bool TargetRepsWeightVisible => App.Settings.TargetRepsWeightVisible;
         public bool PreviousRepsWeightVisible => App.Settings.PreviousRepsWeightVisible;
-        public double ConvertedWeight => Units.GetWeight(Workout.Weight);
-        public double ConvertedPreviousWeight => Units.GetWeight(Workout.PreviousWeight);
-        public double ConvertedTargetWeight => Units.GetWeight(Workout.TargetWeight);
+        public double ConvertedWeight => _units.GetWeight(App.Settings.IsMetric, Workout.Weight);
+        public double ConvertedPreviousWeight => _units.GetWeight(App.Settings.IsMetric, Workout.PreviousWeight);
+        public double ConvertedTargetWeight => _units.GetWeight(App.Settings.IsMetric, Workout.TargetWeight);
+        public Exercise Exercise { get; set; }
 
         #region commands
         public ICommand RepsUpCommand {get; set;}
@@ -61,22 +86,11 @@ namespace OneSet.ViewModels
         public ICommand TargetIconCommand { get; set; }
 		#endregion
 
-		public WorkoutViewModel ()
-		{
-			Title = AppResources.WorkoutTitle;
-
-			RepsUpCommand = new Command (async() => { await OnRepsUp(); });
-			RepsDownCommand = new Command (async() => { await OnRepsDown(); });
-			WeighUpCommand = new Command (async() => { await OnWeighUp(); });
-			WeighDownCommand = new Command (async() => { await OnWeighDown(); });
-            PreviousIconCommand = new Command(() => { OnPreviousIconCommand(); });
-            TargetIconCommand = new Command(() => { OnTargetIconCommand(); });
-		}
-
 		public async Task LoadAsync()
 		{
 			RestTimerToolbarItem.Update();
-		}
+            Exercise = await _exercisesRepository.FindAsync(Workout.ExerciseId);
+        }
 
 		private async Task<bool> Validate ()
 		{
@@ -117,7 +131,7 @@ namespace OneSet.ViewModels
 			} else
 			{
 				// imperial to metric - always save in metric
-				Workout.Weight = Weight / Units.ImperialMetricFactor;
+				Workout.Weight = Weight / _units.ImperialMetricFactor;
 			}
 
 			if (await Validate ())
@@ -125,11 +139,11 @@ namespace OneSet.ViewModels
 				// invalidate TotalTrophies
 				App.TotalTrophies = null;
 
-				Workout.Trophies = WorkoutRules.GetTrophies(Workout);
+				Workout.Trophies = _workoutRules.GetTrophies(Workout);
 
 				var isPersisted = Workout.WorkoutId > 0;
 
-				await App.Database.WorkoutsRepository.SaveAsync(Workout);
+				await _workoutsRepository.SaveAsync(Workout);
 				await App.ShowSuccess(AppResources.WorkoutSaved);
 
 				if (App.Settings.RestTimerAutoStart && !isPersisted)
@@ -212,7 +226,7 @@ namespace OneSet.ViewModels
 
 		private double GetStep()
 		{
-            var step = Units.GetWeight(Workout.Exercise.PlateWeight);
+            var step =_units.GetWeight(App.Settings.IsMetric, Exercise.PlateWeight);
             if (step <= 0)
 				step = 1;
 			return step;

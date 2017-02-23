@@ -28,6 +28,7 @@ namespace OneSet.Droid
 
 			var bootstrapper = new Bootstrapper ();
 			bootstrapper.Automapper ();
+		    App.Container = bootstrapper.CreateContainer();
 
 			OxyPlot.Xamarin.Forms.Platform.Android.Forms.Init();
 

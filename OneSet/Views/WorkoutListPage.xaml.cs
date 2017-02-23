@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -14,12 +15,12 @@ namespace OneSet.Views
         {
 			get
 			{
-			    return _viewModel ?? (_viewModel = new WorkoutListViewModel
-			    {
-			        Navigation = Navigation,
-			        Page = this,
-			        RestTimerToolbarItem = new RestTimerToolbarItem {Navigation = Navigation}
-			    });
+			    return _viewModel ?? (_viewModel = App.Container.Resolve<WorkoutListViewModel>());
+       //         {
+			    //    Navigation = Navigation,
+			    //    Page = this,
+			    //    RestTimerToolbarItem = new RestTimerToolbarItem {Navigation = Navigation}
+			    //});
 			}
 			set
             {
@@ -77,12 +78,10 @@ namespace OneSet.Views
             var routineDayViewModel = e.SelectedItem as RoutineDayViewModel;
             if (routineDayViewModel != null)
             {
-                var viewModel = new WorkoutViewModel()
-                {
-                    Workout = routineDayViewModel.Workout,
-                    Navigation = Navigation,
-                    RestTimerToolbarItem = ViewModel.RestTimerToolbarItem
-                };
+                var viewModel = App.Container.Resolve<WorkoutViewModel>();
+                viewModel.Workout = routineDayViewModel.Workout;
+                viewModel.Navigation = Navigation;
+                viewModel.RestTimerToolbarItem = ViewModel.RestTimerToolbarItem;
 
                 var workoutPage = new WorkoutPage
                 {

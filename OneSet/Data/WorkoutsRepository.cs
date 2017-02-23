@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using SQLite;
 using System.Linq;
+using System.Threading.Tasks;
 using OneSet.Abstract;
 using OneSet.Models;
+using SQLite;
 
-namespace OneSet.Concrete
+namespace OneSet.Data
 {
 	public class WorkoutsRepository : BaseRepository<Workout>, IWorkoutsRepository
 	{
@@ -16,20 +16,6 @@ namespace OneSet.Concrete
 		{
 
 		}
-
-        public async Task LoadRelations(Workout workout)
-        {
-            workout.Exercise = await App.Database.ExercisesRepository.FindAsync(workout.ExerciseId);
-        }
-
-        public async Task LoadRelations(List<Workout> workouts)
-        {
-            var exercises = await App.Database.ExercisesRepository.AllAsync();
-            foreach(var workout in workouts)
-            {
-                workout.Exercise = exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
-            }
-        }
 
         public override async Task<List<Workout>> AllAsync()
         {
@@ -42,7 +28,6 @@ namespace OneSet.Concrete
                     list = await _connection.Table<Workout>().OrderBy(x => x.Created).ToListAsync().ConfigureAwait(false);
                 }
 
-                await LoadRelations(list);
                 return list;
             }
             catch (Exception ex)
@@ -55,7 +40,6 @@ namespace OneSet.Concrete
         public override async Task<Workout> FindAsync(int id)
         {
             var result = await base.FindAsync(id);
-            await LoadRelations(result);
             return result;
         }
 
@@ -68,7 +52,6 @@ namespace OneSet.Concrete
                     WHERE Created = ?";
 	
 				var list = await _connection.QueryAsync<Workout> (sql, date);
-                await LoadRelations(list);
                 return list;
 			}
 		}
@@ -81,8 +64,6 @@ namespace OneSet.Concrete
 					.Where (x => (x.ExerciseId == workout.ExerciseId) && (x.Created < workout.Created))
 					.OrderByDescending (x => x.Created)
 					.FirstOrDefaultAsync ();
-
-                await LoadRelations(previousWorkout);
                 return previousWorkout;
 			}
         }

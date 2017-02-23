@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using OneSet.Abstract;
 using OneSet.ViewModels;
 using OneSet.Views;
@@ -16,11 +17,8 @@ namespace OneSet
 		{
 			get
 			{
-			    return _viewModel ?? (_viewModel = new ExerciseAnalysisViewModel
-			    {
-			        Navigation = Navigation,
-			    });
-			}
+			    return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseAnalysisViewModel>());
+            }
 			set
 			{
 				_viewModel = value;

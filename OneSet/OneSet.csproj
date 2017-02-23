@@ -33,19 +33,26 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IExporter.cs" />
+    <Compile Include="Abstract\IStatistics.cs" />
+    <Compile Include="Abstract\IUnitsService.cs" />
+    <Compile Include="Abstract\IWorkoutRules.cs" />
+    <Compile Include="Extensions\PropertyInfoExtensions.cs" />
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\RoutineDay.cs" />
     <Compile Include="Models\Workout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkoutRules.cs" />
+    <Compile Include="Services\Exporter.cs" />
+    <Compile Include="Services\Statistics.cs" />
+    <Compile Include="Services\WorkoutRules.cs" />
     <Compile Include="Models\RestTimer.cs" />
     <Compile Include="Abstract\ISQLite.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Concrete\Database.cs" />
+    <Compile Include="Data\Database.cs" />
     <Compile Include="Abstract\IBaseRepository.cs" />
-    <Compile Include="Concrete\BaseRepository.cs" />
-    <Compile Include="Concrete\Extensions.cs" />
+    <Compile Include="Data\BaseRepository.cs" />
+    <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\WorkoutListViewModel.cs" />
@@ -59,13 +66,13 @@
     </Compile>
     <Compile Include="Abstract\IWorkoutsRepository.cs" />
     <Compile Include="Abstract\IExercisesRepository.cs" />
-    <Compile Include="Concrete\ExercisesRepository.cs" />
-    <Compile Include="Concrete\WorkoutsRepository.cs" />
+    <Compile Include="Data\ExercisesRepository.cs" />
+    <Compile Include="Data\WorkoutsRepository.cs" />
     <Compile Include="Abstract\ISettingsStorage.cs" />
     <Compile Include="ViewModels\RoutineDayViewModel.cs" />
     <Compile Include="Converters\WeightMetricToImperialConverter.cs" />
     <Compile Include="Abstract\IRoutineDaysRepository.cs" />
-    <Compile Include="Concrete\RoutineDaysRepository.cs" />
+    <Compile Include="Data\RoutineDaysRepository.cs" />
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
     <Compile Include="ViewModels\ExerciseListViewModel.cs" />
     <Compile Include="Localization\TranslateExtension.cs" />
@@ -75,7 +82,7 @@
     <Compile Include="Controls\BlueButton.cs" />
     <Compile Include="Controls\RoundedBoxView.cs" />
     <Compile Include="Controls\CustomEntry.cs" />
-    <Compile Include="ColorPalette.cs" />
+    <Compile Include="Services\ColorPalette.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\CalendarNotesPage.xaml.cs">
       <DependentUpon>CalendarNotesPage.xaml</DependentUpon>
@@ -115,7 +122,7 @@
     </Compile>
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="Abstract\ICalendarRepository.cs" />
-    <Compile Include="Concrete\CalendarRepository.cs" />
+    <Compile Include="Data\CalendarRepository.cs" />
     <Compile Include="ViewModels\CalendarNotesViewModel.cs" />
     <Compile Include="AsyncLock.cs" />
     <Compile Include="Abstract\IBackupRestore.cs" />
@@ -127,12 +134,12 @@
     </Compile>
     <Compile Include="Converters\StateToBooleanConverter.cs" />
     <Compile Include="Abstract\ISoundService.cs" />
-    <Compile Include="Units.cs" />
+    <Compile Include="Services\UnitsService.cs" />
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\TrophiesToStringConverter.cs" />
     <Compile Include="Models\ImagePack.cs" />
     <Compile Include="Views\ScreenSizeHandler.cs" />
-    <Compile Include="Abstract\IExporter.cs" />
+    <Compile Include="Abstract\ITextStorage.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="Views\AnalysisPage.xaml.cs">
       <DependentUpon>AnalysisPage.xaml</DependentUpon>
@@ -151,6 +158,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.3.0\lib\netstandard1.1\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -219,9 +230,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Views\CalendarNotesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

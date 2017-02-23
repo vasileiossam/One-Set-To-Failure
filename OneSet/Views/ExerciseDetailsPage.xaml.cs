@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
 using OneSet.Localization;
 using OneSet.Resx;
 using OneSet.ViewModels;
@@ -12,7 +13,7 @@ namespace OneSet.Views
 		private ExerciseViewModel _viewModel;
 		public ExerciseViewModel ViewModel
 		{
-			get { return _viewModel ?? (_viewModel = new ExerciseViewModel {Navigation = Navigation}); }
+		    get { return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseViewModel>()); }
 		    set
 			{
 				_viewModel = value;

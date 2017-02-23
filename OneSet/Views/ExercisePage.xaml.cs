@@ -1,4 +1,5 @@
-﻿using OneSet.ViewModels;
+﻿using Autofac;
+using OneSet.ViewModels;
 using Xamarin.Forms;
 
 namespace OneSet.Views
@@ -8,7 +9,7 @@ namespace OneSet.Views
 		private ExerciseViewModel _viewModel;
 		public ExerciseViewModel ViewModel
 		{
-			get { return _viewModel ?? (_viewModel = new ExerciseViewModel {Navigation = Navigation}); }
+			get { return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseViewModel>()); }
 		    set
 			{
 				_viewModel = value;

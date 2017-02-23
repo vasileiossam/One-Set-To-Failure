@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using OneSet.Abstract;
+using OneSet.Extensions;
 using SQLite;
 
-namespace OneSet.Concrete
+namespace OneSet.Data
 {
 	/// <summary>
 	/// End to End Mvvm with Xamarin: http://arteksoftware.com/end-to-end-mvvm-with-xamarin/
@@ -57,7 +58,7 @@ namespace OneSet.Concrete
 				try
 				{
 				    var sql =
-				        $@"SELECT * FROM {Extensions.GetTableName(typeof(TEntity))} WHERE {Extensions.IdentifierPropertyName(
+				        $@"SELECT * FROM {EntityExtensions.GetTableName(typeof(TEntity))} WHERE {EntityExtensions.IdentifierPropertyName(
 				            typeof(TEntity))} = ?";
 					var list = await _connection.QueryAsync<TEntity> (sql, id);
 

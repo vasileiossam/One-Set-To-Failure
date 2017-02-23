@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
+using Autofac;
 using OneSet.Abstract;
-using OneSet.Concrete;
+using OneSet.Data;
 using OneSet.Localization;
 using OneSet.Models;
 using OneSet.Resx;
@@ -18,7 +19,8 @@ namespace OneSet
 {
 	public partial class App : Application
 	{
-		public static Database Database = new Database ();
+        public static IContainer Container { get; set; }
+        public static Database Database = new Database ();
 		public static DateTime CurrentDate {get; set;}
 		public static Settings Settings { get; set; }
 		public static string Version {get; set;}

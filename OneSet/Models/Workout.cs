@@ -20,9 +20,6 @@ namespace OneSet.Models
 		public int TargetReps { get; set; }
 		public double TargetWeight { get; set; }
 
-        [Ignore]
-        public Exercise Exercise { get; set; }
-
         public Workout()
         {
             Created = DateTime.Today;

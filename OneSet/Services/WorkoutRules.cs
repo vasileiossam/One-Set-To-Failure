@@ -1,11 +1,23 @@
 using System;
 using System.Threading.Tasks;
+using OneSet.Abstract;
 using OneSet.Models;
 
-namespace OneSet
+namespace OneSet.Services
 {
-    public class WorkoutRules
+    public class WorkoutRules : IWorkoutRules
     {
+        private readonly IUnitsService _units;
+        private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly IExercisesRepository _exercisesRepository;
+
+        public WorkoutRules(IUnitsService units, IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
+        {
+            _units = units;
+            _workoutsRepository = workoutsRepository;
+            _exercisesRepository = exercisesRepository;
+        }
+
         private static bool IsDivisible(int x, int n)
         {
            return x % n == 0;
@@ -27,7 +39,7 @@ namespace OneSet
             return weight < 0 ? 0 : weight;
         }
 
-        private static async Task<bool> CanCalculateTargetAsync(Workout workout)
+        private async Task<bool> CanCalculateTargetAsync(Workout workout)
         {
 			// TODO when I'll implement the settings in the exercise level I have to replace the WorkoutCount with workout.Exercise.RepsIncrement.WorkoutCount 
 			var workoutCount = App.Settings.RepsIncrement.WorkoutCount; 
@@ -38,16 +50,16 @@ namespace OneSet
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-            var count = await App.Database.WorkoutsRepository.GetWorkoutsCount(workout.ExerciseId);
+            var count = await _workoutsRepository.GetWorkoutsCount(workout.ExerciseId);
             if (workout.WorkoutId == 0) count++;
 
             return IsDivisible(count, workoutCount);
         }
-
-
-        public static async Task<object> GetTargetWorkoutAsync(Workout workout)
+        
+        public async Task<object> GetTargetWorkoutAsync(Workout workout)
         {
-            var previousWorkout = await App.Database.WorkoutsRepository.GetPreviousWorkout(workout);
+            var previousWorkout = await _workoutsRepository.GetPreviousWorkout(workout);
+            var exercise = await _exercisesRepository.FindAsync(workout.ExerciseId);
 
             int targetReps;
             double targetWeight;
@@ -78,13 +90,13 @@ namespace OneSet
 					if (previousWorkout.Reps < minReps)
                     {
 						targetReps = startingReps;
-                        targetWeight = GetPreviousWeight(workout.Exercise.PlateWeight, previousWorkout.Weight);
+                        targetWeight = GetPreviousWeight(exercise.PlateWeight, previousWorkout.Weight);
                     }
                     // advance to next Weight
 					else if (previousWorkout.Reps >= maxReps)
                     {
                         targetReps = startingReps;
-                        targetWeight = GetNextWeight(workout.Exercise.PlateWeight, previousWorkout.Weight);
+                        targetWeight = GetNextWeight(exercise.PlateWeight, previousWorkout.Weight);
                     }
                     // stay in same weight but increase Reps
                     else
@@ -106,7 +118,7 @@ namespace OneSet
             return new {TargetReps = targetReps, TargetWeight = targetWeight};
         }
 
-		public static int GetTrophies(Workout workout)
+		public int GetTrophies(Workout workout)
 		{
 			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
 			var minReps = App.Settings.MinReps;
@@ -118,10 +130,10 @@ namespace OneSet
 			}
 
 			// still on same weight
-			if (Math.Abs (workout.TargetWeight - workout.Weight) < Units.WeightTolerance)
+			if (Math.Abs (workout.TargetWeight - workout.Weight) < _units.WeightTolerance)
 			{
 			    // calc how many more reps since last time
-				if (Math.Abs (workout.TargetWeight - workout.PreviousWeight) < Units.WeightTolerance)
+				if (Math.Abs (workout.TargetWeight - workout.PreviousWeight) < _units.WeightTolerance)
 				{
 					return workout.Reps - workout.TargetReps + (workout.TargetReps - workout.PreviousReps);
 				}

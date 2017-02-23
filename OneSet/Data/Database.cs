@@ -9,24 +9,12 @@ using OneSet.Models;
 using SQLite;
 using Xamarin.Forms;
 
-namespace OneSet.Concrete
+namespace OneSet.Data
 {
 	public class Database 
 	{
 		private static readonly AsyncLock Mutex = new AsyncLock ();
 		private readonly SQLiteAsyncConnection _connection;
-
-        private WorkoutsRepository _workoutRepository;
-        public WorkoutsRepository WorkoutsRepository => _workoutRepository ?? (_workoutRepository = new WorkoutsRepository(_connection));
-
-	    private RoutineDaysRepository _routineDaysRepository;
-		public RoutineDaysRepository RoutineDaysRepository => _routineDaysRepository ?? (_routineDaysRepository = new RoutineDaysRepository(_connection));
-
-	    private CalendarRepository _calendarRepository;
-		public CalendarRepository CalendarRepository => _calendarRepository ?? (_calendarRepository = new CalendarRepository(_connection));
-
-	    private ExercisesRepository _exercisesRepository;
-		public ExercisesRepository ExercisesRepository => _exercisesRepository ?? (_exercisesRepository = new ExercisesRepository(_connection));
 
 	    private List<RepsIncrement> _repsIncrements;
 		public List<RepsIncrement> RepsIncrements
@@ -111,67 +99,6 @@ namespace OneSet.Concrete
 			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Triceps Extension", 7);
 			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Biceps Curl", 7);
 			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Lat Pulldown", 7);
-		}
-
-		public async Task RecalcStatistics()
-		{
-			var workoutsList = await App.Database.WorkoutsRepository.AllAsync ();
-
-			foreach (var workout in workoutsList)
-			{
-				workout.Trophies = WorkoutRules.GetTrophies(workout);
-				await App.Database.WorkoutsRepository.SaveAsync(workout);
-			}
-			App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
-		}
-
-		public async Task<string> ExportToCsv()
-		{
-			try
-			{
-				var sb = new StringBuilder();
-				var workouts = await WorkoutsRepository.AllAsync();
-				workouts = workouts.OrderBy(x => x.Created).ToList();
-				var exercises = await ExercisesRepository.AllAsync();
-
-				sb.AppendLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\"", 
-					"Date",
-					"Exercise",
-					"Reps",
-					"Weight",
-					"Target Reps",
-					"Target Weight",
-					"Trophies",
-					"Workout Notes"
-				));
-
-				foreach(Workout workout in workouts)
-				{
-					workout.Exercise = exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
-					if (workout.Exercise == null) continue;
-
-					var line = string.Format("{0},\"{1}\",{2},{3},{4},{5},{6},\"{7}\"", 
-						workout.Created.Date.ToString("d"),
-						workout.Exercise.Name,
-						workout.Reps,
-						WeightMetricToImperialConverter.GetWeightAsDouble(workout.Weight),
-						workout.TargetReps,
-						WeightMetricToImperialConverter.GetWeightAsDouble(workout.TargetWeight),
-						workout.Trophies,
-						workout.Notes
-					);
-
-					sb.AppendLine(line);
-				}
-
-				return DependencyService.Get<IExporter> ().ExportToCsv (sb);
-			}
-			catch(Exception ex)
-			{
-				App.ShowErrorPage (this, ex);				
-			}
-
-			return string.Empty;
 		}
 	}
 }

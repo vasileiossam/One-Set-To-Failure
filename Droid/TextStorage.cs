@@ -4,11 +4,11 @@ using System.IO;
 using System.Text;
 using OneSet.Abstract;
 
-[assembly: Dependency (typeof (Exporter))]
+[assembly: Dependency (typeof (TextStorage))]
 
 namespace OneSet.Droid
 {
-	public class Exporter : IExporter
+	public class TextStorage : ITextStorage
     {
         private static string PersonalFolder
         {
@@ -24,10 +24,10 @@ namespace OneSet.Droid
             }
         }
 
-		public string ExportToCsv(StringBuilder csv)
+		public string Save(StringBuilder text, string fileName)
         {
-			var fileName = Path.Combine (PersonalFolder, "OneSet.csv");
-			File.WriteAllText (fileName, csv.ToString ());
+			var pathName = Path.Combine (PersonalFolder, fileName);
+			File.WriteAllText (pathName, text.ToString ());
 			return fileName;
         }
     }

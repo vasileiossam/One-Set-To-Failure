@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -11,10 +12,7 @@ namespace OneSet.Views
 		{
 			get
 			{
-			    return _viewModel ?? (_viewModel = new ChartsViewModel
-			    {
-			        Navigation = Navigation,
-			    });
+			    return _viewModel ?? (_viewModel = App.Container.Resolve<ChartsViewModel>());
 			}
 			set
 			{

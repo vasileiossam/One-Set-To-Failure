@@ -6,7 +6,9 @@ using OxyPlot.Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using OneSet.Abstract;
 using OneSet.Converters;
+using OneSet.Data;
 using OneSet.Localization;
 using OneSet.Models;
 
@@ -49,16 +51,21 @@ namespace OneSet.ViewModels
 			}
 		}
 
-		public ChartsViewModel ()
-		{
-			NoChartsDataVisible = false;
+        private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly IExercisesRepository _exercisesRepository;
+
+        public ChartsViewModel (IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
+        {
+            _workoutsRepository = workoutsRepository;
+            _exercisesRepository = exercisesRepository;
+            NoChartsDataVisible = false;
 			ChartsPinchToZoomVisible = false;			
 		}
 
 		public async Task Load()
 		{
-			_workouts = await App.Database.WorkoutsRepository.AllAsync ();
-			_exercises = await App.Database.ExercisesRepository.AllAsync ();
+			_workouts = await _workoutsRepository.AllAsync ();
+			_exercises = await _exercisesRepository.AllAsync ();
 
 			NoChartsDataVisible = _workouts.Count == 0;
 			ChartsPinchToZoomVisible = !NoChartsDataVisible;

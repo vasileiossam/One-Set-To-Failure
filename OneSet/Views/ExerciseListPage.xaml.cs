@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Autofac;
 using OneSet.Resx;
 using OneSet.ViewModels;
 using Xamarin.Forms;
@@ -11,7 +12,7 @@ namespace OneSet.Views
 		private ExerciseListViewModel _viewModel;
 		public ExerciseListViewModel ViewModel
 		{
-			get { return _viewModel ?? (_viewModel = new ExerciseListViewModel() {Navigation = Navigation}); }
+		    get { return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseListViewModel>()); }
 		    set
 			{
 				_viewModel = value;
@@ -39,13 +40,9 @@ namespace OneSet.Views
 
 	    public void OnAddExerciseButtonClicked(object sender, EventArgs args)
 		{
-			var exercisePage = new ExerciseDetailsPage
+            var exercisePage = new ExerciseDetailsPage
 			{
-				ViewModel = new ExerciseViewModel()
-				{
-					Title = AppResources.AddExerciseTitle,
-					Navigation = this.Navigation
-				}
+				ViewModel = App.Container.Resolve<ExerciseViewModel>()
 			};
 
 			Navigation.PushAsync(exercisePage);

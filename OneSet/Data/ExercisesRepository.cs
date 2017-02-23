@@ -3,7 +3,7 @@ using OneSet.Abstract;
 using OneSet.Models;
 using SQLite;
 
-namespace OneSet.Concrete
+namespace OneSet.Data
 {
 	public class ExercisesRepository : BaseRepository<Exercise>, IExercisesRepository
 	{

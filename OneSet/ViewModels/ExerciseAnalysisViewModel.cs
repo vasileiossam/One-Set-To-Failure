@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using OneSet.Abstract;
 using OneSet.Converters;
 using OneSet.Localization;
 using OneSet.Models;
@@ -41,28 +42,33 @@ namespace OneSet.ViewModels
 		private List<Exercise> _exercisesInWorkouts { get; set;}
 		private WeightMetricToImperialConverter _weightConverter { get; set;}
 
-		public ExerciseAnalysisViewModel ()
-		{
-			_weightConverter = new WeightMetricToImperialConverter ();
+        private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly IExercisesRepository _exercisesRepository;
+
+        public ExerciseAnalysisViewModel(IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
+        {
+            _workoutsRepository = workoutsRepository;
+            _exercisesRepository = exercisesRepository;
+            _weightConverter = new WeightMetricToImperialConverter ();
 		}
 
 		public async Task Load()
 		{
-			_workouts = await App.Database.WorkoutsRepository.AllAsync ();
-			_exercises = await App.Database.ExercisesRepository.AllAsync ();
+			_workouts = await _workoutsRepository.AllAsync ();
+			_exercises = await _exercisesRepository.AllAsync ();
 
 			foreach (var workout in _workouts)
 			{
 				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
-				workout.Exercise = exercise;
+			//	workout.Exercise = exercise;
 			}
 
-			_exercisesInWorkouts = _workouts.GroupBy (x => x.Exercise).Select (x => x.First ().Exercise).ToList ();
-			ExercisesPicker.Items.Clear();
-			foreach(var item in _exercisesInWorkouts)
-			{
-				ExercisesPicker.Items.Add (item.Name);
-			}
+		//	_exercisesInWorkouts = _workouts.GroupBy (x => x.Exercise).Select (x => x.First ().Exercise).ToList ();
+			//ExercisesPicker.Items.Clear();
+			//foreach(var item in _exercisesInWorkouts)
+			//{
+			//	ExercisesPicker.Items.Add (item.Name);
+			//}
 		}
 
         public async Task<List<ExerciseStat>> GetStats(int exerciseIndex)

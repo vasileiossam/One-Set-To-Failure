@@ -5,16 +5,30 @@ using System.Windows.Input;
 using AutoMapper;
 using Xamarin.Forms;
 using System.Linq;
+using OneSet.Abstract;
 using OneSet.Models;
 using OneSet.Resx;
+using OneSet.Services;
 
 namespace OneSet.ViewModels
 {
 	public class ExerciseViewModel : BaseViewModel
 	{
-		// TODO replace this with MessagingCenter
-		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
-		[IgnoreMap]
+        private readonly IUnitsService _units;
+        private readonly IExercisesRepository _exercisesRepository;
+        private readonly IRoutineDaysRepository _routineDaysRepository;
+
+        public ExerciseViewModel(IUnitsService units, IExercisesRepository exercisesRepository, IRoutineDaysRepository routineDaysRepository) : base()
+        {
+            _units = units;
+            _exercisesRepository = exercisesRepository;
+            _routineDaysRepository = routineDaysRepository;
+            _routineDays = new List<RoutineDay>();
+        }
+
+        // TODO replace this with MessagingCenter
+        // https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
+        [IgnoreMap]
     	public Views.ExerciseDetailsPage Page { get; set; }
 
 		#region Exercice model
@@ -90,22 +104,17 @@ namespace OneSet.ViewModels
 	    protected ICommand _deleteCommand;
 		public ICommand DeleteCommand { 
 			get { return _deleteCommand ?? (_deleteCommand = new Command(() => OnDelete())); }
-		}   
-
-		public ExerciseViewModel () : base()
-		{
-		    _routineDays = new List<RoutineDay>();
 		}
 
-		public async Task Load()
+ 	    public async Task Load()
 		{
 			await LoadRoutine ();
-			PlateWeight = Units.GetWeight (PlateWeight);
+			PlateWeight = _units.GetWeight(App.Settings.IsMetric, PlateWeight);
 		}
 
 		private async Task LoadRoutine()
 		{
-			_routineDays = await App.Database.RoutineDaysRepository.GetRoutine(ExerciseId);
+			_routineDays = await _routineDaysRepository.GetRoutine(ExerciseId);
 
 			DoOnMon = _routineDays.Exists (x => (x.DayOfWeek == 1) && (x.IsActive == 1));
 			DoOnTue = _routineDays.Exists (x => (x.DayOfWeek == 2) && (x.IsActive == 1));
@@ -135,7 +144,7 @@ namespace OneSet.ViewModels
 				foreach (var routineDay in _routineDays)
 				{
 					routineDay.IsActive = GetActive (routineDay.DayOfWeek);
-					await App.Database.RoutineDaysRepository.SaveAsync(routineDay);
+					await _routineDaysRepository.SaveAsync(routineDay);
 				}
 			}
 		}
@@ -150,7 +159,7 @@ namespace OneSet.ViewModels
 				IsActive = isActive ? 1 : 0 
 			};
 
-			await App.Database.RoutineDaysRepository.SaveAsync(routineDay);
+			await _routineDaysRepository.SaveAsync(routineDay);
 		}
 
 		public int GetActive(int dayOfWeek)
@@ -212,10 +221,10 @@ namespace OneSet.ViewModels
                 // imperial to metric - always save in metric
                 if (!App.Settings.IsMetric)
                 {
-                    exercise.PlateWeight = PlateWeight / Units.ImperialMetricFactor;
+                    exercise.PlateWeight = PlateWeight / _units.ImperialMetricFactor;
                 }
 
-                ExerciseId = await App.Database.ExercisesRepository.SaveAsync(exercise);
+                ExerciseId = await _exercisesRepository.SaveAsync(exercise);
                 await SaveRoutine();
 
                 await App.ShowSuccess(AppResources.ExerciseSaved);
@@ -231,7 +240,7 @@ namespace OneSet.ViewModels
 
 				if (answer)
 				{
-					await App.Database.ExercisesRepository.DeleteAsync(ExerciseId);
+					await _exercisesRepository.DeleteAsync(ExerciseId);
 					await Navigation.PopAsync();
 				}
 			}

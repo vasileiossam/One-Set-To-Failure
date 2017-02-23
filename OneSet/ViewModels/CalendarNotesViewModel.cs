@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OneSet.Models;
 using OneSet.Resx;
+using OneSet.Abstract;
 
 namespace OneSet.ViewModels
 {
@@ -26,16 +27,18 @@ namespace OneSet.ViewModels
             }
         }
 
-        public CalendarNotesViewModel()
+	    private readonly ICalendarRepository _repo;
+
+        public CalendarNotesViewModel(ICalendarRepository repo)
             : base()
-		{
-			Title = AppResources.CommentTitle;
+        {
+            _repo = repo;
+            Title = AppResources.CommentTitle;
 		}
 
 		public async Task Load()
 		{
-			var repository = App.Database.CalendarRepository;
-			var all = await repository.AllAsync ();
+			var all = await _repo.AllAsync ();
 			var calendar = all.FirstOrDefault(x => x.Date == _date);
 
 			if (calendar == null)
@@ -59,7 +62,7 @@ namespace OneSet.ViewModels
 			if (Validate ())
 			{
 				var calendar = new Calendar { CalendarId = CalendarId, Date = Date, Notes = Notes.Trim() };
-				await App.Database.CalendarRepository.SaveAsync(calendar);
+				await _repo.SaveAsync(calendar);
 				await Navigation.PopAsync();
 			}
 		}

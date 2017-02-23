@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AutoMapper;
+using OneSet.Abstract;
+using OneSet.Converters;
 using OneSet.Resx;
 
 namespace OneSet.ViewModels
@@ -53,16 +55,19 @@ namespace OneSet.ViewModels
 			}
 		}
 
-		public ExerciseListViewModel () : base()
+        private readonly IExercisesRepository _exercisesRepository;
+
+        public ExerciseListViewModel (IExercisesRepository exercisesRepository) : base()
 		{
-			Title = AppResources.ExercisesTitle;
+            _exercisesRepository = exercisesRepository;
+            Title = AppResources.ExercisesTitle;
 		}
 
-		public async Task Load()
+        public async Task Load()
 		{
 			try
 			{
-				var exercisesList = await App.Database.ExercisesRepository.AllAsync();
+				var exercisesList = await _exercisesRepository.AllAsync();
 				var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseViewModel>>(exercisesList);
 				foreach(var item in exerciseViewModelsList)
 				{

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using Autofac;
 using AutoMapper;
 using OneSet.Abstract;
 
@@ -133,9 +134,17 @@ namespace OneSet.ViewModels
 			}
 		}
 
-		public WorkoutListViewModel ()
-		{
-			Title = "One Set To Fatigue";
+        private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly ICalendarRepository _calendarRepository;
+        private readonly IRoutineDaysRepository _routineDaysRepository;
+
+        public WorkoutListViewModel (IWorkoutsRepository workoutsRepository, 
+            ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
+        {
+            _workoutsRepository = workoutsRepository;
+            _calendarRepository = calendarRepository;
+            _routineDaysRepository = routineDaysRepository;
+            Title = "One Set To Fatigue";
 
 			ChevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
 			CalendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
@@ -150,7 +159,7 @@ namespace OneSet.ViewModels
 
 			CurrentDate = date;
 
-			CalendarNotes = await App.Database.CalendarRepository.GetCalendarNotes (_currentDate);
+			CalendarNotes = await _calendarRepository.GetCalendarNotes (_currentDate);
 			if (CalendarNotes != null)
 			{
 				CalendarNotes = CalendarNotes.Trim ();
@@ -169,7 +178,7 @@ namespace OneSet.ViewModels
 
 			CalendarNotesVisible = !string.IsNullOrEmpty (CalendarNotes);
 
-			var list = await App.Database.RoutineDaysRepository.GetRoutine (_currentDate);
+			var list = await _routineDaysRepository.GetRoutine (_currentDate);
             RoutineDays = Mapper.Map<ObservableCollection<RoutineDayViewModel>>(list);
 
 			if (RoutineDays == null)
@@ -184,9 +193,9 @@ namespace OneSet.ViewModels
 
 			if (App.TotalTrophies == null)
 			{
-  				App.TotalTrophies = await App.Database.WorkoutsRepository.GetTotalTrophies ();
+  				App.TotalTrophies = await _workoutsRepository.GetTotalTrophies ();
 			}
-			var dayTrophies = await App.Database.WorkoutsRepository.GetTrophies (CurrentDate);
+			var dayTrophies = await _workoutsRepository.GetTrophies (CurrentDate);
 		    if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int) App.TotalTrophies}";
 		}
 
@@ -208,7 +217,10 @@ namespace OneSet.ViewModels
 
 		private async Task OnCalendarNotesCommand()
 		{
-			var viewModel = new CalendarNotesViewModel {Navigation = Page.Navigation, Date = CurrentDate };
+		    var viewModel = App.Container.Resolve<CalendarNotesViewModel>();
+            viewModel.Navigation = Page.Navigation;
+		    viewModel.Date = CurrentDate;
+
 			await viewModel.Load ();
 
 			var page = new Views.CalendarNotesPage {ViewModel = viewModel};

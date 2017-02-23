@@ -29,10 +29,15 @@ namespace OneSet.ViewModels
 			}
 		}
 
-		public SettingsViewModel  ()
-		{
-			Title = AppResources.SettingsTitle;
-		}
+	    private readonly ΙStatistics _statistics;
+        private readonly IExporter _exporter;
+
+        public SettingsViewModel  (ΙStatistics statistics, IExporter exporter)
+        {
+            _statistics = statistics;
+            _exporter = exporter;
+            Title = AppResources.SettingsTitle;
+        }
 
 		public async Task Load()
 		{
@@ -292,7 +297,7 @@ namespace OneSet.ViewModels
 				OnSave = async(sender, args) =>
 				{
 					var preference = sender as Preference;
-					var pathName = await App.Database.ExportToCsv();
+					var pathName = await _exporter.ExportToCsv();
 					if (pathName != string.Empty)
 					{
 					    if (preference != null)
@@ -311,7 +316,7 @@ namespace OneSet.ViewModels
 			{
 				try
 				{	
-					await App.Database.RecalcStatistics();
+					await _statistics.Recalc();
 					await App.ShowToast(AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);		
 				}
 				catch(Exception ex)
