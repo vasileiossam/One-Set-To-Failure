@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
-using OneSet.Entities;
 using OneSet.Localization;
+using OneSet.Models;
 using OneSet.Resx;
 using Xamarin.Forms;
 

@@ -1,4 +1,4 @@
-﻿using OneSet.Entities;
+﻿using OneSet.Models;
 
 namespace OneSet.Abstract
 {

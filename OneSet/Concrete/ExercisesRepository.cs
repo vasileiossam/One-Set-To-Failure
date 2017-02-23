@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using OneSet.Abstract;
-using OneSet.Entities;
+using OneSet.Models;
 using SQLite;
 
 namespace OneSet.Concrete

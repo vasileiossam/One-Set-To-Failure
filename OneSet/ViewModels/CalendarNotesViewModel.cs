@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using OneSet.Entities;
+using OneSet.Models;
 using OneSet.Resx;
 
 namespace OneSet.ViewModels

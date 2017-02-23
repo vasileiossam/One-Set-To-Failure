@@ -5,7 +5,7 @@ using System.Diagnostics;
 using SQLite;
 using System.Linq;
 using OneSet.Abstract;
-using OneSet.Entities;
+using OneSet.Models;
 
 namespace OneSet.Concrete
 {

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using OneSet.Abstract;
 using OneSet.Converters;
-using OneSet.Entities;
 using OneSet.Models;
 using SQLite;
 using Xamarin.Forms;

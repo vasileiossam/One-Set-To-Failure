@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using OneSet.Entities;
+using OneSet.Models;
 
 namespace OneSet
 {

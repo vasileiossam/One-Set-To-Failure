@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite;
 
-namespace OneSet.Entities
+namespace OneSet.Models
 {
 	[Table("Calendar")]
 	public class Calendar

@@ -7,8 +7,8 @@ using Xamarin.UITest.Queries;
 
 namespace OneSet.UITest
 {
+    // https://developer.xamarin.com/guides/testcloud/uitest/intro-to-uitest/
     [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
     public class Tests
     {
         IApp app;

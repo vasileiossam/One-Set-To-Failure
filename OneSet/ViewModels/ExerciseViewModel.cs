@@ -5,7 +5,6 @@ using System.Windows.Input;
 using AutoMapper;
 using Xamarin.Forms;
 using System.Linq;
-using OneSet.Entities;
 using OneSet.Models;
 using OneSet.Resx;
 

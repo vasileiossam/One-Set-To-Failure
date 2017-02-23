@@ -132,10 +132,10 @@
 	 		<Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_android" HorizontalOptions="Center" VerticalOptions="Center"/>
 
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="1" Placeholder="{i18n:Translate Reps}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
-	 			Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center" TextChanged="OnTextChanged"/>
+	 			Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 	 		<controls:CustomEntry Grid.Row="0" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric" 
-	 			Text="{Binding Weight, Converter={StaticResource doubleToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center" TextChanged="OnTextChanged"/>
+	 			Text="{Binding Weight, Converter={StaticResource doubleToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
 		    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="0, 0, 0, 0">
 				<Button Image="ic_fa_minus" Command="{Binding RepsDownCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>

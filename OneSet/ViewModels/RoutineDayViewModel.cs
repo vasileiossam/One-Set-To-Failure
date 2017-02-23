@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OneSet.Entities;
+using OneSet.Models;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels

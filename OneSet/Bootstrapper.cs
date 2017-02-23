@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using OneSet.Entities;
+using OneSet.Models;
 using OneSet.ViewModels;
 
 namespace OneSet

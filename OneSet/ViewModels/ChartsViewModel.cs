@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using OneSet.Converters;
-using OneSet.Entities;
 using OneSet.Localization;
+using OneSet.Models;
 
 namespace OneSet.ViewModels
 {

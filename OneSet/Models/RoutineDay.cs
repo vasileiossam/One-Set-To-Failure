@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace OneSet.Entities
+namespace OneSet.Models
 {
 	[Table("RoutineDays")]
 	public class RoutineDay
