@@ -1,24 +1,17 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using AutoMapper;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-		[IgnoreMap]
-		public INavigation Navigation { get; set; }
-
-		[IgnoreMap]
 		public ICommand SaveCommand { get; set; }
+        public ICommand LoadCommand { get; set; }
 
         private string _title;
-
-		[IgnoreMap]
         public string Title
         {
             set
@@ -33,9 +26,10 @@ namespace OneSet.ViewModels
             }
         }
 
-		public BaseViewModel()
+        protected BaseViewModel()
         {
-			SaveCommand = new Command (() => OnSave ());
+			SaveCommand = new Command (async () => await OnSave());
+            LoadCommand = new Command(async (parameter) => await OnLoad(parameter));
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -43,11 +37,7 @@ namespace OneSet.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		protected virtual async Task OnSave () 
-		{
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
-		}
+        public abstract Task OnLoad(object parameter = null);
+        public abstract Task OnSave();
     }
 }
-

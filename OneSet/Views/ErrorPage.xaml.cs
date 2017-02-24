@@ -13,15 +13,11 @@ namespace OneSet.Views
 			InitializeComponent ();
 		}
 
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			BindingContext = ViewModel;
-
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
 		}
-
 	}
 }
 

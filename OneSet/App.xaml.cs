@@ -20,8 +20,8 @@ namespace OneSet
 	public partial class App : Application
 	{
         public static IContainer Container { get; set; }
-        public static Database Database = new Database ();
-		public static DateTime CurrentDate {get; set;}
+        public static Database Database { get; set; }
+        public static DateTime CurrentDate {get; set;}
 		public static Settings Settings { get; set; }
 		public static string Version {get; set;}
 		public static double ScreenWidth {get; set;}

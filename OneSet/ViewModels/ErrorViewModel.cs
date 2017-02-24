@@ -2,7 +2,7 @@
 
 namespace OneSet.ViewModels
 {
-	public class ErrorViewModel : BaseViewModel
+	public class ErrorViewModel 
 	{
 		public object Sender { get; set;}
 		public Exception Exception { get; set;}

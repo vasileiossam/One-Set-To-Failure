@@ -39,341 +39,6 @@ namespace OneSet.ViewModels
             Title = AppResources.SettingsTitle;
         }
 
-		public async Task Load()
-		{
-			var list = new ObservableCollection<PreferenceGroup>();
-
-			#region general group
-			var generalGroup = new PreferenceGroup { Title = AppResources.SettingsGeneralTitle };
-			list.Add (generalGroup);
-
-			var options = new string[2];
-			options[0] = AppResources.UnitSystemMetric;
-			options[1] = AppResources.UnitSystemImperial;
-			var value = options [1];
-			if (App.Settings.IsMetric)
-				value = options [0];
-			generalGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.SettingsUnitSystemTitle, 
-				Hint = "",
-				Value = value,
-				Options = options,
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-				    if (preference != null) App.Settings.IsMetric = ((string)preference.Value == AppResources.UnitSystemMetric);
-				    App.SaveSettings();
-				}
-			});
-			#endregion
-
-			#region rules group
-			var rulesGroup = new PreferenceGroup { Title = AppResources.SettingsTrainingRulesTitle, Hint = AppResources.SettingsTrainingRulesHint };
-			list.Add (rulesGroup);
-
-			rulesGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.SettingsMaxRepsTitle, 
-				Hint = AppResources.SettingsMaxRepsHint,
-				Value = App.Settings.MaxReps,
-				Options = ListPreference.GetOptionsList(0, 50, false),
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-				    if (preference != null) App.Settings.MaxReps = int.Parse((string) preference.Value);
-				    App.SaveSettings();
-				}
-			});
-
-			rulesGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.SettingsMinRepsTitle, 
-				Hint = AppResources.SettingsMinRepsHint,
-				Value = App.Settings.MinReps,
-				Options = ListPreference.GetOptionsList(0, 50, false),
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-				    if (preference != null) App.Settings.MinReps = int.Parse((string) preference.Value);
-				    App.SaveSettings();
-				}
-			});
-
-			var index = 0;
-			options = new string[App.Database.RepsIncrements.Count];
-			foreach(var item in App.Database.RepsIncrements)
-			{
-				options[index++] = item.Description;
-			}
-			rulesGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.SettingsExerciseGoalTitle, 
-				Hint = AppResources.SettingsExerciseGoalHint,
-				Value = App.Settings.RepsIncrement.Description,
-				Options = options,
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-					App.Settings.RepsIncrementId = App.Database.RepsIncrements.FirstOrDefault (x => x.Description == (string) preference.Value).RepsIncrementId;
-					App.SaveSettings();
-				}
-			});
-
-			#endregion
-
-            #region motivation group
-            var motivationGroup = new PreferenceGroup { Title = AppResources.SettingsMotivationTitle };
-            list.Add(motivationGroup);
-
-            index = 0;
-            options = new string[App.Database.ImagePacks.Count];
-            foreach (var item in App.Database.ImagePacks)
-            {
-                options[index++] = item.Title;
-            }
-            motivationGroup.Add(new ListPreference
-            {
-                Title = AppResources.SettingsMotivationalImagePacksTitle,
-                Hint = AppResources.SettingsMotivationalImagePacksHint,
-                Options = options,
-                Clicked = OnClicked,
-                Value = App.Settings.ImagePack.Title,
-                OnSave = async (sender, args) =>
-                {
-                    var preference = sender as ListPreference;
-                    if (preference == null) throw new ArgumentNullException(nameof(preference));
-                    if (App.Settings != null)
-                        App.Settings.ImagePackId = App.Database.ImagePacks.FirstOrDefault(x => x.Title == (string)preference.Value).ImagePackId;
-                    App.SaveSettings();
-                }
-            });
-
-           motivationGroup.Add(new ListPreference
-           {
-                Title = AppResources.SettingsShowImagesInRestTimerTitle,
-                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInRestTimer),
-                Options = ListPreference.YesNoOptions,
-                Clicked = OnClicked,
-                OnSave = (sender, args) =>
-                {
-                    var preference = sender as ListPreference;
-                    if (preference != null) App.Settings.CanShowImagePackInRestTimer = preference.GetValueAsBool();
-                    App.SaveSettings();
-                }
-            });
-
-//            motivationGroup.Add(new ListPreference()
-//            {
-//                Title = AppResources.SettingsShowImagesPackInWorkoutTitle,
-//                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInWorkout),
-//                Options = ListPreference.YesNoOptions,
-//                Clicked = OnClicked,
-//                OnSave = (sender, args) =>
-//                {
-//                    var preference = sender as ListPreference;
-//                    App.Settings.CanShowImagePackInWorkout = preference.GetValueAsBool();
-//                    App.SaveSettings();
-//                }
-//            });
-
-            #endregion
-
-            #region data group
-            var dataGroup = new PreferenceGroup { Title = AppResources.SettingsDataTitle };
-			list.Add (dataGroup);
-
-			dataGroup.Add (new AlertPreference
-			{ 
-				Title = AppResources.SettingsClearWorkoutDataTitle, 
-				Hint = AppResources.SettingsClearWorkoutDataHint,
-				PopupTitle = AppResources.SettingsClearWorkoutDataTitle,
-				PopupMessage = AppResources.ClearWorkoutDataQuestion,
-				Clicked = OnClicked,
-				OnExecute = async(sender, args) =>
-				{
-					var preference = sender as AlertPreference;
-					await App.Database.ClearWorkoutData ();
-				    if (preference != null) await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
-				}
-			});
-
-			options = new string[1];
-			options[0] = "Life Fitness equipment";
-			dataGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.SettingsLoadSampleDataTitle, 
-				Hint = AppResources.SettingsLoadSampleDataHint,
-				Options = options,
-				Clicked = OnClicked,
-				IsValueVisible = false,
-				OnSave = async(sender, args) =>
-				{
-					var preference = sender as Preference;
-					await App.Database.LoadLifeFitnessData ();
-				    if (preference != null) await App.ShowToast(preference.Title, AppResources.LoadSampleDataCompleted);
-				}
-			});
-
-			var backupPreference = new AlertPreference
-			{ 
-				Title = AppResources.SettingsBackupLocallyTitle, 
-				Hint = AppResources.SettingsBackupLocallyHint,
-				Clicked = OnClicked,
-				Value = await GetLastBackupDate(),
-				IsValueVisible = !string.IsNullOrEmpty(await GetLastBackupDate())
-			};
-			backupPreference.OnExecute += async (sender, args) =>
-			{
-				try
-				{	
-					var backupService = DependencyService.Get<IBackupRestore>();
-					await backupService.Backup();
-
-					var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();				
-					await App.ShowToast(AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));		
-
-					var preference = sender as AlertPreference;
-				    if (preference != null) preference.Value = await GetLastBackupDate();
-				}
-				catch(Exception ex)
-				{
-					await App.ShowError(AppResources.ToastErrorTitle, ex.Message);		
-				}
-			};
-			dataGroup.Add (backupPreference);
-
-			var restorePreference = new AlertPreference
-			{ 
-				Title = AppResources.SettingsRestoreLocallyTitle, 
-				Hint = AppResources.SettingsRestoreLocallyHint,
-				Clicked = OnClicked
-			};
-			restorePreference.OnExecute += async (sender, args) =>
-			{
-				try
-				{	
-					var backupService = DependencyService.Get<IBackupRestore>();
-					var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();				
-
-					if (backupInfo.LastBackupDate == null)
-					{
-						await Page.DisplayAlert (AppResources.RestoreNoBackupTitle, AppResources.RestoreNoBackupMessage, AppResources.OK);
-					}
-					else
-					{
-						var answer = await Page.DisplayAlert (AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
-					    if (!answer) return;
-					    await backupService.Restore();	
-
-					    // reload settings
-					    App.Settings = DependencyService.Get<ISettingsStorage>().Load();
-					    await Page.Refresh();
-
-					    await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);
-					}
-				}
-				catch(Exception ex)
-				{
-					await App.ShowError(AppResources.ToastErrorTitle, ex.Message);		
-				}
-
-			};
-			dataGroup.Add (restorePreference);
-
-			options = new string[1];
-			options[0] = AppResources.SettingsExportWorkoutDataOption1;
-			dataGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.SettingsExportWorkoutDataTitle, 
-				Hint = AppResources.SettingsExportWorkoutDataHint,
-				Options = options,
-				Clicked = OnClicked,
-				IsValueVisible = false,
-				OnSave = async(sender, args) =>
-				{
-					var preference = sender as Preference;
-					var pathName = await _exporter.ExportToCsv();
-					if (pathName != string.Empty)
-					{
-					    if (preference != null)
-					        await App.ShowToast(preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
-					}
-				}
-			});
-
-			var recalcStatisticsPreference = new AlertPreference
-			{ 
-				Title = AppResources.SettingsRecalcStatisticsTitle, 
-				Hint = AppResources.SettingsRecalcStatisticsTitleHint,
-				Clicked = OnClicked
-			};
-			recalcStatisticsPreference.OnExecute += async (sender, args) =>
-			{
-				try
-				{	
-					await _statistics.Recalc();
-					await App.ShowToast(AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);		
-				}
-				catch(Exception ex)
-				{
-					await App.ShowError(AppResources.ToastErrorTitle, ex.Message);		
-				}
-
-			};
-			dataGroup.Add (recalcStatisticsPreference);
-
-
-			#endregion
-
-			#region other group
-			var otherGroup = new PreferenceGroup { Title = AppResources.SettingsOtherTitle };
-			list.Add (otherGroup);
-
-			otherGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.ShowPreviousRepsWeight,
-				Value = ListPreference.GetBoolAsString(App.Settings.PreviousRepsWeightVisible),
-				Options = ListPreference.YesNoOptions,
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-				    if (preference != null) App.Settings.PreviousRepsWeightVisible = preference.GetValueAsBool();
-				    App.SaveSettings();
-				}
-			});
-
-			otherGroup.Add (new ListPreference
-			{ 
-				Title = AppResources.ShowTargetRepsWeight,
-				Value = ListPreference.GetBoolAsString(App.Settings.TargetRepsWeightVisible),
-				Options = ListPreference.YesNoOptions,
-				Clicked = OnClicked,
-				OnSave = (sender, args) =>
-				{
-					var preference = sender as ListPreference;
-				    if (preference != null) App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
-				    App.SaveSettings();
-				}
-			});
-
-			otherGroup.Add (new PagePreference
-			{ 
-				Title = AppResources.SettingsAboutTitle,
-				Hint = AppResources.SettingsAboutHint,
-				Navigation = Page.Navigation,
-				NavigateToPage = typeof(Views.AboutPage) 
-			});
-			#endregion
-
-			Settings = list;
-		}
-
 		public async void OnClicked(object sender, EventArgs args)
 		{
 		    var listPreference = sender as ListPreference;
@@ -444,6 +109,345 @@ namespace OneSet.ViewModels
 			return lastBackupDate;
 		}
 
+        public override async Task OnLoad(object parameter = null)
+        {
+            var list = new ObservableCollection<PreferenceGroup>();
+
+            #region general group
+            var generalGroup = new PreferenceGroup { Title = AppResources.SettingsGeneralTitle };
+            list.Add(generalGroup);
+
+            var options = new string[2];
+            options[0] = AppResources.UnitSystemMetric;
+            options[1] = AppResources.UnitSystemImperial;
+            var value = options[1];
+            if (App.Settings.IsMetric)
+                value = options[0];
+            generalGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsUnitSystemTitle,
+                Hint = "",
+                Value = value,
+                Options = options,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference != null) App.Settings.IsMetric = ((string)preference.Value == AppResources.UnitSystemMetric);
+                    App.SaveSettings();
+                }
+            });
+            #endregion
+
+            #region rules group
+            var rulesGroup = new PreferenceGroup { Title = AppResources.SettingsTrainingRulesTitle, Hint = AppResources.SettingsTrainingRulesHint };
+            list.Add(rulesGroup);
+
+            rulesGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsMaxRepsTitle,
+                Hint = AppResources.SettingsMaxRepsHint,
+                Value = App.Settings.MaxReps,
+                Options = ListPreference.GetOptionsList(0, 50, false),
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference != null) App.Settings.MaxReps = int.Parse((string)preference.Value);
+                    App.SaveSettings();
+                }
+            });
+
+            rulesGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsMinRepsTitle,
+                Hint = AppResources.SettingsMinRepsHint,
+                Value = App.Settings.MinReps,
+                Options = ListPreference.GetOptionsList(0, 50, false),
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference != null) App.Settings.MinReps = int.Parse((string)preference.Value);
+                    App.SaveSettings();
+                }
+            });
+
+            var index = 0;
+            options = new string[App.Database.RepsIncrements.Count];
+            foreach (var item in App.Database.RepsIncrements)
+            {
+                options[index++] = item.Description;
+            }
+            rulesGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsExerciseGoalTitle,
+                Hint = AppResources.SettingsExerciseGoalHint,
+                Value = App.Settings.RepsIncrement.Description,
+                Options = options,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    App.Settings.RepsIncrementId = App.Database.RepsIncrements.FirstOrDefault(x => x.Description == (string)preference.Value).RepsIncrementId;
+                    App.SaveSettings();
+                }
+            });
+
+            #endregion
+
+            #region motivation group
+            var motivationGroup = new PreferenceGroup { Title = AppResources.SettingsMotivationTitle };
+            list.Add(motivationGroup);
+
+            index = 0;
+            options = new string[App.Database.ImagePacks.Count];
+            foreach (var item in App.Database.ImagePacks)
+            {
+                options[index++] = item.Title;
+            }
+            motivationGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsMotivationalImagePacksTitle,
+                Hint = AppResources.SettingsMotivationalImagePacksHint,
+                Options = options,
+                Clicked = OnClicked,
+                Value = App.Settings.ImagePack.Title,
+                OnSave = async (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference == null) throw new ArgumentNullException(nameof(preference));
+                    if (App.Settings != null)
+                        App.Settings.ImagePackId = App.Database.ImagePacks.FirstOrDefault(x => x.Title == (string)preference.Value).ImagePackId;
+                    App.SaveSettings();
+                }
+            });
+
+            motivationGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsShowImagesInRestTimerTitle,
+                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInRestTimer),
+                Options = ListPreference.YesNoOptions,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference != null) App.Settings.CanShowImagePackInRestTimer = preference.GetValueAsBool();
+                    App.SaveSettings();
+                }
+            });
+
+            //            motivationGroup.Add(new ListPreference()
+            //            {
+            //                Title = AppResources.SettingsShowImagesPackInWorkoutTitle,
+            //                Value = ListPreference.GetBoolAsString(App.Settings.CanShowImagePackInWorkout),
+            //                Options = ListPreference.YesNoOptions,
+            //                Clicked = OnClicked,
+            //                OnSave = (sender, args) =>
+            //                {
+            //                    var preference = sender as ListPreference;
+            //                    App.Settings.CanShowImagePackInWorkout = preference.GetValueAsBool();
+            //                    App.SaveSettings();
+            //                }
+            //            });
+
+            #endregion
+
+            #region data group
+            var dataGroup = new PreferenceGroup { Title = AppResources.SettingsDataTitle };
+            list.Add(dataGroup);
+
+            dataGroup.Add(new AlertPreference
+            {
+                Title = AppResources.SettingsClearWorkoutDataTitle,
+                Hint = AppResources.SettingsClearWorkoutDataHint,
+                PopupTitle = AppResources.SettingsClearWorkoutDataTitle,
+                PopupMessage = AppResources.ClearWorkoutDataQuestion,
+                Clicked = OnClicked,
+                OnExecute = async (sender, args) =>
+                {
+                    var preference = sender as AlertPreference;
+                    await App.Database.ClearWorkoutData();
+                    if (preference != null) await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
+                }
+            });
+
+            options = new string[1];
+            options[0] = "Life Fitness equipment";
+            dataGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsLoadSampleDataTitle,
+                Hint = AppResources.SettingsLoadSampleDataHint,
+                Options = options,
+                Clicked = OnClicked,
+                IsValueVisible = false,
+                OnSave = async (sender, args) =>
+                {
+                    var preference = sender as Preference;
+                    await App.Database.LoadLifeFitnessData();
+                    if (preference != null) await App.ShowToast(preference.Title, AppResources.LoadSampleDataCompleted);
+                }
+            });
+
+            var backupPreference = new AlertPreference
+            {
+                Title = AppResources.SettingsBackupLocallyTitle,
+                Hint = AppResources.SettingsBackupLocallyHint,
+                Clicked = OnClicked,
+                Value = await GetLastBackupDate(),
+                IsValueVisible = !string.IsNullOrEmpty(await GetLastBackupDate())
+            };
+            backupPreference.OnExecute += async (sender, args) =>
+            {
+                try
+                {
+                    var backupService = DependencyService.Get<IBackupRestore>();
+                    await backupService.Backup();
+
+                    var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
+                    await App.ShowToast(AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));
+
+                    var preference = sender as AlertPreference;
+                    if (preference != null) preference.Value = await GetLastBackupDate();
+                }
+                catch (Exception ex)
+                {
+                    await App.ShowError(AppResources.ToastErrorTitle, ex.Message);
+                }
+            };
+            dataGroup.Add(backupPreference);
+
+            var restorePreference = new AlertPreference
+            {
+                Title = AppResources.SettingsRestoreLocallyTitle,
+                Hint = AppResources.SettingsRestoreLocallyHint,
+                Clicked = OnClicked
+            };
+            restorePreference.OnExecute += async (sender, args) =>
+            {
+                try
+                {
+                    var backupService = DependencyService.Get<IBackupRestore>();
+                    var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
+
+                    if (backupInfo.LastBackupDate == null)
+                    {
+                        await Page.DisplayAlert(AppResources.RestoreNoBackupTitle, AppResources.RestoreNoBackupMessage, AppResources.OK);
+                    }
+                    else
+                    {
+                        var answer = await Page.DisplayAlert(AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
+                        if (!answer) return;
+                        await backupService.Restore();
+
+                        // reload settings
+                        App.Settings = DependencyService.Get<ISettingsStorage>().Load();
+                        await Page.Refresh();
+
+                        await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await App.ShowError(AppResources.ToastErrorTitle, ex.Message);
+                }
+
+            };
+            dataGroup.Add(restorePreference);
+
+            options = new string[1];
+            options[0] = AppResources.SettingsExportWorkoutDataOption1;
+            dataGroup.Add(new ListPreference
+            {
+                Title = AppResources.SettingsExportWorkoutDataTitle,
+                Hint = AppResources.SettingsExportWorkoutDataHint,
+                Options = options,
+                Clicked = OnClicked,
+                IsValueVisible = false,
+                OnSave = async (sender, args) =>
+                {
+                    var preference = sender as Preference;
+                    var pathName = await _exporter.ExportToCsv();
+                    if (pathName != string.Empty)
+                    {
+                        if (preference != null)
+                            await App.ShowToast(preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
+                    }
+                }
+            });
+
+            var recalcStatisticsPreference = new AlertPreference
+            {
+                Title = AppResources.SettingsRecalcStatisticsTitle,
+                Hint = AppResources.SettingsRecalcStatisticsTitleHint,
+                Clicked = OnClicked
+            };
+            recalcStatisticsPreference.OnExecute += async (sender, args) =>
+            {
+                try
+                {
+                    await _statistics.Recalc();
+                    await App.ShowToast(AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);
+                }
+                catch (Exception ex)
+                {
+                    await App.ShowError(AppResources.ToastErrorTitle, ex.Message);
+                }
+
+            };
+            dataGroup.Add(recalcStatisticsPreference);
+
+
+            #endregion
+
+            #region other group
+            var otherGroup = new PreferenceGroup { Title = AppResources.SettingsOtherTitle };
+            list.Add(otherGroup);
+
+            otherGroup.Add(new ListPreference
+            {
+                Title = AppResources.ShowPreviousRepsWeight,
+                Value = ListPreference.GetBoolAsString(App.Settings.PreviousRepsWeightVisible),
+                Options = ListPreference.YesNoOptions,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference != null) App.Settings.PreviousRepsWeightVisible = preference.GetValueAsBool();
+                    App.SaveSettings();
+                }
+            });
+
+            otherGroup.Add(new ListPreference
+            {
+                Title = AppResources.ShowTargetRepsWeight,
+                Value = ListPreference.GetBoolAsString(App.Settings.TargetRepsWeightVisible),
+                Options = ListPreference.YesNoOptions,
+                Clicked = OnClicked,
+                OnSave = (sender, args) =>
+                {
+                    var preference = sender as ListPreference;
+                    if (preference != null) App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
+                    App.SaveSettings();
+                }
+            });
+
+            otherGroup.Add(new PagePreference
+            {
+                Title = AppResources.SettingsAboutTitle,
+                Hint = AppResources.SettingsAboutHint,
+                Navigation = Page.Navigation,
+                NavigateToPage = typeof(Views.AboutPage)
+            });
+            #endregion
+
+            Settings = list;
+        }
+
+        public override Task OnSave()
+	    {
+	        throw new NotImplementedException();
+	    }
 	}
 }
 

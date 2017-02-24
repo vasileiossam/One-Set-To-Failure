@@ -4,12 +4,10 @@ using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class RestTimerPage : ContentPage
-	{
+	public partial class RestTimerPage : RestTimerPageXaml
+    {
 		private readonly ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
-
-		public RestTimerViewModel ViewModel { get; set; }
 
 		public RestTimerPage()
 		{
@@ -27,12 +25,10 @@ namespace OneSet.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
             BindingContext = ViewModel;
 			ViewModel.ProgressBar = ProgressBar;
-			await ViewModel.Load ();
-
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
+			await ViewModel.OnLoad();
         }
 
 		protected override void OnDisappearing()
@@ -76,5 +72,10 @@ namespace OneSet.Views
 			}
 		}
 	}
+
+    public class RestTimerPageXaml : BasePage<RestTimerViewModel>
+    {
+
+    }
 }
 

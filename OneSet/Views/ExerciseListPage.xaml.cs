@@ -7,18 +7,8 @@ using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class ExerciseListPage : ContentPage
-	{
-		private ExerciseListViewModel _viewModel;
-		public ExerciseListViewModel ViewModel
-		{
-		    get { return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseListViewModel>()); }
-		    set
-			{
-				_viewModel = value;
-			}
-		}
-
+	public partial class ExerciseListPage : ExerciseListPageXaml
+    {
 		public ExerciseListPage ()
 		{
 			InitializeComponent ();
@@ -34,7 +24,7 @@ namespace OneSet.Views
 			base.OnAppearing();
 
 			BindingContext = ViewModel;
-			await ViewModel.Load ();
+			await ViewModel.OnLoad();
 			exercisesList.ItemsSource = ViewModel.Exercises;
 		}
 
@@ -42,7 +32,7 @@ namespace OneSet.Views
 		{
             var exercisePage = new ExerciseDetailsPage
 			{
-				ViewModel = App.Container.Resolve<ExerciseViewModel>()
+				ViewModel = App.Container.Resolve<ExerciseDetailsViewModel>()
 			};
 
 			Navigation.PushAsync(exercisePage);
@@ -52,10 +42,9 @@ namespace OneSet.Views
 		{
 			if (((ListView)sender).SelectedItem == null) return;
 
-			var viewModel = e.SelectedItem as ExerciseViewModel;
+			var viewModel = e.SelectedItem as ExerciseDetailsViewModel;
 		    if (viewModel != null)
 		    {
-		        viewModel.Navigation = Navigation;
 		        viewModel.Title = AppResources.EditExerciseTitle; 
 
 		        // its already loaded, no need to load again because it will duplicate the PlateWeight value
@@ -77,5 +66,9 @@ namespace OneSet.Views
 			((ListView)sender).SelectedItem = null;
 		}
 	}
+
+    public class ExerciseListPageXaml : BasePage<ExerciseListViewModel>
+    {
+    }
 }
 

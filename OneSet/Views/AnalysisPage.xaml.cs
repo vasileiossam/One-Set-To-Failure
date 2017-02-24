@@ -5,18 +5,13 @@ namespace OneSet.Views
 {
 	public partial class AnalysisPage : TabbedPage
 	{
-		public AnalysisViewModel ViewModel { get; set; }
+        public AnalysisViewModel ViewModel { get; set; }
 
-		public AnalysisPage ()
+        public AnalysisPage ()
 		{
-			InitializeComponent ();
-		}
-
-		protected override async void OnAppearing()
-		{
-			base.OnAppearing();
-			BindingContext = ViewModel;
-		}
+            InitializeComponent();
+            BindingContext = ViewModel;
+        }
 	}
 }
 

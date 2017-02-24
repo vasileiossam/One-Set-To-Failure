@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<local:CalendarNotesPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
+  xmlns:local="clr-namespace:OneSet.Views"
 	x:Class="OneSet.Views.CalendarNotesPage"
     Title="{Binding Title}">
 
-  <ContentPage.Padding>
+  <local:CalendarNotesPageXaml.Padding>
     <OnPlatform x:TypeArguments="Thickness"
                 iOS="5, 20, 5, 0"
                 Android="0, 0, 0, 0"
                 WinPhone="5, 0, 5, 0" />
-  </ContentPage.Padding>
+  </local:CalendarNotesPageXaml.Padding>
 
-  <ContentPage.ToolbarItems>
-      <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
-  </ContentPage.ToolbarItems>
+  <local:CalendarNotesPageXaml.ToolbarItems>
+    <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
+  </local:CalendarNotesPageXaml.ToolbarItems>
 
-  <ContentPage.Content>
-  	<ScrollView>
-  	<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
-<!--		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" FontSize="24" Keyboard="Chat"/>-->
-		<Editor x:Name="CommentEditor" Text="{Binding Notes}" Keyboard="Chat" HeightRequest="250" VerticalOptions="FillAndExpand"/>
-  	</StackLayout>
-  	</ScrollView>
-  </ContentPage.Content>
-</ContentPage>
+  <local:CalendarNotesPageXaml.Content>
+    <ScrollView>
+      <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
+        <!--		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" FontSize="24" Keyboard="Chat"/>-->
+        <Editor x:Name="CommentEditor" Text="{Binding Notes}" Keyboard="Chat" HeightRequest="250" VerticalOptions="FillAndExpand"/>
+      </StackLayout>
+    </ScrollView>
+  </local:CalendarNotesPageXaml.Content>
+  </local:CalendarNotesPageXaml>

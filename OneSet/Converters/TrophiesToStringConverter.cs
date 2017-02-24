@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Converters
 {
     /// <summary>
     /// http://stackoverflow.com/questions/12977021/best-practice-for-storing-weights-in-a-sql-database

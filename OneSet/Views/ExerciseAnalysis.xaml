@@ -1,43 +1,43 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+<local:ExerciseAnalysisXaml
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:OneSet.Views"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-	x:Class="OneSet.ExerciseAnalysis"
+	x:Class="OneSet.Views.ExerciseAnalysis"
 	>
 
-	<ContentPage.Padding>
-	<OnPlatform x:TypeArguments="Thickness"
-	            iOS="5, 20, 5, 0"
-	            Android="5, 0, 5, 0"
-	            WinPhone="5, 0, 5, 0" />
-	</ContentPage.Padding>
+  <local:ExerciseAnalysisXaml.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="5, 0, 5, 0"
+                WinPhone="5, 0, 5, 0" />
+  </local:ExerciseAnalysisXaml.Padding>
 
-	<ContentPage.Content>
-	  <ScrollView>
-	  	<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
-	  		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-	        	<Label Text="{i18n:Translate ExercisesTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
-			     <Picker x:Name="ExercisesPicker" Title="{i18n:Translate ExercisesTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged"/>
-			</StackLayout>
+  <local:ExerciseAnalysisXaml.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+          <Label Text="{i18n:Translate ExercisesTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+          <Picker x:Name="ExercisesPicker" Title="{i18n:Translate ExercisesTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged"/>
+        </StackLayout>
 
-		   <ListView x:Name="StatsList" HasUnevenRows="true">
-	        <ListView.ItemTemplate>
-	          <DataTemplate>
-	            <ViewCell>
-	      		  <ViewCell.View>
-	      			<StackLayout Orientation="{Binding CellLayoutOrientation}" HorizontalOptions="FillAndExpand" Padding="20, 10, 10, 10">
-		    			<Label Text="{Binding Title}" FontSize="Medium" HorizontalOptions="Start" TextColor="{StaticResource secondaryText}"/>	
-						<Label Text="{Binding Value}" FontSize="Medium" HorizontalOptions="EndAndExpand" TextColor="{StaticResource primaryText}"/>	
-	    			</StackLayout>
-	              </ViewCell.View>
-	            </ViewCell>
-	          </DataTemplate>
-	        </ListView.ItemTemplate>
-	      </ListView>
+        <ListView x:Name="StatsList" HasUnevenRows="true">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <ViewCell.View>
+                  <StackLayout Orientation="{Binding CellLayoutOrientation}" HorizontalOptions="FillAndExpand" Padding="20, 10, 10, 10">
+                    <Label Text="{Binding Title}" FontSize="Medium" HorizontalOptions="Start" TextColor="{StaticResource secondaryText}"/>
+                    <Label Text="{Binding Value}" FontSize="Medium" HorizontalOptions="EndAndExpand" TextColor="{StaticResource primaryText}"/>
+                  </StackLayout>
+                </ViewCell.View>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
 
-		</StackLayout>
-		</ScrollView>
-	</ContentPage.Content>
-</ContentPage>
+      </StackLayout>
+    </ScrollView>
+  </local:ExerciseAnalysisXaml.Content>
+  </local:ExerciseAnalysisXaml>

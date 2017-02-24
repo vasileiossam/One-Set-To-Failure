@@ -1,12 +1,9 @@
 ﻿using OneSet.ViewModels;
-using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class WorkoutPage : ContentPage
-	{
-		public WorkoutViewModel ViewModel { get; set; }
-
+	public partial class WorkoutPage : WorkoutPageXaml
+    {
 		public WorkoutPage ()
 		{
 			InitializeComponent ();
@@ -16,9 +13,13 @@ namespace OneSet.Views
         {
             base.OnAppearing();
 
-			await ViewModel.LoadAsync ();
-			BindingContext = ViewModel;
+            BindingContext = ViewModel;
+            await ViewModel.OnLoad();
         }
 	}
+
+    public class WorkoutPageXaml : BasePage<WorkoutViewModel>
+    {
+    }
 }
 

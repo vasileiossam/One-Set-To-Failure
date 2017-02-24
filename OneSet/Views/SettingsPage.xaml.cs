@@ -1,41 +1,24 @@
 ﻿using System.Threading.Tasks;
-using Autofac;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class SettingsPage : ContentPage
-	{
-		protected SettingsViewModel _viewModel;
-		public SettingsViewModel ViewModel
-		{
-			get
-			{
-			    return _viewModel ?? (_viewModel = App.Container.Resolve<SettingsViewModel>());
-                //{
-			        //Navigation = this.Navigation,
-			        //Page = this
-			    //});
-			}
-			set
-			{
-				_viewModel = value;
-			}
-		}
-
+	public partial class SettingsPage : SettingsPageXaml
+    {
 		public SettingsPage()
 		{
 			InitializeComponent ();
-			BindingContext = ViewModel;
 		}
 
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
 
-			await ViewModel.Load();
-			settingsList.ItemsSource = ViewModel.Settings;
+            BindingContext = ViewModel;
+            await ViewModel.OnLoad();
+
+            settingsList.ItemsSource = ViewModel.Settings;
 		}
 
 	    public void OnSettingTapped(object sender, ItemTappedEventArgs e)
@@ -49,10 +32,14 @@ namespace OneSet.Views
 
 		public async Task Refresh()
 		{
-			await ViewModel.Load();
+			await ViewModel.OnLoad();
 			settingsList.ItemsSource = null;
 			settingsList.ItemsSource = ViewModel.Settings;
 		}
 	}
+
+    public class SettingsPageXaml : BasePage<SettingsViewModel>
+    {
+    }
 }
 

@@ -5,21 +5,8 @@ using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class ChartsPage : ContentPage
-	{
-		private ChartsViewModel _viewModel;
-		public ChartsViewModel ViewModel
-		{
-			get
-			{
-			    return _viewModel ?? (_viewModel = App.Container.Resolve<ChartsViewModel>());
-			}
-			set
-			{
-				_viewModel = value;
-			}
-		}
-
+	public partial class ChartsPage : ChartsPageXaml
+    {
 		public ChartsPage ()
 		{
 			InitializeComponent ();
@@ -29,9 +16,11 @@ namespace OneSet.Views
 		{
 			base.OnAppearing ();
 
-			ViewModel.OxyPlotsLayout = OxyPlotsLayout;
-			await ViewModel.Load ();
-			ChartsPicker.SelectedIndex = 0;
+            BindingContext = ViewModel;
+            ViewModel.OxyPlotsLayout = OxyPlotsLayout;
+		    await ViewModel.OnLoad();
+
+            ChartsPicker.SelectedIndex = 0;
 		}
 
 		private async void OnSelectedIndexChanged(object sender, EventArgs eventArgs)
@@ -50,5 +39,9 @@ namespace OneSet.Views
 		    }
 		}
 	}
+
+    public class ChartsPageXaml : BasePage<ChartsViewModel>
+    {
+    }
 }
 

@@ -3,15 +3,14 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AutoMapper;
 using OneSet.Abstract;
-using OneSet.Converters;
 using OneSet.Resx;
 
 namespace OneSet.ViewModels
 {
 	public class ExerciseListViewModel : BaseViewModel
 	{
-		protected ObservableCollection<ExerciseViewModel> _exercises;
-		public ObservableCollection<ExerciseViewModel> Exercises
+		protected ObservableCollection<ExerciseDetailsViewModel> _exercises;
+		public ObservableCollection<ExerciseDetailsViewModel> Exercises
 		{
 			get
 			{
@@ -63,15 +62,15 @@ namespace OneSet.ViewModels
             Title = AppResources.ExercisesTitle;
 		}
 
-        public async Task Load()
+        public override async Task OnLoad(object parameter = null)
 		{
 			try
 			{
 				var exercisesList = await _exercisesRepository.AllAsync();
-				var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseViewModel>>(exercisesList);
+				var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseDetailsViewModel>>(exercisesList);
 				foreach(var item in exerciseViewModelsList)
 				{
-					await item.Load();
+				    await item.OnLoad(parameter);
 				}
 
 				if (exerciseViewModelsList ==  null)
@@ -91,6 +90,11 @@ namespace OneSet.ViewModels
 				App.ShowErrorPage (this, ex);
 			}
 		}
-	}
+
+        public override Task OnSave()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 

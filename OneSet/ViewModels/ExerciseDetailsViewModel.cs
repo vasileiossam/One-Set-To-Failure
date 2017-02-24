@@ -12,14 +12,17 @@ using OneSet.Services;
 
 namespace OneSet.ViewModels
 {
-	public class ExerciseViewModel : BaseViewModel
+	public class ExerciseDetailsViewModel : BaseViewModel
 	{
+        private readonly INavigationService _navigationService;
         private readonly IUnitsService _units;
         private readonly IExercisesRepository _exercisesRepository;
         private readonly IRoutineDaysRepository _routineDaysRepository;
 
-        public ExerciseViewModel(IUnitsService units, IExercisesRepository exercisesRepository, IRoutineDaysRepository routineDaysRepository) : base()
+        public ExerciseDetailsViewModel(INavigationService navigationService, IUnitsService units, 
+            IExercisesRepository exercisesRepository, IRoutineDaysRepository routineDaysRepository)
         {
+            _navigationService = navigationService;
             _units = units;
             _exercisesRepository = exercisesRepository;
             _routineDaysRepository = routineDaysRepository;
@@ -106,7 +109,7 @@ namespace OneSet.ViewModels
 			get { return _deleteCommand ?? (_deleteCommand = new Command(() => OnDelete())); }
 		}
 
- 	    public async Task Load()
+        public override async Task OnLoad(object parameter)
 		{
 			await LoadRoutine ();
 			PlateWeight = _units.GetWeight(App.Settings.IsMetric, PlateWeight);
@@ -212,7 +215,7 @@ namespace OneSet.ViewModels
 			return true;
 		}
 
-		protected override async Task OnSave () 
+        public override async Task OnSave () 
 		{
             if (Validate())
             {
@@ -228,7 +231,7 @@ namespace OneSet.ViewModels
                 await SaveRoutine();
 
                 await App.ShowSuccess(AppResources.ExerciseSaved);
-                await Navigation.PopAsync();
+                await _navigationService.PopAsync();
             }
         }
 
@@ -241,7 +244,7 @@ namespace OneSet.ViewModels
 				if (answer)
 				{
 					await _exercisesRepository.DeleteAsync(ExerciseId);
-					await Navigation.PopAsync();
+					await _navigationService.PopAsync();
 				}
 			}
 			catch(Exception ex)

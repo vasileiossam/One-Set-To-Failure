@@ -4,21 +4,22 @@ using OneSet.Abstract;
 using OneSet.Localization;
 using OneSet.Models;
 using OneSet.Resx;
-using OneSet.Services;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
     public class WorkoutViewModel : BaseViewModel
     {
+        private readonly INavigationService _navigationService;
         private readonly IUnitsService _units;
         private readonly IWorkoutRules _workoutRules;
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly IExercisesRepository _exercisesRepository;
 
-        public WorkoutViewModel(IUnitsService units, IWorkoutRules workoutRules, 
+        public WorkoutViewModel(INavigationService navigationService, IUnitsService units, IWorkoutRules workoutRules, 
             IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
         {
+            _navigationService = navigationService;
             _exercisesRepository = exercisesRepository;
             _workoutsRepository = workoutsRepository;
             _units = units;
@@ -86,12 +87,6 @@ namespace OneSet.ViewModels
         public ICommand TargetIconCommand { get; set; }
 		#endregion
 
-		public async Task LoadAsync()
-		{
-			RestTimerToolbarItem.Update();
-            Exercise = await _exercisesRepository.FindAsync(Workout.ExerciseId);
-        }
-
 		private async Task<bool> Validate ()
 		{
 			if (Workout.Reps == 0)
@@ -121,7 +116,13 @@ namespace OneSet.ViewModels
 			return true;
 		}
 
-		protected override async Task OnSave () 
+        public override async Task OnLoad(object parameter = null)
+        {
+            RestTimerToolbarItem.Update();
+            Exercise = await _exercisesRepository.FindAsync(Workout.ExerciseId);
+        }
+
+        public override async Task OnSave () 
 		{
 			Workout.Reps = Reps;
 
@@ -148,11 +149,11 @@ namespace OneSet.ViewModels
 
 				if (App.Settings.RestTimerAutoStart && !isPersisted)
 				{
-					await Navigation.PopAsync (false);
+					await _navigationService.PopAsync();
 					await RestTimerToolbarItem.AutoStart ();
 				} else
 				{
-					await Navigation.PopAsync();					
+					await _navigationService.PopAsync();					
 				}
 			}
 		}
@@ -168,7 +169,6 @@ namespace OneSet.ViewModels
 				Reps = Reps + 1;
 			}
 
-			// following statement will prevent a compiler warning about async method lacking await
 			await Task.FromResult(0);
 		}
 
@@ -251,7 +251,7 @@ namespace OneSet.ViewModels
                 Weight = ConvertedTargetWeight;
             }
         }
-		#endregion
+        #endregion
     }
 }
 

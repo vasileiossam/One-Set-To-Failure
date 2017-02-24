@@ -11,6 +11,7 @@ using OneSet.Converters;
 using OneSet.Data;
 using OneSet.Localization;
 using OneSet.Models;
+using System;
 
 namespace OneSet.ViewModels
 {
@@ -62,7 +63,7 @@ namespace OneSet.ViewModels
 			ChartsPinchToZoomVisible = false;			
 		}
 
-		public async Task Load()
+        public override async Task OnLoad(object parameter = null)
 		{
 			_workouts = await _workoutsRepository.AllAsync ();
 			_exercises = await _exercisesRepository.AllAsync ();
@@ -253,6 +254,11 @@ namespace OneSet.ViewModels
 				OxyPlotsLayout.Children.Add(plotView);		
 			}
 		}
-	}
+
+        public override Task OnSave()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 

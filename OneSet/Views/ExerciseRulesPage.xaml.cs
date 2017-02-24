@@ -3,7 +3,7 @@
 namespace OneSet.Views
 {
 	public partial class ExerciseRulesPage : ContentPage
-	{
+    {
 		public ExerciseRulesPage ()
 		{
 			InitializeComponent ();

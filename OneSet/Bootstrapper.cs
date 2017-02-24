@@ -7,6 +7,9 @@ using OneSet.Services;
 using OneSet.ViewModels;
 using System.Reflection;
 using OneSet.Data;
+using OneSet.Views;
+using Xamarin.Forms;
+using SQLite;
 
 namespace OneSet
 {
@@ -21,26 +24,30 @@ namespace OneSet
 
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
-            // register services
-            builder.RegisterType<UnitsService>().As<IUnitsService>().SingleInstance();
-            builder.RegisterType<WorkoutRules>().As<IWorkoutRules>().SingleInstance();
-            builder.RegisterType<Statistics>().As<ΙStatistics>().SingleInstance();
-            builder.RegisterType<Exporter>().As<IExporter>().SingleInstance();
+            // register database
+            builder.Register(c => DependencyService.Get<ISQLite>().GetConnection()).As<SQLiteAsyncConnection>().SingleInstance();
             builder.RegisterType<Database>().SingleInstance();
 
-            // register view views
-            builder.RegisterAssemblyTypes(typeof(Database).GetTypeInfo().Assembly)
-               .Where(t => t.Namespace == " OneSet.Views")
-               .InstancePerRequest();
+            // register services
+            builder.RegisterType<UnitsService>().As<IUnitsService>().SingleInstance();
+            builder.RegisterType<WorkoutRules>().As<IWorkoutRules>().InstancePerLifetimeScope();
+            builder.RegisterType<Statistics>().As<ΙStatistics>().InstancePerLifetimeScope();
+            builder.RegisterType<Exporter>().As<IExporter>().InstancePerLifetimeScope();
+            builder.RegisterType<NavigationService>().As<INavigationService>().InstancePerLifetimeScope();
+
+            // register views
+            builder.RegisterAssemblyTypes(typeof(AboutPage).GetTypeInfo().Assembly)
+               .Where(t => t.Namespace == "OneSet.Views")
+               .InstancePerLifetimeScope();
 
             // register view models
-            builder.RegisterAssemblyTypes(typeof(Database).GetTypeInfo().Assembly)
-               .Where(t => t.Namespace == " OneSet.ViewModels")
-               .InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(WorkoutListViewModel).GetTypeInfo().Assembly)
+               .Where(t => t.Namespace == "OneSet.ViewModels")
+               .InstancePerLifetimeScope();
 
             // register repositories
-            builder.RegisterAssemblyTypes(typeof(Database).GetTypeInfo().Assembly)
-               .Where(t => t.Namespace == " OneSet.Data" && t.Name.EndsWith("Repository"))
+            builder.RegisterAssemblyTypes(typeof(CalendarRepository).GetTypeInfo().Assembly)
+               .Where(t => t.Namespace == "OneSet.Data" && t.Name.EndsWith("Repository"))
                .AsImplementedInterfaces()
                .SingleInstance();
             
@@ -49,8 +56,8 @@ namespace OneSet
         public void Automapper()
 		{
             Mapper.CreateMap<RoutineDay, RoutineDayViewModel> ();
-            Mapper.CreateMap<Exercise, ExerciseViewModel> ();
-            Mapper.CreateMap<ExerciseViewModel, Exercise> ();
+            Mapper.CreateMap<Exercise, ExerciseDetailsViewModel> ();
+            Mapper.CreateMap<ExerciseDetailsViewModel, Exercise> ();
         }
 
         public void CheckMapper()

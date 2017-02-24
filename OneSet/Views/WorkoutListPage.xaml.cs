@@ -5,28 +5,10 @@ using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class WorkoutListPage : ContentPage
-	{
+	public partial class WorkoutListPage : WorkoutListPageXaml
+    {
 		private readonly ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
-
-        private WorkoutListViewModel _viewModel;
-        public WorkoutListViewModel ViewModel
-        {
-			get
-			{
-			    return _viewModel ?? (_viewModel = App.Container.Resolve<WorkoutListViewModel>());
-       //         {
-			    //    Navigation = Navigation,
-			    //    Page = this,
-			    //    RestTimerToolbarItem = new RestTimerToolbarItem {Navigation = Navigation}
-			    //});
-			}
-			set
-            {
-				_viewModel = value;
-            }
-        }
 
         public WorkoutListPage()
 		{
@@ -34,8 +16,8 @@ namespace OneSet.Views
 			_screenSizeHandler = new ScreenSizeHandler ();
 
 			_stackOrientation = StackOrientation.Horizontal;
-			if ((_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait) 
-				&& (_screenSizeHandler.GetScreenSize() == ScreenSizes.Small) )
+			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait 
+				&& _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
 			{
 				_stackOrientation = StackOrientation.Vertical;
 			}
@@ -46,7 +28,7 @@ namespace OneSet.Views
             base.OnAppearing();
 
 			BindingContext = ViewModel;
-			await ViewModel.Load (App.CurrentDate);
+			await ViewModel.OnLoad(App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
 			ChangeOrientation (true);
 
@@ -80,7 +62,6 @@ namespace OneSet.Views
             {
                 var viewModel = App.Container.Resolve<WorkoutViewModel>();
                 viewModel.Workout = routineDayViewModel.Workout;
-                viewModel.Navigation = Navigation;
                 viewModel.RestTimerToolbarItem = ViewModel.RestTimerToolbarItem;
 
                 var workoutPage = new WorkoutPage
@@ -154,5 +135,9 @@ namespace OneSet.Views
 			Refresh ();
 		}
 	}
+
+    public class WorkoutListPageXaml : BasePage<WorkoutListViewModel>
+    {
+    }
 }
 

@@ -5,19 +5,16 @@ using OneSet.Abstract;
 using OneSet.Resx;
 using Xamarin.Forms;
 
-namespace OneSet
-{
-	public enum RestTimerStates 
-	{
-		Paused,
-		Running,
-		Editing
-	};
-}
-
 namespace OneSet.ViewModels
 {
-	public class RestTimerViewModel : BaseViewModel
+    public enum RestTimerStates
+    {
+        Paused,
+        Running,
+        Editing
+    }
+
+    public class RestTimerViewModel : BaseViewModel
 	{
 		public ProgressBar ProgressBar { get; set; }
 		protected double _progressStep;
@@ -181,7 +178,7 @@ namespace OneSet.ViewModels
 			});
 		}
 
-		public async Task Load()
+        public override async Task OnLoad(object parameter = null)
 		{
 			_canSave = false;
 			AutoStart = App.Settings.RestTimerAutoStart;
@@ -293,6 +290,11 @@ namespace OneSet.ViewModels
 		{
 			State = RestTimerStates.Paused;
 		}
+
+        public override Task OnSave()
+	    {
+	        throw new NotImplementedException();
+	    }
 	}
 }
 

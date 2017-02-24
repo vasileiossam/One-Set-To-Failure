@@ -2,9 +2,11 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Autofac;
 using Plugin.Toasts;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using OneSet.Data;
 
 namespace OneSet.Droid
 {
@@ -26,14 +28,14 @@ namespace OneSet.Droid
             var currentDomain = AppDomain.CurrentDomain;
 			currentDomain.UnhandledException += HandleUnhandledException;
 
-			var bootstrapper = new Bootstrapper ();
-			bootstrapper.Automapper ();
-		    App.Container = bootstrapper.CreateContainer();
-
 			OxyPlot.Xamarin.Forms.Platform.Android.Forms.Init();
-
 			Forms.Init (this, bundle);
 
+            var bootstrapper = new Bootstrapper();
+            bootstrapper.Automapper();
+            App.Container = bootstrapper.CreateContainer();
+		    App.Database = App.Container.Resolve<Database>();
+		    
             DependencyService.Register<ToastNotification>();
             ToastNotification.Init(this, new PlatformOptions { SmallIconDrawable = Android.Resource.Drawable.IcDialogInfo });
 

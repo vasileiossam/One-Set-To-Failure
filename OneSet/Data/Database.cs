@@ -57,9 +57,9 @@ namespace OneSet.Data
 	    /// <summary>
 	    /// if the database doesn't exist, it will create the database and all the tables.
 	    /// </summary>
-	    public Database()
+	    public Database(SQLiteAsyncConnection connection)
 		{
-			_connection = DependencyService.Get<ISQLite> ().GetConnection ();
+			_connection = connection;
 			CreateDatabaseAsync ();
 		}
 

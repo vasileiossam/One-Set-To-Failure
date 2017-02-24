@@ -1,78 +1,79 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<local:ExerciseDetailsPageXaml
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="OneSet.Views.ExerciseDetailsPage"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
 	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
+  xmlns:local="clr-namespace:OneSet.Views"
 	Title="{Binding Title}">
 
-	<ContentPage.Padding>
-	<OnPlatform x:TypeArguments="Thickness"
-	            iOS="5, 20, 5, 0"
-	            Android="5, 0, 5, 0"
-	            WinPhone="5, 0, 5, 0" />
-	</ContentPage.Padding>
+  <local:ExerciseDetailsPageXaml.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="5, 0, 5, 0"
+                WinPhone="5, 0, 5, 0" />
+  </local:ExerciseDetailsPageXaml.Padding>
 
-  <ContentPage.ToolbarItems>
-      <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
-  </ContentPage.ToolbarItems>
-  
-  <ContentPage.Content>
-	  <ScrollView>
-	    <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
+  <local:ExerciseDetailsPageXaml.ToolbarItems>
+    <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
+  </local:ExerciseDetailsPageXaml.ToolbarItems>
 
-		  <ContentView Padding="0, 10, 0, 0">
-	      	<controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="{StaticResource primaryText}" FontSize="Medium" Keyboard="Chat"/>
-		  </ContentView>
+  <local:ExerciseDetailsPageXaml.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
-	      <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-	      	<Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>	
-	 		<controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center" TextChanged="OnTextChanged"/>
-	      </StackLayout>
+        <ContentView Padding="0, 10, 0, 0">
+          <controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="{StaticResource primaryText}" FontSize="Medium" Keyboard="Chat"/>
+        </ContentView>
 
-		  <ContentView Padding="0, 10, 0, 10">
-	        <Label Text="{i18n:Translate TrainingProgram}" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>	
-		  </ContentView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+          <Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>
+          <controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center" TextChanged="OnTextChanged"/>
+        </StackLayout>
 
-		  <Grid RowSpacing="0" HorizontalOptions="Start">
-			<Grid.RowDefinitions>
-			  <RowDefinition Height="*" />  
-			</Grid.RowDefinitions>
+        <ContentView Padding="0, 10, 0, 10">
+          <Label Text="{i18n:Translate TrainingProgram}" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+        </ContentView>
 
-			<Grid.ColumnDefinitions>
-			  <ColumnDefinition Width="Auto" />
-			  <ColumnDefinition Width="150" />
-			</Grid.ColumnDefinitions>
+        <Grid RowSpacing="0" HorizontalOptions="Start">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
 
-			<Label x:Name="MonLabel" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnMon}" Grid.Row="0" Grid.Column="1"/>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="150" />
+          </Grid.ColumnDefinitions>
 
-			<Label x:Name="TueLabel" Grid.Row="1" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnTue}" Grid.Row="1" Grid.Column="1"/>
+          <Label x:Name="MonLabel" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnMon}" Grid.Row="0" Grid.Column="1"/>
 
-			<Label x:Name="WedLabel" Grid.Row="2" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnWed}" Grid.Row="2" Grid.Column="1"/>
+          <Label x:Name="TueLabel" Grid.Row="1" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnTue}" Grid.Row="1" Grid.Column="1"/>
 
-			<Label x:Name="ThuLabel" Grid.Row="3" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnThu}" Grid.Row="3" Grid.Column="1"/>
+          <Label x:Name="WedLabel" Grid.Row="2" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnWed}" Grid.Row="2" Grid.Column="1"/>
 
-			<Label x:Name="FriLabel" Grid.Row="4" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnFri}" Grid.Row="4" Grid.Column="1"/>
+          <Label x:Name="ThuLabel" Grid.Row="3" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnThu}" Grid.Row="3" Grid.Column="1"/>
 
-			<Label x:Name="SatLabel" Grid.Row="5" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnSat}" Grid.Row="5" Grid.Column="1"/>
+          <Label x:Name="FriLabel" Grid.Row="4" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnFri}" Grid.Row="4" Grid.Column="1"/>
 
-			<Label x:Name="SunLabel" Grid.Row="6" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding DoOnSun}" Grid.Row="6" Grid.Column="1"/>
-		  </Grid>
-	        
-		  <ContentView Padding="0, 10, 0, 10">
-	      	<Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" Keyboard="Chat"/>
-		  </ContentView>
+          <Label x:Name="SatLabel" Grid.Row="5" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnSat}" Grid.Row="5" Grid.Column="1"/>
 
-	    </StackLayout>
-	</ScrollView>
-  </ContentPage.Content>
-</ContentPage>
+          <Label x:Name="SunLabel" Grid.Row="6" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding DoOnSun}" Grid.Row="6" Grid.Column="1"/>
+        </Grid>
+
+        <ContentView Padding="0, 10, 0, 10">
+          <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" Keyboard="Chat"/>
+        </ContentView>
+
+      </StackLayout>
+    </ScrollView>
+  </local:ExerciseDetailsPageXaml.Content>
+  </local:ExerciseDetailsPageXaml>
 	 

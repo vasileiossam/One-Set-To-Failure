@@ -28,15 +28,16 @@ namespace OneSet.ViewModels
         }
 
 	    private readonly ICalendarRepository _repo;
+        private readonly INavigationService _navigationService;
 
-        public CalendarNotesViewModel(ICalendarRepository repo)
-            : base()
+        public CalendarNotesViewModel(INavigationService navigationService, ICalendarRepository repo)
         {
+            _navigationService = navigationService;
             _repo = repo;
             Title = AppResources.CommentTitle;
 		}
 
-		public async Task Load()
+		public override async Task OnLoad(object parameter = null)
 		{
 			var all = await _repo.AllAsync ();
 			var calendar = all.FirstOrDefault(x => x.Date == _date);
@@ -57,15 +58,15 @@ namespace OneSet.ViewModels
 			return true;
 		}
 
-		protected override async Task OnSave () 
+        public override async Task OnSave () 
 		{
 			if (Validate ())
 			{
 				var calendar = new Calendar { CalendarId = CalendarId, Date = Date, Notes = Notes.Trim() };
 				await _repo.SaveAsync(calendar);
-				await Navigation.PopAsync();
+				await _navigationService.PopAsync();
 			}
 		}
-	}
+    }
 }
 

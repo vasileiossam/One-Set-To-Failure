@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Autofac;
 using Xamarin.Forms;
 using OneSet.Abstract;
+using OneSet.Views;
 
 namespace OneSet.ViewModels
 {
@@ -44,19 +46,24 @@ namespace OneSet.ViewModels
 		private readonly ICommand _command;
 		public ICommand Command => _command;
 
-	    public RestTimerToolbarItem()
-			: base()
-		{
-			_command = new Command (async() => { await OnRestTimerCommand(); });
+        private readonly INavigationService _navigationService;
+        private readonly IComponentContext _componentContext;
+
+        public RestTimerToolbarItem(INavigationService navigationService, IComponentContext componentContext)
+        {
+            _navigationService = navigationService;
+            _componentContext = componentContext;
+            _command = new Command (async() => { await OnRestTimerCommand(); });
 			_isRunning = false;
 		}
 
 		private async Task OnRestTimerCommand()
 		{
 			_terminated = true;
-			var viewModel = new RestTimerViewModel {Navigation = Navigation};
-			var page = new Views.RestTimerPage {ViewModel = viewModel};
-			await Navigation.PushAsync(page); 	
+
+		    var page = _componentContext.Resolve<RestTimerPage>();
+            page.ViewModel = _componentContext.Resolve<RestTimerViewModel>();
+            await _navigationService.PushAsync(page); 	
 		}
 
 		public async Task AutoStart()
@@ -64,10 +71,10 @@ namespace OneSet.ViewModels
 			if (!_isRunning)
 			{
 				_terminated = true;
-				var viewModel = new RestTimerViewModel { Navigation = Navigation };
-				var page = new Views.RestTimerPage { ViewModel = viewModel };
-				await Navigation.PushAsync (page); 	
-				await viewModel.OnStartCommand ();
+                var page = _componentContext.Resolve<RestTimerPage>();
+                page.ViewModel = _componentContext.Resolve<RestTimerViewModel>();
+				await _navigationService.PushAsync (page); 	
+				await page.ViewModel.OnStartCommand ();
 			}
 		}
 
@@ -115,6 +122,16 @@ namespace OneSet.ViewModels
 				Text = string.Empty;
 			}
 		}
+
+        public override Task OnLoad(object parameter)
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    public override Task OnSave()
+	    {
+	        throw new NotImplementedException();
+	    }
 	}
 }
 

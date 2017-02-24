@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+<local:ChartsPageXaml
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:OneSet.Views"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
 	x:Class="OneSet.Views.ChartsPage"
 	>
 
-	<ContentPage.Padding>
-	<OnPlatform x:TypeArguments="Thickness"
-	            iOS="5, 20, 5, 0"
-	            Android="5, 0, 5, 0"
-	            WinPhone="5, 0, 5, 0" />
-	</ContentPage.Padding>
+  <local:ChartsPageXaml.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="5, 0, 5, 0"
+                WinPhone="5, 0, 5, 0" />
+  </local:ChartsPageXaml.Padding>
 
-	<ContentPage.Content>
-	  <ScrollView>
-	  	<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
-	  		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-	        	<Label Text="{i18n:Translate ChartsTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+  <local:ChartsPageXaml.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+          <Label Text="{i18n:Translate ChartsTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
 
-			     <Picker x:Name="ChartsPicker" Title="{i18n:Translate ChartsTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged">
-			        <Picker.Items>
-			            <x:String>Weight per workout</x:String> 
-			            <x:String>Reps per workout</x:String>
-			        </Picker.Items>
-			    </Picker> 
-			</StackLayout>
+          <Picker x:Name="ChartsPicker" Title="{i18n:Translate ChartsTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged">
+            <Picker.Items>
+              <x:String>Weight per workout</x:String>
+              <x:String>Reps per workout</x:String>
+            </Picker.Items>
+          </Picker>
+        </StackLayout>
 
-		    <Label IsVisible="{Binding NoChartsDataVisible}" Text="{i18n:Translate NoChartsData}" FontSize="Large" TextColor="{StaticResource secondaryText}"/>
+        <Label IsVisible="{Binding NoChartsDataVisible}" Text="{i18n:Translate NoChartsData}" FontSize="Large" TextColor="{StaticResource secondaryText}"/>
 
-		    <Label IsVisible="{Binding ChartsPinchToZoomVisible}" Text="{i18n:Translate ChartsPinchToZoom}" FontSize="Large" TextColor="{StaticResource secondaryText}"/>
+        <Label IsVisible="{Binding ChartsPinchToZoomVisible}" Text="{i18n:Translate ChartsPinchToZoom}" FontSize="Large" TextColor="{StaticResource secondaryText}"/>
 
-		    <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
-			</StackLayout>
-		</StackLayout>
-		</ScrollView>
-	</ContentPage.Content>
-</ContentPage>
+        <StackLayout x:Name="OxyPlotsLayout" VerticalOptions="StartAndExpand" Orientation="Vertical">
+        </StackLayout>
+      </StackLayout>
+    </ScrollView>
+  </local:ChartsPageXaml.Content>
+  </local:ChartsPageXaml>

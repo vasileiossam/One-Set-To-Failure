@@ -1,88 +1,89 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<local:RestTimerPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
 	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
-	xmlns:local="clr-namespace:OneSet;assembly=OneSet"
+	xmlns:local="clr-namespace:OneSet.Views"
+  xmlns:viewmodels="clr-namespace:OneSet.ViewModels"
 	xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
 	x:Class="OneSet.Views.RestTimerPage"
     Title="{Binding Title}">
 
-  <ContentPage.Padding>
+  <local:RestTimerPageXaml.Padding>
     <OnPlatform x:TypeArguments="Thickness"
                 iOS="5, 20, 5, 0"
                 Android="0, 0, 0, 0"
                 WinPhone="5, 0, 5, 0" />
-  </ContentPage.Padding>
+  </local:RestTimerPageXaml.Padding>
 
-  <ContentPage.Resources>
+  <local:RestTimerPageXaml.Resources>
     <ResourceDictionary>
       <converters:StateToBooleanConverter x:Key="stateToBooleanConverter" />
     </ResourceDictionary>
-  </ContentPage.Resources>
+  </local:RestTimerPageXaml.Resources>
 
-  <ContentPage.Content>
+  <local:RestTimerPageXaml.Content>
 
-  	<StackLayout x:Name="MainStackLayout" Orientation="Vertical" Padding="10, 0, 10, 0">
+    <StackLayout x:Name="MainStackLayout" Orientation="Vertical" Padding="10, 0, 10, 0">
 
-		<StackLayout Orientation="Vertical" Padding="0, 0, 0, 0" VerticalOptions="Start" HorizontalOptions="Start">
+      <StackLayout Orientation="Vertical" Padding="0, 0, 0, 0" VerticalOptions="Start" HorizontalOptions="Start">
 
-		  <StackLayout Orientation="Horizontal" Padding="0, 0, 20, 0">
-			  <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Editing}}" HorizontalOptions="Start" WidthRequest="172">
-          <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}" TextChanged="OnTextChanged"/>
-			  </ContentView>
+        <StackLayout Orientation="Horizontal" Padding="0, 0, 20, 0">
+          <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Editing}}" HorizontalOptions="Start" WidthRequest="172">
+            <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}" TextChanged="OnTextChanged"/>
+          </ContentView>
 
-			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
-				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
-			  </ContentView>
-			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
-				<Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
-			  </ContentView>
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
+            <Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+          </ContentView>
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
+            <Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+          </ContentView>
 
-			  <Button BackgroundColor="Transparent" Image="{Binding PlaySoundsImage}" Command="{Binding PlaySoundsCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
-		  </StackLayout>
+          <Button BackgroundColor="Transparent" Image="{Binding PlaySoundsImage}" Command="{Binding PlaySoundsCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
 
-		  <ContentView Padding="0, 0, 0, 8" HorizontalOptions="Fill">
-		  	<ProgressBar x:Name = "ProgressBar"/>
-		  </ContentView>
+        <ContentView Padding="0, 0, 0, 8" HorizontalOptions="Fill">
+          <ProgressBar x:Name = "ProgressBar"/>
+        </ContentView>
 
-		  <Grid RowSpacing="0">
-			<Grid.RowDefinitions>
-			  <RowDefinition Height="*" />  
-			</Grid.RowDefinitions>
+        <Grid RowSpacing="0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
 
-			<Grid.ColumnDefinitions>
-			  <ColumnDefinition Width="Auto" />
-			  <ColumnDefinition Width="150" />
-			</Grid.ColumnDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="150" />
+          </Grid.ColumnDefinitions>
 
-			<Label Text="{i18n:Translate RestTimerAutoStartTitle}" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-			<Switch IsToggled="{Binding AutoStart}" Grid.Row="0" Grid.Column="1" />
-		  </Grid>
+          <Label Text="{i18n:Translate RestTimerAutoStartTitle}" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
+          <Switch IsToggled="{Binding AutoStart}" Grid.Row="0" Grid.Column="1" />
+        </Grid>
 
-		  <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 5">		   
-			  <!-- Start button in Paused and Editing states -->
-			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Paused}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start"> 
-				<controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White" />
-			  </ContentView>
-			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Editing}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
-				<controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White" />
-			  </ContentView>
+        <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 5">
+          <!-- Start button in Paused and Editing states -->
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Paused}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+            <controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White" />
+          </ContentView>
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Editing}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+            <controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White" />
+          </ContentView>
 
-			  <!-- Pause button -->
-			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
-				<controls:BlueButton Text="{i18n:Translate RestTimerPause}" Command="{Binding PauseCommand}" TextColor="White"/>
-			  </ContentView>
-			  <!-- Reset button -->
-			  <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static local:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
-				<controls:BlueButton Text="{i18n:Translate RestTimerReset}" Command="{Binding ResetCommand}" TextColor="White"/>
-			  </ContentView>
-		  </StackLayout>
-		</StackLayout>
+          <!-- Pause button -->
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+            <controls:BlueButton Text="{i18n:Translate RestTimerPause}" Command="{Binding PauseCommand}" TextColor="White"/>
+          </ContentView>
+          <!-- Reset button -->
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+            <controls:BlueButton Text="{i18n:Translate RestTimerReset}" Command="{Binding ResetCommand}" TextColor="White"/>
+          </ContentView>
+        </StackLayout>
+      </StackLayout>
 
-	  	<ContentView x:Name="MotivationalQuoteImage" IsVisible="{Binding MotivationalQuoteImageVisible}" Padding="0, 0, 0, 0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="250">
-			<Image Source="{Binding MotivationalQuoteImageFile}" Aspect="AspectFit" BackgroundColor="Black"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
-		</ContentView>
+      <ContentView x:Name="MotivationalQuoteImage" IsVisible="{Binding MotivationalQuoteImageVisible}" Padding="0, 0, 0, 0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="250">
+        <Image Source="{Binding MotivationalQuoteImageFile}" Aspect="AspectFit" BackgroundColor="Black"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+      </ContentView>
 
-	</StackLayout>
-  </ContentPage.Content>
-</ContentPage>
+    </StackLayout>
+  </local:RestTimerPageXaml.Content>
+  </local:RestTimerPageXaml>

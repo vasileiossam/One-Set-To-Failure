@@ -2,28 +2,14 @@
 using Autofac;
 using OneSet.Abstract;
 using OneSet.ViewModels;
-using OneSet.Views;
 using Xamarin.Forms;
 
-namespace OneSet
+namespace OneSet.Views
 {
-	public partial class ExerciseAnalysis : ContentPage, IScreenSizeHandler
+    public partial class ExerciseAnalysis : ExerciseAnalysisXaml, IScreenSizeHandler
 	{
 		private ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
-
-		private ExerciseAnalysisViewModel _viewModel;
-		public ExerciseAnalysisViewModel ViewModel
-		{
-			get
-			{
-			    return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseAnalysisViewModel>());
-            }
-			set
-			{
-				_viewModel = value;
-			}
-		}
 
 		public ExerciseAnalysis ()
 		{
@@ -35,7 +21,9 @@ namespace OneSet
 		{
 			base.OnAppearing ();
 			ViewModel.ExercisesPicker = ExercisesPicker;
-			await ViewModel.Load ();
+
+            BindingContext = ViewModel;
+            await ViewModel.OnLoad();
 
 			ExercisesPicker.SelectedIndex = 0;
 		}
@@ -105,5 +93,9 @@ namespace OneSet
 
 		#endregion
 	}
+
+    public class ExerciseAnalysisXaml : BasePage<ExerciseAnalysisViewModel>
+    {
+    }
 }
 

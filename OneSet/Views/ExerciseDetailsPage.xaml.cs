@@ -8,18 +8,8 @@ using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class ExerciseDetailsPage : ContentPage
-	{
-		private ExerciseViewModel _viewModel;
-		public ExerciseViewModel ViewModel
-		{
-		    get { return _viewModel ?? (_viewModel = App.Container.Resolve<ExerciseViewModel>()); }
-		    set
-			{
-				_viewModel = value;
-			}
-		}
-
+	public partial class ExerciseDetailsPage : ExerciseDetailsPageXaml
+    {
 		public ExerciseDetailsPage ()
 		{
 			InitializeComponent ();
@@ -44,7 +34,7 @@ namespace OneSet.Views
 			if (ViewModel.ExerciseId > 0 && deleteItem == null)
 			{
 				deleteItem = new ToolbarItem { Order = ToolbarItemOrder.Primary, Icon = "ic_action_discard" };
-				deleteItem.SetBinding<ExerciseViewModel> (ToolbarItem.CommandProperty, x => x.DeleteCommand);
+				deleteItem.SetBinding<ExerciseDetailsViewModel> (ToolbarItem.CommandProperty, x => x.DeleteCommand);
 				ToolbarItems.Insert (0, deleteItem);
 			}
 
@@ -72,5 +62,9 @@ namespace OneSet.Views
 //			}
 		}
 	}
+
+    public class ExerciseDetailsPageXaml : BasePage<ExerciseDetailsViewModel>
+    {
+    }
 }
 

@@ -7,17 +7,12 @@ using System.Linq;
 using Autofac;
 using AutoMapper;
 using OneSet.Abstract;
+using OneSet.Views;
 
 namespace OneSet.ViewModels
 {
 	public class WorkoutListViewModel : BaseViewModel
     {
-		// http://forums.xamarin.com/discussion/18631/listview-binding-to-observablecollection-does-not-update-gui
-		// very bad to reference the view here but I need a way to refresh 
-		// ListView which doesn't gets update when LoadRoutineDays()
-		// try again in the next xamarin forms update
-		public Views.WorkoutListPage Page { get; set; }
-
         private string _trophies;
 		public string Trophies
 		{
@@ -96,11 +91,8 @@ namespace OneSet.ViewModels
 		public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
 
         public ICommand ChevronTapCommand { get; }
-
         public ICommand CalendarNotesCommand { get; }
-
         public ICommand AnalysisCommand { get; }
-
         public ICommand GotoDateCommand { get; }
 
         private DateTime _currentDate;
@@ -134,31 +126,34 @@ namespace OneSet.ViewModels
 			}
 		}
 
+        private readonly IComponentContext _componentContext;
+        private readonly INavigationService _navigationService;
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly ICalendarRepository _calendarRepository;
         private readonly IRoutineDaysRepository _routineDaysRepository;
 
-        public WorkoutListViewModel (IWorkoutsRepository workoutsRepository, 
-            ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
+        public WorkoutListViewModel (IComponentContext componentContext, INavigationService navigationService, 
+            IWorkoutsRepository workoutsRepository, ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
+            _navigationService = navigationService;
+            _componentContext = componentContext;
             _workoutsRepository = workoutsRepository;
             _calendarRepository = calendarRepository;
             _routineDaysRepository = routineDaysRepository;
             Title = "One Set To Fatigue";
 
-			ChevronTapCommand = new Command (async(object s) => { await OnChevronTapCommand(s); });
+			ChevronTapCommand = new Command (async(s) => { await OnChevronTapCommand(s); });
 			CalendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
 			AnalysisCommand = new Command (async() => { await OnAnalysisCommand(); });
 			GotoDateCommand = new Command (async() => { await OnGotoDateCommand(); });
-
 		}
 
-		public async Task Load(DateTime date)
+		public override async Task OnLoad(object parameter = null)
 		{
-			RestTimerToolbarItem.Update();
+		    if (!(parameter is DateTime)) return;
+            CurrentDate = (DateTime) parameter;
 
-			CurrentDate = date;
-
+            RestTimerToolbarItem.Update();
 			CalendarNotes = await _calendarRepository.GetCalendarNotes (_currentDate);
 			if (CalendarNotes != null)
 			{
@@ -199,40 +194,38 @@ namespace OneSet.ViewModels
 		    if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int) App.TotalTrophies}";
 		}
 
-		private async Task OnChevronTapCommand (object s) 
+        public override async Task OnSave()
+        {
+            await Task.FromResult(0);
+        }
+
+        private async Task OnChevronTapCommand (object s) 
 		{
 			if ((string)s == "Left")
 			{
-				await Load(CurrentDate.AddDays (-1));
-				Page.ChangeOrientation (false);
-				Page.Refresh ();
+				await OnLoad(CurrentDate.AddDays (-1));
+				//Page.ChangeOrientation (false);
+				//Page.Refresh ();
 			} 
 			else
 			{
-				await Load(CurrentDate.AddDays (1));
-				Page.ChangeOrientation (false);
-				Page.Refresh ();
+				await OnLoad(CurrentDate.AddDays (1));
+				//Page.ChangeOrientation (false);
+				//Page.Refresh ();
 			}
 		}
 
 		private async Task OnCalendarNotesCommand()
 		{
-		    var viewModel = App.Container.Resolve<CalendarNotesViewModel>();
-            viewModel.Navigation = Page.Navigation;
-		    viewModel.Date = CurrentDate;
-
-			await viewModel.Load ();
-
-			var page = new Views.CalendarNotesPage {ViewModel = viewModel};
-
-			await Navigation.PushAsync(page); 	
+		    var page = _componentContext.Resolve<CalendarNotesPage>();
+		    page.ViewModel.Date = CurrentDate;
+			await _navigationService.PushAsync(page); 	
 		}
 
 		private async Task OnAnalysisCommand()
 		{
-			var viewModel = new AnalysisViewModel {Navigation = Page.Navigation};
-			var page = new Views.AnalysisPage {ViewModel = viewModel};
-			await Navigation.PushAsync(page); 	
+			var page = _componentContext.Resolve<AnalysisPage>();
+			await _navigationService.PushAsync(page); 	
 		}
 
 		private async Task OnGotoDateCommand()
@@ -243,15 +236,14 @@ namespace OneSet.ViewModels
 		private async void OnGetDate(object sender, EventArgs args)
 		{
 		    if (!(sender is DateTime)) return;
-		    await Load ((DateTime) sender);
+		    await OnLoad ((DateTime) sender);
 
 		    Device.BeginInvokeOnMainThread (() =>
 		    {
-		        Page.ChangeOrientation (false);
-		        Page.Refresh ();
+		        //Page.ChangeOrientation (false);
+		        //Page.Refresh ();
 		    });
 		}
-
     }
 }
 

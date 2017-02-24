@@ -1,56 +1,55 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<local:SettingsPageXaml
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="OneSet.Views.SettingsPage"
-	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
+	xmlns:local="clr-namespace:OneSet.Views"
 	Title="{Binding Title}">
 
-	<ContentPage.Padding>
-	<OnPlatform x:TypeArguments="Thickness"
-	            iOS="5, 20, 5, 0"
-	            Android="5, 0, 5, 0"
-	            WinPhone="5, 0, 5, 0" />
-	</ContentPage.Padding>
+  <local:SettingsPageXaml.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="5, 0, 5, 0"
+                WinPhone="5, 0, 5, 0" />
+  </local:SettingsPageXaml.Padding>
 
-	<ContentPage.Content>
-	<StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
+  <local:SettingsPageXaml.Content>
+    <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
 
-	   <ListView ItemTapped="OnSettingTapped" x:Name="settingsList" HasUnevenRows="true" 
-	   	IsGroupingEnabled="true"
-	   	GroupDisplayBinding="{Binding Title}"
+      <ListView ItemTapped="OnSettingTapped" x:Name="settingsList" HasUnevenRows="true"
+       IsGroupingEnabled="true"
+       GroupDisplayBinding="{Binding Title}"
 	   	>
-         
-         <ListView.GroupHeaderTemplate>
-           <DataTemplate>
-             <ViewCell>
-				<StackLayout Padding="0,10,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-             		<Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>	
-             		<Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>	
-             	</StackLayout>
-             </ViewCell>
-            </DataTemplate>
-         </ListView.GroupHeaderTemplate>
+
+        <ListView.GroupHeaderTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Padding="0,10,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
+                <Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.GroupHeaderTemplate>
 
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-      		  <ViewCell.View>
+              <ViewCell.View>
 
-      			<StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="20, 10, 10, 10" Spacing="5">
-	    			<Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>	
-					<Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>	
-					<Label Text="{Binding Value}" IsVisible = "{Binding IsValueVisible}" FontSize="Small" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>	
-    			</StackLayout>
-                     
+                <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="20, 10, 10, 10" Spacing="5">
+                  <Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
+                  <Label Text="{Binding Hint}" IsVisible = "{Binding IsHintVisible}" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>
+                  <Label Text="{Binding Value}" IsVisible = "{Binding IsValueVisible}" FontSize="Small" VerticalOptions="Center" TextColor="{StaticResource primaryText}"/>
+                </StackLayout>
+
               </ViewCell.View>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
 
-	</StackLayout>
+    </StackLayout>
 
-	</ContentPage.Content>
-</ContentPage>
+  </local:SettingsPageXaml.Content>
+  </local:SettingsPageXaml>

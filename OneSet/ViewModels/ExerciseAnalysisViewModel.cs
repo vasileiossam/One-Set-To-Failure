@@ -52,7 +52,7 @@ namespace OneSet.ViewModels
             _weightConverter = new WeightMetricToImperialConverter ();
 		}
 
-		public async Task Load()
+        public override async Task OnLoad(object parameter = null)
 		{
 			_workouts = await _workoutsRepository.AllAsync ();
 			_exercises = await _exercisesRepository.AllAsync ();
@@ -216,6 +216,11 @@ namespace OneSet.ViewModels
 			var total = _workouts.Where(x => x.ExerciseId == exercise.ExerciseId).Sum(x=>x.Weight);
 			return $"{WeightMetricToImperialConverter.GetWeight(total)} {L10n.GetWeightUnit()}";
 		}
+
+        public override Task OnSave()
+	    {
+	        throw new NotImplementedException();
+	    }
 	}
 }
 
