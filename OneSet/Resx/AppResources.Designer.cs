@@ -80,6 +80,15 @@ namespace OneSet.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to all week! (REMEMBER: resting is important).
+        /// </summary>
+        internal static string AllWeekTraining {
+            get {
+                return ResourceManager.GetString("AllWeekTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analysis.
         /// </summary>
         internal static string AnalysisTitle {

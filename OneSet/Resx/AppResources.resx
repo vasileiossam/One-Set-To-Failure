@@ -483,4 +483,7 @@
   <data name="ToastWarningTitle" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="AllWeekTraining" xml:space="preserve">
+    <value>all week! (REMEMBER: resting is important)</value>
+  </data>
 </root>

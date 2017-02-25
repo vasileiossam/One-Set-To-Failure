@@ -33,9 +33,16 @@ namespace OneSet.ViewModels
             PreviousIconCommand = new Command(() => { OnPreviousIconCommand(); });
             TargetIconCommand = new Command(() => { OnTargetIconCommand(); });
         }
+        
+        private Workout _workout;
+        public Workout Workout
+        {
+            get { return _workout ?? (_workout = new Workout()); }
+            set { _workout = value; }
+        }
 
-        public Workout Workout {get; set; }
-		public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
+        public Exercise Exercise { get; set; }
+        public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
 
 		protected int _reps;
 		public int Reps
@@ -76,16 +83,13 @@ namespace OneSet.ViewModels
         public double ConvertedWeight => _units.GetWeight(App.Settings.IsMetric, Workout.Weight);
         public double ConvertedPreviousWeight => _units.GetWeight(App.Settings.IsMetric, Workout.PreviousWeight);
         public double ConvertedTargetWeight => _units.GetWeight(App.Settings.IsMetric, Workout.TargetWeight);
-        public Exercise Exercise { get; set; }
 
-        #region commands
         public ICommand RepsUpCommand {get; set;}
 		public ICommand RepsDownCommand {get; set;}
 		public ICommand WeighUpCommand {get; set;}
 		public ICommand WeighDownCommand {get; set;}
         public ICommand PreviousIconCommand { get; set; }
         public ICommand TargetIconCommand { get; set; }
-		#endregion
 
 		private async Task<bool> Validate ()
 		{
@@ -156,7 +160,9 @@ namespace OneSet.ViewModels
 					await _navigationService.PopAsync();					
 				}
 			}
-		}
+
+            await Task.FromResult(0);
+        }
 
 		#region commands
 		private async Task OnRepsUp () 

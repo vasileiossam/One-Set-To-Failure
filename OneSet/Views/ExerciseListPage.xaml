@@ -43,14 +43,14 @@
             <ViewCell>
               <ViewCell.View>
                 <StackLayout Padding="10,10,0,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
-                  <Label Text="{Binding Name}" FontSize="Large" TextColor="{StaticResource primaryText}" YAlign="Center"/>
+                  <Label Text="{Binding Exercise.Name}" FontSize="Large" TextColor="{StaticResource primaryText}" YAlign="Center"/>
 
                   <StackLayout IsVisible="{Binding TrainingDaysVisible}" VerticalOptions="FillAndExpand" Orientation="Horizontal">
                     <Label Text="{i18n:Translate TrainingDaysLabel}" TextColor="{StaticResource primaryText}" FontSize="Small" YAlign="Center"/>
                     <Label Text="{Binding TrainingDays}" TextColor="{StaticResource primaryText}" FontSize="Small" YAlign="Center"/>
                   </StackLayout>
 
-                  <Label IsVisible="{Binding NotesVisible}" Text="{Binding Notes}" FontSize="Small" TextColor="{StaticResource secondaryText}" YAlign="Center"/>
+                  <Label IsVisible="{Binding NotesVisible}" Text="{Binding Exercise.Notes}" FontSize="Small" TextColor="{StaticResource secondaryText}" YAlign="Center"/>
                 </StackLayout>
               </ViewCell.View>
             </ViewCell>

@@ -9,13 +9,10 @@ namespace OneSet.Views
             InitializeComponent();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-
             BindingContext = ViewModel;
-            await ViewModel.OnLoad();
-
             CommentEditor.Focus ();
         }
 	}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using AutoMapper;
+using Autofac;
 using OneSet.Abstract;
 using OneSet.Resx;
 
@@ -54,10 +54,12 @@ namespace OneSet.ViewModels
 			}
 		}
 
+        private readonly IComponentContext _componentContext;
         private readonly IExercisesRepository _exercisesRepository;
 
-        public ExerciseListViewModel (IExercisesRepository exercisesRepository) : base()
-		{
+        public ExerciseListViewModel (IComponentContext componentContext, IExercisesRepository exercisesRepository)
+        {
+            _componentContext = componentContext;
             _exercisesRepository = exercisesRepository;
             Title = AppResources.ExercisesTitle;
 		}
@@ -66,34 +68,30 @@ namespace OneSet.ViewModels
 		{
 			try
 			{
-				var exercisesList = await _exercisesRepository.AllAsync();
-				var exerciseViewModelsList = Mapper.Map<ObservableCollection<ExerciseDetailsViewModel>>(exercisesList);
-				foreach(var item in exerciseViewModelsList)
-				{
-				    await item.OnLoad(parameter);
-				}
-
-				if (exerciseViewModelsList ==  null)
-				{
-					ListVisible = false;
-				}
-				else
-				{
-					ListVisible = exerciseViewModelsList.Count > 0;
-				}
-				NoDataVisible = !ListVisible;
-
-				Exercises = exerciseViewModelsList;
-			}
-			catch(Exception  ex)
+				Exercises = await GetExercises();
+                ListVisible = Exercises.Count > 0;
+                NoDataVisible = !ListVisible;
+            }
+            catch (Exception  ex)
 			{
 				App.ShowErrorPage (this, ex);
 			}
 		}
 
-        public override Task OnSave()
+        private async Task<ObservableCollection<ExerciseDetailsViewModel>> GetExercises()
         {
-            throw new NotImplementedException();
+            var collection = new ObservableCollection<ExerciseDetailsViewModel>();
+            var list = await _exercisesRepository.AllAsync();
+
+            foreach (var item in list)
+            {
+                var vm = _componentContext.Resolve<ExerciseDetailsViewModel>();
+                vm.Exercise = item;
+                await vm.OnLoad();
+                collection.Add(vm);
+            }
+
+            return collection;
         }
     }
 }

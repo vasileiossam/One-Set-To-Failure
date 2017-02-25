@@ -6,6 +6,7 @@
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
 	xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
   xmlns:local="clr-namespace:OneSet.Views"
+  xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"  
 	Title="{Binding Title}">
 
   <local:ExerciseDetailsPageXaml.Padding>
@@ -15,6 +16,12 @@
                 WinPhone="5, 0, 5, 0" />
   </local:ExerciseDetailsPageXaml.Padding>
 
+  <local:ExerciseDetailsPageXaml.Resources>
+    <ResourceDictionary>
+      <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+    </ResourceDictionary>
+  </local:ExerciseDetailsPageXaml.Resources>
+  
   <local:ExerciseDetailsPageXaml.ToolbarItems>
     <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
   </local:ExerciseDetailsPageXaml.ToolbarItems>
@@ -24,12 +31,12 @@
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
         <ContentView Padding="0, 10, 0, 0">
-          <controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="{StaticResource primaryText}" FontSize="Medium" Keyboard="Chat"/>
+          <controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}" TextColor="{StaticResource primaryText}" FontSize="Medium" Keyboard="Chat"/>
         </ContentView>
 
         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
           <Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>
-          <controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center" TextChanged="OnTextChanged"/>
+          <controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding Exercise.PlateWeight}" Keyboard="Numeric" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center"/>
         </StackLayout>
 
         <ContentView Padding="0, 10, 0, 10">
@@ -47,29 +54,29 @@
           </Grid.ColumnDefinitions>
 
           <Label x:Name="MonLabel" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnMon}" Grid.Row="0" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Mon.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="0" Grid.Column="1"/>
 
           <Label x:Name="TueLabel" Grid.Row="1" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnTue}" Grid.Row="1" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Tue.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="1" Grid.Column="1"/>
 
           <Label x:Name="WedLabel" Grid.Row="2" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnWed}" Grid.Row="2" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Wed.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="2" Grid.Column="1"/>
 
           <Label x:Name="ThuLabel" Grid.Row="3" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnThu}" Grid.Row="3" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Thu.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="3" Grid.Column="1"/>
 
           <Label x:Name="FriLabel" Grid.Row="4" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnFri}" Grid.Row="4" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Fri.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="4" Grid.Column="1"/>
 
           <Label x:Name="SatLabel" Grid.Row="5" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnSat}" Grid.Row="5" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Sat.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="5" Grid.Column="1"/>
 
           <Label x:Name="SunLabel" Grid.Row="6" Grid.Column="0" FontSize="Medium" TextColor="{StaticResource secondaryText}"/>
-          <Switch IsToggled="{Binding DoOnSun}" Grid.Row="6" Grid.Column="1"/>
+          <Switch IsToggled="{Binding Sun.IsActive, Converter={StaticResource IntToBoolConverter}}" Grid.Row="6" Grid.Column="1"/>
         </Grid>
 
         <ContentView Padding="0, 10, 0, 10">
-          <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" Keyboard="Chat"/>
+          <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Exercise.Notes}" TextColor="{StaticResource primaryText}" Keyboard="Chat"/>
         </ContentView>
 
       </StackLayout>

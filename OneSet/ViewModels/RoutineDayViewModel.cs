@@ -1,21 +1,12 @@
-﻿using AutoMapper;
-using OneSet.Models;
+﻿using OneSet.Models;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
 	public class RoutineDayViewModel
     {
-        public int RoutineDayId { get; set; }
-        public int ExerciseId { get; set; }        
-		public int DayOfWeek { get; set; }
-        public int RowNumber { get; set; }
-		public int IsActive {get; set;}
-
-        [IgnoreMap]
+        public RoutineDay RoutineDay { get; set; }
         public Exercise Exercise { get; set; }
-
-        [IgnoreMap]
         public Workout Workout {get; set;}
 
 		public string StateImage {
@@ -47,7 +38,6 @@ namespace OneSet.ViewModels
 			
 		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
 		protected StackOrientation _cellLayoutOrientation;
-        [IgnoreMap]
         public StackOrientation CellLayoutOrientation
 		{
 			get

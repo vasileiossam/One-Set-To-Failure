@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using OneSet.Abstract;
 using OneSet.Resx;
 using Xamarin.Forms;
 
@@ -11,7 +12,6 @@ namespace OneSet.ViewModels
 
 		public string Title { get; set; }
 		public string Hint { get; set; }
-		public INavigation Navigation { get; set; }
 
 		protected object _value;
 		public object Value 
@@ -107,17 +107,19 @@ namespace OneSet.ViewModels
 	public class PagePreference : Preference
 	{
 		public Type NavigateToPage { get; set; }
+	    private INavigationService _navigationService;
 
-		public PagePreference():base()
-		{
-			Clicked += OnClicked;
+        public PagePreference(INavigationService navigationService) 
+        {
+            _navigationService = navigationService;
+            Clicked += OnClicked;
 			IsValueVisible = false;
 		}
 
 		public async void OnClicked(object sender, EventArgs args)
 		{
 			var page = Activator.CreateInstance (NavigateToPage);
-			await Navigation.PushAsync (page as Page);
+			await _navigationService.PushAsync (page as Page);
 		}
 	}
 }

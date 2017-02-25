@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
-using Autofac;
 using OneSet.Localization;
 using OneSet.Resx;
 using OneSet.ViewModels;
@@ -18,9 +16,12 @@ namespace OneSet.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-			BindingContext = ViewModel;
 
-			PlateWeightLabel.Text = string.Format (AppResources.PlateWeightLabel, L10n.GetWeightUnit());
+			BindingContext = ViewModel;
+            await ViewModel.OnLoad();
+
+            // set Text
+            PlateWeightLabel.Text = string.Format (AppResources.PlateWeightLabel, L10n.GetWeightUnit());
 			var dayNames = AppResources.Culture.DateTimeFormat.DayNames;
             MonLabel.Text = dayNames[1];
             TueLabel.Text = dayNames[2];
@@ -30,41 +31,20 @@ namespace OneSet.Views
             SatLabel.Text = dayNames[6];
             SunLabel.Text = dayNames[0];
 
+            // setup delete toolbar item
 			var deleteItem = ToolbarItems.FirstOrDefault (x => x.Icon == "ic_action_discard");
-			if (ViewModel.ExerciseId > 0 && deleteItem == null)
+			if (ViewModel.Exercise.ExerciseId > 0 && deleteItem == null)
 			{
 				deleteItem = new ToolbarItem { Order = ToolbarItemOrder.Primary, Icon = "ic_action_discard" };
-				deleteItem.SetBinding<ExerciseDetailsViewModel> (ToolbarItem.CommandProperty, x => x.DeleteCommand);
+				deleteItem.SetBinding<ExerciseDetailsViewModel> (MenuItem.CommandProperty, x => x.DeleteCommand);
 				ToolbarItems.Insert (0, deleteItem);
 			}
-
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
         }
-
-	    void OnTextChanged(object sender, TextChangedEventArgs  e)
-		{
-			// fires multiple times and can go to infinite loop
-			// example: when in the workout list we have a workout with weight 500.1
-			// when we will tap this workout app will crash
-
-//			var entry = sender as Entry;
-//			if (entry == null) return;
-//			var value = entry.Text;
-//
-//			// max length = 4
-//			if(value.Length > 4)
-//			{
-//				// Remove Last character 
-//				value = value.Remove(value.Length - 1);
-//				// Set the Old value
-//				entry.Text = value; 
-//			}
-		}
 	}
 
     public class ExerciseDetailsPageXaml : BasePage<ExerciseDetailsViewModel>
     {
+
     }
 }
 

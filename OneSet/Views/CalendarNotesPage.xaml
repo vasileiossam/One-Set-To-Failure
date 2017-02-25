@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <local:CalendarNotesPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
   xmlns:local="clr-namespace:OneSet.Views"
 	x:Class="OneSet.Views.CalendarNotesPage"
-    Title="{Binding Title}">
+  Title="{Binding Title}">
 
   <local:CalendarNotesPageXaml.Padding>
     <OnPlatform x:TypeArguments="Thickness"
@@ -19,8 +18,7 @@
   <local:CalendarNotesPageXaml.Content>
     <ScrollView>
       <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
-        <!--		<controls:CustomEntry Placeholder="{i18n:Translate CommentTitle}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" FontSize="24" Keyboard="Chat"/>-->
-        <Editor x:Name="CommentEditor" Text="{Binding Notes}" Keyboard="Chat" HeightRequest="250" VerticalOptions="FillAndExpand"/>
+        <Editor x:Name="CommentEditor" Text="{Binding Calendar.Notes}" Keyboard="Chat" HeightRequest="250" VerticalOptions="FillAndExpand"/>
       </StackLayout>
     </ScrollView>
   </local:CalendarNotesPageXaml.Content>

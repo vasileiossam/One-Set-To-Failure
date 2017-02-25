@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Autofac;
+using OneSet.Abstract;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -9,11 +11,15 @@ namespace OneSet.Views
     {
 		private readonly ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
+        private readonly IComponentContext _componentContext;
+        private readonly INavigationService _navigationService;
 
-        public WorkoutListPage()
+        public WorkoutListPage(INavigationService navigationService, IComponentContext componentContext)
 		{
 			InitializeComponent ();
-			_screenSizeHandler = new ScreenSizeHandler ();
+		    _navigationService = navigationService;
+            _componentContext = componentContext;
+            _screenSizeHandler = new ScreenSizeHandler ();
 
 			_stackOrientation = StackOrientation.Horizontal;
 			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait 
@@ -53,37 +59,28 @@ namespace OneSet.Views
             base.OnDisappearing();
         }
 
-        public void OnWorkoutSelected(object sender, SelectedItemChangedEventArgs e)
+        public async Task OnWorkoutSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            if (((ListView)sender).SelectedItem == null) return;
+            var item = args.SelectedItem as RoutineDayViewModel;
+            if (item == null) return;
 
-            var routineDayViewModel = e.SelectedItem as RoutineDayViewModel;
-            if (routineDayViewModel != null)
-            {
-                var viewModel = App.Container.Resolve<WorkoutViewModel>();
-                viewModel.Workout = routineDayViewModel.Workout;
-                viewModel.RestTimerToolbarItem = ViewModel.RestTimerToolbarItem;
-
-                var workoutPage = new WorkoutPage
-                {
-                    ViewModel = viewModel
-                };
-
-                Navigation.PushAsync(workoutPage);
-            }
+            var viewModel = _componentContext.Resolve<WorkoutViewModel>();
+            viewModel.Workout = item.Workout;
+            viewModel.RestTimerToolbarItem = ViewModel.RestTimerToolbarItem;
+            await _navigationService.NavigateTo(viewModel);
 
             // deselect row
 			((ListView)sender).SelectedItem = null;
         }
 
-		public void OnExercisesButtonClicked(object sender, EventArgs args)
+		public async Task OnExercisesButtonClicked(object sender, EventArgs args)
 		{
-			Navigation.PushAsync( new ExerciseListPage());
+		    await _navigationService.NavigateTo<ExerciseListViewModel>();
 		}
 
-		public void OnSettingsButtonClicked(object sender, EventArgs args)
+		public async Task OnSettingsButtonClicked(object sender, EventArgs args)
 		{
-			Navigation.PushAsync( new SettingsPage());
+            await _navigationService.NavigateTo<SettingsViewModel>();
 		}
 
 		public void Refresh()

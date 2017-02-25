@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
 using Autofac;
-using AutoMapper;
 using OneSet.Abstract;
 using OneSet.Views;
 
@@ -129,15 +128,17 @@ namespace OneSet.ViewModels
         private readonly IComponentContext _componentContext;
         private readonly INavigationService _navigationService;
         private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly IExercisesRepository _exercisesRepository;
         private readonly ICalendarRepository _calendarRepository;
         private readonly IRoutineDaysRepository _routineDaysRepository;
 
         public WorkoutListViewModel (IComponentContext componentContext, INavigationService navigationService, 
-            IWorkoutsRepository workoutsRepository, ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
+            IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
             _navigationService = navigationService;
             _componentContext = componentContext;
             _workoutsRepository = workoutsRepository;
+            _exercisesRepository = exercisesRepository;
             _calendarRepository = calendarRepository;
             _routineDaysRepository = routineDaysRepository;
             Title = "One Set To Fatigue";
@@ -146,7 +147,9 @@ namespace OneSet.ViewModels
 			CalendarNotesCommand = new Command (async() => { await OnCalendarNotesCommand(); });
 			AnalysisCommand = new Command (async() => { await OnAnalysisCommand(); });
 			GotoDateCommand = new Command (async() => { await OnGotoDateCommand(); });
-		}
+
+            RestTimerToolbarItem = _componentContext.Resolve<RestTimerToolbarItem>();
+        }
 
 		public override async Task OnLoad(object parameter = null)
 		{
@@ -171,19 +174,10 @@ namespace OneSet.ViewModels
 				}
 			}
 
-			CalendarNotesVisible = !string.IsNullOrEmpty (CalendarNotes);
+		    RoutineDays = await GetRoutine(_currentDate);
 
-			var list = await _routineDaysRepository.GetRoutine (_currentDate);
-            RoutineDays = Mapper.Map<ObservableCollection<RoutineDayViewModel>>(list);
-
-			if (RoutineDays == null)
-			{
-				WorkoutsListVisible = false;
-			}
-			else
-			{
-				WorkoutsListVisible = RoutineDays.Count > 0;
-			}
+            CalendarNotesVisible = !string.IsNullOrEmpty(CalendarNotes);
+            WorkoutsListVisible = RoutineDays.Count > 0;
 			NoWorkoutDataVisible = !WorkoutsListVisible;
 
 			if (App.TotalTrophies == null)
@@ -193,6 +187,27 @@ namespace OneSet.ViewModels
 			var dayTrophies = await _workoutsRepository.GetTrophies (CurrentDate);
 		    if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int) App.TotalTrophies}";
 		}
+
+        private async Task<ObservableCollection<RoutineDayViewModel>> GetRoutine(DateTime date)
+        {
+            var collection = new ObservableCollection<RoutineDayViewModel>();
+            var list = await _routineDaysRepository.GetRoutine(date);
+            var exercises = await _exercisesRepository.AllAsync();
+            var workouts = await _workoutsRepository.GetWorkouts(date);
+
+            foreach (var day in list)
+            {
+                var vm = new RoutineDayViewModel
+                {
+                    RoutineDay =  day,
+                    Exercise = exercises.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
+                    Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId)
+                };
+                collection.Add(vm);
+            }
+
+            return collection;
+        }
 
         public override async Task OnSave()
         {
@@ -217,9 +232,9 @@ namespace OneSet.ViewModels
 
 		private async Task OnCalendarNotesCommand()
 		{
-		    var page = _componentContext.Resolve<CalendarNotesPage>();
-		    page.ViewModel.Date = CurrentDate;
-			await _navigationService.PushAsync(page); 	
+		    var viewModel = _componentContext.Resolve<CalendarNotesViewModel>();
+		    viewModel.Date = CurrentDate;
+            await _navigationService.NavigateTo(viewModel);
 		}
 
 		private async Task OnAnalysisCommand()

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using SQLite;
+﻿using SQLite;
 
 namespace OneSet.Models
 {
@@ -15,8 +14,6 @@ namespace OneSet.Models
         public int? MinReps { get; set; }
         public int? RestTimerId { get; set; }
         public int? RepsIncrementId { get; set; }
-
-        [IgnoreMap]
         public byte[] Image { get; set; }
 	}
 }

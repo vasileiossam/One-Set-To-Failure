@@ -3,49 +3,56 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.Resx;
+using OneSet.Services;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
 	public class SettingsViewModel : BaseViewModel
 	{
-		// TODO replace this with MessagingCenter
-		// https://forums.xamarin.com/discussion/22499/looking-to-pop-up-an-alert-like-displayalert-but-from-the-view-model-xamarin-forms-labs
-		public Views.SettingsPage Page { get; set; }
-
-        private ObservableCollection<PreferenceGroup> _settings;
-		public ObservableCollection<PreferenceGroup> Settings
-		{
-			get
-			{
-				return _settings;
-			}
-			set
-			{
-			    if (_settings == value) return;
-			    _settings = value;
-			    OnPropertyChanged("Settings");
-			}
-		}
-
-	    private readonly ΙStatistics _statistics;
+        private readonly INavigationService _navigationService;
+        private readonly IDialogService _dialogService;
+        private readonly IMessagingService _messagingService;
+        private readonly ISettingsStorage _settingsStorage;
+        private readonly ΙStatistics _statistics;
         private readonly IExporter _exporter;
 
-        public SettingsViewModel  (ΙStatistics statistics, IExporter exporter)
+        public SettingsViewModel(INavigationService navigationService, IDialogService dialogService, IMessagingService messagingService,
+            ISettingsStorage settingsStorage, ΙStatistics statistics, IExporter exporter)
         {
+            _navigationService = navigationService;
+            _dialogService = dialogService;
+            _messagingService = messagingService;
+            _settingsStorage = settingsStorage;
             _statistics = statistics;
             _exporter = exporter;
             Title = AppResources.SettingsTitle;
         }
 
-		public async void OnClicked(object sender, EventArgs args)
+        private ObservableCollection<PreferenceGroup> _settings;
+        public ObservableCollection<PreferenceGroup> Settings
+        {
+            get
+            {
+                return _settings;
+            }
+            set
+            {
+                if (_settings == value) return;
+                _settings = value;
+                OnPropertyChanged("Settings");
+            }
+        }
+
+        public async void OnClicked(object sender, EventArgs args)
 		{
 		    var listPreference = sender as ListPreference;
 		    if (listPreference != null)
 			{
 				var preference = listPreference;
-				var action = await Page.DisplayActionSheet(preference.Title, AppResources.CancelButton, null, preference.Options);
+				var action = await _dialogService.DisplayActionSheet(preference.Title, AppResources.CancelButton, null, preference.Options);
 
 				if ((action != null) && (action != AppResources.CancelButton))
 				{
@@ -61,7 +68,7 @@ namespace OneSet.ViewModels
 
                 if (!string.IsNullOrEmpty(preference.PopupMessage))
                 {
-                    var answer = await Page.DisplayAlert(preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
+                    var answer = await _dialogService.DisplayAlert(preference.PopupTitle, preference.PopupMessage, AppResources.Yes, AppResources.No);
 
                     if (answer)
                     {
@@ -332,17 +339,17 @@ namespace OneSet.ViewModels
 
                     if (backupInfo.LastBackupDate == null)
                     {
-                        await Page.DisplayAlert(AppResources.RestoreNoBackupTitle, AppResources.RestoreNoBackupMessage, AppResources.OK);
+                        await _dialogService.DisplayAlert(AppResources.RestoreNoBackupTitle, AppResources.RestoreNoBackupMessage, AppResources.OK);
                     }
                     else
                     {
-                        var answer = await Page.DisplayAlert(AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
+                        var answer = await _dialogService.DisplayAlert(AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
                         if (!answer) return;
                         await backupService.Restore();
 
-                        // reload settings
-                        App.Settings = DependencyService.Get<ISettingsStorage>().Load();
-                        await Page.Refresh();
+                        // reload settings 
+                        App.Settings = _settingsStorage.Load();
+                        _messagingService.Send(this, Messages.SettingsReloaded);
 
                         await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);
                     }
@@ -432,11 +439,10 @@ namespace OneSet.ViewModels
                 }
             });
 
-            otherGroup.Add(new PagePreference
+            otherGroup.Add(new PagePreference(_navigationService)
             {
                 Title = AppResources.SettingsAboutTitle,
                 Hint = AppResources.SettingsAboutHint,
-                Navigation = Page.Navigation,
                 NavigateToPage = typeof(Views.AboutPage)
             });
             #endregion

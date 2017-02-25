@@ -40,9 +40,6 @@ namespace OneSet.Data
 					list = await _connection.Table<RoutineDay> ()
 						.Where (x => (x.DayOfWeek == (int)date.DayOfWeek) && (x.IsActive == 1)).ToListAsync ();
 				}
-
-				//await LoadExercisesAsync (list);
-				//await LoadRelations(list, date);
 				return list;
 			}
 			catch(Exception ex)
@@ -51,11 +48,6 @@ namespace OneSet.Data
 			}
 
 			return null;
-		}
-
-		private async Task LoadRelations(List<RoutineDay> list, DateTime date)
-		{	
-			
 		}
 
 		public async Task<List<RoutineDay>> GetRoutine(int exerciseId)

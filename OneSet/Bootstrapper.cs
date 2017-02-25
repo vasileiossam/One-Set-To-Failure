@@ -1,8 +1,5 @@
-﻿using System;
-using Autofac;
-using AutoMapper;
+﻿using Autofac;
 using OneSet.Abstract;
-using OneSet.Models;
 using OneSet.Services;
 using OneSet.ViewModels;
 using System.Reflection;
@@ -34,16 +31,19 @@ namespace OneSet
             builder.RegisterType<Statistics>().As<ΙStatistics>().InstancePerLifetimeScope();
             builder.RegisterType<Exporter>().As<IExporter>().InstancePerLifetimeScope();
             builder.RegisterType<NavigationService>().As<INavigationService>().InstancePerLifetimeScope();
+            builder.RegisterType<DialogService>().As<IDialogService>().InstancePerLifetimeScope();
+            builder.RegisterType<MessagingService>().As<IMessagingService>().InstancePerLifetimeScope();
+            builder.Register(c => DependencyService.Get<ISettingsStorage>()).As<ISettingsStorage>().InstancePerLifetimeScope();
 
             // register views
             builder.RegisterAssemblyTypes(typeof(AboutPage).GetTypeInfo().Assembly)
                .Where(t => t.Namespace == "OneSet.Views")
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
             // register view models
             builder.RegisterAssemblyTypes(typeof(WorkoutListViewModel).GetTypeInfo().Assembly)
                .Where(t => t.Namespace == "OneSet.ViewModels")
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
             // register repositories
             builder.RegisterAssemblyTypes(typeof(CalendarRepository).GetTypeInfo().Assembly)
@@ -52,24 +52,6 @@ namespace OneSet
                .SingleInstance();
             
         }
-
-        public void Automapper()
-		{
-            Mapper.CreateMap<RoutineDay, RoutineDayViewModel> ();
-            Mapper.CreateMap<Exercise, ExerciseDetailsViewModel> ();
-            Mapper.CreateMap<ExerciseDetailsViewModel, Exercise> ();
-        }
-
-        public void CheckMapper()
-		{
-			try
-			{
-				Mapper.AssertConfigurationIsValid ();
-			} catch (Exception ex)
-			{
-				App.ShowErrorPage (this, ex);
-			}
-		}
 	}
 }
 

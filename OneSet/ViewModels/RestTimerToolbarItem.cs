@@ -60,10 +60,7 @@ namespace OneSet.ViewModels
 		private async Task OnRestTimerCommand()
 		{
 			_terminated = true;
-
-		    var page = _componentContext.Resolve<RestTimerPage>();
-            page.ViewModel = _componentContext.Resolve<RestTimerViewModel>();
-            await _navigationService.PushAsync(page); 	
+            await _navigationService.NavigateTo<RestTimerViewModel>(); 	
 		}
 
 		public async Task AutoStart()
@@ -71,11 +68,11 @@ namespace OneSet.ViewModels
 			if (!_isRunning)
 			{
 				_terminated = true;
-                var page = _componentContext.Resolve<RestTimerPage>();
-                page.ViewModel = _componentContext.Resolve<RestTimerViewModel>();
-				await _navigationService.PushAsync (page); 	
-				await page.ViewModel.OnStartCommand ();
-			}
+
+                var viewModel = _componentContext.Resolve<RestTimerViewModel>();
+                await _navigationService.NavigateTo(viewModel);
+				await viewModel.OnStartCommand();
+            }
 		}
 
 		public void Update()
@@ -122,16 +119,6 @@ namespace OneSet.ViewModels
 				Text = string.Empty;
 			}
 		}
-
-        public override Task OnLoad(object parameter)
-	    {
-	        throw new NotImplementedException();
-	    }
-
-	    public override Task OnSave()
-	    {
-	        throw new NotImplementedException();
-	    }
 	}
 }
 

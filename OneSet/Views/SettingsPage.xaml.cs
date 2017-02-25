@@ -1,4 +1,7 @@
 ﻿using System.Threading.Tasks;
+using OneSet.Abstract;
+using OneSet.Models;
+using OneSet.Services;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -6,12 +9,25 @@ namespace OneSet.Views
 {
 	public partial class SettingsPage : SettingsPageXaml
     {
-		public SettingsPage()
-		{
-			InitializeComponent ();
-		}
+        private readonly IMessagingService _messagingService;
 
-		protected override async void OnAppearing()
+        public SettingsPage(IMessagingService messagingService)
+        {
+            InitializeComponent();
+
+            _messagingService = messagingService;
+            _messagingService.Subscribe<SettingsViewModel>(this, Messages.SettingsReloaded, async sender =>
+            {
+                await Refresh();
+            });
+        }
+
+        ~SettingsPage()
+        {
+            _messagingService.Unsubscribe<SettingsViewModel>(this, Messages.SettingsReloaded);
+        }
+
+        protected override async void OnAppearing()
 		{
 			base.OnAppearing();
 
@@ -21,9 +37,9 @@ namespace OneSet.Views
             settingsList.ItemsSource = ViewModel.Settings;
 		}
 
-	    public void OnSettingTapped(object sender, ItemTappedEventArgs e)
+	    public void OnSettingTapped(object sender, ItemTappedEventArgs args)
 		{
-			var preference = e.Item as Preference;
+            var preference = args.Item as Preference;
 		    preference?.Clicked(preference, null);
 
 		    // deselect row

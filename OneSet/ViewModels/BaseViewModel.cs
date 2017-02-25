@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 		public ICommand SaveCommand { get; set; }
@@ -37,7 +37,14 @@ namespace OneSet.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public abstract Task OnLoad(object parameter = null);
-        public abstract Task OnSave();
+        public virtual async Task OnLoad(object parameter = null)
+        {
+            await Task.FromResult(0);
+        }
+
+        public virtual async Task OnSave()
+        {
+            await Task.FromResult(0);
+        }
     }
 }

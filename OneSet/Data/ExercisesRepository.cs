@@ -17,14 +17,10 @@ namespace OneSet.Data
 		{
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{
-                var item = FindAsync(id);
-                if (item != null)
-                {
-                    await _connection.ExecuteAsync("DELETE FROM RoutineDays WHERE ExerciseId = ?", id);
-                    await _connection.ExecuteAsync("DELETE FROM Workouts WHERE ExerciseId = ?", id);
-                    return await _connection.DeleteAsync(item);
-                }
-                return 0;
+			    await _connection.ExecuteAsync("DELETE FROM RoutineDays WHERE ExerciseId = ?", id);
+			    await _connection.ExecuteAsync("DELETE FROM Workouts WHERE ExerciseId = ?", id);
+                await _connection.ExecuteAsync("DELETE FROM Exercises WHERE ExerciseId = ?", id);
+			    return 0;
 			}
 		}
 

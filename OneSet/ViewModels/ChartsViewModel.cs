@@ -255,9 +255,9 @@ namespace OneSet.ViewModels
 			}
 		}
 
-        public override Task OnSave()
+        public override async Task OnSave()
         {
-            throw new NotImplementedException();
+            await Task.FromResult(0);
         }
     }
 }

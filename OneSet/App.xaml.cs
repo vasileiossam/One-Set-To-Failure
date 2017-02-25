@@ -40,8 +40,8 @@ namespace OneSet
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
-		    var mainNav = new NavigationPage(new Views.WorkoutListPage());
-		    MainPage = mainNav;
+            var navigateService = Container.Resolve<INavigationService>();
+            MainPage = navigateService.InitMain<WorkoutListViewModel>();
 		}
 
 		protected override void OnStart ()
@@ -112,6 +112,7 @@ namespace OneSet
 			{
 				var mainNav = new NavigationPage (new ErrorPage { ViewModel = viewModel });
 				Current.MainPage = mainNav;
+                
 			}
 		}
 	}

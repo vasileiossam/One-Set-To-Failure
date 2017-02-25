@@ -30,11 +30,6 @@ namespace OneSet.Droid
 
 			OxyPlot.Xamarin.Forms.Platform.Android.Forms.Init();
 			Forms.Init (this, bundle);
-
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Automapper();
-            App.Container = bootstrapper.CreateContainer();
-		    App.Database = App.Container.Resolve<Database>();
 		    
             DependencyService.Register<ToastNotification>();
             ToastNotification.Init(this, new PlatformOptions { SmallIconDrawable = Android.Resource.Drawable.IcDialogInfo });
@@ -44,9 +39,11 @@ namespace OneSet.Droid
 			App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
 			App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
 
-			LoadApplication(new App());
+            var bootstrapper = new Bootstrapper();
+            App.Container = bootstrapper.CreateContainer();
+            App.Database = App.Container.Resolve<Database>();
 
-			bootstrapper.CheckMapper ();
+            LoadApplication(new App());
 		}
 
         private static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
