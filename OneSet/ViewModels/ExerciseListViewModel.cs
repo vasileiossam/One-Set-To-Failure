@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Autofac;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.Resx;
 
 namespace OneSet.ViewModels
 {
-	public class ExerciseListViewModel : BaseViewModel
-	{
+	public class ExerciseListViewModel : BaseViewModel, INavigationAware
+    {
 		protected ObservableCollection<ExerciseDetailsViewModel> _exercises;
 		public ObservableCollection<ExerciseDetailsViewModel> Exercises
 		{
@@ -64,20 +65,6 @@ namespace OneSet.ViewModels
             Title = AppResources.ExercisesTitle;
 		}
 
-        public override async Task OnLoad(object parameter = null)
-		{
-			try
-			{
-				Exercises = await GetExercises();
-                ListVisible = Exercises.Count > 0;
-                NoDataVisible = !ListVisible;
-            }
-            catch (Exception  ex)
-			{
-				App.ShowErrorPage (this, ex);
-			}
-		}
-
         private async Task<ObservableCollection<ExerciseDetailsViewModel>> GetExercises()
         {
             var collection = new ObservableCollection<ExerciseDetailsViewModel>();
@@ -87,11 +74,29 @@ namespace OneSet.ViewModels
             {
                 var vm = _componentContext.Resolve<ExerciseDetailsViewModel>();
                 vm.Exercise = item;
-                await vm.OnLoad();
                 collection.Add(vm);
             }
 
             return collection;
+        }
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            try
+            {
+                Exercises = await GetExercises();
+                ListVisible = Exercises.Count > 0;
+                NoDataVisible = !ListVisible;
+            }
+            catch (Exception ex)
+            {
+                App.ShowErrorPage(this, ex);
+            }
         }
     }
 }

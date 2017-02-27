@@ -6,11 +6,12 @@ using Xamarin.Forms;
 using System.Linq;
 using Autofac;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.Views;
 
 namespace OneSet.ViewModels
 {
-	public class WorkoutListViewModel : BaseViewModel
+	public class WorkoutListViewModel : BaseViewModel, INavigationAware
     {
         private string _trophies;
 		public string Trophies
@@ -127,16 +128,18 @@ namespace OneSet.ViewModels
 
         private readonly IComponentContext _componentContext;
         private readonly INavigationService _navigationService;
+        private readonly IMessagingService _messagingService;
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly IExercisesRepository _exercisesRepository;
         private readonly ICalendarRepository _calendarRepository;
         private readonly IRoutineDaysRepository _routineDaysRepository;
 
-        public WorkoutListViewModel (IComponentContext componentContext, INavigationService navigationService, 
+        public WorkoutListViewModel (IComponentContext componentContext, INavigationService navigationService, IMessagingService messagingService,
             IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
-            _navigationService = navigationService;
             _componentContext = componentContext;
+            _navigationService = navigationService;
+            _messagingService = messagingService;
             _workoutsRepository = workoutsRepository;
             _exercisesRepository = exercisesRepository;
             _calendarRepository = calendarRepository;
@@ -150,43 +153,6 @@ namespace OneSet.ViewModels
 
             RestTimerToolbarItem = _componentContext.Resolve<RestTimerToolbarItem>();
         }
-
-		public override async Task OnLoad(object parameter = null)
-		{
-		    if (!(parameter is DateTime)) return;
-            CurrentDate = (DateTime) parameter;
-
-            RestTimerToolbarItem.Update();
-			CalendarNotes = await _calendarRepository.GetCalendarNotes (_currentDate);
-			if (CalendarNotes != null)
-			{
-				CalendarNotes = CalendarNotes.Trim ();
-
-				// trim to two lines
-				var countLines = CalendarNotes.ToCharArray ().Count (c => c == '\n');
-				if (countLines > 2)
-				{
-					var lines = CalendarNotes.Split (new[]{ '\n' });
-					if (lines.Count () >= 2)
-					{
-						CalendarNotes = $"{lines[0].Trim()}\n{lines[1].Trim()}...";
-					}
-				}
-			}
-
-		    RoutineDays = await GetRoutine(_currentDate);
-
-            CalendarNotesVisible = !string.IsNullOrEmpty(CalendarNotes);
-            WorkoutsListVisible = RoutineDays.Count > 0;
-			NoWorkoutDataVisible = !WorkoutsListVisible;
-
-			if (App.TotalTrophies == null)
-			{
-  				App.TotalTrophies = await _workoutsRepository.GetTotalTrophies ();
-			}
-			var dayTrophies = await _workoutsRepository.GetTrophies (CurrentDate);
-		    if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int) App.TotalTrophies}";
-		}
 
         private async Task<ObservableCollection<RoutineDayViewModel>> GetRoutine(DateTime date)
         {
@@ -218,23 +184,19 @@ namespace OneSet.ViewModels
 		{
 			if ((string)s == "Left")
 			{
-				await OnLoad(CurrentDate.AddDays (-1));
-				//Page.ChangeOrientation (false);
-				//Page.Refresh ();
+				await Load(CurrentDate.AddDays (-1));
+                _messagingService.Send(this, Messages.WorkoutsReloaded);
 			} 
 			else
 			{
-				await OnLoad(CurrentDate.AddDays (1));
-				//Page.ChangeOrientation (false);
-				//Page.Refresh ();
-			}
+				await Load(CurrentDate.AddDays (1));
+                _messagingService.Send(this, Messages.WorkoutsReloaded);
+            }
 		}
 
 		private async Task OnCalendarNotesCommand()
 		{
-		    var viewModel = _componentContext.Resolve<CalendarNotesViewModel>();
-		    viewModel.Date = CurrentDate;
-            await _navigationService.NavigateTo(viewModel);
+		    await _navigationService.NavigateTo<CalendarNotesViewModel>(CurrentDate);
 		}
 
 		private async Task OnAnalysisCommand()
@@ -251,14 +213,62 @@ namespace OneSet.ViewModels
 		private async void OnGetDate(object sender, EventArgs args)
 		{
 		    if (!(sender is DateTime)) return;
-		    await OnLoad ((DateTime) sender);
+		    await Load((DateTime) sender);
 
 		    Device.BeginInvokeOnMainThread (() =>
 		    {
-		        //Page.ChangeOrientation (false);
-		        //Page.Refresh ();
-		    });
+                _messagingService.Send(this, Messages.WorkoutsReloaded);
+            });
 		}
+
+        public async Task Load(DateTime date)
+        {
+            CurrentDate = date;
+
+            RestTimerToolbarItem.Update();
+            CalendarNotes = await _calendarRepository.GetCalendarNotes(_currentDate);
+            if (CalendarNotes != null)
+            {
+                CalendarNotes = CalendarNotes.Trim();
+
+                // trim to two lines
+                var countLines = CalendarNotes.ToCharArray().Count(c => c == '\n');
+                if (countLines > 2)
+                {
+                    var lines = CalendarNotes.Split(new[] { '\n' });
+                    if (lines.Count() >= 2)
+                    {
+                        CalendarNotes = $"{lines[0].Trim()}\n{lines[1].Trim()}...";
+                    }
+                }
+            }
+
+            RoutineDays = await GetRoutine(_currentDate);
+
+            CalendarNotesVisible = !string.IsNullOrEmpty(CalendarNotes);
+            WorkoutsListVisible = RoutineDays.Count > 0;
+            NoWorkoutDataVisible = !WorkoutsListVisible;
+
+            if (App.TotalTrophies == null)
+            {
+                App.TotalTrophies = await _workoutsRepository.GetTotalTrophies();
+            }
+            var dayTrophies = await _workoutsRepository.GetTrophies(CurrentDate);
+            if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int)App.TotalTrophies}";
+        }
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("CurrentDate"))
+            {
+                await Load((DateTime)parameters["CurrentDate"]);
+            }
+        }
     }
 }
 

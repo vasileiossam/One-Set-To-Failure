@@ -15,7 +15,9 @@ namespace OneSet.Converters
     
 	    public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
 	    {
-			return value;
-	    }
+            var s = value as string;
+            if (string.IsNullOrEmpty(s)) return "0";
+            return value;
+        }
 	}
 }

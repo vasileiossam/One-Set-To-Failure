@@ -33,8 +33,8 @@ namespace OneSet.ViewModels
 		}
 	}
 
-	public class ExerciseAnalysisViewModel : BaseViewModel
-	{
+	public class ExerciseAnalysisViewModel : BaseViewModel, INavigationAware
+    {
 		public Picker ExercisesPicker { get; set; }
 		public List<ExerciseStat> Stats {get; set;}
 		private List<Exercise> _exercises;
@@ -50,25 +50,6 @@ namespace OneSet.ViewModels
             _workoutsRepository = workoutsRepository;
             _exercisesRepository = exercisesRepository;
             _weightConverter = new WeightMetricToImperialConverter ();
-		}
-
-        public override async Task OnLoad(object parameter = null)
-		{
-			_workouts = await _workoutsRepository.AllAsync ();
-			_exercises = await _exercisesRepository.AllAsync ();
-
-			foreach (var workout in _workouts)
-			{
-				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
-			//	workout.Exercise = exercise;
-			}
-
-		//	_exercisesInWorkouts = _workouts.GroupBy (x => x.Exercise).Select (x => x.First ().Exercise).ToList ();
-			//ExercisesPicker.Items.Clear();
-			//foreach(var item in _exercisesInWorkouts)
-			//{
-			//	ExercisesPicker.Items.Add (item.Name);
-			//}
 		}
 
         public async Task<List<ExerciseStat>> GetStats(int exerciseIndex)
@@ -221,6 +202,30 @@ namespace OneSet.ViewModels
 	    {
             await Task.FromResult(0);
         }
-	}
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            _workouts = await _workoutsRepository.AllAsync();
+            _exercises = await _exercisesRepository.AllAsync();
+
+            foreach (var workout in _workouts)
+            {
+                var exercise = _exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
+                //	workout.Exercise = exercise;
+            }
+
+            //	_exercisesInWorkouts = _workouts.GroupBy (x => x.Exercise).Select (x => x.First ().Exercise).ToList ();
+            //ExercisesPicker.Items.Clear();
+            //foreach(var item in _exercisesInWorkouts)
+            //{
+            //	ExercisesPicker.Items.Add (item.Name);
+            //}
+        }
+    }
 }
 

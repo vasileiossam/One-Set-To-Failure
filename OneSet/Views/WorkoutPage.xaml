@@ -16,10 +16,9 @@
 
   <local:WorkoutPageXaml.Resources>
     <ResourceDictionary>
-      <converters:DateTimeToStringConverter x:Key="dateConverter" />
-      <converters:WeightMetricToImperialConverter x:Key="weightConverter" />
-      <converters:IntToStringConverter x:Key="intToStringConverter" />
-      <converters:DoubleToStringConverter x:Key="doubleToStringConverter" />
+      <converters:WeightMetricToImperialConverter x:Key="WeightConverter" />
+      <converters:IntToStringConverter x:Key="IntToStringConverter" />
+      <converters:DoubleToStringConverter x:Key="DoubleToStringConverter" />
     </ResourceDictionary>
   </local:WorkoutPageXaml.Resources>
 
@@ -33,12 +32,12 @@
     <ScrollView>
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="10, 10, 10, 10">
 
-        <Label Text="{Binding Workout.Exercise.Name}" YAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource primaryText}"/>
-        <Label IsVisible="{Binding NotesVisible}" Text="{Binding Workout.Exercise.Notes}" FontSize="Small" TextColor="{StaticResource secondaryText}"/>
+        <Label Text="{Binding Exercise.Name}" YAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource primaryText}"/>
+        <Label IsVisible="{Binding NotesVisible}" Text="{Binding Exercise.Notes}" FontSize="Small" TextColor="{StaticResource secondaryText}"/>
 
         <!--  
 				Previous Workout 
-		-->
+		    -->
         <Grid IsVisible="{Binding PreviousRepsWeightVisible}" VerticalOptions="FillAndExpand">
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -65,7 +64,7 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding Workout.PreviousReps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+            <Label Text="{Binding Workout.PreviousReps, Converter={StaticResource IntToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
           </Grid>
 
           <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -77,13 +76,13 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+            <Label Text="{Binding Workout.PreviousWeight, Converter={StaticResource WeightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
           </Grid>
         </Grid>
 
         <!--  
  				Target Workout 
- 		-->
+ 		    -->
         <Grid  IsVisible="{Binding TargetRepsWeightVisible}" VerticalOptions="FillAndExpand">
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -111,7 +110,7 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding Workout.TargetReps, Converter={StaticResource intToStringConverter}}"
+            <Label Text="{Binding Workout.TargetReps, Converter={StaticResource IntToStringConverter}}"
               YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
           </Grid>
 
@@ -124,8 +123,7 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding Workout.TargetWeight, Converter={StaticResource weightConverter}}"
-              YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
+            <Label Text="{Binding Workout.TargetWeight, Converter={StaticResource WeightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
             <Image IsVisible="{Binding LevelUpVisible}" Source="ic_fa_arrow_up" HorizontalOptions="Start"/>
           </Grid>
 
@@ -134,7 +132,7 @@
 
         <!--  
  				Workout 
- 		-->
+ 		    -->
         <Grid VerticalOptions="FillAndExpand">
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -148,10 +146,10 @@
           <Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="ic_fa_android" HorizontalOptions="Center" VerticalOptions="Center"/>
 
           <controls:CustomEntry Grid.Row="0" Grid.Column="1" Placeholder="{i18n:Translate Reps}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric"
-            Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+            Text="{Binding Workout.Reps, Converter={StaticResource IntToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
           <controls:CustomEntry Grid.Row="0" Grid.Column="2" Placeholder="{i18n:Translate Weight}" HorizontalOptions="CenterAndExpand" Keyboard="Numeric"
-            Text="{Binding Weight, Converter={StaticResource doubleToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
+            Text="{Binding Workout.Weight, Converter={StaticResource DoubleToStringConverter}}" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="32" TextAlignment="Center"/>
 
           <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="0, 0, 0, 0">
             <Button Image="ic_fa_minus" Command="{Binding RepsDownCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -162,19 +160,7 @@
             <Button Image="ic_fa_plus" Command="{Binding WeighUpCommand}" VerticalOptions="Center" HorizontalOptions="Center"/>
           </StackLayout>
         </Grid>
-
-
-        <!--	  <ContentView Padding="0, 0, 0, 10">
-	  	<controls:BlueButton Text="Done it!" TextColor="White"/>
-	  </ContentView>
-	  <ContentView Padding="0, 0, 0, 10">
-	  	<controls:BlueButton Text="Back" TextColor="White"/>
-	  </ContentView>-->
-
       </StackLayout>
-
     </ScrollView>
-
-
   </local:WorkoutPageXaml.Content>
-  </local:WorkoutPageXaml>
+</local:WorkoutPageXaml>

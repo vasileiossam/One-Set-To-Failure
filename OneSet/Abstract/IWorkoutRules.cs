@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using OneSet.Models;
 
 namespace OneSet.Abstract
 {
     public interface IWorkoutRules
     {
-        Task<object> GetTargetWorkoutAsync(Workout workout);
+        Task<KeyValuePair<int, double>> GetTargetWorkout(Workout workout, Exercise exercise, Workout previousWorkout);
         int GetTrophies(Workout workout);
     }
 }

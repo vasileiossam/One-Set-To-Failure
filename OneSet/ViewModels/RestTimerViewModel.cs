@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.Resx;
 using Xamarin.Forms;
 
@@ -14,8 +15,8 @@ namespace OneSet.ViewModels
         Editing
     }
 
-    public class RestTimerViewModel : BaseViewModel
-	{
+    public class RestTimerViewModel : BaseViewModel, INavigationAware
+    {
 		public ProgressBar ProgressBar { get; set; }
 		protected double _progressStep;
 
@@ -178,28 +179,6 @@ namespace OneSet.ViewModels
 			});
 		}
 
-        public override async Task OnLoad(object parameter = null)
-		{
-			_canSave = false;
-			AutoStart = App.Settings.RestTimerAutoStart;
-			PlaySounds = App.Settings.RestTimerPlaySounds;
-			TotalSeconds = App.Settings.RestTimerTotalSeconds;
-
-			// rest timer already running
-			if (App.RestTimerSecondsLeft > 0)
-			{
-				var seconds = App.RestTimerSecondsLeft; 
-				await OnResetCommand ();
-				SecondsLeft = seconds;
-				await OnStartCommand ();
-			} else
-			{
-				await OnResetCommand ();
-			}
-
-			_canSave = true;
-		}
-
 		protected void Save()
 		{
 			if (!_canSave)
@@ -295,6 +274,34 @@ namespace OneSet.ViewModels
 	    {
             await Task.FromResult(0);
         }
-	}
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            _canSave = false;
+            AutoStart = App.Settings.RestTimerAutoStart;
+            PlaySounds = App.Settings.RestTimerPlaySounds;
+            TotalSeconds = App.Settings.RestTimerTotalSeconds;
+
+            // rest timer already running
+            if (App.RestTimerSecondsLeft > 0)
+            {
+                var seconds = App.RestTimerSecondsLeft;
+                await OnResetCommand();
+                SecondsLeft = seconds;
+                await OnStartCommand();
+            }
+            else
+            {
+                await OnResetCommand();
+            }
+
+            _canSave = true;
+        }
+    }
 }
 

@@ -57,6 +57,7 @@ namespace OneSet.Services
 
         public async Task PushAsync(Page page)
         {
+    
             await _rootPage.PushAsync(page);
         }
 

@@ -15,8 +15,8 @@ using System;
 
 namespace OneSet.ViewModels
 {
-	public class ChartsViewModel : BaseViewModel
-	{
+	public class ChartsViewModel : BaseViewModel, INavigationAware
+    {
 		public StackLayout OxyPlotsLayout { get; set; }
 
 		private List<Exercise> _exercises;
@@ -61,21 +61,6 @@ namespace OneSet.ViewModels
             _exercisesRepository = exercisesRepository;
             NoChartsDataVisible = false;
 			ChartsPinchToZoomVisible = false;			
-		}
-
-        public override async Task OnLoad(object parameter = null)
-		{
-			_workouts = await _workoutsRepository.AllAsync ();
-			_exercises = await _exercisesRepository.AllAsync ();
-
-			NoChartsDataVisible = _workouts.Count == 0;
-			ChartsPinchToZoomVisible = !NoChartsDataVisible;
-
-			foreach (var workout in _workouts)
-			{
-				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
-				//workout.Exercise = exercise;
-			}
 		}
 
 		public async Task SelectChart(int selectedChartIndex)
@@ -258,6 +243,26 @@ namespace OneSet.ViewModels
         public override async Task OnSave()
         {
             await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            _workouts = await _workoutsRepository.AllAsync();
+            _exercises = await _exercisesRepository.AllAsync();
+
+            NoChartsDataVisible = _workouts.Count == 0;
+            ChartsPinchToZoomVisible = !NoChartsDataVisible;
+
+            foreach (var workout in _workouts)
+            {
+                var exercise = _exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
+                //workout.Exercise = exercise;
+            }
         }
     }
 }

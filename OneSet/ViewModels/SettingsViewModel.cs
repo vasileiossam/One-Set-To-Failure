@@ -10,8 +10,8 @@ using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-	public class SettingsViewModel : BaseViewModel
-	{
+	public class SettingsViewModel : BaseViewModel, INavigationAware
+    {
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
         private readonly IMessagingService _messagingService;
@@ -116,8 +116,19 @@ namespace OneSet.ViewModels
 			return lastBackupDate;
 		}
 
-        public override async Task OnLoad(object parameter = null)
+        public override Task OnSave()
+	    {
+	        throw new NotImplementedException();
+	    }
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+
             var list = new ObservableCollection<PreferenceGroup>();
 
             #region general group
@@ -449,11 +460,6 @@ namespace OneSet.ViewModels
 
             Settings = list;
         }
-
-        public override Task OnSave()
-	    {
-	        throw new NotImplementedException();
-	    }
-	}
+    }
 }
 

@@ -17,7 +17,7 @@
 
   <local:RestTimerPageXaml.Resources>
     <ResourceDictionary>
-      <converters:StateToBooleanConverter x:Key="stateToBooleanConverter" />
+      <converters:StateToBooleanConverter x:Key="StateToBooleanConverter" />
     </ResourceDictionary>
   </local:RestTimerPageXaml.Resources>
 
@@ -28,14 +28,14 @@
       <StackLayout Orientation="Vertical" Padding="0, 0, 0, 0" VerticalOptions="Start" HorizontalOptions="Start">
 
         <StackLayout Orientation="Horizontal" Padding="0, 0, 20, 0">
-          <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Editing}}" HorizontalOptions="Start" WidthRequest="172">
+          <ContentView Padding="0, 0, 0, 10" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Editing}}" HorizontalOptions="Start" WidthRequest="172">
             <controls:CustomEntry Text="{Binding TotalSeconds}" Keyboard="Numeric" TextAlignment="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}" TextChanged="OnTextChanged"/>
           </ContentView>
 
-          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Paused}}" HorizontalOptions="Start" WidthRequest="172">
             <Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
           </ContentView>
-          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" HorizontalOptions="Start" WidthRequest="172">
             <Button BackgroundColor="Transparent" Text="{Binding SecondsLeft}" Command="{Binding EditingModeCommand}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="72" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
           </ContentView>
 
@@ -62,19 +62,19 @@
 
         <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 5">
           <!-- Start button in Paused and Editing states -->
-          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Paused}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Paused}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
             <controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White" />
           </ContentView>
-          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Editing}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Editing}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
             <controls:BlueButton Text="{i18n:Translate RestTimerStart}" Command="{Binding StartCommand}" TextColor="White" />
           </ContentView>
 
           <!-- Pause button -->
-          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
             <controls:BlueButton Text="{i18n:Translate RestTimerPause}" Command="{Binding PauseCommand}" TextColor="White"/>
           </ContentView>
           <!-- Reset button -->
-          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource stateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
+          <ContentView Padding="0, 0, 0, 0" IsVisible="{Binding State, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static viewmodels:RestTimerStates.Running}}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Start">
             <controls:BlueButton Text="{i18n:Translate RestTimerReset}" Command="{Binding ResetCommand}" TextColor="White"/>
           </ContentView>
         </StackLayout>

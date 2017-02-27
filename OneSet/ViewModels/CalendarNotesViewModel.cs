@@ -6,27 +6,24 @@ using OneSet.Abstract;
 
 namespace OneSet.ViewModels
 {
-	public class CalendarNotesViewModel : BaseViewModel
-	{
-        public DateTime Date { get; set; }
-
+	public class CalendarNotesViewModel : BaseViewModel, INavigationAware
+    {
         private Calendar _calendar { get; set; }
-	    public Calendar Calendar
-	    {
+        public Calendar Calendar
+        {
             get
             {
-                if (_calendar == null)
-                {
-                    Task.Run(async () =>
-                    {
-                        _calendar = await _repo.FindAsync(Date) ?? new Calendar() {Date = Date};
-                        OnPropertyChanged("Calendar");
-                    }).Wait();
-                }
                 return _calendar;
             }
+            set
+            {
+                if (_calendar == value) return;
+                _calendar = value;
+                OnPropertyChanged("Calendar");
+            }
         }
-	    private readonly ICalendarRepository _repo;
+
+        private readonly ICalendarRepository _repo;
         private readonly INavigationService _navigationService;
 
         public CalendarNotesViewModel(INavigationService navigationService, ICalendarRepository repo)
@@ -42,6 +39,20 @@ namespace OneSet.ViewModels
 		    await _repo.SaveAsync(Calendar);
 		    await _navigationService.PopAsync();
 		}
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("date"))
+            {
+                var date = (DateTime) parameters["date"];
+                Calendar = await _repo.FindAsync(date) ?? new Calendar() { Date = date };
+            }
+        }
     }
 }
 

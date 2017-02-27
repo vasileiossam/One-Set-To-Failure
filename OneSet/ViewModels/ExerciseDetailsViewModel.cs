@@ -10,8 +10,8 @@ using OneSet.Resx;
 
 namespace OneSet.ViewModels
 {
-	public class ExerciseDetailsViewModel : BaseViewModel
-	{
+	public class ExerciseDetailsViewModel : BaseViewModel, INavigationAware
+    {
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
         private readonly IUnitsService _units;
@@ -107,20 +107,6 @@ namespace OneSet.ViewModels
             };
         }
 
-        public override async Task OnLoad(object parameter = null)
-		{
-            Exercise.PlateWeight = _units.GetWeight(App.Settings.IsMetric, Exercise.PlateWeight);
-
-            var routine = await _routineDaysRepository.GetRoutine(Exercise.ExerciseId);
-            Mon = GetRoutineDay(routine, 1);
-            Tue = GetRoutineDay(routine, 2);
-            Wed = GetRoutineDay(routine, 3);
-            Thu = GetRoutineDay(routine, 4);
-            Fri = GetRoutineDay(routine, 5);
-            Sat = GetRoutineDay(routine, 6);
-            Sun = GetRoutineDay(routine, 7);
-        }
-
 		private async Task SaveRoutine()
 		{
             await _routineDaysRepository.SaveAsync(Mon);
@@ -185,6 +171,25 @@ namespace OneSet.ViewModels
                 App.ShowErrorPage(this, ex);
             }
         }
-	}
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            Exercise.PlateWeight = _units.GetWeight(App.Settings.IsMetric, Exercise.PlateWeight);
+
+            var routine = await _routineDaysRepository.GetRoutine(Exercise.ExerciseId);
+            Mon = GetRoutineDay(routine, 1);
+            Tue = GetRoutineDay(routine, 2);
+            Wed = GetRoutineDay(routine, 3);
+            Thu = GetRoutineDay(routine, 4);
+            Fri = GetRoutineDay(routine, 5);
+            Sat = GetRoutineDay(routine, 6);
+            Sun = GetRoutineDay(routine, 0);
+        }
+    }
 }
 

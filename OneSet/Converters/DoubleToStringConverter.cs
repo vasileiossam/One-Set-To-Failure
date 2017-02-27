@@ -6,8 +6,7 @@ namespace OneSet.Converters
 {
 	public class DoubleToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType,
-                              object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return string.Empty;
 			if ((double) value == 0) return string.Empty;
@@ -16,7 +15,9 @@ namespace OneSet.Converters
     
 	    public object ConvertBack (object value, Type targetType, object parameter, CultureInfo culture)
 	    {
-			return value;
+	        var s = value as string;
+	        if (string.IsNullOrEmpty(s)) return "0";
+            return value;
 	    }
 	}
 }

@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IExporter.cs" />
     <Compile Include="Abstract\IMessagingService.cs" />
+    <Compile Include="Abstract\INavigationAware.cs" />
     <Compile Include="Abstract\INavigationService.cs" />
     <Compile Include="Abstract\IDialogService.cs" />
     <Compile Include="Abstract\IStatistics.cs" />
@@ -45,6 +46,7 @@
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Messages.cs" />
+    <Compile Include="Models\NavigationParameters.cs" />
     <Compile Include="Models\RoutineDay.cs" />
     <Compile Include="Models\Workout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

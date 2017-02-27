@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Autofac;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -13,21 +14,35 @@ namespace OneSet.Views
 		private StackOrientation _stackOrientation;
         private readonly IComponentContext _componentContext;
         private readonly INavigationService _navigationService;
+        private readonly IMessagingService _messagingService;
 
-        public WorkoutListPage(INavigationService navigationService, IComponentContext componentContext)
+        public WorkoutListPage(IComponentContext componentContext, INavigationService navigationService, IMessagingService messagingService)
 		{
-			InitializeComponent ();
-		    _navigationService = navigationService;
+
+            InitializeComponent ();
             _componentContext = componentContext;
+            _navigationService = navigationService;
+            _messagingService = messagingService;
             _screenSizeHandler = new ScreenSizeHandler ();
 
 			_stackOrientation = StackOrientation.Horizontal;
-			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait 
-				&& _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
+			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait && _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
 			{
 				_stackOrientation = StackOrientation.Vertical;
 			}
-		}
+
+            _messagingService = messagingService;
+            _messagingService.Subscribe<WorkoutListViewModel>(this, Messages.WorkoutsReloaded, sender =>
+            {
+                Refresh();
+                ChangeOrientation();
+            });
+        }
+
+        ~WorkoutListPage()
+        {
+            _messagingService.Unsubscribe<WorkoutListViewModel>(this, Messages.WorkoutsReloaded);
+        }
 
         protected override async void OnAppearing()
         {
@@ -36,7 +51,7 @@ namespace OneSet.Views
 			BindingContext = ViewModel;
 			await ViewModel.OnLoad(App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
-			ChangeOrientation (true);
+			ChangeOrientation();
 
 			MainFrame.SwipeLeft += OnLeftChevronTapCommand;
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
@@ -66,6 +81,7 @@ namespace OneSet.Views
 
             var viewModel = _componentContext.Resolve<WorkoutViewModel>();
             viewModel.Workout = item.Workout;
+            viewModel.Exercise = item.Exercise;
             viewModel.RestTimerToolbarItem = ViewModel.RestTimerToolbarItem;
             await _navigationService.NavigateTo(viewModel);
 
@@ -104,7 +120,7 @@ namespace OneSet.Views
 					CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Button));		
 					NoDataImage.IsVisible = false;
 					_stackOrientation = StackOrientation.Horizontal;
-					ChangeOrientation (true);				
+					ChangeOrientation();				
 				}
 				if (orientation == Orientations.Portrait)
 				{
@@ -112,13 +128,13 @@ namespace OneSet.Views
 					CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Button));					
 					NoDataImage.IsVisible = true;		
 					_stackOrientation = StackOrientation.Vertical;
-					ChangeOrientation (true);
+					ChangeOrientation();
 				}
 			}
 		}
 
 		// TODO remove this when xamarin forms supports source/relative binding inside a datatemplate
-		public void ChangeOrientation(bool canRefresh)
+		public void ChangeOrientation()
 		{
 			workoutsList.BeginRefresh ();
 			if (ViewModel.RoutineDays != null)
@@ -129,7 +145,6 @@ namespace OneSet.Views
 				}
 			}
 			workoutsList.EndRefresh ();
-			Refresh ();
 		}
 	}
 

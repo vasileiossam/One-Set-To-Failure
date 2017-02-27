@@ -1,9 +1,11 @@
-﻿using OneSet.Models;
+﻿using System.Threading.Tasks;
+using OneSet.Abstract;
+using OneSet.Models;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-	public class RoutineDayViewModel
+	public class RoutineDayViewModel : INavigationAware
     {
         public RoutineDay RoutineDay { get; set; }
         public Exercise Exercise { get; set; }
@@ -36,24 +38,6 @@ namespace OneSet.ViewModels
 			}
 		}
 			
-		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
-		protected StackOrientation _cellLayoutOrientation;
-        public StackOrientation CellLayoutOrientation
-		{
-			get
-			{
-				return _cellLayoutOrientation;
-			}
-			set
-			{
-				if (_cellLayoutOrientation != value)
-				{
-					_cellLayoutOrientation = value;
-					//OnPropertyChanged ("CellLayoutOrientation");
-				}
-			}
-		}
-
         public int Reps
         {
             get
@@ -76,10 +60,52 @@ namespace OneSet.ViewModels
         {
             get
             {
-                if (Workout == null) return ColorPalette.SecondaryText;
-                return Workout.WorkoutId > 0 ? ColorPalette.SecondaryText : ColorPalette.Accent;
+                if (Workout != null)
+                {
+                    if (Workout.WorkoutId > 0)
+                    {
+                        return ColorPalette.SecondaryText;
+                    }
+                    else
+                    {
+                        return ColorPalette.Accent;
+                    }
+                }
+                else
+                {
+                    return ColorPalette.SecondaryText;
+                }
             }
         }
-	}
+
+        // TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
+        protected StackOrientation _cellLayoutOrientation;
+        public StackOrientation CellLayoutOrientation
+        {
+            get
+            {
+                return _cellLayoutOrientation;
+            }
+            set
+            {
+                if (_cellLayoutOrientation != value)
+                {
+                    _cellLayoutOrientation = value;
+                    //OnPropertyChanged ("CellLayoutOrientation");
+                }
+            }
+        }
+
+
+        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+
+        public async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            await Task.FromResult(0);
+        }
+    }
 }
 

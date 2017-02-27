@@ -16,10 +16,10 @@
 
   <local:WorkoutListPageXaml.Resources>
     <ResourceDictionary>
-      <converters:DateTimeToStringConverter x:Key="dateConverter" />
-      <converters:WeightMetricToImperialConverter x:Key="weightConverter" />
-      <converters:IntToStringConverter x:Key="intToStringConverter" />
-      <converters:TrophiesToStringConverter x:Key="trophiesToStringConverter" />
+      <converters:DateTimeToStringConverter x:Key="DateConverter" />
+      <converters:WeightMetricToImperialConverter x:Key="WeightConverter" />
+      <converters:IntToStringConverter x:Key="IntToStringConverter" />
+      <converters:TrophiesToStringConverter x:Key="TrophiesToStringConverter" />
     </ResourceDictionary>
   </local:WorkoutListPageXaml.Resources>
 
@@ -44,7 +44,7 @@
 
         <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
           <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
-          <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource dateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold"/>
+          <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource DateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold"/>
           <Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"  HorizontalOptions="End"/>
         </StackLayout>
 
@@ -99,7 +99,7 @@
 
                       <StackLayout IsVisible="{Binding TrophyVisible}" Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                         <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
-                        <Label Text="{Binding Workout.Trophies, Converter={StaticResource trophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
+                        <Label Text="{Binding Workout.Trophies, Converter={StaticResource TrophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
                       </StackLayout>
                     </Grid>
 
@@ -118,7 +118,7 @@
                         </Grid.ColumnDefinitions>
 
                         <controls:RoundedBoxView  WidthRequest="90" HeightRequest="35" CornerRadius="32" Color="{StaticResource box}" />
-                        <Label Text="{Binding Reps, Converter={StaticResource intToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold"
+                        <Label Text="{Binding Reps, Converter={StaticResource IntToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold"
                           TextColor="{Binding RepsWeightColor}"/>
                       </Grid>
 
@@ -130,7 +130,7 @@
                           <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="{StaticResource box}" />
-                        <Label Text="{Binding Weight, Converter={StaticResource weightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold"
+                        <Label Text="{Binding Weight, Converter={StaticResource WeightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold"
                           TextColor="{Binding RepsWeightColor}"/>
                       </Grid>
                     </StackLayout>

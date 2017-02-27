@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using OneSet.Abstract;
 using OneSet.Models;
@@ -39,7 +40,7 @@ namespace OneSet.Services
             return weight < 0 ? 0 : weight;
         }
 
-        private async Task<bool> CanCalculateTargetAsync(Workout workout)
+        private async Task<bool> CanCalculateTarget(Workout workout)
         {
 			// TODO when I'll implement the settings in the exercise level I have to replace the WorkoutCount with workout.Exercise.RepsIncrement.WorkoutCount 
 			var workoutCount = App.Settings.RepsIncrement.WorkoutCount; 
@@ -56,11 +57,8 @@ namespace OneSet.Services
             return IsDivisible(count, workoutCount);
         }
         
-        public async Task<object> GetTargetWorkoutAsync(Workout workout)
+        public async Task<KeyValuePair<int, double>> GetTargetWorkout(Workout workout, Exercise exercise, Workout previousWorkout)
         {
-            var previousWorkout = await _workoutsRepository.GetPreviousWorkout(workout);
-            var exercise = await _exercisesRepository.FindAsync(workout.ExerciseId);
-
             int targetReps;
             double targetWeight;
 
@@ -76,7 +74,7 @@ namespace OneSet.Services
                 targetWeight = 0;
             }
             else
-            if (await CanCalculateTargetAsync(workout))
+            if (await CanCalculateTarget(workout))
             {
                 // no previous workout exist, this is the first workout for this exercise
                 if (previousWorkout == null)
@@ -110,12 +108,10 @@ namespace OneSet.Services
             }
             else
             {
-                // suggest previous workout Reps and Weight
-                targetReps = previousWorkout.Reps;
-                targetWeight = previousWorkout.Weight;
+                return new KeyValuePair<int, double>(previousWorkout.Reps, previousWorkout.Weight);
             }
 
-            return new {TargetReps = targetReps, TargetWeight = targetWeight};
+            return new KeyValuePair<int, double>(targetReps, targetWeight);
         }
 
 		public int GetTrophies(Workout workout)
