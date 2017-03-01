@@ -41,6 +41,10 @@
     <Compile Include="Abstract\IStatistics.cs" />
     <Compile Include="Abstract\IUnitsService.cs" />
     <Compile Include="Abstract\IWorkoutRules.cs" />
+    <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Behaviors\ListViewSelectedItemBehavior.cs" />
+    <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Converters\IntToBoolConverter.cs" />
     <Compile Include="Extensions\PropertyInfoExtensions.cs" />
     <Compile Include="Models\Calendar.cs" />
@@ -66,7 +70,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\ExerciseItemViewModel.cs" />
-    <Compile Include="ViewModels\WorkoutListViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\WorkoutDetailsViewModel.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
@@ -102,8 +106,8 @@
     <Compile Include="Views\WorkoutDetailsPage.xaml.cs">
       <DependentUpon>WorkoutDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkoutListPage.xaml.cs">
-      <DependentUpon>WorkoutListPage.xaml</DependentUpon>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -250,8 +254,9 @@
     <EmbeddedResource Include="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\WorkoutListPage.xaml">
+    <EmbeddedResource Include="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ExerciseListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

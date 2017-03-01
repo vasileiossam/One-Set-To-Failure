@@ -106,6 +106,7 @@ namespace OneSet.ViewModels
 
 				Workout.Trophies = _workoutRules.GetTrophies(Workout);
 			    Workout.ExerciseId = Exercise.ExerciseId;
+
                 var isPersisted = Workout.WorkoutId > 0;
 				await _workoutsRepository.SaveAsync(Workout);
 				await App.ShowSuccess(AppResources.WorkoutSaved);

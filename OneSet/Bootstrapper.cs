@@ -41,7 +41,7 @@ namespace OneSet
                .InstancePerDependency();
 
             // register view models
-            builder.RegisterAssemblyTypes(typeof(WorkoutListViewModel).GetTypeInfo().Assembly)
+            builder.RegisterAssemblyTypes(typeof(MainViewModel).GetTypeInfo().Assembly)
                .Where(t => t.Namespace == "OneSet.ViewModels")
                .InstancePerDependency();
 

@@ -8,20 +8,16 @@ using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class WorkoutListPage : WorkoutListPageXaml
+	public partial class MainPage : MainPageXaml
     {
 		private readonly ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
-        private readonly IComponentContext _componentContext;
-        private readonly INavigationService _navigationService;
         private readonly IMessagingService _messagingService;
 
-        public WorkoutListPage(IComponentContext componentContext, INavigationService navigationService, IMessagingService messagingService)
+        public MainPage(IMessagingService messagingService)
 		{
 
             InitializeComponent ();
-            _componentContext = componentContext;
-            _navigationService = navigationService;
             _messagingService = messagingService;
             _screenSizeHandler = new ScreenSizeHandler ();
 
@@ -32,25 +28,26 @@ namespace OneSet.Views
 			}
 
             _messagingService = messagingService;
-            _messagingService.Subscribe<WorkoutListViewModel>(this, Messages.WorkoutsReloaded, sender =>
+            _messagingService.Subscribe<MainViewModel>(this, Messages.WorkoutsReloaded, sender =>
             {
                 Refresh();
                 ChangeOrientation();
             });
         }
 
-        ~WorkoutListPage()
+        ~MainPage()
         {
-            _messagingService.Unsubscribe<WorkoutListViewModel>(this, Messages.WorkoutsReloaded);
+            _messagingService.Unsubscribe<MainViewModel>(this, Messages.WorkoutsReloaded);
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
 			BindingContext = ViewModel;
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
-			ChangeOrientation();
+            workoutsList.SelectedItem = null;
+            ChangeOrientation();
 
 			MainFrame.SwipeLeft += OnLeftChevronTapCommand;
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
@@ -72,33 +69,6 @@ namespace OneSet.Views
 			MainFrame.SwipeRight -= OnRightChevronTapCommand;			
             base.OnDisappearing();
         }
-
-        public async Task OnWorkoutSelected(object sender, SelectedItemChangedEventArgs args)
-        {
-            var item = args.SelectedItem as RoutineDayViewModel;
-            if (item == null) return;
-
-            var parameters = new NavigationParameters
-            {
-                {"Workout", item.Workout},
-                {"Exercise", item.Exercise},
-                {"RestTimerToolbarItem", ViewModel.RestTimerToolbarItem}
-            };
-            await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
-
-            // deselect row
-			((ListView)sender).SelectedItem = null;
-        }
-
-		public async Task OnExercisesButtonClicked(object sender, EventArgs args)
-		{
-		    await _navigationService.NavigateTo<ExerciseListViewModel>();
-		}
-
-		public async Task OnSettingsButtonClicked(object sender, EventArgs args)
-		{
-            await _navigationService.NavigateTo<SettingsViewModel>();
-		}
 
 		public void Refresh()
 		{
@@ -149,7 +119,7 @@ namespace OneSet.Views
 		}
 	}
 
-    public class WorkoutListPageXaml : BasePage<WorkoutListViewModel>
+    public class MainPageXaml : BasePage<MainViewModel>
     {
     }
 }

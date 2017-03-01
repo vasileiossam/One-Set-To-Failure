@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using OneSet.Abstract;
 using OneSet.Models;
 using OneSet.Resx;
@@ -19,6 +20,8 @@ namespace OneSet.ViewModels
         private readonly ΙStatistics _statistics;
         private readonly IExporter _exporter;
 
+        public ICommand SelectItemCommand { get; }
+
         public SettingsViewModel(INavigationService navigationService, IDialogService dialogService, IMessagingService messagingService,
             ISettingsStorage settingsStorage, ΙStatistics statistics, IExporter exporter)
         {
@@ -29,6 +32,8 @@ namespace OneSet.ViewModels
             _statistics = statistics;
             _exporter = exporter;
             Title = AppResources.SettingsTitle;
+
+            SelectItemCommand = new Command<Preference>(OnItemSelected);
         }
 
         private ObservableCollection<PreferenceGroup> _settings;
@@ -54,7 +59,7 @@ namespace OneSet.ViewModels
 				var preference = listPreference;
 				var action = await _dialogService.DisplayActionSheet(preference.Title, AppResources.CancelButton, null, preference.Options);
 
-				if ((action != null) && (action != AppResources.CancelButton))
+				if (action != null && action != AppResources.CancelButton)
 				{
 					preference.Value = action;
 					preference.OnSave (listPreference, args);
@@ -459,6 +464,11 @@ namespace OneSet.ViewModels
             #endregion
 
             Settings = list;
+        }
+
+        private void OnItemSelected(Preference item)
+        {
+            item?.Clicked(item, null);
         }
     }
 }

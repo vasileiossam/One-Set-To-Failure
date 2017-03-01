@@ -4,6 +4,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="OneSet.Views.SettingsPage"
 	xmlns:local="clr-namespace:OneSet.Views"
+  xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+  xmlns:behaviors="clr-namespace:OneSet.Behaviors;assembly=OneSet"
 	Title="{Binding Title}">
 
   <local:SettingsPageXaml.Padding>
@@ -13,14 +15,21 @@
                 WinPhone="5, 0, 5, 0" />
   </local:SettingsPageXaml.Padding>
 
+  <local:SettingsPageXaml.Resources>
+    <ResourceDictionary>
+      <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+    </ResourceDictionary>
+  </local:SettingsPageXaml.Resources>
+  
   <local:SettingsPageXaml.Content>
     <StackLayout Orientation="Vertical" Padding="10, 10, 10, 10" >
 
-      <ListView ItemTapped="OnSettingTapped" x:Name="settingsList" HasUnevenRows="true"
-       IsGroupingEnabled="true"
-       GroupDisplayBinding="{Binding Title}"
-	   	>
-
+      <ListView x:Name="settingsList" HasUnevenRows="true" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" ItemSelected="SettingsList_OnItemSelected">
+        
+        <ListView.Behaviors>
+          <behaviors:ListViewSelectedItemBehavior Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+        </ListView.Behaviors>
+        
         <ListView.GroupHeaderTemplate>
           <DataTemplate>
             <ViewCell>

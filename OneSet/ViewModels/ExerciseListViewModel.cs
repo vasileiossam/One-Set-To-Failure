@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Autofac;
 using OneSet.Abstract;
 using OneSet.Models;
 using OneSet.Resx;
+using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
@@ -25,7 +27,9 @@ namespace OneSet.ViewModels
 			}
 		}
 
-		protected bool _listVisible;
+        private readonly INavigationService _navigationService;
+
+        protected bool _listVisible;
 		public bool ListVisible
 		{
 			get
@@ -58,12 +62,19 @@ namespace OneSet.ViewModels
         private readonly IComponentContext _componentContext;
         private readonly IExercisesRepository _exercisesRepository;
 
-        public ExerciseListViewModel (IComponentContext componentContext, IExercisesRepository exercisesRepository)
+        public ICommand SelectItemCommand { get; }
+        public ICommand AddExerciseCommand { get; }
+
+        public ExerciseListViewModel (IComponentContext componentContext, INavigationService navigationService, IExercisesRepository exercisesRepository)
         {
             _componentContext = componentContext;
+            _navigationService = navigationService;
             _exercisesRepository = exercisesRepository;
             Title = AppResources.ExercisesTitle;
-		}
+
+            SelectItemCommand = new Command(async (item) => { await OnItemSelected(item); });
+            AddExerciseCommand = new Command(async () => { await _navigationService.NavigateTo<ExerciseDetailsViewModel>(); });
+        }
 
         private async Task<ObservableCollection<ExerciseItemViewModel>> GetExercises()
         {
@@ -91,6 +102,19 @@ namespace OneSet.ViewModels
             Exercises = await GetExercises();
             ListVisible = Exercises.Count > 0;
             NoDataVisible = !ListVisible;
+        }
+
+        private async Task OnItemSelected(object selectedItem)
+        {
+            var item = selectedItem as ExerciseItemViewModel;
+            if (item == null) return;
+
+            var parameters = new NavigationParameters()
+            {
+                {"Title", AppResources.EditExerciseTitle},
+                {"Exercise", item.Exercise }
+            };
+            await _navigationService.NavigateTo<ExerciseDetailsViewModel>(parameters);
         }
     }
 }

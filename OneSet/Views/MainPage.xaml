@@ -1,38 +1,40 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<local:WorkoutListPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:OneSet.Views"
-			 xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
-			 xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-			 xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
-			 x:Class="OneSet.Views.WorkoutListPage"
-       Title="{Binding Title}">
+<local:MainPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+xmlns:local="clr-namespace:OneSet.Views"
+xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
+xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
+xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+xmlns:behaviors="clr-namespace:OneSet.Behaviors;assembly=OneSet"
+x:Class="OneSet.Views.MainPage"
+Title="{Binding Title}">
 
-  <local:WorkoutListPageXaml.Padding>
+  <local:MainPageXaml.Padding>
     <OnPlatform x:TypeArguments="Thickness"
                 iOS="5, 20, 5, 0"
                 Android="0, 0, 0, 0"
                 WinPhone="5, 0, 5, 0" />
-  </local:WorkoutListPageXaml.Padding>
+    </local:MainPageXaml.Padding>
 
-  <local:WorkoutListPageXaml.Resources>
+  <local:MainPageXaml.Resources>
     <ResourceDictionary>
       <converters:DateTimeToStringConverter x:Key="DateConverter" />
       <converters:WeightMetricToImperialConverter x:Key="WeightConverter" />
       <converters:IntToStringConverter x:Key="IntToStringConverter" />
       <converters:TrophiesToStringConverter x:Key="TrophiesToStringConverter" />
+      <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
     </ResourceDictionary>
-  </local:WorkoutListPageXaml.Resources>
+  </local:MainPageXaml.Resources>
 
-  <local:WorkoutListPageXaml.ToolbarItems>
+  <local:MainPageXaml.ToolbarItems>
     <ToolbarItem Text="{Binding RestTimerToolbarItem.Text}" Icon="{Binding RestTimerToolbarItem.Icon}" Order="Primary" Command="{Binding RestTimerToolbarItem.Command}" Priority="0"/>
-    <ToolbarItem Name="{i18n:Translate ExercisesTitle}" Order="Secondary" Clicked="OnExercisesButtonClicked" Priority="0" x:Name = "ExercisesButton"/>
-    <ToolbarItem Name="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Clicked="OnSettingsButtonClicked" Priority="1" x:Name = "SettingsButton"/>
-    <ToolbarItem Name="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>
-    <ToolbarItem Name="{i18n:Translate AnalysisTitle}" Order="Secondary" Command="{Binding AnalysisCommand}" Priority="1"/>
-    <ToolbarItem Name="{i18n:Translate GotoDateTitle}" Order="Secondary" Command="{Binding GotoDateCommand}" Priority="1"/>
-  </local:WorkoutListPageXaml.ToolbarItems>
+    <ToolbarItem Text="{i18n:Translate ExercisesTitle}" Order="Secondary" Command="{Binding ExercisesCommand}" Priority="0"/>
+    <ToolbarItem Text="{i18n:Translate SettingsTitle}" Icon="ic_action_settings" Order="Secondary" Command="{Binding SettingsCommand}"  Priority="1"/>
+    <ToolbarItem Text="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>
+    <ToolbarItem Text="{i18n:Translate AnalysisTitle}" Order="Secondary" Command="{Binding AnalysisCommand}" Priority="1"/>
+    <ToolbarItem Text="{i18n:Translate GotoDateTitle}" Order="Secondary" Command="{Binding GotoDateCommand}" Priority="1"/>
+  </local:MainPageXaml.ToolbarItems>
 
-  <local:WorkoutListPageXaml.Content>
+  <local:MainPageXaml.Content>
     <controls:GestureFrame x:Name="MainFrame" Padding="10, 10, 10, 10" >
 
       <StackLayout Orientation="Vertical">
@@ -75,11 +77,15 @@
           </ContentView>
         </StackLayout>
 
-        <ListView IsVisible="{Binding WorkoutsListVisible}" ItemSelected="OnWorkoutSelected" x:Name="workoutsList" HasUnevenRows="true">
+        <ListView IsVisible="{Binding WorkoutsListVisible}" x:Name="workoutsList" HasUnevenRows="true">
+          
+          <ListView.Behaviors>
+            <behaviors:ListViewSelectedItemBehavior Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+          </ListView.Behaviors>
+          
           <ListView.ItemTemplate>
             <DataTemplate>
               <ViewCell>
-
                 <ViewCell.View>
 
                   <StackLayout Orientation="{Binding CellLayoutOrientation}"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" Spacing="0">
@@ -145,5 +151,5 @@
       </StackLayout>
 
     </controls:GestureFrame>
-  </local:WorkoutListPageXaml.Content>
-  </local:WorkoutListPageXaml>
+  </local:MainPageXaml.Content>
+  </local:MainPageXaml>

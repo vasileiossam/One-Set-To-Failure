@@ -27,22 +27,14 @@ namespace OneSet.Views
             _messagingService.Unsubscribe<SettingsViewModel>(this, Messages.SettingsReloaded);
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
 		{
 			base.OnAppearing();
 
             BindingContext = ViewModel;
             settingsList.ItemsSource = ViewModel.Settings;
-		}
-
-	    public void OnSettingTapped(object sender, ItemTappedEventArgs args)
-		{
-            var preference = args.Item as Preference;
-		    preference?.Clicked(preference, null);
-
-		    // deselect row
-			((ListView)sender).SelectedItem = null;
-		}
+            settingsList.SelectedItem = null;
+        }
 
 		public async Task Refresh()
 		{
@@ -50,7 +42,13 @@ namespace OneSet.Views
 			settingsList.ItemsSource = null;
 			settingsList.ItemsSource = ViewModel.Settings;
 		}
-	}
+
+        private void SettingsList_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            // unselect row
+            settingsList.SelectedItem = null;
+        }
+    }
 
     public class SettingsPageXaml : BasePage<SettingsViewModel>
     {

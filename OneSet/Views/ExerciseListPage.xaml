@@ -3,6 +3,8 @@
 	xmlns:local="clr-namespace:OneSet.Views"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
 	x:Class="OneSet.Views.ExerciseListPage"
+  xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+  xmlns:behaviors="clr-namespace:OneSet.Behaviors;assembly=OneSet"
 	Title="{Binding Title}">
 
   <local:ExerciseListPageXaml.Padding>
@@ -12,8 +14,14 @@
                 WinPhone="5, 0, 5, 0" />
   </local:ExerciseListPageXaml.Padding>
 
+  <local:ExerciseListPageXaml.Resources>
+    <ResourceDictionary>
+      <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+    </ResourceDictionary>
+  </local:ExerciseListPageXaml.Resources>
+
   <local:ExerciseListPageXaml.ToolbarItems>
-    <ToolbarItem Icon="ic_action_new.png" Order="Primary" Clicked="OnAddExerciseButtonClicked" x:Name = "AddExerciseButton"/>
+    <ToolbarItem Icon="ic_action_new.png" Order="Primary" Command="{Binding AddExerciseCommand}"/>
   </local:ExerciseListPageXaml.ToolbarItems>
 
   <local:ExerciseListPageXaml.Content>
@@ -38,6 +46,11 @@
       </StackLayout>
 
       <ListView IsVisible="{Binding ListVisible}" x:Name="exercisesList" HasUnevenRows="true">
+
+        <ListView.Behaviors>
+          <behaviors:ListViewSelectedItemBehavior Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+        </ListView.Behaviors>
+
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
@@ -60,4 +73,4 @@
 
     </StackLayout>
   </local:ExerciseListPageXaml.Content>
-  </local:ExerciseListPageXaml>
+</local:ExerciseListPageXaml>

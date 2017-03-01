@@ -41,7 +41,7 @@ namespace OneSet
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
             var navigateService = Container.Resolve<INavigationService>();
-            MainPage = navigateService.InitNavigation<WorkoutListViewModel>();
+            MainPage = navigateService.InitNavigation<MainViewModel>();
 		}
 
 		protected override void OnStart ()
