@@ -49,7 +49,6 @@ namespace OneSet.Views
             base.OnAppearing();
 
 			BindingContext = ViewModel;
-			await ViewModel.OnLoad(App.CurrentDate);
 			workoutsList.ItemsSource = ViewModel.RoutineDays;
 			ChangeOrientation();
 
@@ -79,11 +78,13 @@ namespace OneSet.Views
             var item = args.SelectedItem as RoutineDayViewModel;
             if (item == null) return;
 
-            var viewModel = _componentContext.Resolve<WorkoutViewModel>();
-            viewModel.Workout = item.Workout;
-            viewModel.Exercise = item.Exercise;
-            viewModel.RestTimerToolbarItem = ViewModel.RestTimerToolbarItem;
-            await _navigationService.NavigateTo(viewModel);
+            var parameters = new NavigationParameters
+            {
+                {"Workout", item.Workout},
+                {"Exercise", item.Exercise},
+                {"RestTimerToolbarItem", ViewModel.RestTimerToolbarItem}
+            };
+            await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
 
             // deselect row
 			((ListView)sender).SelectedItem = null;

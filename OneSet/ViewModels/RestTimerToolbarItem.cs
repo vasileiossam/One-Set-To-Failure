@@ -68,10 +68,7 @@ namespace OneSet.ViewModels
 			if (!_isRunning)
 			{
 				_terminated = true;
-
-                var viewModel = _componentContext.Resolve<RestTimerViewModel>();
-                await _navigationService.NavigateTo(viewModel);
-				await viewModel.OnStartCommand();
+			    await _navigationService.NavigateTo<RestTimerViewModel>();
             }
 		}
 

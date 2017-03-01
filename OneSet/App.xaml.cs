@@ -41,14 +41,14 @@ namespace OneSet
 		    AppResources.Culture = new CultureInfo (netLanguage);
 
             var navigateService = Container.Resolve<INavigationService>();
-            MainPage = navigateService.InitMain<WorkoutListViewModel>();
+            MainPage = navigateService.InitNavigation<WorkoutListViewModel>();
 		}
 
 		protected override void OnStart ()
 		{
-			CurrentDate = DateTime.Today;
-			RestTimerSecondsLeft = 0;
-		}
+            CurrentDate = DateTime.Today;
+            RestTimerSecondsLeft = 0;
+        }
 
 		protected override void OnSleep ()
 		{

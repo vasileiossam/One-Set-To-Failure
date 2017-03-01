@@ -301,6 +301,8 @@ namespace OneSet.ViewModels
             }
 
             _canSave = true;
+
+            await OnStartCommand();
         }
     }
 }

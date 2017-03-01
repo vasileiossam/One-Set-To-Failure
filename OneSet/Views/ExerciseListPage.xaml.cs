@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Autofac;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.Resx;
 using OneSet.ViewModels;
 using Xamarin.Forms;
@@ -28,7 +29,6 @@ namespace OneSet.Views
 			base.OnAppearing();
 
 			BindingContext = ViewModel;
-			await ViewModel.OnLoad();
 			exercisesList.ItemsSource = ViewModel.Exercises;
 		}
 
@@ -39,11 +39,15 @@ namespace OneSet.Views
 
 		public async Task OnExerciseSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-            var item = args.SelectedItem as ExerciseDetailsViewModel;
+            var item = args.SelectedItem as ExerciseItemViewModel;
             if (item == null) return;
 
-            item.Title = AppResources.EditExerciseTitle;
-            await _navigationService.NavigateTo(item);
+		    var parameters = new NavigationParameters()
+		    {
+		        {"Title", AppResources.EditExerciseTitle},
+                {"Exercise", item.Exercise }
+		    };
+		    await _navigationService.NavigateTo<ExerciseDetailsViewModel>(parameters);
 
             // deselect row
             ((ListView)sender).SelectedItem = null;

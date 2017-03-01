@@ -18,7 +18,6 @@ namespace OneSet.Views
             base.OnAppearing();
 
 			BindingContext = ViewModel;
-            await ViewModel.OnLoad();
 
             // set Text
             PlateWeightLabel.Text = string.Format (AppResources.PlateWeightLabel, L10n.GetWeightUnit());

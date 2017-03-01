@@ -8,14 +8,14 @@ using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-    public class WorkoutViewModel : BaseViewModel, INavigationAware
+    public class WorkoutDetailsViewModel : BaseViewModel, INavigationAware
     {
         private readonly INavigationService _navigationService;
         private readonly IUnitsService _units;
         private readonly IWorkoutRules _workoutRules;
         private readonly IWorkoutsRepository _workoutsRepository;
 
-        public WorkoutViewModel(INavigationService navigationService, IUnitsService units, IWorkoutRules workoutRules, 
+        public WorkoutDetailsViewModel(INavigationService navigationService, IUnitsService units, IWorkoutRules workoutRules, 
             IWorkoutsRepository workoutsRepository)
         {
             _navigationService = navigationService;
@@ -212,19 +212,35 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            RestTimerToolbarItem.Update();
-
-            Workout.ExerciseId = Exercise.ExerciseId;
-            var previousWorkout = await _workoutsRepository.GetPreviousWorkout(Workout);
-            if (previousWorkout != null)
+            if (parameters.ContainsKey("Workout"))
             {
-                Workout.PreviousReps = previousWorkout.Reps;
-                Workout.PreviousWeight = previousWorkout.Weight;
+                Workout = parameters["Workout"] as Workout;
+            }
+            if (parameters.ContainsKey("Exercise"))
+            {
+                Exercise = parameters["Exercise"] as Exercise;
+            }
+            if (parameters.ContainsKey("RestTimerToolbarItem"))
+            {
+                RestTimerToolbarItem = parameters["RestTimerToolbarItem"] as RestTimerToolbarItem;
             }
 
-            var targetWorkout = await _workoutRules.GetTargetWorkout(Workout, Exercise, previousWorkout);
-            Workout.TargetReps = targetWorkout.Key;
-            Workout.TargetWeight = targetWorkout.Value;
+            RestTimerToolbarItem?.Update();
+
+            if (Workout != null)
+            {
+                Workout.ExerciseId = Exercise.ExerciseId;
+                var previousWorkout = await _workoutsRepository.GetPreviousWorkout(Workout);
+                if (previousWorkout != null)
+                {
+                    Workout.PreviousReps = previousWorkout.Reps;
+                    Workout.PreviousWeight = previousWorkout.Weight;
+                }
+
+                var targetWorkout = await _workoutRules.GetTargetWorkout(Workout, Exercise, previousWorkout);
+                Workout.TargetReps = targetWorkout.Key;
+                Workout.TargetWeight = targetWorkout.Value;
+            }
         }
     }
 }

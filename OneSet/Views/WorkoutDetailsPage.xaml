@@ -2,7 +2,7 @@
 <local:WorkoutPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:local="clr-namespace:OneSet.Views"
   xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-  x:Class="OneSet.Views.WorkoutPage"
+  x:Class="OneSet.Views.WorkoutDetailsPage"
   xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
   xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
   Title="{Binding Title}">

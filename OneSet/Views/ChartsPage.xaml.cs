@@ -18,7 +18,6 @@ namespace OneSet.Views
 
             BindingContext = ViewModel;
             ViewModel.OxyPlotsLayout = OxyPlotsLayout;
-		    await ViewModel.OnLoad();
 
             ChartsPicker.SelectedIndex = 0;
 		}

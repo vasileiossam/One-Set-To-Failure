@@ -28,7 +28,6 @@ namespace OneSet.Views
 
             BindingContext = ViewModel;
 			ViewModel.ProgressBar = ProgressBar;
-			await ViewModel.OnLoad();
         }
 
 		protected override void OnDisappearing()

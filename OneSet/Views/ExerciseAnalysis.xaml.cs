@@ -23,8 +23,6 @@ namespace OneSet.Views
 			ViewModel.ExercisesPicker = ExercisesPicker;
 
             BindingContext = ViewModel;
-            await ViewModel.OnLoad();
-
 			ExercisesPicker.SelectedIndex = 0;
 		}
 

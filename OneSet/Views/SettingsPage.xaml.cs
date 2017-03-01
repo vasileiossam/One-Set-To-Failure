@@ -32,8 +32,6 @@ namespace OneSet.Views
 			base.OnAppearing();
 
             BindingContext = ViewModel;
-            await ViewModel.OnLoad();
-
             settingsList.ItemsSource = ViewModel.Settings;
 		}
 
@@ -48,7 +46,7 @@ namespace OneSet.Views
 
 		public async Task Refresh()
 		{
-			await ViewModel.OnLoad();
+			//await ViewModel.OnLoad();
 			settingsList.ItemsSource = null;
 			settingsList.ItemsSource = ViewModel.Settings;
 		}

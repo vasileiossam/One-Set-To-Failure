@@ -45,8 +45,6 @@ namespace OneSet.ViewModels
                 return repsIncrement;
             }
         }
-        
-        public bool NotesVisible => !string.IsNullOrEmpty (Exercise.Notes);
 
         public RoutineDay Mon { get; set; }
         public RoutineDay Tue { get; set; }
@@ -55,42 +53,7 @@ namespace OneSet.ViewModels
         public RoutineDay Fri { get; set; }
         public RoutineDay Sat { get; set; }
         public RoutineDay Sun { get; set; }
-        
-        public string TrainingDays 
-        { 
-            get
-            {
-				var list = new List<string>();
-				var dayNames = AppResources.Culture.DateTimeFormat.AbbreviatedDayNames;
-
-				if (Mon.IsActive == 1) { list.Add(dayNames[1]); }
-                if (Tue.IsActive == 1) { list.Add(dayNames[2]); }
-				if (Wed.IsActive == 1) { list.Add(dayNames[3]); }
-                if (Thu.IsActive == 1) { list.Add(dayNames[4]); }
-                if (Fri.IsActive == 1) { list.Add(dayNames[5]); }
-                if (Sat.IsActive == 1) { list.Add(dayNames[6]); }
-                if (Sun.IsActive == 1) { list.Add(dayNames[0]); }
-
-                if (list.Count == 7)
-                {
-                    return AppResources.AllWeekTraining;
-                }
-
-                var s = string.Join(", ", list);
-
-                // replace last , with 'and'
-                if (s == string.Empty) return s;
-                var place = s.LastIndexOf(",", StringComparison.Ordinal);
-                if (place >= 0)
-                {
-                    s = s.Remove(place, 1).Insert(place, " " + AppResources.And);
-                }
-                
-                return s;
-            }
-        }
-		public bool TrainingDaysVisible => !string.IsNullOrEmpty (TrainingDays);
-
+		
 	    protected ICommand _deleteCommand;
 		public ICommand DeleteCommand { 
 			get { return _deleteCommand ?? (_deleteCommand = new Command(() => OnDelete())); }
@@ -179,16 +142,28 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            Exercise.PlateWeight = _units.GetWeight(App.Settings.IsMetric, Exercise.PlateWeight);
+            if (parameters.ContainsKey("Title"))
+            {
+                Title = (string) parameters["Title"];
+            }
+            if (parameters.ContainsKey("Exercise"))
+            {
+                Exercise = parameters["Exercise"] as Exercise;
+            }
 
-            var routine = await _routineDaysRepository.GetRoutine(Exercise.ExerciseId);
-            Mon = GetRoutineDay(routine, 1);
-            Tue = GetRoutineDay(routine, 2);
-            Wed = GetRoutineDay(routine, 3);
-            Thu = GetRoutineDay(routine, 4);
-            Fri = GetRoutineDay(routine, 5);
-            Sat = GetRoutineDay(routine, 6);
-            Sun = GetRoutineDay(routine, 0);
+            if (Exercise != null)
+            {
+                Exercise.PlateWeight = _units.GetWeight(App.Settings.IsMetric, Exercise.PlateWeight);
+
+                var routine = await _routineDaysRepository.GetRoutine(Exercise.ExerciseId);
+                Mon = GetRoutineDay(routine, 1);
+                Tue = GetRoutineDay(routine, 2);
+                Wed = GetRoutineDay(routine, 3);
+                Thu = GetRoutineDay(routine, 4);
+                Fri = GetRoutineDay(routine, 5);
+                Sat = GetRoutineDay(routine, 6);
+                Sun = GetRoutineDay(routine, 0);
+            }
         }
     }
 }

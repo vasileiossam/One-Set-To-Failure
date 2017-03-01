@@ -167,7 +167,7 @@ namespace OneSet.ViewModels
                 {
                     RoutineDay =  day,
                     Exercise = exercises.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
-                    Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId)
+                    Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
                 };
                 collection.Add(vm);
             }
@@ -194,9 +194,10 @@ namespace OneSet.ViewModels
             }
 		}
 
-		private async Task OnCalendarNotesCommand()
-		{
-		    await _navigationService.NavigateTo<CalendarNotesViewModel>(CurrentDate);
+        private async Task OnCalendarNotesCommand()
+        {
+            var parameters = new NavigationParameters() {{"CurrentDate", CurrentDate}};
+            await _navigationService.NavigateTo<CalendarNotesViewModel>(parameters);
 		}
 
 		private async Task OnAnalysisCommand()
@@ -266,8 +267,14 @@ namespace OneSet.ViewModels
         {
             if (parameters.ContainsKey("CurrentDate"))
             {
-                await Load((DateTime)parameters["CurrentDate"]);
+                CurrentDate = (DateTime) parameters["CurrentDate"];
             }
+            else
+            {
+                CurrentDate = DateTime.Today;
+            }
+
+            await Load(CurrentDate);
         }
     }
 }

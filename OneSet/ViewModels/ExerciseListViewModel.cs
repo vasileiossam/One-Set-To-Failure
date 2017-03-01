@@ -10,8 +10,8 @@ namespace OneSet.ViewModels
 {
 	public class ExerciseListViewModel : BaseViewModel, INavigationAware
     {
-		protected ObservableCollection<ExerciseDetailsViewModel> _exercises;
-		public ObservableCollection<ExerciseDetailsViewModel> Exercises
+		protected ObservableCollection<ExerciseItemViewModel> _exercises;
+		public ObservableCollection<ExerciseItemViewModel> Exercises
 		{
 			get
 			{
@@ -65,15 +65,16 @@ namespace OneSet.ViewModels
             Title = AppResources.ExercisesTitle;
 		}
 
-        private async Task<ObservableCollection<ExerciseDetailsViewModel>> GetExercises()
+        private async Task<ObservableCollection<ExerciseItemViewModel>> GetExercises()
         {
-            var collection = new ObservableCollection<ExerciseDetailsViewModel>();
+            var collection = new ObservableCollection<ExerciseItemViewModel>();
             var list = await _exercisesRepository.AllAsync();
 
             foreach (var item in list)
             {
-                var vm = _componentContext.Resolve<ExerciseDetailsViewModel>();
+                var vm = _componentContext.Resolve<ExerciseItemViewModel>();
                 vm.Exercise = item;
+                vm.TrainingDays = await _exercisesRepository.GetTrainingDays(item);
                 collection.Add(vm);
             }
 
@@ -87,16 +88,9 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            try
-            {
-                Exercises = await GetExercises();
-                ListVisible = Exercises.Count > 0;
-                NoDataVisible = !ListVisible;
-            }
-            catch (Exception ex)
-            {
-                App.ShowErrorPage(this, ex);
-            }
+            Exercises = await GetExercises();
+            ListVisible = Exercises.Count > 0;
+            NoDataVisible = !ListVisible;
         }
     }
 }

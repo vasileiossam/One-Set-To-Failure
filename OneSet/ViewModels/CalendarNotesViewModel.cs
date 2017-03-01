@@ -47,9 +47,9 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("date"))
+            if (parameters.ContainsKey("Date"))
             {
-                var date = (DateTime) parameters["date"];
+                var date = (DateTime) parameters["Date"];
                 Calendar = await _repo.FindAsync(date) ?? new Calendar() { Date = date };
             }
         }

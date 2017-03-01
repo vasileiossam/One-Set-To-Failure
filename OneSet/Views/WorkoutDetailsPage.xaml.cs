@@ -2,9 +2,9 @@
 
 namespace OneSet.Views
 {
-	public partial class WorkoutPage : WorkoutPageXaml
+	public partial class WorkoutDetailsPage : WorkoutPageXaml
     {
-		public WorkoutPage ()
+		public WorkoutDetailsPage()
 		{
 			InitializeComponent ();
 		}
@@ -12,13 +12,11 @@ namespace OneSet.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
             BindingContext = ViewModel;
-            await ViewModel.OnLoad();
         }
 	}
 
-    public class WorkoutPageXaml : BasePage<WorkoutViewModel>
+    public class WorkoutPageXaml : BasePage<WorkoutDetailsViewModel>
     {
     }
 }

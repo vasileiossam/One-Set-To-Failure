@@ -65,8 +65,9 @@
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\ExerciseItemViewModel.cs" />
     <Compile Include="ViewModels\WorkoutListViewModel.cs" />
-    <Compile Include="ViewModels\WorkoutViewModel.cs" />
+    <Compile Include="ViewModels\WorkoutDetailsViewModel.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Resx\AppResources.Designer.cs">
@@ -98,8 +99,8 @@
     <Compile Include="Views\CalendarNotesPage.xaml.cs">
       <DependentUpon>CalendarNotesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkoutPage.xaml.cs">
-      <DependentUpon>WorkoutPage.xaml</DependentUpon>
+    <Compile Include="Views\WorkoutDetailsPage.xaml.cs">
+      <DependentUpon>WorkoutDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkoutListPage.xaml.cs">
       <DependentUpon>WorkoutListPage.xaml</DependentUpon>
@@ -242,8 +243,9 @@
     <EmbeddedResource Include="Views\CalendarNotesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\WorkoutPage.xaml">
+    <EmbeddedResource Include="Views\WorkoutDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
