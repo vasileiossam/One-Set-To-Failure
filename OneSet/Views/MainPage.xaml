@@ -58,7 +58,7 @@ Title="{Binding Title}">
         </StackLayout>
 
         <!-- No data -->
-        <StackLayout x:Name="NoDataLayout" IsVisible="{Binding NoWorkoutDataVisible}" Orientation="Vertical" Padding="10, 20, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+        <StackLayout x:Name="NoDataLayout" IsVisible="{Binding NoDataVisible}" Orientation="Vertical" Padding="10, 20, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
 
           <Image x:Name="NoDataImage" Source="comfortable.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
 
@@ -77,7 +77,7 @@ Title="{Binding Title}">
           </ContentView>
         </StackLayout>
 
-        <ListView IsVisible="{Binding WorkoutsListVisible}" x:Name="workoutsList" HasUnevenRows="true">
+        <ListView ItemsSource="{Binding Routine}" IsVisible="{Binding ListVisible}" x:Name="list" HasUnevenRows="true">
           
           <ListView.Behaviors>
             <behaviors:ListViewSelectedItemBehavior Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />

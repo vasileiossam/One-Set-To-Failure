@@ -45,7 +45,7 @@
         </ContentView>
       </StackLayout>
 
-      <ListView IsVisible="{Binding ListVisible}" x:Name="exercisesList" HasUnevenRows="true">
+      <ListView ItemsSource="{Binding Exercises}" IsVisible="{Binding ListVisible}" x:Name="list" HasUnevenRows="true">
 
         <ListView.Behaviors>
           <behaviors:ListViewSelectedItemBehavior Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />

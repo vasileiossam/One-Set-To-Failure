@@ -17,7 +17,12 @@ namespace OneSet.ViewModels
 
     public class RestTimerViewModel : BaseViewModel, INavigationAware
     {
-		public ProgressBar ProgressBar { get; set; }
+        #region private variables
+        private ISoundService _soundService;
+        #endregion
+
+        #region properties
+        public ProgressBar ProgressBar { get; set; }
 		protected double _progressStep;
 
 		protected RestTimerStates _state;
@@ -141,45 +146,38 @@ namespace OneSet.ViewModels
 		}
 
 		public bool MotivationalQuoteImageVisible => App.Settings.CanShowImagePackInRestTimer;
+        #endregion
 
-	    #region commands
-		protected ICommand _startCommand;
-		public ICommand StartCommand => _startCommand;
+        #region commands
+        public ICommand StartCommand { get; set; }
+		public ICommand PauseCommand { get; set; }
+        public ICommand ResetCommand { get; set; }
+        public ICommand PlaySoundsCommand { get; set; }
+        public ICommand EditingModeCommand { get; set; }
+        #endregion
 
-	    protected ICommand _pauseCommand;
-		public ICommand PauseCommand => _pauseCommand;
+        public RestTimerViewModel(ISoundService soundService)
+        {
+            _soundService = soundService;
 
-	    protected ICommand _resetCommand;
-		public ICommand ResetCommand => _resetCommand;
-
-	    protected ICommand _playSoundsCommand;
-		public ICommand PlaySoundsCommand => _playSoundsCommand;
-
-	    protected ICommand _editingModeCommand;
-		public ICommand EditingModeCommand => _editingModeCommand;
-
-	    #endregion
-
-		public RestTimerViewModel()
-			: base()
-		{
-			Title = AppResources.RestTimerTitle;
+            Title = AppResources.RestTimerTitle;
 		
-			_startCommand = new Command (async() => { await OnStartCommand(); });
-			_pauseCommand = new Command (async() => { await OnPauseCommand(); });
-			_resetCommand = new Command (async() => { await OnResetCommand(); });
+			StartCommand = new Command (async() => { await OnStartCommand(); });
+			PauseCommand = new Command (async() => { await OnPauseCommand(); });
+			ResetCommand = new Command (async() => { await OnResetCommand(); });
 
-			_playSoundsCommand  = new Command (() => { 
+            PlaySoundsCommand  = new Command (() => { 
 				PlaySounds = !PlaySounds; 
 				Save();
 			});
 
-			_editingModeCommand  = new Command (() => { 
+			EditingModeCommand  = new Command (() => { 
 				State = RestTimerStates.Editing;
 			});
 		}
 
-		protected void Save()
+        #region private methods
+        private void Save()
 		{
 			if (!_canSave)
 				return;
@@ -189,19 +187,18 @@ namespace OneSet.ViewModels
 			App.SaveSettings ();
 		}
 
-		protected bool OnTimer()
+        private bool OnTimer()
 		{
 			if (State != RestTimerStates.Running)
 				return false;
 			
-			if ((SecondsLeft - 1) <= 0)
+			if (SecondsLeft - 1 <= 0)
 			{
 				OnResetCommand ();
 
 				if (PlaySounds == true)
 				{
-					var soundService = DependencyService.Get<ISoundService> ();
-					soundService.Play ("Bleep");
+                    _soundService.Play ("Bleep");
 				}
 
 				App.RestTimerSecondsLeft = 0;
@@ -217,7 +214,7 @@ namespace OneSet.ViewModels
 			return State == RestTimerStates.Running;	
 		}
 
-		public async Task OnStartCommand()
+        private async Task OnStartCommand()
 		{	
 			if (State == RestTimerStates.Editing)
 			{
@@ -254,7 +251,7 @@ namespace OneSet.ViewModels
 			await Task.FromResult(0);
 		}
 
-		protected double GetProgressStep()
+        private double GetProgressStep()
 		{
 			if (TotalSeconds == 0)
 			{
@@ -264,17 +261,14 @@ namespace OneSet.ViewModels
 				return 1.0 / TotalSeconds;
 			}			
 		}
+        #endregion
 
-		public void StopTimer()
+        public void StopTimer()
 		{
 			State = RestTimerStates.Paused;
 		}
 
-        public override async Task OnSave()
-	    {
-            await Task.FromResult(0);
-        }
-
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -304,6 +298,7 @@ namespace OneSet.ViewModels
 
             await OnStartCommand();
         }
+        #endregion
     }
 }
 

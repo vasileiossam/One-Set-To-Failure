@@ -10,10 +10,15 @@ namespace OneSet.ViewModels
 {
 	public class RestTimerToolbarItem : BaseViewModel
 	{
-		private bool _isRunning;
+        #region private variables
+        private bool _isRunning;
 		private bool _terminated;
+        private readonly INavigationService _navigationService;
+        private readonly ISoundService _soundService;
+        #endregion
 
-		private string _text;
+        #region properties
+        private string _text;
 		public string Text
 		{
 			get
@@ -43,17 +48,14 @@ namespace OneSet.ViewModels
 			}
 		}
 
-		private readonly ICommand _command;
-		public ICommand Command => _command;
-
-        private readonly INavigationService _navigationService;
-        private readonly IComponentContext _componentContext;
-
-        public RestTimerToolbarItem(INavigationService navigationService, IComponentContext componentContext)
+        public ICommand Command { get; set; }
+        #endregion
+        
+        public RestTimerToolbarItem(INavigationService navigationService, ISoundService soundService)
         {
             _navigationService = navigationService;
-            _componentContext = componentContext;
-            _command = new Command (async() => { await OnRestTimerCommand(); });
+            _soundService = soundService;
+            Command = new Command (async() => { await OnRestTimerCommand(); });
 			_isRunning = false;
 		}
 
@@ -95,8 +97,7 @@ namespace OneSet.ViewModels
 							{
 								if (App.Settings.RestTimerPlaySounds)
 								{
-									var soundService = DependencyService.Get<ISoundService> ();
-									soundService.Play ("Bleep");
+									_soundService.Play ("Bleep");
 								}
 							}
 							_isRunning = false;

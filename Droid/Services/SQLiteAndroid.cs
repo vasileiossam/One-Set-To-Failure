@@ -1,13 +1,13 @@
 ﻿using System;
-using Xamarin.Forms;
 using System.IO;
 using OneSet.Abstract;
-using OneSet.Droid;
+using OneSet.Droid.Services;
 using SQLite;
+using Xamarin.Forms;
 
 [assembly: Dependency (typeof (SQLiteAndroid))]
 
-namespace OneSet.Droid
+namespace OneSet.Droid.Services
 {
 	#if DEBUG
 	//public class TraceListener : ITraceListener

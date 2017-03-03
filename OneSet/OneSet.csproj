@@ -84,7 +84,7 @@
     <Compile Include="Data\ExercisesRepository.cs" />
     <Compile Include="Data\WorkoutsRepository.cs" />
     <Compile Include="Abstract\ISettingsStorage.cs" />
-    <Compile Include="ViewModels\RoutineDayViewModel.cs" />
+    <Compile Include="ViewModels\RoutineItemViewModel.cs" />
     <Compile Include="Converters\WeightMetricToImperialConverter.cs" />
     <Compile Include="Abstract\IRoutineDaysRepository.cs" />
     <Compile Include="Data\RoutineDaysRepository.cs" />
@@ -120,14 +120,8 @@
     </Compile>
     <Compile Include="ViewModels\Preference.cs" />
     <Compile Include="ViewModels\PreferenceGroup.cs" />
-    <Compile Include="Views\ExerciseRulesPage.xaml.cs">
-      <DependentUpon>ExerciseRulesPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ExerciseDetailsPage.xaml.cs">
       <DependentUpon>ExerciseDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ExercisePage.xaml.cs">
-      <DependentUpon>ExercisePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -141,7 +135,7 @@
     <Compile Include="Data\CalendarRepository.cs" />
     <Compile Include="ViewModels\CalendarNotesViewModel.cs" />
     <Compile Include="AsyncLock.cs" />
-    <Compile Include="Abstract\IBackupRestore.cs" />
+    <Compile Include="Abstract\IBackupRestoreService.cs" />
     <Compile Include="Models\BackupInfo.cs" />
     <Compile Include="Controls\GestureFrame.cs" />
     <Compile Include="ViewModels\RestTimerViewModel.cs" />
@@ -261,13 +255,7 @@
     <EmbeddedResource Include="Views\ExerciseListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ExerciseRulesPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\ExerciseDetailsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ExercisePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AboutPage.xaml">

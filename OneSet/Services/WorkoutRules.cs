@@ -10,13 +10,11 @@ namespace OneSet.Services
     {
         private readonly IUnitsService _units;
         private readonly IWorkoutsRepository _workoutsRepository;
-        private readonly IExercisesRepository _exercisesRepository;
 
-        public WorkoutRules(IUnitsService units, IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
+        public WorkoutRules(IUnitsService units, IWorkoutsRepository workoutsRepository)
         {
             _units = units;
             _workoutsRepository = workoutsRepository;
-            _exercisesRepository = exercisesRepository;
         }
 
         private static bool IsDivisible(int x, int n)

@@ -4,6 +4,8 @@
     {
         double ImperialMetricFactor { get; }
         double WeightTolerance { get; }
-        double GetWeight(bool isMetric, double value);
+
+        double GetMetric(bool systemIsMetric, double value);
+        double GetWeight(bool systemIsMetric, double weightInMetric);
     }
 }

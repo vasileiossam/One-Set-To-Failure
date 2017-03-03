@@ -107,7 +107,7 @@ namespace OneSet.ViewModels
 	public class PagePreference : Preference
 	{
 		public Type NavigateToPage { get; set; }
-	    private INavigationService _navigationService;
+	    private readonly INavigationService _navigationService;
 
         public PagePreference(INavigationService navigationService) 
         {

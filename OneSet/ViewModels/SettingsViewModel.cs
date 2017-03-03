@@ -6,36 +6,23 @@ using System.Windows.Input;
 using OneSet.Abstract;
 using OneSet.Models;
 using OneSet.Resx;
-using OneSet.Services;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
 	public class SettingsViewModel : BaseViewModel, INavigationAware
     {
+        #region private variables
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
         private readonly IMessagingService _messagingService;
         private readonly ISettingsStorage _settingsStorage;
         private readonly ΙStatistics _statistics;
         private readonly IExporter _exporter;
+        private readonly IBackupRestoreService _backupRestoreService;
+        #endregion
 
-        public ICommand SelectItemCommand { get; }
-
-        public SettingsViewModel(INavigationService navigationService, IDialogService dialogService, IMessagingService messagingService,
-            ISettingsStorage settingsStorage, ΙStatistics statistics, IExporter exporter)
-        {
-            _navigationService = navigationService;
-            _dialogService = dialogService;
-            _messagingService = messagingService;
-            _settingsStorage = settingsStorage;
-            _statistics = statistics;
-            _exporter = exporter;
-            Title = AppResources.SettingsTitle;
-
-            SelectItemCommand = new Command<Preference>(OnItemSelected);
-        }
-
+        #region properties
         private ObservableCollection<PreferenceGroup> _settings;
         public ObservableCollection<PreferenceGroup> Settings
         {
@@ -50,6 +37,62 @@ namespace OneSet.ViewModels
                 OnPropertyChanged("Settings");
             }
         }
+
+        public ICommand SelectItemCommand { get; }
+        #endregion
+
+        public SettingsViewModel(INavigationService navigationService, IDialogService dialogService, 
+            IMessagingService messagingService, IBackupRestoreService backupRestoreService,
+            ISettingsStorage settingsStorage, ΙStatistics statistics, IExporter exporter)
+        {
+            _navigationService = navigationService;
+            _dialogService = dialogService;
+            _messagingService = messagingService;
+            _settingsStorage = settingsStorage;
+            _statistics = statistics;
+            _exporter = exporter;
+            _backupRestoreService = backupRestoreService;
+
+            Title = AppResources.SettingsTitle;
+
+            SelectItemCommand = new Command<Preference>(OnItemSelected);
+        }
+
+        #region private methods
+        private async Task<string> GetLastBackupDate()
+        {
+            var lastBackupDate = string.Empty;
+            var backupInfo = await _backupRestoreService.GetBackupInfo();
+
+            if (backupInfo.LastBackupDate != null)
+            {
+                var date = (DateTime)backupInfo.LastBackupDate;
+
+                lastBackupDate = string.Format(AppResources.SettingsLastBackupDate,
+                    date.ToString("D") + ", " + date.ToString("hh:mm:ss")
+                );
+            }
+
+            return lastBackupDate;
+        }
+
+        private async Task<string> GetRestoreQuestionMessage()
+        {
+            var lastBackupDate = string.Empty;
+            var backupInfo = await _backupRestoreService.GetBackupInfo();
+
+            if (backupInfo.LastBackupDate != null)
+            {
+                var date = (DateTime)backupInfo.LastBackupDate;
+
+                lastBackupDate = string.Format(AppResources.RestoreQuestionMessage,
+                    date.ToString("D") + ", " + date.ToString("hh:mm:ss")
+                );
+            }
+
+            return lastBackupDate;
+        }
+        #endregion
 
         public async void OnClicked(object sender, EventArgs args)
 		{
@@ -87,45 +130,7 @@ namespace OneSet.ViewModels
             }
         }
 
-		public async Task<string> GetLastBackupDate()
-		{
-			var lastBackupDate = string.Empty;
-			var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
-
-			if (backupInfo.LastBackupDate != null) 
-			{
-				var date = (DateTime) backupInfo.LastBackupDate;
-			
-				lastBackupDate = string.Format(AppResources.SettingsLastBackupDate, 
-					date.ToString("D") + ", " + date.ToString("hh:mm:ss")
-				);
-			}
-
-			return lastBackupDate;
-		}
-
-		public async Task<string> GetRestoreQuestionMessage()
-		{
-			var lastBackupDate = string.Empty;
-			var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
-
-			if (backupInfo.LastBackupDate != null) 
-			{
-				var date = (DateTime) backupInfo.LastBackupDate;
-
-				lastBackupDate = string.Format(AppResources.RestoreQuestionMessage, 
-					date.ToString("D") + ", " + date.ToString("hh:mm:ss")
-				);
-			}
-
-			return lastBackupDate;
-		}
-
-        public override Task OnSave()
-	    {
-	        throw new NotImplementedException();
-	    }
-
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -324,10 +329,10 @@ namespace OneSet.ViewModels
             {
                 try
                 {
-                    var backupService = DependencyService.Get<IBackupRestore>();
-                    await backupService.Backup();
+                    await _backupRestoreService.Backup();
 
-                    var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
+                    var backupInfo = await _backupRestoreService.GetBackupInfo();
+
                     await App.ShowToast(AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));
 
                     var preference = sender as AlertPreference;
@@ -350,8 +355,7 @@ namespace OneSet.ViewModels
             {
                 try
                 {
-                    var backupService = DependencyService.Get<IBackupRestore>();
-                    var backupInfo = await DependencyService.Get<IBackupRestore>().GetBackupInfo();
+                    var backupInfo = await _backupRestoreService.GetBackupInfo();
 
                     if (backupInfo.LastBackupDate == null)
                     {
@@ -361,7 +365,7 @@ namespace OneSet.ViewModels
                     {
                         var answer = await _dialogService.DisplayAlert(AppResources.RestoreQuestionTitle, await GetRestoreQuestionMessage(), AppResources.Yes, AppResources.No);
                         if (!answer) return;
-                        await backupService.Restore();
+                        await _backupRestoreService.Restore();
 
                         // reload settings 
                         App.Settings = _settingsStorage.Load();
@@ -465,6 +469,7 @@ namespace OneSet.ViewModels
 
             Settings = list;
         }
+        #endregion
 
         private void OnItemSelected(Preference item)
         {

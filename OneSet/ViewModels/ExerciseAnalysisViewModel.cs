@@ -37,13 +37,15 @@ namespace OneSet.ViewModels
     {
 		public Picker ExercisesPicker { get; set; }
 		public List<ExerciseStat> Stats {get; set;}
-		private List<Exercise> _exercises;
+        
+        #region private variables
+        private List<Exercise> _exercises;
 		private List<Workout> _workouts;
 		private List<Exercise> _exercisesInWorkouts { get; set;}
 		private WeightMetricToImperialConverter _weightConverter { get; set;}
-
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly IExercisesRepository _exercisesRepository;
+        #endregion
 
         public ExerciseAnalysisViewModel(IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
         {
@@ -52,31 +54,7 @@ namespace OneSet.ViewModels
             _weightConverter = new WeightMetricToImperialConverter ();
 		}
 
-        public async Task<List<ExerciseStat>> GetStats(int exerciseIndex)
-        {
-            var exercise = _exercisesInWorkouts[exerciseIndex];
-
-            var list = new List<ExerciseStat>
-            {
-                new ExerciseStat {Title = "Started", Value = GetStarted(exercise)},
-                new ExerciseStat {Title = "Last workout", Value = GetLastWorkout(exercise)},
-                new ExerciseStat {Title = "Last target workout", Value = GetLastTargetWorkout(exercise)},
-                new ExerciseStat {Title = "Current Weight", Value = GetCurrentWeight(exercise)},
-                new ExerciseStat {Title = "Successive workouts in current weight", Value = GetSuccesiveDays(exercise)},
-                new ExerciseStat {Title = "Weight increases", Value = GetWeightIncreases(exercise)},
-                new ExerciseStat {Title = "Days since started", Value = GetDaysSinceStarted(exercise)},
-                new ExerciseStat {Title = "Days since last workout", Value = GetDaysSinceLastWorkout(exercise)},
-                new ExerciseStat {Title = "Total workouts", Value = GetTotalWorkouts(exercise)},
-                new ExerciseStat {Title = "Total trophies", Value = GetTotalTrophies(exercise)},
-                new ExerciseStat {Title = "Trophies won", Value = GetTrophiesWon(exercise)},
-                new ExerciseStat {Title = "Trophies lost", Value = GetTrophiesLost(exercise)},
-                new ExerciseStat {Title = "Total Reps", Value = GetTotalReps(exercise)},
-                new ExerciseStat {Title = "Total Weight", Value = GetTotalWeight(exercise)}
-            };
-
-            return list;
-        }
-
+        #region private methods
         private string GetStarted(Exercise exercise)
 		{
 			var workout = _workouts.Where(x=>x.ExerciseId == exercise.ExerciseId).OrderBy (x => x.Created).FirstOrDefault ();
@@ -197,12 +175,9 @@ namespace OneSet.ViewModels
 			var total = _workouts.Where(x => x.ExerciseId == exercise.ExerciseId).Sum(x=>x.Weight);
 			return $"{WeightMetricToImperialConverter.GetWeight(total)} {L10n.GetWeightUnit()}";
 		}
+        #endregion
 
-        public override async Task OnSave()
-	    {
-            await Task.FromResult(0);
-        }
-
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -225,6 +200,32 @@ namespace OneSet.ViewModels
             //{
             //	ExercisesPicker.Items.Add (item.Name);
             //}
+        }
+        #endregion
+
+        public async Task<List<ExerciseStat>> GetStats(int exerciseIndex)
+        {
+            var exercise = _exercisesInWorkouts[exerciseIndex];
+
+            var list = new List<ExerciseStat>
+            {
+                new ExerciseStat {Title = "Started", Value = GetStarted(exercise)},
+                new ExerciseStat {Title = "Last workout", Value = GetLastWorkout(exercise)},
+                new ExerciseStat {Title = "Last target workout", Value = GetLastTargetWorkout(exercise)},
+                new ExerciseStat {Title = "Current Weight", Value = GetCurrentWeight(exercise)},
+                new ExerciseStat {Title = "Successive workouts in current weight", Value = GetSuccesiveDays(exercise)},
+                new ExerciseStat {Title = "Weight increases", Value = GetWeightIncreases(exercise)},
+                new ExerciseStat {Title = "Days since started", Value = GetDaysSinceStarted(exercise)},
+                new ExerciseStat {Title = "Days since last workout", Value = GetDaysSinceLastWorkout(exercise)},
+                new ExerciseStat {Title = "Total workouts", Value = GetTotalWorkouts(exercise)},
+                new ExerciseStat {Title = "Total trophies", Value = GetTotalTrophies(exercise)},
+                new ExerciseStat {Title = "Trophies won", Value = GetTrophiesWon(exercise)},
+                new ExerciseStat {Title = "Trophies lost", Value = GetTrophiesLost(exercise)},
+                new ExerciseStat {Title = "Total Reps", Value = GetTotalReps(exercise)},
+                new ExerciseStat {Title = "Total Weight", Value = GetTotalWeight(exercise)}
+            };
+
+            return list;
         }
     }
 }

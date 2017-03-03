@@ -11,7 +11,8 @@ namespace OneSet.Abstract
         Task<int> GetWorkoutsCount(int exerciseId);
 	    Task<int> GetTotalTrophies();
 	    Task<int> GetTrophies(DateTime date);
-        Task<Workout> GetPreviousWorkout(Workout workout);
+	    Task<Workout> GetPreviousWorkout(int exerciseId, DateTime created);
+
 	}
 }
 	 

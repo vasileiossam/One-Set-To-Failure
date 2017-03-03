@@ -1,17 +1,36 @@
-﻿using System.Threading.Tasks;
-using OneSet.Abstract;
-using OneSet.Models;
+﻿using OneSet.Models;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-	public class RoutineDayViewModel : INavigationAware
+	public class RoutineItemViewModel : BaseViewModel
     {
+        #region properties
         public RoutineDay RoutineDay { get; set; }
         public Exercise Exercise { get; set; }
-        public Workout Workout {get; set;}
 
-		public string StateImage {
+        protected Workout _workout;
+        public Workout Workout
+        {
+            get
+            {
+                return _workout;
+            }
+            set
+            {
+                if (_workout == value) return;
+                _workout = value;
+                OnPropertyChanged("Workout");
+                OnPropertyChanged("StateImage");
+                OnPropertyChanged("TrophyVisible");
+                OnPropertyChanged("LevelUpVisible");
+                OnPropertyChanged("Reps");
+                OnPropertyChanged("Weight");
+                OnPropertyChanged("RepsWeightColor");
+            }
+        }
+
+        public string StateImage {
 			get
 			{
                 if (Workout != null && (Workout.Reps == 0 || Workout.Weight == 0))
@@ -95,17 +114,7 @@ namespace OneSet.ViewModels
                 }
             }
         }
-
-
-        public async Task OnNavigatedFrom(NavigationParameters parameters)
-        {
-            await Task.FromResult(0);
-        }
-
-        public async Task OnNavigatedTo(NavigationParameters parameters)
-        {
-            await Task.FromResult(0);
-        }
+        #endregion
     }
 }
 

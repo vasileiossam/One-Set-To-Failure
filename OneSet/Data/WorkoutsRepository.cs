@@ -55,12 +55,12 @@ namespace OneSet.Data
 			}
 		}
 
-        public async Task<Workout> GetPreviousWorkout(Workout workout)
+        public async Task<Workout> GetPreviousWorkout(int exerciseId, DateTime created)
         {
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{				
 				var previousWorkout = await _connection.Table<Workout> ()
-					.Where (x => (x.ExerciseId == workout.ExerciseId) && (x.Created < workout.Created))
+					.Where (x => x.ExerciseId == exerciseId && x.Created < created)
 					.OrderByDescending (x => x.Created)
 					.FirstOrDefaultAsync ();
                 return previousWorkout;

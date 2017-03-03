@@ -28,6 +28,7 @@ namespace OneSet.Views
 			}
 
             _messagingService = messagingService;
+
             _messagingService.Subscribe<MainViewModel>(this, Messages.WorkoutsReloaded, sender =>
             {
                 Refresh();
@@ -45,8 +46,7 @@ namespace OneSet.Views
             base.OnAppearing();
 
 			BindingContext = ViewModel;
-			workoutsList.ItemsSource = ViewModel.RoutineDays;
-            workoutsList.SelectedItem = null;
+            list.SelectedItem = null;
             ChangeOrientation();
 
 			MainFrame.SwipeLeft += OnLeftChevronTapCommand;
@@ -72,8 +72,8 @@ namespace OneSet.Views
 
 		public void Refresh()
 		{
-			workoutsList.ItemsSource = null;
-			workoutsList.ItemsSource = ViewModel.RoutineDays;
+            list.ItemsSource = null;
+            list.ItemsSource = ViewModel.Routine;
 		}
 
 		protected override void OnSizeAllocated(double width, double height)
@@ -107,15 +107,15 @@ namespace OneSet.Views
 		// TODO remove this when xamarin forms supports source/relative binding inside a datatemplate
 		public void ChangeOrientation()
 		{
-			workoutsList.BeginRefresh ();
-			if (ViewModel.RoutineDays != null)
+            list.BeginRefresh ();
+			if (ViewModel.Routine != null)
 			{
-				foreach (var item in ViewModel.RoutineDays)
+				foreach (var item in ViewModel.Routine)
 				{
 					item.CellLayoutOrientation = _stackOrientation;
 				}
 			}
-			workoutsList.EndRefresh ();
+            list.EndRefresh ();
 		}
 	}
 

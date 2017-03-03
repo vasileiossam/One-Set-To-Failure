@@ -32,7 +32,7 @@ namespace OneSet.Views
 
             // setup delete toolbar item
 			var deleteItem = ToolbarItems.FirstOrDefault (x => x.Icon == "ic_action_discard");
-			if (ViewModel.Exercise.ExerciseId > 0 && deleteItem == null)
+			if (ViewModel.ExerciseId > 0 && deleteItem == null)
 			{
 				deleteItem = new ToolbarItem { Order = ToolbarItemOrder.Primary, Icon = "ic_action_discard" };
 				deleteItem.SetBinding<ExerciseDetailsViewModel> (MenuItem.CommandProperty, x => x.DeleteCommand);

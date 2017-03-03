@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace OneSet.Droid
+namespace OneSet.Droid.Services
 {
     public class Logger
     {

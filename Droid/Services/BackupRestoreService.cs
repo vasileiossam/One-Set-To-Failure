@@ -1,15 +1,16 @@
 ﻿using System;
-using Xamarin.Forms;
-using System.Threading.Tasks;
 using System.IO;
+using System.Threading.Tasks;
 using OneSet.Abstract;
+using OneSet.Droid.Services;
 using OneSet.Models;
+using Xamarin.Forms;
 
-[assembly:Dependency(typeof(OneSet.Droid.BackupRestore))]
+[assembly:Dependency(typeof(BackupRestoreService))]
 
-namespace OneSet.Droid
+namespace OneSet.Droid.Services
 {
-	public class BackupRestore : IBackupRestore
+	public class BackupRestoreService : IBackupRestoreService
 	{
 
 		public async Task Backup()

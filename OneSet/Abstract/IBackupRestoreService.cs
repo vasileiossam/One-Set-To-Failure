@@ -3,7 +3,7 @@ using OneSet.Models;
 
 namespace OneSet.Abstract
 {
-	public interface IBackupRestore
+	public interface IBackupRestoreService
 	{
 		Task Backup();
 		Task Restore();

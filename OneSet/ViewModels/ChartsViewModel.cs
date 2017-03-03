@@ -8,19 +8,15 @@ using System.Linq;
 using System.Collections.Generic;
 using OneSet.Abstract;
 using OneSet.Converters;
-using OneSet.Data;
 using OneSet.Localization;
 using OneSet.Models;
-using System;
 
 namespace OneSet.ViewModels
 {
 	public class ChartsViewModel : BaseViewModel, INavigationAware
     {
-		public StackLayout OxyPlotsLayout { get; set; }
-
-		private List<Exercise> _exercises;
-		private List<Workout> _workouts;
+        #region properties
+        public StackLayout OxyPlotsLayout { get; set; }
 
 		private bool _noChartsDataVisible;
 		public bool NoChartsDataVisible 
@@ -51,9 +47,14 @@ namespace OneSet.ViewModels
 			    OnPropertyChanged("ChartsPinchToZoomVisible");
 			}
 		}
+        #endregion
 
+        #region private variables
+        private List<Exercise> _exercises;
+        private List<Workout> _workouts;
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly IExercisesRepository _exercisesRepository;
+        #endregion
 
         public ChartsViewModel (IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
         {
@@ -63,21 +64,8 @@ namespace OneSet.ViewModels
 			ChartsPinchToZoomVisible = false;			
 		}
 
-		public async Task SelectChart(int selectedChartIndex)
-		{
-			switch(selectedChartIndex)
-			{
-				case 0:
-				BuildWeightPerWorkout ();
-				break;
-
-				case 1:
-				BuildRepsPerWorkout ();
-				break;
-			}
-		}
-
-		private DateTimeAxis GetDateTimeAxis(int count)
+        #region private methods
+        private DateTimeAxis GetDateTimeAxis(int count)
 		{
 		    var dateAxis = new DateTimeAxis
 		    {
@@ -105,36 +93,6 @@ namespace OneSet.ViewModels
 
 			return dateAxis;
 		}
-
-		public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
-		{
-            //await Task.Run (() =>
-            //{
-            // create plot model
-            var plotModel = new PlotModel
-            {
-                Title = item.Key.Name,
-                Background = OxyColors.LightYellow,
-                PlotAreaBackground = OxyColors.LightGray,
-            };
-
-            var series = new LineSeries { ItemsSource = item.Value };
-            plotModel.Series.Add(series);
-
-            var dateAxis = GetDateTimeAxis(item.Value.Count);
-            plotModel.Axes.Add(dateAxis);
-
-            var valueAxis = new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                MinimumPadding = 0,
-                Title = "Weight"
-            };
-            plotModel.Axes.Add(valueAxis);
-
-            return plotModel;
-            //});
-        }
 
         private void BuildWeightPerWorkout ()
 		{
@@ -239,12 +197,9 @@ namespace OneSet.ViewModels
 				OxyPlotsLayout.Children.Add(plotView);		
 			}
 		}
+        #endregion
 
-        public override async Task OnSave()
-        {
-            await Task.FromResult(0);
-        }
-
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -262,6 +217,51 @@ namespace OneSet.ViewModels
             {
                 var exercise = _exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
                 //workout.Exercise = exercise;
+            }
+        }
+        #endregion
+
+        public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
+        {
+            //await Task.Run (() =>
+            //{
+            // create plot model
+            var plotModel = new PlotModel
+            {
+                Title = item.Key.Name,
+                Background = OxyColors.LightYellow,
+                PlotAreaBackground = OxyColors.LightGray,
+            };
+
+            var series = new LineSeries { ItemsSource = item.Value };
+            plotModel.Series.Add(series);
+
+            var dateAxis = GetDateTimeAxis(item.Value.Count);
+            plotModel.Axes.Add(dateAxis);
+
+            var valueAxis = new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                MinimumPadding = 0,
+                Title = "Weight"
+            };
+            plotModel.Axes.Add(valueAxis);
+
+            return plotModel;
+            //});
+        }
+
+        public async Task SelectChart(int selectedChartIndex)
+        {
+            switch (selectedChartIndex)
+            {
+                case 0:
+                    BuildWeightPerWorkout();
+                    break;
+
+                case 1:
+                    BuildRepsPerWorkout();
+                    break;
             }
         }
     }

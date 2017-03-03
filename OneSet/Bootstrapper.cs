@@ -34,7 +34,11 @@ namespace OneSet
             builder.RegisterType<DialogService>().As<IDialogService>().InstancePerLifetimeScope();
             builder.RegisterType<MessagingService>().As<IMessagingService>().InstancePerLifetimeScope();
             builder.Register(c => DependencyService.Get<ISettingsStorage>()).As<ISettingsStorage>().InstancePerLifetimeScope();
-
+            builder.Register(c => DependencyService.Get<ITextStorage>()).As<ITextStorage>().InstancePerLifetimeScope();
+            builder.Register(c => DependencyService.Get<IDatePickerDialog>()).As<IDatePickerDialog>().InstancePerLifetimeScope();
+            builder.Register(c => DependencyService.Get<ISoundService>()).As<ISoundService>().InstancePerLifetimeScope();
+            builder.Register(c => DependencyService.Get<IBackupRestoreService>()).As<IBackupRestoreService>().InstancePerLifetimeScope();
+            
             // register views
             builder.RegisterAssemblyTypes(typeof(AboutPage).GetTypeInfo().Assembly)
                .Where(t => t.Namespace == "OneSet.Views")

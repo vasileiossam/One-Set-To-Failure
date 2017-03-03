@@ -31,12 +31,12 @@
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical">
 
         <ContentView Padding="0, 10, 0, 0">
-          <controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Exercise.Name}" TextColor="{StaticResource primaryText}" FontSize="Medium" Keyboard="Chat"/>
+          <controls:CustomEntry Placeholder="{i18n:Translate ExerciseLabel}" Text="{Binding Name}" TextColor="{StaticResource primaryText}" FontSize="Medium" Keyboard="Chat"/>
         </ContentView>
 
         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
           <Label x:Name="PlateWeightLabel" FontSize="Medium" VerticalOptions="Center" TextColor="{StaticResource secondaryText}"/>
-          <controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding Exercise.PlateWeight}" Keyboard="Numeric" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center"/>
+          <controls:CustomEntry Placeholder="{i18n:Translate Weight}" Text="{Binding PlateWeight}" Keyboard="Numeric" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="Medium" TextAlignment="Center"/>
         </StackLayout>
 
         <ContentView Padding="0, 10, 0, 10">
@@ -76,7 +76,7 @@
         </Grid>
 
         <ContentView Padding="0, 10, 0, 10">
-          <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Exercise.Notes}" TextColor="{StaticResource primaryText}" Keyboard="Chat"/>
+          <Entry Placeholder="{i18n:Translate NotesLabel}" Text="{Binding Notes}" TextColor="{StaticResource primaryText}" Keyboard="Chat"/>
         </ContentView>
 
       </StackLayout>

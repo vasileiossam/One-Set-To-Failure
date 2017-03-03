@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
-using OneSet.Droid;
+using OneSet.Droid.Services;
 using OneSet.Localization;
 using Xamarin.Forms;
 
 [assembly:Dependency(typeof(Locale))]
 
-namespace OneSet.Droid
+namespace OneSet.Droid.Services
 {
 	public class Locale : ILocale
 	{

@@ -13,8 +13,8 @@ namespace OneSet.ViewModels
 {
     public class MainViewModel : BaseViewModel, INavigationAware
     {
+        #region properties
         private string _trophies;
-
         public string Trophies
         {
             get
@@ -30,7 +30,6 @@ namespace OneSet.ViewModels
         }
 
         private string _calendarNotes;
-
         public string CalendarNotes
         {
             get
@@ -46,7 +45,6 @@ namespace OneSet.ViewModels
         }
 
         private bool _calendarNotesVisible;
-
         public bool CalendarNotesVisible
         {
             get
@@ -61,35 +59,33 @@ namespace OneSet.ViewModels
             }
         }
 
-        private bool _workoutsListVisible;
-
-        public bool WorkoutsListVisible
+        private bool _listVisible;
+        public bool ListVisible
         {
             get
             {
-                return _workoutsListVisible;
+                return _listVisible;
             }
             set
             {
-                if (_workoutsListVisible == value) return;
-                _workoutsListVisible = value;
-                OnPropertyChanged("WorkoutsListVisible");
+                if (_listVisible == value) return;
+                _listVisible = value;
+                OnPropertyChanged("ListVisible");
             }
         }
 
-        private bool _noWorkoutDataVisible;
-
-        public bool NoWorkoutDataVisible
+        private bool _noDataVisible;
+        public bool NoDataVisible
         {
             get
             {
-                return _noWorkoutDataVisible;
+                return _noDataVisible;
             }
             set
             {
-                if (_noWorkoutDataVisible == value) return;
-                _noWorkoutDataVisible = value;
-                OnPropertyChanged("NoWorkoutDataVisible");
+                if (_noDataVisible == value) return;
+                _noDataVisible = value;
+                OnPropertyChanged("NoDataVisible");
             }
         }
 
@@ -104,7 +100,6 @@ namespace OneSet.ViewModels
         public ICommand SettingsCommand { get; }
 
         private DateTime _currentDate;
-
         public DateTime CurrentDate
         {
             get
@@ -120,22 +115,23 @@ namespace OneSet.ViewModels
             }
         }
 
-        private ObservableCollection<RoutineDayViewModel> _routineDays;
-
-        public ObservableCollection<RoutineDayViewModel> RoutineDays
+        private ObservableCollection<RoutineItemViewModel> _routine;
+        public ObservableCollection<RoutineItemViewModel> Routine
         {
             get
             {
-                return _routineDays;
+                return _routine;
             }
             set
             {
-                if (_routineDays == value) return;
-                _routineDays = value;
-                OnPropertyChanged("RoutineDays");
+                if (_routine == value) return;
+                _routine = value;
+                OnPropertyChanged("Routine");
             }
         }
+        #endregion
 
+        #region private variables
         private readonly IComponentContext _componentContext;
         private readonly INavigationService _navigationService;
         private readonly IMessagingService _messagingService;
@@ -143,13 +139,18 @@ namespace OneSet.ViewModels
         private readonly IExercisesRepository _exercisesRepository;
         private readonly ICalendarRepository _calendarRepository;
         private readonly IRoutineDaysRepository _routineDaysRepository;
+        private readonly IDatePickerDialog _datePickerDialog;
+        #endregion
 
-        public MainViewModel(IComponentContext componentContext, INavigationService navigationService, IMessagingService messagingService,
-            IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
+        public MainViewModel(IComponentContext componentContext, INavigationService navigationService, 
+            IMessagingService messagingService, IDatePickerDialog datePickerDialog,
+            IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, 
+            ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
             _componentContext = componentContext;
             _navigationService = navigationService;
             _messagingService = messagingService;
+            _datePickerDialog = datePickerDialog;
             _workoutsRepository = workoutsRepository;
             _exercisesRepository = exercisesRepository;
             _calendarRepository = calendarRepository;
@@ -159,40 +160,28 @@ namespace OneSet.ViewModels
             ChevronTapCommand = new Command(async (s) => { await OnChevronTapCommand(s); });
             CalendarNotesCommand = new Command(async () => { await OnCalendarNotesCommand(); });
             AnalysisCommand = new Command(async () => { await OnAnalysisCommand(); });
-            GotoDateCommand = new Command(async () => { await OnGotoDateCommand(); });
+            GotoDateCommand = new Command(OnGotoDateCommand);
             SelectItemCommand = new Command(async (item) => { await OnItemSelected(item); });
             ExercisesCommand = new Command(async () => { await _navigationService.NavigateTo<ExerciseListViewModel>(); });
             SettingsCommand = new Command(async () => { await _navigationService.NavigateTo<SettingsViewModel>(); });
 
             RestTimerToolbarItem = _componentContext.Resolve<RestTimerToolbarItem>();
-        }
 
-        private async Task<ObservableCollection<RoutineDayViewModel>> GetRoutine(DateTime date)
-        {
-            var collection = new ObservableCollection<RoutineDayViewModel>();
-            var list = await _routineDaysRepository.GetRoutine(date);
-            var exercises = await _exercisesRepository.AllAsync();
-            var workouts = await _workoutsRepository.GetWorkouts(date);
-
-            foreach (var day in list)
+            _messagingService.Subscribe<WorkoutDetailsViewModel, Workout>(this, Messages.ItemChanged, (sender, workout) =>
             {
-                var vm = new RoutineDayViewModel
-                {
-                    RoutineDay = day,
-                    Exercise = exercises.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
-                    Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
-                };
-                collection.Add(vm);
-            }
-
-            return collection;
+                var item = Routine.FirstOrDefault(x => x.Exercise.ExerciseId == workout.ExerciseId);
+                if (item == null) return;
+                item.Workout = null;
+                item.Workout = workout;
+            });
         }
 
-        public override async Task OnSave()
+        ~MainViewModel()
         {
-            await Task.FromResult(0);
+            _messagingService.Unsubscribe<WorkoutDetailsViewModel, Workout>(this, Messages.ItemChanged);
         }
-
+        
+        #region commands
         private async Task OnChevronTapCommand(object s)
         {
             if ((string)s == "Left")
@@ -219,9 +208,9 @@ namespace OneSet.ViewModels
             await _navigationService.PushAsync(page);
         }
 
-        private async Task OnGotoDateCommand()
+        private void OnGotoDateCommand()
         {
-            DependencyService.Get<IDatePickerDialog>().Show(OnGetDate);
+            _datePickerDialog.Show(OnGetDate);
         }
 
         private async void OnGetDate(object sender, EventArgs args)
@@ -235,7 +224,46 @@ namespace OneSet.ViewModels
            });
         }
 
-        public async Task Load(DateTime date)
+        private async Task OnItemSelected(object selectedItem)
+        {
+            var item = selectedItem as RoutineItemViewModel;
+            if (item == null) return;
+
+            var parameters = new NavigationParameters
+            {
+                {"CurrentDate", CurrentDate },
+                {"Workout", item.Workout},
+                {"Exercise", item.Exercise},
+                {"RestTimerToolbarItem", RestTimerToolbarItem}
+            };
+
+            await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
+        }
+        #endregion
+
+        #region private methods
+        private async Task<ObservableCollection<RoutineItemViewModel>> GetRoutine(DateTime date)
+        {
+            var collection = new ObservableCollection<RoutineItemViewModel>();
+            var list = await _routineDaysRepository.GetRoutine(date);
+            var exercises = await _exercisesRepository.AllAsync();
+            var workouts = await _workoutsRepository.GetWorkouts(date);
+
+            foreach (var day in list)
+            {
+                var vm = new RoutineItemViewModel
+                {
+                    RoutineDay = day,
+                    Exercise = exercises.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
+                    Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
+                };
+                collection.Add(vm);
+            }
+
+            return collection;
+        }
+
+        private async Task Load(DateTime date)
         {
             CurrentDate = date;
 
@@ -257,11 +285,11 @@ namespace OneSet.ViewModels
                 }
             }
 
-            RoutineDays = await GetRoutine(_currentDate);
+            Routine = await GetRoutine(_currentDate);
 
             CalendarNotesVisible = !string.IsNullOrEmpty(CalendarNotes);
-            WorkoutsListVisible = RoutineDays.Count > 0;
-            NoWorkoutDataVisible = !WorkoutsListVisible;
+            ListVisible = Routine.Count > 0;
+            NoDataVisible = !ListVisible;
 
             if (App.TotalTrophies == null)
             {
@@ -270,7 +298,9 @@ namespace OneSet.ViewModels
             var dayTrophies = await _workoutsRepository.GetTrophies(CurrentDate);
             if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int)App.TotalTrophies}";
         }
+        #endregion
 
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -289,21 +319,6 @@ namespace OneSet.ViewModels
 
             await Load(CurrentDate);
         }
-
-        private async Task OnItemSelected(object selectedItem)
-        {
-            var item = selectedItem as RoutineDayViewModel;
-            if (item == null) return;
-
-            var parameters = new NavigationParameters
-            {
-                {"CurrentDate", CurrentDate },
-                {"Workout", item.Workout},
-                {"Exercise", item.Exercise},
-                {"RestTimerToolbarItem", RestTimerToolbarItem}
-            };
-
-            await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
-        }
+        #endregion
     }
 }

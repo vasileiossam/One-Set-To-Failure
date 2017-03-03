@@ -12,36 +12,61 @@ namespace OneSet.ViewModels
 {
 	public class ExerciseDetailsViewModel : BaseViewModel, INavigationAware
     {
-        private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
-        private readonly IUnitsService _units;
-        private readonly IExercisesRepository _exercisesRepository;
-        private readonly IRoutineDaysRepository _routineDaysRepository;
+        #region properties
 
-        public ExerciseDetailsViewModel(
-            INavigationService navigationService, IDialogService dialogService, IUnitsService units, 
-            IExercisesRepository exercisesRepository, IRoutineDaysRepository routineDaysRepository)
-        {
-            _navigationService = navigationService;
-            _dialogService = dialogService;
-            _units = units;
-            _exercisesRepository = exercisesRepository;
-            _routineDaysRepository = routineDaysRepository;
-            Title = AppResources.AddExerciseTitle;
-        }
+        public int ExerciseId { get; set; }
+        public int? RepsIncrementId { get; set; }
 
-	    private Exercise _exercise;
-	    public Exercise Exercise
-	    {
-	        get { return _exercise ?? (_exercise = new Exercise()); }
-	        set { _exercise = value; }
-	    }
-
-	    public RepsIncrement RepsIncrement
+        private string _name;
+        public string Name
         {
             get
             {
-                var repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x => x.RepsIncrementId == Exercise.RepsIncrementId);
+                return _name;
+            }
+            set
+            {
+                if (_name == value) return;
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private double _plateWeight;
+        public double PlateWeight
+        {
+            get
+            {
+                return _plateWeight;
+            }
+            set
+            {
+                if (_plateWeight == value) return;
+                _plateWeight = value;
+                OnPropertyChanged("PlateWeight");
+            }
+        }
+
+        private string _notes;
+        public string Notes
+        {
+            get
+            {
+                return _notes;
+            }
+            set
+            {
+                if (_notes == value) return;
+                _notes = value;
+                OnPropertyChanged("Notes");
+            }
+        }
+
+        public RepsIncrement RepsIncrement
+        {
+            get
+            {
+                var repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x => x.RepsIncrementId == RepsIncrementId);
                 return repsIncrement;
             }
         }
@@ -53,18 +78,44 @@ namespace OneSet.ViewModels
         public RoutineDay Fri { get; set; }
         public RoutineDay Sat { get; set; }
         public RoutineDay Sun { get; set; }
-		
-	    protected ICommand _deleteCommand;
-		public ICommand DeleteCommand { 
-			get { return _deleteCommand ?? (_deleteCommand = new Command(() => OnDelete())); }
-		}
 
+        public ICommand DeleteCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        #endregion
+
+        #region private variables
+        private readonly INavigationService _navigationService;
+        private readonly IDialogService _dialogService;
+        private readonly IMessagingService _messagingService;
+        private readonly IUnitsService _units;
+        private readonly IExercisesRepository _exercisesRepository;
+        private readonly IRoutineDaysRepository _routineDaysRepository;
+        #endregion
+
+        public ExerciseDetailsViewModel(
+            INavigationService navigationService, IDialogService dialogService, IMessagingService messagingService, IUnitsService units, 
+            IExercisesRepository exercisesRepository, IRoutineDaysRepository routineDaysRepository)
+        {
+            _navigationService = navigationService;
+            _dialogService = dialogService;
+            _messagingService = messagingService;
+            _units = units;
+            _exercisesRepository = exercisesRepository;
+            _routineDaysRepository = routineDaysRepository;
+
+            Title = AppResources.AddExerciseTitle;
+
+            DeleteCommand = new Command(async () => { await OnDelete(); });
+            SaveCommand = new Command(async () => await OnSave());
+        }
+        
+        #region private methods
         private RoutineDay GetRoutineDay(List<RoutineDay> routine, int dayOfWeek)
         {
             return routine.FirstOrDefault(x => x.DayOfWeek == dayOfWeek) ?? new RoutineDay
             {
                 DayOfWeek = dayOfWeek,
-                ExerciseId = Exercise.ExerciseId,
+                ExerciseId = ExerciseId,
                 IsActive = 0,
                 RowNumber = 1
             };
@@ -81,43 +132,7 @@ namespace OneSet.ViewModels
             await _routineDaysRepository.SaveAsync(Sun);
         }
         
-		private bool Validate ()
-		{
-			if (string.IsNullOrWhiteSpace (Exercise.Name))
-			{
-				App.ShowWarning(AppResources.ExerciseNameIsRequired);
-				return false;
-			}
-
-			if (Exercise.PlateWeight < 0 || Exercise.PlateWeight > 999)
-			{
-				App.ShowWarning(AppResources.ExerciseInvalidPlateWeight);
-                Exercise.PlateWeight = 0;
-				return false;
-			}
-
-			return true;
-		}
-
-        public override async Task OnSave () 
-		{
-            if (Validate())
-            {
-                // imperial to metric - always save in metric
-                if (!App.Settings.IsMetric)
-                {
-                    Exercise.PlateWeight = Exercise.PlateWeight / _units.ImperialMetricFactor;
-                }
-
-                Exercise.ExerciseId = await _exercisesRepository.SaveAsync(Exercise);
-                await SaveRoutine();
-
-                await App.ShowSuccess(AppResources.ExerciseSaved);
-                await _navigationService.PopAsync();
-            }
-        }
-
-		protected virtual async Task OnDelete () 
+        private async Task OnDelete () 
 		{
             try
             {
@@ -125,7 +140,10 @@ namespace OneSet.ViewModels
 
                 if (answer)
                 {
-                    await _exercisesRepository.DeleteAsync(Exercise.ExerciseId);
+                    await _exercisesRepository.DeleteAsync(ExerciseId);
+
+                    _messagingService.Send(this, Messages.ItemDeleted);
+
                     await _navigationService.PopAsync();
                 }
             }
@@ -135,6 +153,53 @@ namespace OneSet.ViewModels
             }
         }
 
+        private bool Validate()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                App.ShowWarning(AppResources.ExerciseNameIsRequired);
+                return false;
+            }
+
+            if (PlateWeight < 0 || PlateWeight > 999)
+            {
+                App.ShowWarning(AppResources.ExerciseInvalidPlateWeight);
+                PlateWeight = 0;
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task OnSave()
+        {
+            if (Validate())
+            {
+                var exercise = new Exercise()
+                {
+                    ExerciseId = this.ExerciseId,
+                    Name = this.Name,
+                    PlateWeight = _units.GetMetric(App.Settings.IsMetric, this.PlateWeight),
+                    Notes = this.Notes
+                };
+
+                var message = Messages.ItemAdded;
+                if (exercise.ExerciseId > 0)
+                {
+                    message = Messages.ItemChanged;
+                }
+
+                ExerciseId = await _exercisesRepository.SaveAsync(exercise);
+                await SaveRoutine();
+
+                _messagingService.Send(this, message, exercise);
+                await App.ShowSuccess(AppResources.ExerciseSaved);
+                await _navigationService.PopAsync();
+            }
+        }
+        #endregion
+
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -148,23 +213,28 @@ namespace OneSet.ViewModels
             }
             if (parameters.ContainsKey("Exercise"))
             {
-                Exercise = parameters["Exercise"] as Exercise;
+                var exercise = parameters["Exercise"] as Exercise;
+
+                if (exercise != null)
+                {
+                    ExerciseId = exercise.ExerciseId;
+                    Name = exercise.Name;
+                    Notes = exercise.Notes;
+                    PlateWeight = _units.GetWeight(App.Settings.IsMetric, exercise.PlateWeight);
+                    RepsIncrementId = exercise.RepsIncrementId;
+                }
             }
 
-            if (Exercise != null)
-            {
-                Exercise.PlateWeight = _units.GetWeight(App.Settings.IsMetric, Exercise.PlateWeight);
-
-                var routine = await _routineDaysRepository.GetRoutine(Exercise.ExerciseId);
-                Mon = GetRoutineDay(routine, 1);
-                Tue = GetRoutineDay(routine, 2);
-                Wed = GetRoutineDay(routine, 3);
-                Thu = GetRoutineDay(routine, 4);
-                Fri = GetRoutineDay(routine, 5);
-                Sat = GetRoutineDay(routine, 6);
-                Sun = GetRoutineDay(routine, 0);
-            }
+            var routine = await _routineDaysRepository.GetRoutine(ExerciseId);
+            Mon = GetRoutineDay(routine, 1);
+            Tue = GetRoutineDay(routine, 2);
+            Wed = GetRoutineDay(routine, 3);
+            Thu = GetRoutineDay(routine, 4);
+            Fri = GetRoutineDay(routine, 5);
+            Sat = GetRoutineDay(routine, 6);
+            Sun = GetRoutineDay(routine, 0);
         }
+        #endregion
     }
 }
 

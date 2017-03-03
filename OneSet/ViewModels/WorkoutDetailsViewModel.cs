@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using OneSet.Abstract;
@@ -10,18 +11,138 @@ namespace OneSet.ViewModels
 {
     public class WorkoutDetailsViewModel : BaseViewModel, INavigationAware
     {
+        #region properties
+
+        public int WorkoutId { get; set; }
+        public DateTime Created { get; set; }
+        public string Notes { get; set; }
+
+        private int _reps;
+        public int Reps
+        {
+            get
+            {
+                return _reps;
+            }
+            set
+            {
+                if (_reps == value) return;
+                _reps = value;
+                OnPropertyChanged("Reps");
+            }
+        }
+
+        private double _weight;
+        public double Weight
+        {
+            get
+            {
+                return _weight;
+            }
+            set
+            {
+                if (_weight == value) return;
+                _weight = value;
+                OnPropertyChanged("Weight");
+            }
+        }
+
+        private int _reviousReps;
+        public int PreviousReps
+        {
+            get
+            {
+                return _reviousReps;
+            }
+            set
+            {
+                if (_reviousReps == value) return;
+                _reviousReps = value;
+                OnPropertyChanged("PreviousReps");
+            }
+        }
+
+        private double _previousWeight;
+        public double PreviousWeight
+        {
+            get
+            {
+                return _previousWeight;
+            }
+            set
+            {
+                if (_previousWeight == value) return;
+                _previousWeight = value;
+                OnPropertyChanged("PreviousWeight");
+            }
+        }
+
+        private int _targetReps;
+        public int TargetReps
+        {
+            get
+            {
+                return _targetReps;
+            }
+            set
+            {
+                if (_targetReps == value) return;
+                _targetReps = value;
+                OnPropertyChanged("TargetReps");
+            }
+        }
+
+        private double _targetWeight;
+        public double TargetWeight
+        {
+            get
+            {
+                return _targetWeight;
+            }
+            set
+            {
+                if (_targetWeight == value) return;
+                _targetWeight = value;
+                OnPropertyChanged("TargetWeight");
+            }
+        }
+
+        public Exercise Exercise { get; set; }
+        public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
+
+        public string PreviousTitle => AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")";
+        public string TargetTitle => AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")";
+        public bool NotesVisible => !string.IsNullOrEmpty(Exercise?.Notes);
+        public bool LevelUpVisible => TargetWeight > PreviousWeight;
+        public bool TargetRepsWeightVisible => App.Settings.TargetRepsWeightVisible;
+        public bool PreviousRepsWeightVisible => App.Settings.PreviousRepsWeightVisible;
+
+        public ICommand RepsUpCommand { get; set; }
+        public ICommand RepsDownCommand { get; set; }
+        public ICommand WeighUpCommand { get; set; }
+        public ICommand WeighDownCommand { get; set; }
+        public ICommand PreviousIconCommand { get; set; }
+        public ICommand TargetIconCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        #endregion
+
+        #region private variables
         private readonly INavigationService _navigationService;
         private readonly IUnitsService _units;
         private readonly IWorkoutRules _workoutRules;
         private readonly IWorkoutsRepository _workoutsRepository;
+        private readonly IMessagingService _messagingService;
+        #endregion
 
-        public WorkoutDetailsViewModel(INavigationService navigationService, IUnitsService units, IWorkoutRules workoutRules, 
-            IWorkoutsRepository workoutsRepository)
+        public WorkoutDetailsViewModel(INavigationService navigationService, IMessagingService messagingService, 
+            IUnitsService units, IWorkoutRules workoutRules, IWorkoutsRepository workoutsRepository)
         {
             _navigationService = navigationService;
+            _messagingService = messagingService;
             _workoutsRepository = workoutsRepository;
             _units = units;
             _workoutRules = workoutRules;
+
             Title = AppResources.WorkoutTitle;
 
             RepsUpCommand = new Command(OnRepsUp);
@@ -30,86 +151,65 @@ namespace OneSet.ViewModels
             WeighDownCommand = new Command(OnWeighDown);
             PreviousIconCommand = new Command(OnPreviousIconCommand);
             TargetIconCommand = new Command(OnTargetIconCommand);
-        }
-        
-        private Workout _workout;
-        public Workout Workout
-        {
-            get { return _workout ?? (_workout = new Workout()); }
-            set { _workout = value; }
+            SaveCommand = new Command(async () => await OnSave());
         }
 
-        public Exercise Exercise { get; set; }
-        public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
-
-	    public string PreviousTitle => AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")";
-        public string TargetTitle => AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")";
-        public bool NotesVisible => !string.IsNullOrEmpty (Exercise?.Notes);
-        public bool LevelUpVisible => Workout != null && Workout?.TargetWeight > Workout.PreviousWeight;
-        public bool TargetRepsWeightVisible => App.Settings.TargetRepsWeightVisible;
-        public bool PreviousRepsWeightVisible => App.Settings.PreviousRepsWeightVisible;
-        public double ConvertedWeight => _units.GetWeight(App.Settings.IsMetric, Workout.Weight);
-        public double ConvertedPreviousWeight => _units.GetWeight(App.Settings.IsMetric, Workout.PreviousWeight);
-        public double ConvertedTargetWeight => _units.GetWeight(App.Settings.IsMetric, Workout.TargetWeight);
-
-        public ICommand RepsUpCommand {get; set;}
-		public ICommand RepsDownCommand {get; set;}
-		public ICommand WeighUpCommand {get; set;}
-		public ICommand WeighDownCommand {get; set;}
-        public ICommand PreviousIconCommand { get; set; }
-        public ICommand TargetIconCommand { get; set; }
-
-		private async Task<bool> Validate ()
+        private async Task<bool> Validate ()
 		{
-			if (Workout.Reps == 0)
+			if (Reps == 0)
 			{
 				await App.ShowWarning(AppResources.WorkoutRepsIsRequired);
 				return false;
 			}
-			if (Workout.Weight == 0)
+			if (Weight == 0)
 			{
 				await App.ShowWarning(AppResources.WorkoutWeightIsRequired);
 				return false;
 			}
 
-			if (Workout.Reps <= 0 || Workout.Reps > 100)
+			if (Reps <= 0 || Reps > 100)
 			{
 				await App.ShowWarning(AppResources.WorkoutInvalidReps);
-				Workout.Reps = 0;
+				Reps = 0;
 				return false;
 			}
-			if (Workout.Weight <= 0 || Workout.Weight > 1000)
+			if (Weight <= 0 || Weight > 1000)
 			{
 				await App.ShowWarning(AppResources.WorkoutInvalidWeight);
-				Workout.Weight = 0;
+				Weight = 0;
 				return false;
 			}
 
 			return true;
 		}
 
-        public override async Task OnSave () 
+        public async Task OnSave () 
 		{
-			//if (App.Settings.IsMetric)
-			//{
-			//	Workout.Weight = Weight;
-			//} else
-			//{
-			//	// imperial to metric - always save in metric
-			//	Workout.Weight = Weight / _units.ImperialMetricFactor;
-			//}
-
-			if (await Validate ())
+            if (await Validate ())
 			{
 				// invalidate TotalTrophies
 				App.TotalTrophies = null;
 
-				Workout.Trophies = _workoutRules.GetTrophies(Workout);
-			    Workout.ExerciseId = Exercise.ExerciseId;
+                var workout = new Workout
+                {
+                    WorkoutId = this.WorkoutId,
+                    ExerciseId = Exercise.ExerciseId,
+                    Created = this.Created,
+                    Notes = this.Notes,
+                    Reps = this.Reps,
+                    Weight = _units.GetMetric(App.Settings.IsMetric, this.Weight),
+                    PreviousReps = this.PreviousReps,
+                    PreviousWeight = _units.GetMetric(App.Settings.IsMetric, this.PreviousWeight),
+                    TargetReps = this.TargetReps,
+                    TargetWeight = _units.GetMetric(App.Settings.IsMetric, this.TargetWeight),
+                };
+                workout.Trophies = _workoutRules.GetTrophies(workout);
 
-                var isPersisted = Workout.WorkoutId > 0;
-				await _workoutsRepository.SaveAsync(Workout);
-				await App.ShowSuccess(AppResources.WorkoutSaved);
+                var isPersisted = WorkoutId > 0;
+                WorkoutId = await _workoutsRepository.SaveAsync(workout);
+
+                _messagingService.Send(this, Messages.ItemChanged, workout);
+                await App.ShowSuccess(AppResources.WorkoutSaved);
 
 				if (App.Settings.RestTimerAutoStart && !isPersisted)
 				{
@@ -125,60 +225,58 @@ namespace OneSet.ViewModels
 		#region commands
 		private void OnRepsUp () 
 		{
-			if (Workout.Reps == 0 && Workout.TargetReps > 0)
+			if (Reps == 0 && TargetReps > 0)
 			{
-                Workout.Reps = Workout.TargetReps;
+                Reps = TargetReps;
 			} else
 			{
-                Workout.Reps = Workout.Reps + 1;
+                Reps = Reps + 1;
 			}
-            OnPropertyChanged("Workout");
 		}
 
 		private void OnRepsDown () 
 		{
-            if (Workout.Reps == 0 && Workout.TargetReps > 0)
+            if (Reps == 0 && TargetReps > 0)
             {
-                Workout.Reps = Workout.TargetReps - 1;
+                Reps = TargetReps - 1;
             }
             else
-			if (Workout.Reps - 1 < 0)
+			if (Reps - 1 < 0)
 			{
-                Workout.Reps = 0;
+                Reps = 0;
 			} else
 			{
-                Workout.Reps = Workout.Reps - 1;
+                Reps = Reps - 1;
 			}
-            OnPropertyChanged("Workout");
         }
 
 		private void OnWeighUp () 
 		{
-			if (Workout.Weight == 0 && Workout.TargetWeight > 0)
+			if (Weight == 0 && TargetWeight > 0)
 			{
-                Workout.Weight = ConvertedTargetWeight;
+                Weight = TargetWeight;
 			} else
 			{
-                Workout.Weight = Workout.Weight + GetStep ();
+                Weight = Weight + GetStep ();
 			}
-            OnPropertyChanged("Workout");
+            OnPropertyChanged("Weight");
         }
 
 		private void OnWeighDown () 
 		{
-            if (Workout.Weight == 0 && Workout.TargetWeight > 0)
+            if (Weight == 0 && TargetWeight > 0)
             {
-                Workout.Weight = ConvertedTargetWeight;
+                Weight = TargetWeight;
             }
             else
-			if (Workout.Weight - GetStep () < 0)
+			if (Weight - GetStep () < 0)
 			{
-                Workout.Weight = 0;
+                Weight = 0;
 			} else
 			{
-                Workout.Weight = Workout.Weight - GetStep ();
+                Weight = Weight - GetStep ();
 			}
-            OnPropertyChanged("Workout");
+            OnPropertyChanged("Weight");
         }
 
 		private double GetStep()
@@ -191,21 +289,20 @@ namespace OneSet.ViewModels
 
         private void  OnPreviousIconCommand() 
 		{
-            if (Workout.PreviousReps <= 0) return;
-            Workout.Reps = Workout.PreviousReps;
-            Workout.Weight = ConvertedPreviousWeight;
-            OnPropertyChanged("Workout");
+            if (PreviousReps <= 0) return;
+            Reps = PreviousReps;
+            Weight = PreviousWeight;
         }
 
         private void OnTargetIconCommand() 
 		{
-            if (Workout.TargetReps <= 0) return;
-            Workout.Reps = Workout.TargetReps;
-            Workout.Weight = ConvertedTargetWeight;
-            OnPropertyChanged("Workout");
+            if (TargetReps <= 0) return;
+            Reps = TargetReps;
+            Weight = TargetWeight;
         }
         #endregion
 
+        #region INavigationAware
         public async Task OnNavigatedFrom(NavigationParameters parameters)
         {
             await Task.FromResult(0);
@@ -213,9 +310,9 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("Workout"))
+            if (parameters.ContainsKey("CurrentDate"))
             {
-                Workout = parameters["Workout"] as Workout;
+                Created = (DateTime) parameters["CurrentDate"];
             }
             if (parameters.ContainsKey("Exercise"))
             {
@@ -224,25 +321,36 @@ namespace OneSet.ViewModels
             if (parameters.ContainsKey("RestTimerToolbarItem"))
             {
                 RestTimerToolbarItem = parameters["RestTimerToolbarItem"] as RestTimerToolbarItem;
+                RestTimerToolbarItem?.Update();
             }
 
-            RestTimerToolbarItem?.Update();
-
-            if (Workout != null)
+            var workout = new Workout();
+            if (parameters.ContainsKey("Workout"))
             {
-                Workout.ExerciseId = Exercise.ExerciseId;
-                var previousWorkout = await _workoutsRepository.GetPreviousWorkout(Workout);
-                if (previousWorkout != null)
-                {
-                    Workout.PreviousReps = previousWorkout.Reps;
-                    Workout.PreviousWeight = previousWorkout.Weight;
-                }
+                workout = parameters["Workout"] as Workout;
 
-                var targetWorkout = await _workoutRules.GetTargetWorkout(Workout, Exercise, previousWorkout);
-                Workout.TargetReps = targetWorkout.Key;
-                Workout.TargetWeight = targetWorkout.Value;
+                if (workout != null)
+                {
+                    WorkoutId = workout.WorkoutId;
+                    Created = workout.Created;
+                    Notes = workout.Notes;
+                    Reps = workout.Reps;
+                    Weight = _units.GetWeight(App.Settings.IsMetric, workout.Weight);
+                }
             }
+
+            var previousWorkout = await _workoutsRepository.GetPreviousWorkout(Exercise.ExerciseId, Created);
+            if (previousWorkout != null)
+            {
+                PreviousReps = previousWorkout.PreviousReps;
+                PreviousWeight = _units.GetWeight(App.Settings.IsMetric, previousWorkout.PreviousWeight);
+            }
+
+            var targetWorkout = await _workoutRules.GetTargetWorkout(workout, Exercise, previousWorkout);
+            TargetReps = targetWorkout.Key;
+            TargetWeight = _units.GetWeight(App.Settings.IsMetric, targetWorkout.Value);
         }
+        #endregion
     }
 }
 

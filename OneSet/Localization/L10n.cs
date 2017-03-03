@@ -14,10 +14,7 @@ namespace OneSet.Localization
 			DependencyService.Get<ILocale>().SetLocale();
 		}
 
-		/// <remarks>
-		/// Maybe we can cache this info rather than querying every time
-		/// </remarks>
-		public static string Locale ()
+        public static string Locale ()
 		{
 			return DependencyService.Get<ILocale>().GetCurrent();
 		}
@@ -27,7 +24,7 @@ namespace OneSet.Localization
 			var netLanguage = Locale ();
 
 			// Platform-specific
-			ResourceManager temp = new ResourceManager("OneSet.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
+			var temp = new ResourceManager("OneSet.Resx.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
 			string result = temp.GetString (key, new CultureInfo (netLanguage));
 
 			return result; 
@@ -35,11 +32,7 @@ namespace OneSet.Localization
 
 		public static string GetWeightUnit()
 		{
-			if (App.Settings.IsMetric)
-			{
-				return "Kgs";
-			}
-			return "Lbs";
+		    return App.Settings.IsMetric ? "Kgs" : "Lbs";
 		}
 	}
 }

@@ -1,12 +1,12 @@
-﻿using OneSet.Droid;
-using Xamarin.Forms;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using OneSet.Abstract;
+using OneSet.Droid.Services;
+using Xamarin.Forms;
 
 [assembly: Dependency (typeof (TextStorage))]
 
-namespace OneSet.Droid
+namespace OneSet.Droid.Services
 {
 	public class TextStorage : ITextStorage
     {

@@ -181,20 +181,20 @@
     <AndroidResource Include="Resources\values-v21\style.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <Compile Include="SQLiteAndroid.cs" />
-    <Compile Include="Locale.cs" />
-    <Compile Include="SettingsStorage.cs" />
+    <Compile Include="Services\SQLiteAndroid.cs" />
+    <Compile Include="Services\Locale.cs" />
+    <Compile Include="Services\SettingsStorage.cs" />
     <Compile Include="Renders\BlueButtonRender.cs" />
     <Compile Include="Renders\RoundedBoxViewRenderer.cs" />
     <Compile Include="Renders\CustomEntryRender.cs" />
     <Compile Include="SplashActivity.cs" />
-    <Compile Include="BackupRestore.cs" />
+    <Compile Include="Services\BackupRestoreService.cs" />
     <Compile Include="Renders\GestureFrameRenderer.cs" />
     <Compile Include="Renders\CustomGestureListener.cs" />
-    <Compile Include="SoundService.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="TextStorage.cs" />
-    <Compile Include="DatePickerDialog.cs" />
+    <Compile Include="Services\SoundService.cs" />
+    <Compile Include="Services\Logger.cs" />
+    <Compile Include="Services\TextStorage.cs" />
+    <Compile Include="Services\DatePickerDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
