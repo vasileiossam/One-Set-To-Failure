@@ -74,49 +74,31 @@ namespace OneSet.ViewModels
 		protected bool? _playSounds;
 		public bool? PlaySounds
 		{
-			get
-			{
-				return _playSounds;
-			}
+			get { return _playSounds; }
 			set
 			{
-			    if (_playSounds == value) return;
-			    _playSounds = value;
-			    OnPropertyChanged("PlaySounds");
+                SetProperty(ref _playSounds, value);
 
-			    _playSoundsImage = _playSounds == true ? "sound" : "nosound";
+                _playSoundsImage = _playSounds == true ? "sound" : "nosound";
 			    OnPropertyChanged("PlaySoundsImage");
 			}
 		}
 
 		protected string _playSoundsImage;
 		public string PlaySoundsImage
-		{
-			get
-			{
-				return _playSoundsImage;
-			}
-			set
-			{
-			    if (_playSoundsImage == value) return;
-			    _playSoundsImage = value;
-			    OnPropertyChanged("PlaySoundsImage");
-			}
-		}
+        {
+            get { return _playSoundsImage; }
+            set { SetProperty(ref _playSoundsImage, value); }
+        }
 
-		protected bool _autoStart;
+        protected bool _autoStart;
 		public bool AutoStart
 		{
-			get
-			{
-				return _autoStart;
-			}
+			get { return _autoStart; }
 			set
 			{
-			    if (_autoStart == value) return;
-			    _autoStart = value;
-			    Save ();
-			    OnPropertyChanged("AutoStart");
+                SetProperty(ref _autoStart, value);
+                Save ();
 			}
 		}
 

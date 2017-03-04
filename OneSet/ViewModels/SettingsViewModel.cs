@@ -26,16 +26,8 @@ namespace OneSet.ViewModels
         private ObservableCollection<PreferenceGroup> _settings;
         public ObservableCollection<PreferenceGroup> Settings
         {
-            get
-            {
-                return _settings;
-            }
-            set
-            {
-                if (_settings == value) return;
-                _settings = value;
-                OnPropertyChanged("Settings");
-            }
+            get { return _settings; }
+            set { SetProperty(ref _settings, value); }
         }
 
         public ICommand SelectItemCommand { get; }

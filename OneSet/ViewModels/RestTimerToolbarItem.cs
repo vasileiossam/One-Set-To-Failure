@@ -20,33 +20,17 @@ namespace OneSet.ViewModels
         #region properties
         private string _text;
 		public string Text
-		{
-			get
-			{
-				return _text;
-			}
-			set
-			{
-			    if (_text == value) return;
-			    _text = value;
-			    OnPropertyChanged("Text");
-			}
-		}
+        {
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
+        }
 
-		private string _icon;
+        private string _icon;
 		public string Icon
-		{
-			get
-			{
-				return _icon;
-			}
-			set
-			{
-			    if (_icon == value) return;
-			    _icon = value;
-			    OnPropertyChanged("Icon");
-			}
-		}
+        {
+            get { return _icon; }
+            set { SetProperty(ref _icon, value); }
+        }
 
         public ICommand Command { get; set; }
         #endregion

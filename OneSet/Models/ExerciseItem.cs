@@ -1,21 +1,14 @@
-﻿using OneSet.Models;
-
-namespace OneSet.ViewModels
+﻿namespace OneSet.Models
 {
-    public class ExerciseItemViewModel : BaseViewModel
+    public class ExerciseItem : ObservableObject
     {
         protected Exercise _exercise;
         public Exercise Exercise
         {
-            get
-            {
-                return _exercise;
-            }
+            get { return _exercise; }
             set
             {
-                if (_exercise == value) return;
-                _exercise = value;
-                OnPropertyChanged("Exercise");
+                SetProperty(ref _exercise, value);
                 OnPropertyChanged("NotesVisible");
             }
         }
@@ -23,15 +16,10 @@ namespace OneSet.ViewModels
         protected string _trainingDays;
         public string TrainingDays
         {
-            get
-            {
-                return _trainingDays;
-            }
+            get { return _trainingDays; }
             set
             {
-                if (_trainingDays == value) return;
-                _trainingDays = value;
-                OnPropertyChanged("TrainingDays");
+                SetProperty(ref _trainingDays, value);
                 OnPropertyChanged("TrainingDaysVisible");
             }
         }

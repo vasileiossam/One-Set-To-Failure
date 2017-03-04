@@ -10,33 +10,10 @@ using OneSet.Models;
 
 namespace OneSet.ViewModels
 {
-	public class ExerciseStat
-	{
-		public string Title {get; set;}
-		public string Value {get; set;}
-
-		// TODO move to viewmodel or page when this works https://forums.xamarin.com/discussion/25677/does-xamarin-forms-support-relativesource-on-a-binding
-		protected StackOrientation _cellLayoutOrientation;
-		public StackOrientation CellLayoutOrientation
-		{
-			get
-			{
-				return _cellLayoutOrientation;
-			}
-			set
-			{
-				if (_cellLayoutOrientation != value)
-				{
-					_cellLayoutOrientation = value;
-				}
-			}
-		}
-	}
-
 	public class ExerciseAnalysisViewModel : BaseViewModel, INavigationAware
     {
 		public Picker ExercisesPicker { get; set; }
-		public List<ExerciseStat> Stats {get; set;}
+		public List<ExerciseAnalysisItem> Stats {get; set;}
         
         #region private variables
         private List<Exercise> _exercises;
@@ -203,26 +180,26 @@ namespace OneSet.ViewModels
         }
         #endregion
 
-        public async Task<List<ExerciseStat>> GetStats(int exerciseIndex)
+        public async Task<List<ExerciseAnalysisItem>> GetItems(int exerciseIndex)
         {
             var exercise = _exercisesInWorkouts[exerciseIndex];
 
-            var list = new List<ExerciseStat>
+            var list = new List<ExerciseAnalysisItem>
             {
-                new ExerciseStat {Title = "Started", Value = GetStarted(exercise)},
-                new ExerciseStat {Title = "Last workout", Value = GetLastWorkout(exercise)},
-                new ExerciseStat {Title = "Last target workout", Value = GetLastTargetWorkout(exercise)},
-                new ExerciseStat {Title = "Current Weight", Value = GetCurrentWeight(exercise)},
-                new ExerciseStat {Title = "Successive workouts in current weight", Value = GetSuccesiveDays(exercise)},
-                new ExerciseStat {Title = "Weight increases", Value = GetWeightIncreases(exercise)},
-                new ExerciseStat {Title = "Days since started", Value = GetDaysSinceStarted(exercise)},
-                new ExerciseStat {Title = "Days since last workout", Value = GetDaysSinceLastWorkout(exercise)},
-                new ExerciseStat {Title = "Total workouts", Value = GetTotalWorkouts(exercise)},
-                new ExerciseStat {Title = "Total trophies", Value = GetTotalTrophies(exercise)},
-                new ExerciseStat {Title = "Trophies won", Value = GetTrophiesWon(exercise)},
-                new ExerciseStat {Title = "Trophies lost", Value = GetTrophiesLost(exercise)},
-                new ExerciseStat {Title = "Total Reps", Value = GetTotalReps(exercise)},
-                new ExerciseStat {Title = "Total Weight", Value = GetTotalWeight(exercise)}
+                new ExerciseAnalysisItem {Title = "Started", Value = GetStarted(exercise)},
+                new ExerciseAnalysisItem {Title = "Last workout", Value = GetLastWorkout(exercise)},
+                new ExerciseAnalysisItem {Title = "Last target workout", Value = GetLastTargetWorkout(exercise)},
+                new ExerciseAnalysisItem {Title = "Current Weight", Value = GetCurrentWeight(exercise)},
+                new ExerciseAnalysisItem {Title = "Successive workouts in current weight", Value = GetSuccesiveDays(exercise)},
+                new ExerciseAnalysisItem {Title = "Weight increases", Value = GetWeightIncreases(exercise)},
+                new ExerciseAnalysisItem {Title = "Days since started", Value = GetDaysSinceStarted(exercise)},
+                new ExerciseAnalysisItem {Title = "Days since last workout", Value = GetDaysSinceLastWorkout(exercise)},
+                new ExerciseAnalysisItem {Title = "Total workouts", Value = GetTotalWorkouts(exercise)},
+                new ExerciseAnalysisItem {Title = "Total trophies", Value = GetTotalTrophies(exercise)},
+                new ExerciseAnalysisItem {Title = "Trophies won", Value = GetTrophiesWon(exercise)},
+                new ExerciseAnalysisItem {Title = "Trophies lost", Value = GetTrophiesLost(exercise)},
+                new ExerciseAnalysisItem {Title = "Total Reps", Value = GetTotalReps(exercise)},
+                new ExerciseAnalysisItem {Title = "Total Weight", Value = GetTotalWeight(exercise)}
             };
 
             return list;

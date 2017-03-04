@@ -20,46 +20,22 @@ namespace OneSet.ViewModels
         private string _name;
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (_name == value) return;
-                _name = value;
-                OnPropertyChanged("Name");
-            }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
 
         private double _plateWeight;
         public double PlateWeight
         {
-            get
-            {
-                return _plateWeight;
-            }
-            set
-            {
-                if (_plateWeight == value) return;
-                _plateWeight = value;
-                OnPropertyChanged("PlateWeight");
-            }
+            get { return _plateWeight; }
+            set { SetProperty(ref _plateWeight, value); }
         }
 
         private string _notes;
         public string Notes
         {
-            get
-            {
-                return _notes;
-            }
-            set
-            {
-                if (_notes == value) return;
-                _notes = value;
-                OnPropertyChanged("Notes");
-            }
+            get { return _notes; }
+            set { SetProperty(ref _notes, value); }
         }
 
         public RepsIncrement RepsIncrement

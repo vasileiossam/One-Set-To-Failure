@@ -35,10 +35,10 @@ namespace OneSet.Services
         {
             if (!(previousWorkoutWeight > 0) || !(plateWeight > 0)) return 0;
             var weight = previousWorkoutWeight - plateWeight;
-            return weight < 0 ? 0 : weight;
+            return weight > 0 ? weight : previousWorkoutWeight;
         }
 
-        private async Task<bool> CanCalculateTarget(Workout workout)
+        private async Task<bool> CanCalculateTarget(int exerciseId)
         {
 			// TODO when I'll implement the settings in the exercise level I have to replace the WorkoutCount with workout.Exercise.RepsIncrement.WorkoutCount 
 			var workoutCount = App.Settings.RepsIncrement.WorkoutCount; 
@@ -49,8 +49,8 @@ namespace OneSet.Services
             // target is calculated in every Nth workout
 
             // how many workouts for this exercise?
-            var count = await _workoutsRepository.GetWorkoutsCount(workout.ExerciseId);
-            if (workout.WorkoutId == 0) count++;
+            var count = await _workoutsRepository.GetWorkoutsCount(exerciseId);
+            //if (workout == null) count++;
 
             return IsDivisible(count, workoutCount);
         }
@@ -72,7 +72,7 @@ namespace OneSet.Services
                 targetWeight = 0;
             }
             else
-            if (await CanCalculateTarget(workout))
+            if (await CanCalculateTarget(exercise.ExerciseId))
             {
                 // no previous workout exist, this is the first workout for this exercise
                 if (previousWorkout == null)

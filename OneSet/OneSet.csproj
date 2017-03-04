@@ -48,6 +48,8 @@
     <Compile Include="Converters\IntToBoolConverter.cs" />
     <Compile Include="Extensions\PropertyInfoExtensions.cs" />
     <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\ExerciseAnalysisItem.cs" />
+    <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Messages.cs" />
     <Compile Include="Models\NavigationParameters.cs" />
@@ -69,7 +71,7 @@
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
-    <Compile Include="ViewModels\ExerciseItemViewModel.cs" />
+    <Compile Include="Models\ExerciseItem.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\WorkoutDetailsViewModel.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
@@ -84,7 +86,7 @@
     <Compile Include="Data\ExercisesRepository.cs" />
     <Compile Include="Data\WorkoutsRepository.cs" />
     <Compile Include="Abstract\ISettingsStorage.cs" />
-    <Compile Include="ViewModels\RoutineItemViewModel.cs" />
+    <Compile Include="Models\RoutineItem.cs" />
     <Compile Include="Converters\WeightMetricToImperialConverter.cs" />
     <Compile Include="Abstract\IRoutineDaysRepository.cs" />
     <Compile Include="Data\RoutineDaysRepository.cs" />

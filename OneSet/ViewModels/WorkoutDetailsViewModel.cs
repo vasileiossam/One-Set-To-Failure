@@ -20,91 +20,43 @@ namespace OneSet.ViewModels
         private int _reps;
         public int Reps
         {
-            get
-            {
-                return _reps;
-            }
-            set
-            {
-                if (_reps == value) return;
-                _reps = value;
-                OnPropertyChanged("Reps");
-            }
+            get { return _reps; }
+            set { SetProperty(ref _reps, value); }
         }
 
         private double _weight;
         public double Weight
         {
-            get
-            {
-                return _weight;
-            }
-            set
-            {
-                if (_weight == value) return;
-                _weight = value;
-                OnPropertyChanged("Weight");
-            }
+            get { return _weight; }
+            set { SetProperty(ref _weight, value); }
         }
 
         private int _reviousReps;
         public int PreviousReps
         {
-            get
-            {
-                return _reviousReps;
-            }
-            set
-            {
-                if (_reviousReps == value) return;
-                _reviousReps = value;
-                OnPropertyChanged("PreviousReps");
-            }
+            get { return _reviousReps; }
+            set { SetProperty(ref _reviousReps, value); }
         }
 
         private double _previousWeight;
         public double PreviousWeight
         {
-            get
-            {
-                return _previousWeight;
-            }
-            set
-            {
-                if (_previousWeight == value) return;
-                _previousWeight = value;
-                OnPropertyChanged("PreviousWeight");
-            }
+            get { return _previousWeight; }
+            set { SetProperty(ref _previousWeight, value); }
         }
 
         private int _targetReps;
         public int TargetReps
         {
-            get
-            {
-                return _targetReps;
-            }
-            set
-            {
-                if (_targetReps == value) return;
-                _targetReps = value;
-                OnPropertyChanged("TargetReps");
-            }
+            get { return _targetReps; }
+            set { SetProperty(ref _targetReps, value); }
         }
 
         private double _targetWeight;
         public double TargetWeight
         {
-            get
-            {
-                return _targetWeight;
-            }
-            set
-            {
-                if (_targetWeight == value) return;
-                _targetWeight = value;
-                OnPropertyChanged("TargetWeight");
-            }
+            get { return _targetWeight; }
+            set { SetProperty(ref _targetWeight, value); }
         }
 
         public Exercise Exercise { get; set; }
@@ -113,7 +65,6 @@ namespace OneSet.ViewModels
         public string PreviousTitle => AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")";
         public string TargetTitle => AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")";
         public bool NotesVisible => !string.IsNullOrEmpty(Exercise?.Notes);
-        public bool LevelUpVisible => TargetWeight > PreviousWeight;
         public bool TargetRepsWeightVisible => App.Settings.TargetRepsWeightVisible;
         public bool PreviousRepsWeightVisible => App.Settings.PreviousRepsWeightVisible;
 
@@ -259,7 +210,6 @@ namespace OneSet.ViewModels
 			{
                 Weight = Weight + GetStep ();
 			}
-            OnPropertyChanged("Weight");
         }
 
 		private void OnWeighDown () 
@@ -276,7 +226,6 @@ namespace OneSet.ViewModels
 			{
                 Weight = Weight - GetStep ();
 			}
-            OnPropertyChanged("Weight");
         }
 
 		private double GetStep()
@@ -342,8 +291,8 @@ namespace OneSet.ViewModels
             var previousWorkout = await _workoutsRepository.GetPreviousWorkout(Exercise.ExerciseId, Created);
             if (previousWorkout != null)
             {
-                PreviousReps = previousWorkout.PreviousReps;
-                PreviousWeight = _units.GetWeight(App.Settings.IsMetric, previousWorkout.PreviousWeight);
+                PreviousReps = previousWorkout.Reps;
+                PreviousWeight = _units.GetWeight(App.Settings.IsMetric, previousWorkout.Weight);
             }
 
             var targetWorkout = await _workoutRules.GetTargetWorkout(workout, Exercise, previousWorkout);

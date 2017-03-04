@@ -13,8 +13,8 @@ namespace OneSet.ViewModels
 	public class ExerciseListViewModel : BaseViewModel, INavigationAware
     {
         #region properties
-        private ObservableCollection<ExerciseItemViewModel> _exercises;
-		public ObservableCollection<ExerciseItemViewModel> Exercises
+        private ObservableCollection<ExerciseItem> _exercises;
+		public ObservableCollection<ExerciseItem> Exercises
 		{
 			get
 			{
@@ -32,33 +32,17 @@ namespace OneSet.ViewModels
 
         protected bool _listVisible;
 		public bool ListVisible
-		{
-			get
-			{
-				return _listVisible;
-			}
-			set
-			{
-			    if (_listVisible == value) return;
-			    _listVisible = value;
-			    OnPropertyChanged("ListVisible");
-			}
-		}
+        {
+            get { return _listVisible; }
+            set { SetProperty(ref _listVisible, value); }
+        }
 
-		protected bool _noDataVisible;
+        protected bool _noDataVisible;
 		public bool NoDataVisible
-		{
-			get
-			{
-				return _noDataVisible;
-			}
-			set
-			{
-			    if (_noDataVisible == value) return;
-			    _noDataVisible = value;
-			    OnPropertyChanged("NoDataVisible");
-			}
-		}
+        {
+            get { return _noDataVisible; }
+            set { SetProperty(ref _noDataVisible, value); }
+        }
         #endregion
 
         #region private variables
@@ -85,7 +69,7 @@ namespace OneSet.ViewModels
 
             _messagingService.Subscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded, async (sender, e) =>
             {
-                var item = new ExerciseItemViewModel
+                var item = new ExerciseItem
                 {
                     Exercise = e,
                     TrainingDays = await _exercisesRepository.GetTrainingDays(e)
@@ -115,16 +99,18 @@ namespace OneSet.ViewModels
         }
         
         #region private methods
-        private async Task<ObservableCollection<ExerciseItemViewModel>> GetExercises()
+        private async Task<ObservableCollection<ExerciseItem>> GetExercises()
         {
-            var collection = new ObservableCollection<ExerciseItemViewModel>();
+            var collection = new ObservableCollection<ExerciseItem>();
             var list = await _exercisesRepository.AllAsync();
 
             foreach (var item in list)
             {
-                var vm = _componentContext.Resolve<ExerciseItemViewModel>();
-                vm.Exercise = item;
-                vm.TrainingDays = await _exercisesRepository.GetTrainingDays(item);
+                var vm = new ExerciseItem
+                {
+                    Exercise = item,
+                    TrainingDays = await _exercisesRepository.GetTrainingDays(item)
+                };
                 collection.Add(vm);
             }
 
@@ -133,7 +119,7 @@ namespace OneSet.ViewModels
 
         private async Task OnItemSelected(object selectedItem)
         {
-            var item = selectedItem as ExerciseItemViewModel;
+            var item = selectedItem as ExerciseItem;
             if (item == null) return;
 
             var parameters = new NavigationParameters()

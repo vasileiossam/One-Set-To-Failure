@@ -11,19 +11,11 @@ namespace OneSet.ViewModels
 	public class CalendarNotesViewModel : BaseViewModel, INavigationAware
     {
         #region properties
-        private Calendar _calendar { get; set; }
+        private Calendar _calendar;
         public Calendar Calendar
         {
-            get
-            {
-                return _calendar;
-            }
-            set
-            {
-                if (_calendar == value) return;
-                _calendar = value;
-                OnPropertyChanged("Calendar");
-            }
+            get { return _calendar; }
+            set { SetProperty(ref _calendar, value); }
         }
 
         public ICommand SaveCommand { get; set; }

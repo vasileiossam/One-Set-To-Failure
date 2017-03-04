@@ -1,6 +1,6 @@
 ﻿using System;
-using Autofac;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -32,7 +32,7 @@ namespace OneSet.Views
 		    if (picker == null) return;
 		    var selectedIndex = picker.SelectedIndex;
 		    if (selectedIndex <= -1) return;
-		    ViewModel.Stats = await ViewModel.GetStats(selectedIndex);
+		    ViewModel.Stats = await ViewModel.GetItems(selectedIndex);
 		    ChangeOrientation ();
 		}
 
@@ -73,24 +73,22 @@ namespace OneSet.Views
 		    ChangeOrientation ();
 		}
 
-		// TODO remove this when xamarin forms supports source/relative binding inside a datatemplate
-		public void ChangeOrientation()
-		{
-			StatsList.BeginRefresh ();
-			if (StatsList.ItemsSource != null)
-			{
-				foreach (var item in StatsList.ItemsSource)
-				{
-				    var stat = item as ExerciseStat;
-				    if (stat != null) stat.CellLayoutOrientation = _stackOrientation;
-				}
-			}
-			StatsList.EndRefresh ();
-			Refresh ();
-		}
+        public void ChangeOrientation()
+        {
+            StatsList.BeginRefresh();
+            if (ViewModel.Stats != null)
+            {
+                foreach (var item in ViewModel.Stats)
+                {
+                    item.CellLayoutOrientation = _stackOrientation;
+                }
+            }
+            StatsList.EndRefresh();
+            Refresh();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 
     public class ExerciseAnalysisXaml : BasePage<ExerciseAnalysisViewModel>
     {

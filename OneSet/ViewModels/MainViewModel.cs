@@ -3,6 +3,7 @@ using OneSet.Abstract;
 using OneSet.Models;
 using OneSet.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,76 +18,36 @@ namespace OneSet.ViewModels
         private string _trophies;
         public string Trophies
         {
-            get
-            {
-                return _trophies;
-            }
-            set
-            {
-                if (_trophies == value) return;
-                _trophies = value;
-                OnPropertyChanged("Trophies");
-            }
+            get { return _trophies; }
+            set { SetProperty(ref _trophies, value); }
         }
 
         private string _calendarNotes;
         public string CalendarNotes
         {
-            get
-            {
-                return _calendarNotes;
-            }
-            set
-            {
-                if (_calendarNotes == value) return;
-                _calendarNotes = value;
-                OnPropertyChanged("CalendarNotes");
-            }
+            get { return _calendarNotes; }
+            set { SetProperty(ref _calendarNotes, value); }
         }
 
         private bool _calendarNotesVisible;
         public bool CalendarNotesVisible
         {
-            get
-            {
-                return _calendarNotesVisible;
-            }
-            set
-            {
-                if (_calendarNotesVisible == value) return;
-                _calendarNotesVisible = value;
-                OnPropertyChanged("CalendarNotesVisible");
-            }
+            get { return _calendarNotesVisible; }
+            set { SetProperty(ref _calendarNotesVisible, value); }
         }
 
         private bool _listVisible;
         public bool ListVisible
         {
-            get
-            {
-                return _listVisible;
-            }
-            set
-            {
-                if (_listVisible == value) return;
-                _listVisible = value;
-                OnPropertyChanged("ListVisible");
-            }
+            get { return _listVisible; }
+            set { SetProperty(ref _listVisible, value); }
         }
 
         private bool _noDataVisible;
         public bool NoDataVisible
         {
-            get
-            {
-                return _noDataVisible;
-            }
-            set
-            {
-                if (_noDataVisible == value) return;
-                _noDataVisible = value;
-                OnPropertyChanged("NoDataVisible");
-            }
+            get { return _noDataVisible; }
+            set { SetProperty(ref _noDataVisible, value); }
         }
 
         public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
@@ -108,26 +69,16 @@ namespace OneSet.ViewModels
             }
             set
             {
-                if (_currentDate == value) return;
-                _currentDate = value;
+                SetProperty(ref _currentDate, value);
                 App.CurrentDate = value;
-                OnPropertyChanged("CurrentDate");
             }
         }
 
-        private ObservableCollection<RoutineItemViewModel> _routine;
-        public ObservableCollection<RoutineItemViewModel> Routine
+        private ObservableCollection<RoutineItem> _routine;
+        public ObservableCollection<RoutineItem> Routine
         {
-            get
-            {
-                return _routine;
-            }
-            set
-            {
-                if (_routine == value) return;
-                _routine = value;
-                OnPropertyChanged("Routine");
-            }
+            get { return _routine; }
+            set { SetProperty(ref _routine, value); }
         }
         #endregion
 
@@ -135,15 +86,16 @@ namespace OneSet.ViewModels
         private readonly IComponentContext _componentContext;
         private readonly INavigationService _navigationService;
         private readonly IMessagingService _messagingService;
+        private readonly IDatePickerDialog _datePickerDialog;
+        private readonly IWorkoutRules _workoutRules;
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly IExercisesRepository _exercisesRepository;
         private readonly ICalendarRepository _calendarRepository;
         private readonly IRoutineDaysRepository _routineDaysRepository;
-        private readonly IDatePickerDialog _datePickerDialog;
         #endregion
 
         public MainViewModel(IComponentContext componentContext, INavigationService navigationService, 
-            IMessagingService messagingService, IDatePickerDialog datePickerDialog,
+            IMessagingService messagingService, IDatePickerDialog datePickerDialog, IWorkoutRules workoutRules,
             IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, 
             ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
@@ -151,6 +103,7 @@ namespace OneSet.ViewModels
             _navigationService = navigationService;
             _messagingService = messagingService;
             _datePickerDialog = datePickerDialog;
+            _workoutRules = workoutRules;
             _workoutsRepository = workoutsRepository;
             _exercisesRepository = exercisesRepository;
             _calendarRepository = calendarRepository;
@@ -226,7 +179,7 @@ namespace OneSet.ViewModels
 
         private async Task OnItemSelected(object selectedItem)
         {
-            var item = selectedItem as RoutineItemViewModel;
+            var item = selectedItem as RoutineItem;
             if (item == null) return;
 
             var parameters = new NavigationParameters
@@ -242,21 +195,36 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private methods
-        private async Task<ObservableCollection<RoutineItemViewModel>> GetRoutine(DateTime date)
+        private async Task<ObservableCollection<RoutineItem>> GetRoutine(DateTime date)
         {
-            var collection = new ObservableCollection<RoutineItemViewModel>();
+            var collection = new ObservableCollection<RoutineItem>();
             var list = await _routineDaysRepository.GetRoutine(date);
             var exercises = await _exercisesRepository.AllAsync();
             var workouts = await _workoutsRepository.GetWorkouts(date);
 
             foreach (var day in list)
             {
-                var vm = new RoutineItemViewModel
+                var vm = new RoutineItem
                 {
                     RoutineDay = day,
                     Exercise = exercises.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
                     Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
                 };
+
+                var previousWorkout = await _workoutsRepository.GetPreviousWorkout(vm.Exercise.ExerciseId, date);
+                if (previousWorkout != null)
+                {
+                    vm.PreviousReps = previousWorkout.Reps;
+                    vm.PreviousWeight = previousWorkout.Weight;
+                }
+
+                var targetWorkout = await _workoutRules.GetTargetWorkout(vm.Workout, vm.Exercise, previousWorkout);
+                if (!targetWorkout.Equals(default(KeyValuePair<int, double>)))
+                {
+                    vm.TargetReps = targetWorkout.Key;
+                    vm.TargetWeight = targetWorkout.Value;
+                }
+
                 collection.Add(vm);
             }
 

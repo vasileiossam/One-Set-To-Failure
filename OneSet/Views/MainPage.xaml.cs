@@ -104,8 +104,7 @@ namespace OneSet.Views
 			}
 		}
 
-		// TODO remove this when xamarin forms supports source/relative binding inside a datatemplate
-		public void ChangeOrientation()
+    	public void ChangeOrientation()
 		{
             list.BeginRefresh ();
 			if (ViewModel.Routine != null)

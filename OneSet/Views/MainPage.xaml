@@ -41,12 +41,12 @@ Title="{Binding Title}">
 
         <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
           <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
-          <Label Text="{Binding Trophies}" FontSize="Large" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="{StaticResource primaryText}"/>
+          <Label Text="{Binding Trophies}" FontSize="Large" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource primaryText}"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
           <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
-          <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource DateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" XAlign="Center" YAlign="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold"/>
+          <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource DateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold"/>
           <Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"  HorizontalOptions="End"/>
         </StackLayout>
 
@@ -64,16 +64,16 @@ Title="{Binding Title}">
 
           <ContentView Padding="0, 0, 0, 0">
             <Label Text="{i18n:Translate NoWorkoutDataTitle}"
-              FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
+              FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
           </ContentView>
 
           <ContentView Padding="0, 10, 0, 0">
             <Label Text="{i18n:Translate NoWorkoutDataLine1}"
-              FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
+              FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
           </ContentView>
           <ContentView Padding="0, 10, 0, 0">
             <Label Text="{i18n:Translate NoWorkoutDataLine2}"
-              FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
+              FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
           </ContentView>
         </StackLayout>
 
@@ -101,18 +101,18 @@ Title="{Binding Title}">
 
                       <Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="{Binding StateImage}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-                      <Label Text="{Binding Exercise.Name}" YAlign="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="{StaticResource primaryText}"/>
+                      <Label Text="{Binding Exercise.Name}" VerticalTextAlignment="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="{StaticResource primaryText}"/>
 
                       <StackLayout IsVisible="{Binding TrophyVisible}" Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                         <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
-                        <Label Text="{Binding Workout.Trophies, Converter={StaticResource TrophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" XAlign="Center" YAlign="Center" TextColor="{StaticResource secondaryText}"/>
+                        <Label Text="{Binding Workout.Trophies, Converter={StaticResource TrophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
                       </StackLayout>
                     </Grid>
 
                     <StackLayout Padding="0, 2, 0, 2" Orientation="Horizontal" HorizontalOptions="End">
                       <StackLayout IsVisible="{Binding LevelUpVisible}" Padding="0, 0, 0, 0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="0">
                         <Image Source="ic_fa_arrow_up_orange" HorizontalOptions="Start"/>
-                        <Label Text="LVL UP!" YAlign="Center" FontSize="Small" TextColor="#E64A19"/>
+                        <Label Text="LVL UP!" VerticalTextAlignment="Center" FontSize="Small" TextColor="#E64A19"/>
                       </StackLayout>
 
                       <Grid HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
@@ -124,7 +124,7 @@ Title="{Binding Title}">
                         </Grid.ColumnDefinitions>
 
                         <controls:RoundedBoxView  WidthRequest="90" HeightRequest="35" CornerRadius="32" Color="{StaticResource box}" />
-                        <Label Text="{Binding Reps, Converter={StaticResource IntToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold"
+                        <Label Text="{Binding Reps, Converter={StaticResource IntToStringConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold"
                           TextColor="{Binding RepsWeightColor}"/>
                       </Grid>
 
@@ -136,7 +136,7 @@ Title="{Binding Title}">
                           <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="{StaticResource box}" />
-                        <Label Text="{Binding Weight, Converter={StaticResource WeightConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold"
+                        <Label Text="{Binding Weight, Converter={StaticResource WeightConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold"
                           TextColor="{Binding RepsWeightColor}"/>
                       </Grid>
                     </StackLayout>

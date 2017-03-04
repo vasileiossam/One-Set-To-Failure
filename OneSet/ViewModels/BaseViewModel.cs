@@ -1,34 +1,19 @@
-using System.ComponentModel;
+using OneSet.Models;
 
 namespace OneSet.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private string _title;
         public string Title
         {
-            set
-            {
-                if (_title == value) return;
-                _title = value;
-                OnPropertyChanged("Title");
-            }
-            get
-            {
-                return _title;
-            }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         protected BaseViewModel()
         {
 
-        }
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

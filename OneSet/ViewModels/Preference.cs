@@ -1,34 +1,25 @@
 ﻿using System;
 using System.ComponentModel;
 using OneSet.Abstract;
+using OneSet.Models;
 using OneSet.Resx;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-	public class Preference : INotifyPropertyChanged
+	public class Preference : ObservableObject
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-
 		public string Title { get; set; }
 		public string Hint { get; set; }
 
 		protected object _value;
-		public object Value 
-		{ 
-			get
-			{
-				return _value;
-			}
-			set
-			{
-			    if (_value == value) return;
-			    _value = value;
-			    OnPropertyChanged("Value");
-			}
-		}
+		public object Value
+        {
+            get { return _value; }
+            set { SetProperty(ref _value, value); }
+        }
 
-		public bool IsHintVisible => !string.IsNullOrEmpty (Hint);
+        public bool IsHintVisible => !string.IsNullOrEmpty (Hint);
 	    public bool IsValueVisible { get; set; }
 
 		public EventHandler Clicked {get; set;}
@@ -37,11 +28,6 @@ namespace OneSet.ViewModels
 		public Preference ()
 		{
 			IsValueVisible = true;
-		}
-
-		protected void OnPropertyChanged(string propertyName)
-		{
-		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 

@@ -31,7 +31,7 @@
     <ScrollView>
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="10, 10, 10, 10">
 
-        <Label Text="{Binding Exercise.Name}" YAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource primaryText}"/>
+        <Label Text="{Binding Exercise.Name}" VerticalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource primaryText}"/>
         <Label IsVisible="{Binding NotesVisible}" Text="{Binding Exercise.Notes}" FontSize="Small" TextColor="{StaticResource secondaryText}"/>
 
         <!--  
@@ -49,7 +49,7 @@
             <ColumnDefinition Width="122" />
           </Grid.ColumnDefinitions>
 
-          <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PreviousTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="{StaticResource secondaryText}"/>
+          <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PreviousTitle}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Font="Medium"  TextColor="{StaticResource secondaryText}"/>
 
           <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="54" WidthRequest="54"
               Image="ic_fa_calendar" Command="{Binding PreviousIconCommand}"  HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -63,7 +63,7 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding PreviousReps, Converter={StaticResource IntToStringConverter}}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+            <Label Text="{Binding PreviousReps, Converter={StaticResource IntToStringConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
           </Grid>
 
           <Grid Grid.Row="1" Grid.Column="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -75,7 +75,7 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding PreviousWeight}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
+            <Label Text="{Binding PreviousWeight, Converter={StaticResource DoubleToStringConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
           </Grid>
         </Grid>
 
@@ -95,7 +95,7 @@
             <ColumnDefinition Width="122" />
           </Grid.ColumnDefinitions>
 
-          <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TargetTitle}" YAlign="Center" XAlign="Center" Font="Medium"  TextColor="{StaticResource secondaryText}"/>
+          <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TargetTitle}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Font="Medium"  TextColor="{StaticResource secondaryText}"/>
 
           <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" HeightRequest="54" WidthRequest="54"
               Image="ic_fa_bullseye" Command="{Binding TargetIconCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -110,7 +110,7 @@
 
             <controls:RoundedBoxView WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
             <Label Text="{Binding TargetReps, Converter={StaticResource IntToStringConverter}}"
-              YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
+              VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
           </Grid>
 
           <Grid Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -122,8 +122,7 @@
             </Grid.ColumnDefinitions>
 
             <controls:RoundedBoxView  WidthRequest="90" HeightRequest="48" CornerRadius="35" Color="{StaticResource box}" />
-            <Label Text="{Binding TargetWeight}" YAlign="Center" XAlign="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
-            <Image IsVisible="{Binding LevelUpVisible}" Source="ic_fa_arrow_up" HorizontalOptions="Start"/>
+            <Label Text="{Binding TargetWeight, Converter={StaticResource DoubleToStringConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" TextColor="#448AFF"/>
           </Grid>
 
           <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" Color="{StaticResource divider}"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>

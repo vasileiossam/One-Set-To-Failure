@@ -19,34 +19,18 @@ namespace OneSet.ViewModels
         public StackLayout OxyPlotsLayout { get; set; }
 
 		private bool _noChartsDataVisible;
-		public bool NoChartsDataVisible 
-		{ 
-			get
-			{
-				return _noChartsDataVisible;
-			}
-			set
-			{
-			    if (_noChartsDataVisible == value) return;
-			    _noChartsDataVisible = value;
-			    OnPropertyChanged("NoChartsDataVisible");
-			}
-		}
+		public bool NoChartsDataVisible
+        {
+            get { return _noChartsDataVisible; }
+            set { SetProperty(ref _noChartsDataVisible, value); }
+        }
 
-		private bool _chartsPinchToZoomVisible;
-		public bool ChartsPinchToZoomVisible 
-		{ 
-			get
-			{
-				return _chartsPinchToZoomVisible;
-			}
-			set
-			{
-			    if (_chartsPinchToZoomVisible == value) return;
-			    _chartsPinchToZoomVisible = value;
-			    OnPropertyChanged("ChartsPinchToZoomVisible");
-			}
-		}
+        private bool _chartsPinchToZoomVisible;
+		public bool ChartsPinchToZoomVisible
+        {
+            get { return _chartsPinchToZoomVisible; }
+            set { SetProperty(ref _chartsPinchToZoomVisible, value); }
+        }
         #endregion
 
         #region private variables
