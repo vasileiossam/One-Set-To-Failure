@@ -47,9 +47,6 @@ namespace OneSet.Services
 
         private async Task NavigateTo<T>(Page page, NavigationParameters parameters = null) where T : BaseViewModel
         {
-            // TODO implement OnNavigatedFrom(parameters)
-            // ....
-
             if (parameters == null)
             {
                 parameters = new NavigationParameters();
@@ -65,6 +62,7 @@ namespace OneSet.Services
 
             if (viewModel is INavigationAware)
             {
+                await OnNavigateFrom();
                 await (viewModel as INavigationAware).OnNavigatedTo(parameters);
             }
 
@@ -82,13 +80,18 @@ namespace OneSet.Services
 
         public async Task PushAsync(Page page)
         {
-    
             await _rootPage.PushAsync(page);
         }
 
         public async Task PopAsync()
         {
+            await OnNavigateFrom();
             await _rootPage.PopAsync();
+        }
+
+        public async Task OnNavigateFrom()
+        {
+            // TODO implement
         }
 
         private Page GetPage<T>()

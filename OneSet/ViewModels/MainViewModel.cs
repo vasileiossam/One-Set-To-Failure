@@ -50,7 +50,7 @@ namespace OneSet.ViewModels
             set { SetProperty(ref _noDataVisible, value); }
         }
 
-        public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
+        public RestTimerItem RestTimerItem { get; set; }
 
         public ICommand ChevronTapCommand { get; }
         public ICommand CalendarNotesCommand { get; }
@@ -59,6 +59,7 @@ namespace OneSet.ViewModels
         public ICommand SelectItemCommand { get; }
         public ICommand ExercisesCommand { get; }
         public ICommand SettingsCommand { get; }
+        public ICommand RestTimerCommand { get; }
 
         private DateTime _currentDate;
         public DateTime CurrentDate
@@ -118,8 +119,9 @@ namespace OneSet.ViewModels
             SelectItemCommand = new Command(async (item) => { await OnItemSelected(item); });
             ExercisesCommand = new Command(async () => { await _navigationService.NavigateTo<ExerciseListViewModel>(); });
             SettingsCommand = new Command(async () => { await _navigationService.NavigateTo<SettingsViewModel>(); });
+            RestTimerCommand = new Command(async () => { await _navigationService.NavigateTo<RestTimerViewModel>(); });
 
-            RestTimerToolbarItem = _componentContext.Resolve<RestTimerToolbarItem>();
+            RestTimerItem = App.RestTimerItem;
 
             _messagingService.Subscribe<WorkoutDetailsViewModel, Workout>(this, Messages.ItemChanged, (sender, workout) =>
             {
@@ -202,8 +204,7 @@ namespace OneSet.ViewModels
             {
                 {"CurrentDate", CurrentDate },
                 {"Workout", item.Workout},
-                {"Exercise", item.Exercise},
-                {"RestTimerToolbarItem", RestTimerToolbarItem}
+                {"Exercise", item.Exercise}
             };
 
             await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
@@ -260,7 +261,6 @@ namespace OneSet.ViewModels
         {
             CurrentDate = date;
 
-            RestTimerToolbarItem.Update();
             CalendarNotes = await _calendarRepository.GetCalendarNotes(_currentDate);
             if (CalendarNotes != null)
             {

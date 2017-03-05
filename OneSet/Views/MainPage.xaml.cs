@@ -110,12 +110,14 @@ namespace OneSet.Views
 
             InitScreenSize();
             ChangeOrientation();
-
+            
             BindingContext = ViewModel;
             list.SelectedItem = null;
 
             MainFrame.SwipeLeft += OnLeftChevronTapCommand;
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
+
+            App.RestTimerItem.Update();
         }
 
         protected override void OnDisappearing()

@@ -166,7 +166,7 @@
     </Compile>
     <Compile Include="ViewModels\ExerciseAnalysisViewModel.cs" />
     <Compile Include="Abstract\IScreenSizeHandler.cs" />
-    <Compile Include="ViewModels\RestTimerToolbarItem.cs" />
+    <Compile Include="Models\RestTimerItem.cs" />
     <Compile Include="Abstract\IDatePickerDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

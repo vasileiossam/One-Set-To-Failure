@@ -13,6 +13,7 @@ namespace OneSet.Views
         {
             base.OnAppearing();
             BindingContext = ViewModel;
+            App.RestTimerItem.Update();
         }
 	}
 

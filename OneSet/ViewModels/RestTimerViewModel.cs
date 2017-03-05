@@ -166,7 +166,7 @@ namespace OneSet.ViewModels
                     _soundService.Play ("Bleep");
 				}
 
-				App.RestTimerSecondsLeft = 0;
+				App.RestTimerItem.SecondsLeft = 0;
 				return false;
 			}
 
@@ -175,7 +175,7 @@ namespace OneSet.ViewModels
 			var progress = Progress + _progressStep;
 		    Progress = progress >= 1 ? 1 : progress;
 
-			App.RestTimerSecondsLeft = SecondsLeft;
+            App.RestTimerItem.SecondsLeft = SecondsLeft;
 			return State == RestTimerStates.Running;	
 		}
 
@@ -194,13 +194,13 @@ namespace OneSet.ViewModels
 
         private void OnPauseCommand()
 		{
-			App.RestTimerSecondsLeft = 0;
+            App.RestTimerItem.SecondsLeft = 0;
 			State = RestTimerStates.Paused;
 		}
 
 		private void OnResetCommand()
 		{
-			App.RestTimerSecondsLeft = 0;
+            App.RestTimerItem.SecondsLeft = 0;
 			State = RestTimerStates.Paused;
 			SecondsLeft = TotalSeconds;
 			Progress = 0;
@@ -235,11 +235,13 @@ namespace OneSet.ViewModels
             PlaySounds = App.Settings.RestTimerPlaySounds;
             TotalSeconds = App.Settings.RestTimerTotalSeconds;
 
-            // rest timer already running
-            if (App.RestTimerSecondsLeft > 0)
+            if (App.RestTimerItem.IsRunning)
             {
-                var seconds = App.RestTimerSecondsLeft;
+                var seconds = App.RestTimerItem.SecondsLeft;
+                App.RestTimerItem.Stop();
+
                 OnResetCommand();
+
                 SecondsLeft = seconds;
                 OnStartCommand();
             }
@@ -250,7 +252,10 @@ namespace OneSet.ViewModels
 
             _canSave = true;
 
-            // OnStartCommand();
+            if (parameters.ContainsKey("StartImmediately"))
+            {
+                OnStartCommand();
+            }
 
             await Task.FromResult(0);
         }

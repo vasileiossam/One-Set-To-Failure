@@ -60,7 +60,7 @@ namespace OneSet.ViewModels
         }
 
         public Exercise Exercise { get; set; }
-        public RestTimerToolbarItem RestTimerToolbarItem { get; set; }
+        public RestTimerItem RestTimerItem { get; set; }
 
         public string PreviousTitle => AppResources.PreviousTitle + " (" + L10n.GetWeightUnit() + ")";
         public string TargetTitle => AppResources.TargetTitle + " (" + L10n.GetWeightUnit() + ")";
@@ -75,6 +75,7 @@ namespace OneSet.ViewModels
         public ICommand PreviousIconCommand { get; set; }
         public ICommand TargetIconCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand RestTimerCommand { get; set; }
         #endregion
 
         #region private variables
@@ -103,6 +104,7 @@ namespace OneSet.ViewModels
             PreviousIconCommand = new Command(OnPreviousIconCommand);
             TargetIconCommand = new Command(OnTargetIconCommand);
             SaveCommand = new Command(async () => await OnSave());
+            RestTimerCommand = new Command(async () => { await _navigationService.NavigateTo<RestTimerViewModel>(); });
         }
 
         private async Task<bool> Validate ()
@@ -165,7 +167,12 @@ namespace OneSet.ViewModels
 				if (App.Settings.RestTimerAutoStart && !isPersisted)
 				{
 					await _navigationService.PopAsync();
-					await RestTimerToolbarItem.AutoStart();
+
+                    if (!RestTimerItem.IsRunning)
+				    {
+                        var parameters = new NavigationParameters { {"StartImmediately", true } };
+                        await _navigationService.NavigateTo<RestTimerViewModel>(parameters);
+				    }
 				} else
 				{
 					await _navigationService.PopAsync();					
@@ -267,11 +274,8 @@ namespace OneSet.ViewModels
             {
                 Exercise = parameters["Exercise"] as Exercise;
             }
-            if (parameters.ContainsKey("RestTimerToolbarItem"))
-            {
-                RestTimerToolbarItem = parameters["RestTimerToolbarItem"] as RestTimerToolbarItem;
-                RestTimerToolbarItem?.Update();
-            }
+
+            RestTimerItem = App.RestTimerItem;
 
             var workout = new Workout();
             if (parameters.ContainsKey("Workout"))
