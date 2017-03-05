@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using OneSet.Abstract;
+﻿using OneSet.Abstract;
 using OneSet.Models;
-using OneSet.Services;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -16,9 +14,10 @@ namespace OneSet.Views
             InitializeComponent();
 
             _messagingService = messagingService;
-            _messagingService.Subscribe<SettingsViewModel>(this, Messages.SettingsReloaded, async sender =>
+
+            _messagingService.Subscribe<SettingsViewModel>(this, Messages.SettingsReloaded, sender =>
             {
-                await Refresh();
+                Refresh();
             });
         }
 
@@ -36,12 +35,11 @@ namespace OneSet.Views
             settingsList.SelectedItem = null;
         }
 
-		public async Task Refresh()
-		{
-			//await ViewModel.OnLoad();
-			settingsList.ItemsSource = null;
-			settingsList.ItemsSource = ViewModel.Settings;
-		}
+        public void Refresh()
+        {
+            settingsList.ItemsSource = null;
+            settingsList.ItemsSource = ViewModel.Settings;
+        }
 
         private void SettingsList_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

@@ -15,7 +15,6 @@ namespace OneSet.ViewModels
         #region properties
 
         public int ExerciseId { get; set; }
-        public int? RepsIncrementId { get; set; }
 
         private string _name;
         public string Name
@@ -38,22 +37,14 @@ namespace OneSet.ViewModels
             set { SetProperty(ref _notes, value); }
         }
 
-        public RepsIncrement RepsIncrement
-        {
-            get
-            {
-                var repsIncrement = App.Database.RepsIncrements.FirstOrDefault(x => x.RepsIncrementId == RepsIncrementId);
-                return repsIncrement;
-            }
-        }
-
-        public RoutineDay Mon { get; set; }
-        public RoutineDay Tue { get; set; }
-        public RoutineDay Wed { get; set; }
-        public RoutineDay Thu { get; set; }
-        public RoutineDay Fri { get; set; }
-        public RoutineDay Sat { get; set; }
-        public RoutineDay Sun { get; set; }
+        public List<RoutineDay> Days{ get; set; }
+        public RoutineDay Mon { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 1); } }
+        public RoutineDay Tue { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 2); } }
+        public RoutineDay Wed { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 3); } }
+        public RoutineDay Thu { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 4); } }
+        public RoutineDay Fri { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 5); } }
+        public RoutineDay Sat { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 6); } }
+        public RoutineDay Sun { get { return Days?.FirstOrDefault(x => x.DayOfWeek == 0); } }
 
         public ICommand DeleteCommand { get; set; }
         public ICommand SaveCommand { get; set; }
@@ -86,28 +77,6 @@ namespace OneSet.ViewModels
         }
         
         #region private methods
-        private RoutineDay GetRoutineDay(List<RoutineDay> routine, int dayOfWeek)
-        {
-            return routine.FirstOrDefault(x => x.DayOfWeek == dayOfWeek) ?? new RoutineDay
-            {
-                DayOfWeek = dayOfWeek,
-                ExerciseId = ExerciseId,
-                IsActive = 0,
-                RowNumber = 1
-            };
-        }
-
-		private async Task SaveRoutine()
-		{
-            await _routineDaysRepository.SaveAsync(Mon);
-            await _routineDaysRepository.SaveAsync(Tue);
-            await _routineDaysRepository.SaveAsync(Wed);
-            await _routineDaysRepository.SaveAsync(Thu);
-            await _routineDaysRepository.SaveAsync(Fri);
-            await _routineDaysRepository.SaveAsync(Sat);
-            await _routineDaysRepository.SaveAsync(Sun);
-        }
-        
         private async Task OnDelete () 
 		{
             try
@@ -166,7 +135,13 @@ namespace OneSet.ViewModels
                 }
 
                 ExerciseId = await _exercisesRepository.SaveAsync(exercise);
-                await SaveRoutine();
+                
+                // save routine
+                foreach (var day in Days)
+                {
+                    day.ExerciseId = ExerciseId;
+                    await _routineDaysRepository.SaveAsync(day);
+                }
 
                 _messagingService.Send(this, message, exercise);
                 await App.ShowSuccess(AppResources.ExerciseSaved);
@@ -197,20 +172,29 @@ namespace OneSet.ViewModels
                     Name = exercise.Name;
                     Notes = exercise.Notes;
                     PlateWeight = _units.GetWeight(App.Settings.IsMetric, exercise.PlateWeight);
-                    RepsIncrementId = exercise.RepsIncrementId;
                 }
             }
 
-            var routine = await _routineDaysRepository.GetRoutine(ExerciseId);
-            Mon = GetRoutineDay(routine, 1);
-            Tue = GetRoutineDay(routine, 2);
-            Wed = GetRoutineDay(routine, 3);
-            Thu = GetRoutineDay(routine, 4);
-            Fri = GetRoutineDay(routine, 5);
-            Sat = GetRoutineDay(routine, 6);
-            Sun = GetRoutineDay(routine, 0);
+            // make sure we have all days
+            Days = await _routineDaysRepository.GetRoutine(ExerciseId);
+            for (var i = 0; i <= 6; i++)
+            {
+                var day = Days.FirstOrDefault(x => x.DayOfWeek == i);
+                if (day == null)
+                {
+                    day = new RoutineDay
+                    {
+                        DayOfWeek = i,
+                        ExerciseId = ExerciseId,
+                        IsActive = 0,
+                        RowNumber = 1
+                    };
+                    Days.Add(day);
+                }
+            }
         }
         #endregion
     }
 }
+
 

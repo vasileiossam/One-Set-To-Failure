@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using OneSet.Services;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
@@ -6,10 +6,12 @@ namespace OneSet.Views
 {
 	public partial class RestTimerPage : RestTimerPageXaml
     {
-		private readonly ScreenSizeHandler _screenSizeHandler;
+        #region private variables
+        private readonly ScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
+        #endregion
 
-		public RestTimerPage()
+        public RestTimerPage()
 		{
 			InitializeComponent ();
 
@@ -22,15 +24,14 @@ namespace OneSet.Views
 			}
 		}
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
             BindingContext = ViewModel;
-			ViewModel.ProgressBar = ProgressBar;
         }
 
-		protected override void OnDisappearing()
+        protected override void OnDisappearing()
 		{
 		    ViewModel?.StopTimer ();
 		    base.OnDisappearing();

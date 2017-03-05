@@ -1,4 +1,6 @@
-﻿namespace OneSet.Views
+﻿using OneSet.Abstract;
+
+namespace OneSet.Services
 {
 	public enum Orientations  
 	{
@@ -13,8 +15,8 @@
 		Small,
 	}
 
-	public class ScreenSizeHandler
-	{
+	public class ScreenSizeHandler : IScreenSizeHandler
+    {
 		private double _width;
 		private double _height;
 

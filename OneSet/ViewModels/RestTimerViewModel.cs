@@ -18,60 +18,45 @@ namespace OneSet.ViewModels
     public class RestTimerViewModel : BaseViewModel, INavigationAware
     {
         #region private variables
-        private ISoundService _soundService;
+        private readonly ISoundService _soundService;
+        private double _progressStep;
+        private bool _canSave;
         #endregion
 
         #region properties
-        public ProgressBar ProgressBar { get; set; }
-		protected double _progressStep;
-
-		protected RestTimerStates _state;
+        protected double _progress;
+        public double Progress
+        {
+            get { return _progress; }
+            set { SetProperty(ref _progress, value); }
+        }
+        
+        protected RestTimerStates _state;
 		public RestTimerStates State
-		{
-			get
-			{
-				return _state;
-			}
-			set
-			{
-			    if (_state == value) return;
-			    _state = value;
-			    OnPropertyChanged ("State");
-			}
-		}
+        {
+            get { return _state; }
+            set { SetProperty(ref _state, value); }
+        }
 
-		protected int _totalSeconds;
+        protected int _totalSeconds;
 		public int TotalSeconds
-		{
-			get
-			{
-				return _totalSeconds;
-			}
-			set
-			{
-			    if (_totalSeconds == value) return;
-			    _totalSeconds = value;
-			    Save ();
-			    OnPropertyChanged ("TotalSeconds");
-			}
-		}
+        {
+            get { return _totalSeconds; }
+            set
+            {
+                SetProperty(ref _totalSeconds, value);
+                Save();
+            }
+        }
 
-		protected int _secondsLeft;
+        protected int _secondsLeft;
 		public int SecondsLeft
-		{
-			get
-			{
-				return _secondsLeft;
-			}
-			set
-			{
-			    if (_secondsLeft == value) return;
-			    _secondsLeft = value;
-			    OnPropertyChanged ("SecondsLeft");
-			}
-		}
+        {
+            get { return _secondsLeft; }
+            set { SetProperty(ref _secondsLeft, value); }
+        }
 
-		protected bool? _playSounds;
+        protected bool? _playSounds;
 		public bool? PlaySounds
 		{
 			get { return _playSounds; }
@@ -101,8 +86,6 @@ namespace OneSet.ViewModels
                 Save ();
 			}
 		}
-
-		protected bool _canSave;
 
 		public string MotivationalQuoteImageFile 
 		{
@@ -144,9 +127,9 @@ namespace OneSet.ViewModels
 
             Title = AppResources.RestTimerTitle;
 		
-			StartCommand = new Command (async() => { await OnStartCommand(); });
-			PauseCommand = new Command (async() => { await OnPauseCommand(); });
-			ResetCommand = new Command (async() => { await OnResetCommand(); });
+			StartCommand = new Command (OnStartCommand);
+			PauseCommand = new Command (OnPauseCommand);
+			ResetCommand = new Command (OnResetCommand);
 
             PlaySoundsCommand  = new Command (() => { 
 				PlaySounds = !PlaySounds; 
@@ -187,62 +170,51 @@ namespace OneSet.ViewModels
 				return false;
 			}
 
-			SecondsLeft = SecondsLeft - 1;
+            SecondsLeft = SecondsLeft - 1;
 
-			var progress = ProgressBar.Progress + _progressStep;
-			ProgressBar.Progress = progress >= 1 ? 1 : progress;
+			var progress = Progress + _progressStep;
+		    Progress = progress >= 1 ? 1 : progress;
 
 			App.RestTimerSecondsLeft = SecondsLeft;
 			return State == RestTimerStates.Running;	
 		}
 
-        private async Task OnStartCommand()
-		{	
-			if (State == RestTimerStates.Editing)
-			{
-				SecondsLeft = TotalSeconds;
-				ProgressBar.Progress = 0;
-				_progressStep = GetProgressStep ();
-			}
+        private void OnStartCommand()
+        {
+            if (State == RestTimerStates.Editing)
+            {
+                SecondsLeft = TotalSeconds;
+                Progress = 0;
+                _progressStep = GetProgressStep();
+            }
 
-			State = RestTimerStates.Running;
-			Device.StartTimer(TimeSpan.FromSeconds(1), () => {	return OnTimer(); });
+            State = RestTimerStates.Running;
+            Device.StartTimer(TimeSpan.FromSeconds(1), OnTimer);
+        }
 
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
-		}
-
-		private async Task OnPauseCommand()
+        private void OnPauseCommand()
 		{
 			App.RestTimerSecondsLeft = 0;
 			State = RestTimerStates.Paused;
-
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
 		}
 
-		private async Task OnResetCommand()
+		private void OnResetCommand()
 		{
 			App.RestTimerSecondsLeft = 0;
 			State = RestTimerStates.Paused;
 			SecondsLeft = TotalSeconds;
-			ProgressBar.Progress = 0;
-			_progressStep = GetProgressStep ();
-
-			// following statement will prevent a compiler warning about async method lacking await
-			await Task.FromResult(0);
+			Progress = 0;
+			_progressStep = GetProgressStep();
 		}
 
         private double GetProgressStep()
-		{
-			if (TotalSeconds == 0)
+        {
+            if (TotalSeconds == 0)
 			{
 				return 0;
-			} else
-			{
-				return 1.0 / TotalSeconds;
-			}			
-		}
+			}
+            return 1.0 / TotalSeconds;
+        }
         #endregion
 
         public void StopTimer()
@@ -267,18 +239,20 @@ namespace OneSet.ViewModels
             if (App.RestTimerSecondsLeft > 0)
             {
                 var seconds = App.RestTimerSecondsLeft;
-                await OnResetCommand();
+                OnResetCommand();
                 SecondsLeft = seconds;
-                await OnStartCommand();
+                OnStartCommand();
             }
             else
             {
-                await OnResetCommand();
+                OnResetCommand();
             }
 
             _canSave = true;
 
-            await OnStartCommand();
+            // OnStartCommand();
+
+            await Task.FromResult(0);
         }
         #endregion
     }

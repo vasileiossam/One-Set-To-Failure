@@ -1,30 +1,36 @@
 ﻿using System;
 using OneSet.Abstract;
 using OneSet.Models;
+using OneSet.Services;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-    public partial class ExerciseAnalysis : ExerciseAnalysisXaml, IScreenSizeHandler
-	{
-		private ScreenSizeHandler _screenSizeHandler;
+    public partial class ExerciseAnalysis : ExerciseAnalysisXaml, IScreenRotationAware
+    {
+		private readonly IScreenSizeHandler _screenSizeHandler;
 		private StackOrientation _stackOrientation;
 
 		public ExerciseAnalysis ()
 		{
 			InitializeComponent ();
-			InitScreenSizeHandler ();
+
+		    _screenSizeHandler = new ScreenSizeHandler();
 		}
 
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing ();
-			ViewModel.ExercisesPicker = ExercisesPicker;
+
+            InitScreenSize();
+            ChangeOrientation();
+
+            ViewModel.ExercisesPicker = ExercisesPicker;
 
             BindingContext = ViewModel;
 			ExercisesPicker.SelectedIndex = 0;
-		}
+        }
 
 		private async void OnSelectedIndexChanged(object sender, EventArgs eventArgs)
 		{
@@ -42,35 +48,15 @@ namespace OneSet.Views
 			StatsList.ItemsSource = ViewModel.Stats;
 		}
 
-		#region IScreenSizeHandler
-
-		public void InitScreenSizeHandler()
+        #region IScreenRotationAware
+        public void InitScreenSize()
 		{
-			_screenSizeHandler = new ScreenSizeHandler ();
-
 			_stackOrientation = StackOrientation.Horizontal;
-			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait 
-				&& _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
+
+            if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait && _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
 			{
 				_stackOrientation = StackOrientation.Vertical;
 			}
-		}
-
-		protected override void OnSizeAllocated(double width, double height)
-		{
-			base.OnSizeAllocated (width, height);
-
-		    if (_screenSizeHandler.GetScreenSize() != ScreenSizes.Small) return;
-		    var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
-
-		    if (orientation == Orientations.Landscape)
-		    {
-		        _stackOrientation = StackOrientation.Horizontal;
-		        ChangeOrientation ();				
-		    }
-		    if (orientation != Orientations.Portrait) return;
-		    _stackOrientation = StackOrientation.Vertical;
-		    ChangeOrientation ();
 		}
 
         public void ChangeOrientation()
@@ -86,8 +72,24 @@ namespace OneSet.Views
             StatsList.EndRefresh();
             Refresh();
         }
-
         #endregion
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (_screenSizeHandler.GetScreenSize() != ScreenSizes.Small) return;
+            var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
+
+            if (orientation == Orientations.Landscape)
+            {
+                _stackOrientation = StackOrientation.Horizontal;
+                ChangeOrientation();
+            }
+            if (orientation != Orientations.Portrait) return;
+            _stackOrientation = StackOrientation.Vertical;
+            ChangeOrientation();
+        }
     }
 
     public class ExerciseAnalysisXaml : BasePage<ExerciseAnalysisViewModel>

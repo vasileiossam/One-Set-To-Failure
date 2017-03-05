@@ -43,7 +43,7 @@
         </StackLayout>
 
         <ContentView Padding="0, 0, 0, 8" HorizontalOptions="Fill">
-          <ProgressBar x:Name = "ProgressBar"/>
+          <ProgressBar x:Name = "ProgressBar" Progress="{Binding Progress}"/>
         </ContentView>
 
         <Grid RowSpacing="0">

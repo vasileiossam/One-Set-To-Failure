@@ -15,18 +15,10 @@ namespace OneSet.ViewModels
         #region properties
         private ObservableCollection<ExerciseItem> _exercises;
 		public ObservableCollection<ExerciseItem> Exercises
-		{
-			get
-			{
-				return _exercises;
-			}
-			set
-			{
-			    if (_exercises == value) return;
-			    _exercises = value;
-			    OnPropertyChanged ("Exercises");
-			}
-		}
+        {
+            get { return _exercises; }
+            set { SetProperty(ref _exercises, value); }
+        }
 
         private readonly INavigationService _navigationService;
 

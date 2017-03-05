@@ -1,38 +1,28 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Autofac;
 using OneSet.Abstract;
 using OneSet.Models;
+using OneSet.Services;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 
 namespace OneSet.Views
 {
-	public partial class MainPage : MainPageXaml
+	public partial class MainPage : MainPageXaml, IScreenRotationAware
     {
-		private readonly ScreenSizeHandler _screenSizeHandler;
-		private StackOrientation _stackOrientation;
         private readonly IMessagingService _messagingService;
+        private readonly IScreenSizeHandler _screenSizeHandler;
+        private StackOrientation _stackOrientation;
 
-        public MainPage(IMessagingService messagingService)
+        public MainPage(IMessagingService messagingService, IScreenSizeHandler screenSizeHandler)
 		{
 
             InitializeComponent ();
             _messagingService = messagingService;
-            _screenSizeHandler = new ScreenSizeHandler ();
-
-			_stackOrientation = StackOrientation.Horizontal;
-			if (_screenSizeHandler.GetStartingOrientation () == Orientations.Portrait && _screenSizeHandler.GetScreenSize() == ScreenSizes.Small )
-			{
-				_stackOrientation = StackOrientation.Vertical;
-			}
-
-            _messagingService = messagingService;
+		    _screenSizeHandler = screenSizeHandler;
 
             _messagingService.Subscribe<MainViewModel>(this, Messages.WorkoutsReloaded, sender =>
             {
                 Refresh();
-                ChangeOrientation();
             });
         }
 
@@ -41,81 +31,100 @@ namespace OneSet.Views
             _messagingService.Unsubscribe<MainViewModel>(this, Messages.WorkoutsReloaded);
         }
 
+        #region private methods
+        private void Refresh()
+        {
+            list.ItemsSource = null;
+            list.ItemsSource = ViewModel.Routine;
+            ChangeOrientation();
+        }
+
+        private void OnLeftChevronTapCommand(object sender, EventArgs args)
+        {
+            // Used by the gesture frame
+            ViewModel.ChevronTapCommand.Execute("Left");
+        }
+
+        private void OnRightChevronTapCommand(object sender, EventArgs args)
+        {
+            // Used by the gesture frame
+            ViewModel.ChevronTapCommand.Execute("Right");
+        }
+
+        #endregion
+
+        #region IScreenRotationAware
+        public void InitScreenSize()
+        {
+            _stackOrientation = StackOrientation.Horizontal;
+            if (_screenSizeHandler.GetStartingOrientation() == Orientations.Portrait && _screenSizeHandler.GetScreenSize() == ScreenSizes.Small)
+            {
+                _stackOrientation = StackOrientation.Vertical;
+            }
+        }
+
+        public void ChangeOrientation()
+        {
+            list.BeginRefresh();
+            if (ViewModel.Routine != null)
+            {
+                foreach (var item in ViewModel.Routine)
+                {
+                    item.CellLayoutOrientation = _stackOrientation;
+                }
+            }
+            list.EndRefresh();
+        }
+        #endregion
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            
+            if (_screenSizeHandler.GetScreenSize() == ScreenSizes.Small)
+            {
+                var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
+
+                if (orientation == Orientations.Landscape)
+                {
+                    CurrentDate.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+                    CalendarNotesButton.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button));
+                    NoDataImage.IsVisible = false;
+                    _stackOrientation = StackOrientation.Horizontal;
+                    ChangeOrientation();
+                }
+                if (orientation == Orientations.Portrait)
+                {
+                    CurrentDate.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+                    CalendarNotesButton.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Button));
+                    NoDataImage.IsVisible = true;
+                    _stackOrientation = StackOrientation.Vertical;
+                    ChangeOrientation();
+                }
+            }
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-			BindingContext = ViewModel;
-            list.SelectedItem = null;
+            InitScreenSize();
             ChangeOrientation();
 
-			MainFrame.SwipeLeft += OnLeftChevronTapCommand;
+            BindingContext = ViewModel;
+            list.SelectedItem = null;
+
+            MainFrame.SwipeLeft += OnLeftChevronTapCommand;
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
         }
 
-		private void OnLeftChevronTapCommand(object sender, EventArgs args)
-		{
-			ViewModel.ChevronTapCommand.Execute("Left");
-		}
-
-		private void OnRightChevronTapCommand(object sender, EventArgs args)
-		{
-			ViewModel.ChevronTapCommand.Execute("Right");
-		}
-
         protected override void OnDisappearing()
         {
-			MainFrame.SwipeLeft -= OnLeftChevronTapCommand;
-			MainFrame.SwipeRight -= OnRightChevronTapCommand;			
+            MainFrame.SwipeLeft -= OnLeftChevronTapCommand;
+            MainFrame.SwipeRight -= OnRightChevronTapCommand;
             base.OnDisappearing();
         }
-
-		public void Refresh()
-		{
-            list.ItemsSource = null;
-            list.ItemsSource = ViewModel.Routine;
-		}
-
-		protected override void OnSizeAllocated(double width, double height)
-		{
-			base.OnSizeAllocated (width, height);
-
-
-			if (_screenSizeHandler.GetScreenSize () == ScreenSizes.Small)
-			{
-				var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
-
-				if (orientation == Orientations.Landscape)
-				{
-					CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Label));					
-					CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Large, typeof(Button));		
-					NoDataImage.IsVisible = false;
-					_stackOrientation = StackOrientation.Horizontal;
-					ChangeOrientation();				
-				}
-				if (orientation == Orientations.Portrait)
-				{
-					CurrentDate.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label));					
-					CalendarNotesButton.FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Button));					
-					NoDataImage.IsVisible = true;		
-					_stackOrientation = StackOrientation.Vertical;
-					ChangeOrientation();
-				}
-			}
-		}
-
-    	public void ChangeOrientation()
-		{
-            list.BeginRefresh ();
-			if (ViewModel.Routine != null)
-			{
-				foreach (var item in ViewModel.Routine)
-				{
-					item.CellLayoutOrientation = _stackOrientation;
-				}
-			}
-            list.EndRefresh ();
-		}
+    
 	}
 
     public class MainPageXaml : BasePage<MainViewModel>

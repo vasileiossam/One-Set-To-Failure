@@ -38,6 +38,7 @@
     <Compile Include="Abstract\INavigationAware.cs" />
     <Compile Include="Abstract\INavigationService.cs" />
     <Compile Include="Abstract\IDialogService.cs" />
+    <Compile Include="Abstract\IScreenRotationAware.cs" />
     <Compile Include="Abstract\IStatistics.cs" />
     <Compile Include="Abstract\IUnitsService.cs" />
     <Compile Include="Abstract\IWorkoutRules.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\TrophiesToStringConverter.cs" />
     <Compile Include="Models\ImagePack.cs" />
-    <Compile Include="Views\ScreenSizeHandler.cs" />
+    <Compile Include="Services\ScreenSizeHandler.cs" />
     <Compile Include="Abstract\ITextStorage.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="Views\AnalysisPage.xaml.cs">

@@ -108,6 +108,7 @@ namespace OneSet.ViewModels
             _exercisesRepository = exercisesRepository;
             _calendarRepository = calendarRepository;
             _routineDaysRepository = routineDaysRepository;
+
             Title = "One Set To Fatigue";
 
             ChevronTapCommand = new Command(async (s) => { await OnChevronTapCommand(s); });
@@ -127,11 +128,26 @@ namespace OneSet.ViewModels
                 item.Workout = null;
                 item.Workout = workout;
             });
+            _messagingService.Subscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded, async (sender, e) =>
+            {
+                await Reload();
+            });
+            _messagingService.Subscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemChanged, async (sender, e) =>
+            {
+                await Reload();
+            });
+            _messagingService.Subscribe<ExerciseDetailsViewModel>(this, Messages.ItemDeleted, async sender =>
+            {
+                await Reload();
+            });
         }
 
         ~MainViewModel()
         {
             _messagingService.Unsubscribe<WorkoutDetailsViewModel, Workout>(this, Messages.ItemChanged);
+            _messagingService.Unsubscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded);
+            _messagingService.Unsubscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemChanged);
+            _messagingService.Unsubscribe<ExerciseDetailsViewModel>(this, Messages.ItemDeleted);
         }
         
         #region commands
@@ -140,18 +156,18 @@ namespace OneSet.ViewModels
             if ((string)s == "Left")
             {
                 await Load(CurrentDate.AddDays(-1));
-                _messagingService.Send(this, Messages.WorkoutsReloaded);
             }
             else
             {
                 await Load(CurrentDate.AddDays(1));
-                _messagingService.Send(this, Messages.WorkoutsReloaded);
             }
+
+            _messagingService.Send(this, Messages.WorkoutsReloaded);
         }
 
         private async Task OnCalendarNotesCommand()
         {
-            var parameters = new NavigationParameters() { { "CurrentDate", CurrentDate } };
+            var parameters = new NavigationParameters { { "CurrentDate", CurrentDate } };
             await _navigationService.NavigateTo<CalendarNotesViewModel>(parameters);
         }
 
@@ -192,6 +208,12 @@ namespace OneSet.ViewModels
 
             await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
         }
+
+        private async Task Reload()
+        {
+            await Load(CurrentDate);
+            _messagingService.Send(this, Messages.WorkoutsReloaded);
+        }
         #endregion
 
         #region private methods
@@ -204,13 +226,16 @@ namespace OneSet.ViewModels
 
             foreach (var day in list)
             {
+                // we shouldn't have days without an Exercise but we might have them because of an older fixed bug
+                if (day.ExerciseId == 0) continue;
+
                 var vm = new RoutineItem
                 {
                     RoutineDay = day,
                     Exercise = exercises.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
                     Workout = workouts.FirstOrDefault(x => x.ExerciseId == day.ExerciseId),
                 };
-
+                
                 var previousWorkout = await _workoutsRepository.GetPreviousWorkout(vm.Exercise.ExerciseId, date);
                 if (previousWorkout != null)
                 {
