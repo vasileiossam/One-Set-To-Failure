@@ -29,11 +29,7 @@ namespace OneSet.Data
 		public async Task<string> GetCalendarNotes (DateTime date)
 		{
 			var calendar = await FindAsync (date);
-			if (calendar == null)
-			{
-				return string.Empty;
-			}
-			return calendar.Notes;
+			return calendar == null ? string.Empty : calendar.Notes;
 		}
 	}
 }

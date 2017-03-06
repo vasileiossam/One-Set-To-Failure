@@ -13,11 +13,9 @@ using OneSet.Models;
 
 namespace OneSet.ViewModels
 {
-	public class ChartsViewModel : BaseViewModel, INavigationAware
+	public class ChartsViewModel : BaseViewModel
     {
         #region properties
-        public StackLayout OxyPlotsLayout { get; set; }
-
 		private bool _noChartsDataVisible;
 		public bool NoChartsDataVisible
         {
@@ -31,22 +29,41 @@ namespace OneSet.ViewModels
             get { return _chartsPinchToZoomVisible; }
             set { SetProperty(ref _chartsPinchToZoomVisible, value); }
         }
-        #endregion
 
-        #region private variables
-        private List<Exercise> _exercises;
-        private List<Workout> _workouts;
-        private readonly IWorkoutsRepository _workoutsRepository;
-        private readonly IExercisesRepository _exercisesRepository;
-        #endregion
-
-        public ChartsViewModel (IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository)
+        private int _pickerSelectedIndex;
+        public int PickerSelectedIndex
         {
-            _workoutsRepository = workoutsRepository;
-            _exercisesRepository = exercisesRepository;
+            get { return _pickerSelectedIndex; }
+            set
+            {
+                SetProperty(ref _pickerSelectedIndex, value);
+
+                if (_pickerSelectedIndex == 0)
+                {
+                    BuildWeightPerWorkout();
+                }
+                if (_pickerSelectedIndex == 1)
+                {
+                    BuildRepsPerWorkout();
+                }
+            }
+        }
+
+        public List<Exercise> Exercises { get; set; }
+        public List<Workout> Workouts { get; set; }
+
+        #endregion
+
+        private readonly IMessagingService _messagingService;
+
+        public ChartsViewModel (IMessagingService messagingService)
+        {
+            _messagingService = messagingService;
+
             NoChartsDataVisible = false;
-			ChartsPinchToZoomVisible = false;			
-		}
+			ChartsPinchToZoomVisible = false;
+            PickerSelectedIndex = -1;
+        }
 
         #region private methods
         private DateTimeAxis GetDateTimeAxis(int count)
@@ -61,8 +78,7 @@ namespace OneSet.ViewModels
 		        MinorIntervalType = DateTimeIntervalType.Days,
 		        MinorStep = 1
 		    };
-
-
+            
 		    // when one workout it display a black mark in the begining of the axis; like minor and major to print in the same area
 			if (count == 1)
 			{
@@ -78,14 +94,40 @@ namespace OneSet.ViewModels
 			return dateAxis;
 		}
 
+        private PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
+        {
+            var plotModel = new PlotModel
+            {
+                Title = item.Key.Name,
+                Background = OxyColors.LightYellow,
+                PlotAreaBackground = OxyColors.LightGray,
+            };
+
+            var series = new LineSeries { ItemsSource = item.Value };
+            plotModel.Series.Add(series);
+
+            var dateAxis = GetDateTimeAxis(item.Value.Count);
+            plotModel.Axes.Add(dateAxis);
+
+            var valueAxis = new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                MinimumPadding = 0,
+                Title = "Weight"
+            };
+            plotModel.Axes.Add(valueAxis);
+
+            return plotModel;
+        }
+        
         private void BuildWeightPerWorkout ()
 		{
 			var data = new Dictionary<Exercise, List<DataPoint>> ();
 
 			// prepare data
-			foreach (var workout in _workouts)
+			foreach (var workout in Workouts)
 			{
-				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
+				var exercise = Exercises.FirstOrDefault (x => x.ExerciseId == workout.ExerciseId);
 				if (exercise == null)
 					continue;
 
@@ -102,26 +144,28 @@ namespace OneSet.ViewModels
 				);
 			}
 
-			// create charts
-			foreach(var item in data)
+            // create charts
+            var list = new List<PlotView>();
+            foreach (var item in data)
 			{
 				var plotModel = GetWeightPerWorkoutModel (item);
-				var plotView = new PlotView ()
+				var plotView = new PlotView
 				{
 					HeightRequest = 300,
 					Model = plotModel,
 					VerticalOptions = LayoutOptions.Fill,
 					HorizontalOptions = LayoutOptions.Fill
 				};
+			    list.Add(plotView);
+			}
 
-				OxyPlotsLayout.Children.Add(plotView);		
-			}			
-		}
+            _messagingService.Send(this, Messages.ChartBuilt, list);
+        }
 
-		private void BuildRepsPerWorkout ()
+        private void BuildRepsPerWorkout ()
 		{
 			var data = 
-				from w in _workouts
+				from w in Workouts
 				group w by w.ExerciseId into workoutsPerExercise
 				from nestedGroup in
 					(
@@ -130,16 +174,17 @@ namespace OneSet.ViewModels
 					)
 				group nestedGroup by workoutsPerExercise.Key;
 
-			foreach (var exerciseGroup in data)
+            var list = new List<PlotView>();
+            foreach (var exerciseGroup in data)
 			{
-				var exercise = _exercises.FirstOrDefault (x => x.ExerciseId == exerciseGroup.Key);
+				var exercise = Exercises.FirstOrDefault (x => x.ExerciseId == exerciseGroup.Key);
 				var plotModel = new PlotModel {
 					Title = exercise.Name,
 					Background = OxyColors.LightYellow,
 					PlotAreaBackground = OxyColors.LightGray,
 				};
 
-				int count = 0;
+				var count = 0;
 				foreach (var weightGroup in exerciseGroup)
 				{
 				    var series = new LineSeries
@@ -178,75 +223,19 @@ namespace OneSet.ViewModels
 						
 				};
 
-				OxyPlotsLayout.Children.Add(plotView);		
-			}
-		}
+                list.Add(plotView); 
+            }
+
+            _messagingService.Send(this, Messages.ChartBuilt, list);
+        }
         #endregion
 
-        #region INavigationAware
-        public async Task OnNavigatedFrom(NavigationParameters parameters)
+        public void Load()
         {
-            await Task.FromResult(0);
-        }
-
-        public async Task OnNavigatedTo(NavigationParameters parameters)
-        {
-            _workouts = await _workoutsRepository.AllAsync();
-            _exercises = await _exercisesRepository.AllAsync();
-
-            NoChartsDataVisible = _workouts.Count == 0;
+            NoChartsDataVisible = Workouts.Count == 0;
             ChartsPinchToZoomVisible = !NoChartsDataVisible;
 
-            foreach (var workout in _workouts)
-            {
-                var exercise = _exercises.FirstOrDefault(x => x.ExerciseId == workout.ExerciseId);
-                //workout.Exercise = exercise;
-            }
-        }
-        #endregion
-
-        public PlotModel GetWeightPerWorkoutModel(KeyValuePair<Exercise, List<DataPoint>> item)
-        {
-            //await Task.Run (() =>
-            //{
-            // create plot model
-            var plotModel = new PlotModel
-            {
-                Title = item.Key.Name,
-                Background = OxyColors.LightYellow,
-                PlotAreaBackground = OxyColors.LightGray,
-            };
-
-            var series = new LineSeries { ItemsSource = item.Value };
-            plotModel.Series.Add(series);
-
-            var dateAxis = GetDateTimeAxis(item.Value.Count);
-            plotModel.Axes.Add(dateAxis);
-
-            var valueAxis = new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                MinimumPadding = 0,
-                Title = "Weight"
-            };
-            plotModel.Axes.Add(valueAxis);
-
-            return plotModel;
-            //});
-        }
-
-        public async Task SelectChart(int selectedChartIndex)
-        {
-            switch (selectedChartIndex)
-            {
-                case 0:
-                    BuildWeightPerWorkout();
-                    break;
-
-                case 1:
-                    BuildRepsPerWorkout();
-                    break;
-            }
+            PickerSelectedIndex = 0;
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using OneSet.Abstract;
-using OneSet.ViewModels;
 using Xamarin.Forms;
 
 namespace OneSet.Models
@@ -12,7 +9,6 @@ namespace OneSet.Models
         #region private variables
 		private bool _terminated;
         private readonly ISoundService _soundService;
-        public int SecondsLeft { get; set; }
         #endregion
 
         #region properties
@@ -30,6 +26,7 @@ namespace OneSet.Models
             set { SetProperty(ref _icon, value); }
         }
 
+        public int SecondsLeft { get; set; }
         public bool IsRunning { get; set; }
         #endregion
         

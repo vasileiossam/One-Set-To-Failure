@@ -22,13 +22,15 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private variables
-        private readonly ICalendarRepository _repo;
         private readonly INavigationService _navigationService;
+        private readonly IMessagingService _messagingService;
+        private readonly ICalendarRepository _repo;
         #endregion
 
-        public CalendarNotesViewModel(INavigationService navigationService, ICalendarRepository repo)
+        public CalendarNotesViewModel(INavigationService navigationService, IMessagingService messagingService, ICalendarRepository repo)
         {
             _navigationService = navigationService;
+            _messagingService = messagingService;
             _repo = repo;
 
             Title = AppResources.CommentTitle;
@@ -39,7 +41,10 @@ namespace OneSet.ViewModels
         private  async Task OnSave() 
 		{
 		    await _repo.SaveAsync(Calendar);
-		    await _navigationService.PopAsync();
+
+            _messagingService.Send(this, Messages.ItemChanged);
+
+            await _navigationService.PopAsync();
 		}
 
         #region INavigationAware
@@ -50,9 +55,9 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("Date"))
+            if (parameters.ContainsKey("CurrentDate"))
             {
-                var date = (DateTime) parameters["Date"];
+                var date = (DateTime) parameters["CurrentDate"];
                 Calendar = await _repo.FindAsync(date) ?? new Calendar() { Date = date };
             }
         }

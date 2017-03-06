@@ -7,5 +7,6 @@
         public static string ItemChanged = "ItemChanged";
         public static string ItemDeleted = "ItemDeleted";
         public static string ItemAdded = "ItemAdded";
+        public static string ChartBuilt = "ChartBuilt";
     }
 }

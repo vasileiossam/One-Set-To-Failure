@@ -20,7 +20,7 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
           <Label Text="{i18n:Translate ChartsTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
 
-          <Picker x:Name="ChartsPicker" Title="{i18n:Translate ChartsTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged">
+          <Picker Title="{i18n:Translate ChartsTitle}" HorizontalOptions="FillAndExpand" SelectedIndex="{Binding PickerSelectedIndex, Mode=TwoWay}">
             <Picker.Items>
               <x:String>Weight per workout</x:String>
               <x:String>Reps per workout</x:String>

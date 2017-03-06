@@ -153,18 +153,17 @@
     <Compile Include="Models\ImagePack.cs" />
     <Compile Include="Services\ScreenSizeHandler.cs" />
     <Compile Include="Abstract\ITextStorage.cs" />
-    <Compile Include="ViewModels\AnalysisViewModel.cs" />
-    <Compile Include="Views\AnalysisPage.xaml.cs">
-      <DependentUpon>AnalysisPage.xaml</DependentUpon>
+    <Compile Include="Views\AnalysisTabbedPage.xaml.cs">
+      <DependentUpon>AnalysisTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ChartsViewModel.cs" />
     <Compile Include="Views\ChartsPage.xaml.cs">
       <DependentUpon>ChartsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExerciseAnalysis.xaml.cs">
-      <DependentUpon>ExerciseAnalysis.xaml</DependentUpon>
+    <Compile Include="Views\ExerciseStatsPage.xaml.cs">
+      <DependentUpon>ExerciseStatsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ExerciseAnalysisViewModel.cs" />
+    <Compile Include="ViewModels\ExerciseStatsViewModel.cs" />
     <Compile Include="Abstract\IScreenSizeHandler.cs" />
     <Compile Include="Models\RestTimerItem.cs" />
     <Compile Include="Abstract\IDatePickerDialog.cs" />
@@ -270,14 +269,15 @@
     <EmbeddedResource Include="Views\RestTimerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AnalysisPage.xaml">
+    <EmbeddedResource Include="Views\AnalysisTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ChartsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ExerciseAnalysis.xaml">
+    <EmbeddedResource Include="Views\ExerciseStatsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resx\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

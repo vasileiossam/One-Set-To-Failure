@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<local:ExerciseAnalysisXaml
+<local:ExerciseStatsPageXaml
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:local="clr-namespace:OneSet.Views"
 	xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
-	x:Class="OneSet.Views.ExerciseAnalysis"
+	x:Class="OneSet.Views.ExerciseStatsPage"
 	>
 
-  <local:ExerciseAnalysisXaml.Padding>
+  <local:ExerciseStatsPageXaml.Padding>
     <OnPlatform x:TypeArguments="Thickness"
                 iOS="5, 20, 5, 0"
                 Android="5, 0, 5, 0"
                 WinPhone="5, 0, 5, 0" />
-  </local:ExerciseAnalysisXaml.Padding>
+  </local:ExerciseStatsPageXaml.Padding>
 
-  <local:ExerciseAnalysisXaml.Content>
+  <local:ExerciseStatsPageXaml.Content>
     <ScrollView>
       <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" Padding="0, 10, 0, 0" >
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
           <Label Text="{i18n:Translate ExercisesTitle}" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource secondaryText}"/>
-          <Picker x:Name="ExercisesPicker" Title="{i18n:Translate ExercisesTitle}" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged"/>
+          <Picker x:Name="ExercisesPicker" Title="{i18n:Translate ExercisesTitle}" HorizontalOptions="FillAndExpand" SelectedIndex="{Binding PickerSelectedIndex, Mode=TwoWay}"/>
         </StackLayout>
 
-        <ListView x:Name="StatsList" HasUnevenRows="true">
+        <ListView x:Name="StatsList" ItemsSource="{Binding Stats}" HasUnevenRows="true">
           <ListView.ItemTemplate>
             <DataTemplate>
               <ViewCell>
@@ -39,5 +39,5 @@
 
       </StackLayout>
     </ScrollView>
-  </local:ExerciseAnalysisXaml.Content>
-  </local:ExerciseAnalysisXaml>
+  </local:ExerciseStatsPageXaml.Content>
+  </local:ExerciseStatsPageXaml>

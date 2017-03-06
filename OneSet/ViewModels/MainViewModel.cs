@@ -26,7 +26,11 @@ namespace OneSet.ViewModels
         public string CalendarNotes
         {
             get { return _calendarNotes; }
-            set { SetProperty(ref _calendarNotes, value); }
+            set
+            {
+                SetProperty(ref _calendarNotes, value);
+                OnPropertyChanged("CalendarNotesVisible");
+            }
         }
 
         private bool _calendarNotesVisible;
@@ -130,6 +134,7 @@ namespace OneSet.ViewModels
                 item.Workout = null;
                 item.Workout = workout;
             });
+
             _messagingService.Subscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded, async (sender, e) =>
             {
                 await Reload();
@@ -142,6 +147,11 @@ namespace OneSet.ViewModels
             {
                 await Reload();
             });
+
+            _messagingService.Subscribe<CalendarNotesViewModel>(this, Messages.ItemChanged, async sender =>
+            {
+                await LoadNotes();
+            });
         }
 
         ~MainViewModel()
@@ -150,6 +160,7 @@ namespace OneSet.ViewModels
             _messagingService.Unsubscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded);
             _messagingService.Unsubscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemChanged);
             _messagingService.Unsubscribe<ExerciseDetailsViewModel>(this, Messages.ItemDeleted);
+            _messagingService.Unsubscribe<CalendarNotesViewModel>(this, Messages.ItemChanged);
         }
         
         #region commands
@@ -175,7 +186,7 @@ namespace OneSet.ViewModels
 
         private async Task OnAnalysisCommand()
         {
-            var page = _componentContext.Resolve<AnalysisPage>();
+            var page = _componentContext.Resolve<AnalysisTabbedPage>();
             await _navigationService.PushAsync(page);
         }
 
@@ -257,11 +268,10 @@ namespace OneSet.ViewModels
             return collection;
         }
 
-        private async Task Load(DateTime date)
+        private async Task LoadNotes()
         {
-            CurrentDate = date;
-
             CalendarNotes = await _calendarRepository.GetCalendarNotes(_currentDate);
+
             if (CalendarNotes != null)
             {
                 CalendarNotes = CalendarNotes.Trim();
@@ -278,9 +288,17 @@ namespace OneSet.ViewModels
                 }
             }
 
+            CalendarNotesVisible = !string.IsNullOrEmpty(CalendarNotes);
+        }
+
+        private async Task Load(DateTime date)
+        {
+            CurrentDate = date;
+
+            await LoadNotes();
+
             Routine = await GetRoutine(_currentDate);
 
-            CalendarNotesVisible = !string.IsNullOrEmpty(CalendarNotes);
             ListVisible = Routine.Count > 0;
             NoDataVisible = !ListVisible;
 
