@@ -45,6 +45,7 @@
     <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Behaviors\ListViewSelectedItemBehavior.cs" />
+    <Compile Include="Controls\NoCapsButton.cs" />
     <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Converters\IntToBoolConverter.cs" />
     <Compile Include="Extensions\PropertyInfoExtensions.cs" />

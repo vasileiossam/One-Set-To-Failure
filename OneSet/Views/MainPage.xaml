@@ -54,7 +54,7 @@ Title="{Binding Title}">
 
         <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 0, 0, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Spacing="0">
           <Button BackgroundColor="Transparent" Image="drawable-hdpi/ic_fa_comment_o.png"  Command="{Binding CalendarNotesCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
-          <Button x:Name="CalendarNotesButton" BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="{StaticResource secondaryText}" />
+          <controls:NoCapsButton x:Name="CalendarNotesButton" BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="{StaticResource secondaryText}" />
         </StackLayout>
 
         <!-- No data -->
