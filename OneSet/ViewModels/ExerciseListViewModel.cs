@@ -17,28 +17,19 @@ namespace OneSet.ViewModels
 		public ObservableCollection<ExerciseItem> Exercises
         {
             get { return _exercises; }
-            set { SetProperty(ref _exercises, value); }
+		    set
+		    {
+		        SetProperty(ref _exercises, value);
+		        UpdateVisible();
+		    }
         }
 
-        private readonly INavigationService _navigationService;
-
-        protected bool _listVisible;
-		public bool ListVisible
-        {
-            get { return _listVisible; }
-            set { SetProperty(ref _listVisible, value); }
-        }
-
-        protected bool _noDataVisible;
-		public bool NoDataVisible
-        {
-            get { return _noDataVisible; }
-            set { SetProperty(ref _noDataVisible, value); }
-        }
+		public bool ListVisible => Exercises.Count > 0;
+        public bool NoDataVisible => !ListVisible;
         #endregion
 
         #region private variables
-        private readonly IComponentContext _componentContext;
+        private readonly INavigationService _navigationService;
         private readonly IExercisesRepository _exercisesRepository;
         private readonly IMessagingService _messagingService;
         #endregion
@@ -48,9 +39,8 @@ namespace OneSet.ViewModels
         public ICommand AddExerciseCommand { get; }
         #endregion
 
-        public ExerciseListViewModel (IComponentContext componentContext, INavigationService navigationService, IMessagingService messagingService, IExercisesRepository exercisesRepository)
+        public ExerciseListViewModel (INavigationService navigationService, IMessagingService messagingService, IExercisesRepository exercisesRepository)
         {
-            _componentContext = componentContext;
             _navigationService = navigationService;
             _messagingService = messagingService;
             _exercisesRepository = exercisesRepository;
@@ -67,6 +57,7 @@ namespace OneSet.ViewModels
                     TrainingDays = await _exercisesRepository.GetTrainingDays(e)
                 };
                 Exercises.Add(item);
+                UpdateVisible();
             });
             _messagingService.Subscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemChanged, async (sender, e) =>
             {
@@ -80,6 +71,7 @@ namespace OneSet.ViewModels
             {
                 var item = Exercises.FirstOrDefault(x => x.Exercise.ExerciseId == sender.ExerciseId);
                 Exercises.Remove(item);
+                UpdateVisible();
             });
         }
 
@@ -121,6 +113,12 @@ namespace OneSet.ViewModels
             };
             await _navigationService.NavigateTo<ExerciseDetailsViewModel>(parameters);
         }
+
+        private void UpdateVisible()
+        {
+            OnPropertyChanged("ListVisible");
+            OnPropertyChanged("NoDataVisible");
+        }
         #endregion
 
         #region INavigationAware
@@ -132,8 +130,6 @@ namespace OneSet.ViewModels
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
             Exercises = await GetExercises();
-            ListVisible = Exercises.Count > 0;
-            NoDataVisible = !ListVisible;
         }
         #endregion
     }
