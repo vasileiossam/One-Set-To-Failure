@@ -152,6 +152,11 @@ namespace OneSet.ViewModels
             {
                 await LoadNotes();
             });
+
+            _messagingService.Subscribe<SettingsViewModel>(this, Messages.WorkoutDataCleared, async sender =>
+            {
+                await Reload();
+            });
         }
 
         ~MainViewModel()
@@ -161,8 +166,10 @@ namespace OneSet.ViewModels
             _messagingService.Unsubscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemChanged);
             _messagingService.Unsubscribe<ExerciseDetailsViewModel>(this, Messages.ItemDeleted);
             _messagingService.Unsubscribe<CalendarNotesViewModel>(this, Messages.ItemChanged);
+            _messagingService.Unsubscribe<SettingsViewModel>(this, Messages.WorkoutDataCleared);
+
         }
-        
+
         #region commands
         private async Task OnChevronTapCommand(object s)
         {

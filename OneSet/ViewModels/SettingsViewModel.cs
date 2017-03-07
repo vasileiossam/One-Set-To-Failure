@@ -288,6 +288,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as AlertPreference;
                     await App.Database.ClearWorkoutData();
+                    _messagingService.Send(this, Messages.WorkoutDataCleared);
                     if (preference != null) await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
                 }
             });

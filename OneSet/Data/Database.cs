@@ -83,7 +83,8 @@ namespace OneSet.Data
 
 		public async Task ClearWorkoutData()
 		{
-			await _connection.ExecuteAsync ("DELETE FROM Workouts");
+            await _connection.ExecuteAsync("DELETE FROM Calendar");
+            await _connection.ExecuteAsync("DELETE FROM Workouts");
 		}
 
 		public async Task LoadLifeFitnessData()
