@@ -8,7 +8,7 @@ namespace OneSet.Data
 {
 	public class Database 
 	{
-		private static readonly AsyncLock Mutex = new AsyncLock ();
+		//private static readonly AsyncLock Mutex = new AsyncLock ();
 		private readonly SQLiteAsyncConnection _connection;
 
 	    private List<RepsIncrement> _repsIncrements;
@@ -49,39 +49,24 @@ namespace OneSet.Data
             new ImagePack {ImagePackId = 2, Title = "20 Inspirational and Motivational Quotes"}
         });
 
-	    /// <summary>
-	    /// if the database doesn't exist, it will create the database and all the tables.
-	    /// </summary>
 	    public Database(SQLiteAsyncConnection connection)
 		{
 			_connection = connection;
-			CreateDatabaseAsync ();
+		    CreateTables();
 		}
 
-		public async Task CreateDatabaseAsync ()
+        /// <summary>
+        /// Create tables if not exist
+        /// </summary>
+        private void CreateTables()
 		{
-			try
-			{
-				using (await Mutex.LockAsync ().ConfigureAwait (false)) 
-				{
-					//await _connection.DropTableAsync<Exercise> ().ConfigureAwait (false);
-					//await _connection.DropTableAsync<RoutineDay> ().ConfigureAwait (false);
-					//await _connection.DropTableAsync<Workout> ().ConfigureAwait (false);
-					//await _connection.DropTableAsync<Calendar> ().ConfigureAwait (false);
+            _connection.CreateTableAsync<Exercise>().Wait();
+            _connection.CreateTableAsync<RoutineDay>().Wait();
+            _connection.CreateTableAsync<Workout>().Wait();
+            _connection.CreateTableAsync<Calendar>().Wait();
+        }
 
-					await _connection.CreateTableAsync<Exercise> ().ConfigureAwait (false);
-					await _connection.CreateTableAsync<RoutineDay> ().ConfigureAwait (false);
-					await _connection.CreateTableAsync<Workout> ().ConfigureAwait (false);
-					await _connection.CreateTableAsync<Calendar> ().ConfigureAwait (false);
-				}
-			}
-			catch(Exception ex)
-			{
-				App.ShowErrorPage (this, ex);
-			}
-		}
-
-		public async Task ClearWorkoutData()
+        public async Task ClearWorkoutData()
 		{
             await _connection.ExecuteAsync("DELETE FROM Calendar");
             await _connection.ExecuteAsync("DELETE FROM Workouts");

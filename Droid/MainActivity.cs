@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -41,7 +42,6 @@ namespace OneSet.Droid
 
             var bootstrapper = new Bootstrapper();
             App.Container = bootstrapper.CreateContainer();
-            App.Database = App.Container.Resolve<Database>();
 
             LoadApplication(new App());
 		}
