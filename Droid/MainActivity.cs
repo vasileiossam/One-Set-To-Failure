@@ -11,7 +11,7 @@ using OneSet.Data;
 namespace OneSet.Droid
 {
 	[Activity (
-        Label = "One Set To Fatigue",
+        Label = "One Set To Failure",
         Icon = "@drawable/icon",
         Theme = "@style/MyTheme",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]

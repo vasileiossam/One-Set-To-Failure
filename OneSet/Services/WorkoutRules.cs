@@ -40,7 +40,6 @@ namespace OneSet.Services
 
         private async Task<bool> CanCalculateTarget(int exerciseId)
         {
-			// TODO when I'll implement the settings in the exercise level I have to replace the WorkoutCount with workout.Exercise.RepsIncrement.WorkoutCount 
 			var workoutCount = App.Settings.RepsIncrement.WorkoutCount; 
 
             // target is calculated in every workout
@@ -60,7 +59,6 @@ namespace OneSet.Services
             int targetReps;
             double targetWeight;
 
-			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
 			var minReps = App.Settings.MinReps; 
 			var maxReps = App.Settings.MaxReps;
 
@@ -97,9 +95,7 @@ namespace OneSet.Services
                     // stay in same weight but increase Reps
                     else
                     {
-						// TODO when I'll implement the settings in the exercise level I have to replace the increment with workout.Exercise.RepsIncrement.Increment
 						targetReps = previousWorkout.Reps + App.Settings.RepsIncrement.Increment;
-					    
                         targetWeight = previousWorkout.Weight;
                     }
                 }
@@ -114,7 +110,6 @@ namespace OneSet.Services
 
 		public int GetTrophies(Workout workout)
 		{
-			// TODO when I'll implement the settings in the exercise level I have to replace the MinReps with (int) workout.Exercise.MinReps; 
 			var minReps = App.Settings.MinReps;
 
 		    // we need at least one previous workout to start collecting trophies

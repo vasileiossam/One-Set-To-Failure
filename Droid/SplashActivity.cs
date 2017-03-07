@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OneSet.Droid
 {
 	[Activity(
-        Label = "One Set To Fatigue", 
+        Label = "One Set To Failure", 
         Icon = "@drawable/icon", 
         Theme = "@style/MyTheme.Splash", 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 

@@ -15,7 +15,7 @@ namespace OneSet.ViewModels
         public AboutViewModel()
         {
 			Title = AppResources.AboutTitle;
-			AppTitle = "One Set To Fatigue";
+			AppTitle = "One Set To Failure";
 			Version = App.Version;
 			Author = "Vas";
 			SupportEmail = "vas@samaltanos.com";

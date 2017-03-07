@@ -114,7 +114,7 @@ namespace OneSet.ViewModels
             _calendarRepository = calendarRepository;
             _routineDaysRepository = routineDaysRepository;
 
-            Title = "One Set To Fatigue";
+            Title = "One Set To Failure";
 
             ChevronTapCommand = new Command(async (s) => { await OnChevronTapCommand(s); });
             CalendarNotesCommand = new Command(async () => { await OnCalendarNotesCommand(); });

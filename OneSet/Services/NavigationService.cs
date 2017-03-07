@@ -91,7 +91,7 @@ namespace OneSet.Services
 
         public async Task OnNavigateFrom()
         {
-            // TODO implement
+            // TODO implement OnNavigateFrom
         }
 
         private Page GetPage<T>()
