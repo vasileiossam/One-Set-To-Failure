@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using OneSet.Abstract;
-using OneSet.Converters;
 using OneSet.Models;
 using SQLite;
-using Xamarin.Forms;
 
 namespace OneSet.Data
 {
