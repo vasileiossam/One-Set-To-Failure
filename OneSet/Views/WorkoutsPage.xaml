@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<local:WorkoutsPageXaml xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+xmlns:local="clr-namespace:OneSet.Views"
+xmlns:controls="clr-namespace:OneSet.Controls;assembly=OneSet"
+xmlns:i18n="clr-namespace:OneSet.Localization;assembly=OneSet"
+xmlns:converters="clr-namespace:OneSet.Converters;assembly=OneSet"
+xmlns:behaviors="clr-namespace:OneSet.Behaviors;assembly=OneSet"
+x:Class="OneSet.Views.WorkoutsPage"
+Title="{Binding Title}">
+
+  <local:WorkoutsPageXaml.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="0, 0, 0, 0"
+                WinPhone="5, 0, 5, 0" />
+    </local:WorkoutsPageXaml.Padding>
+
+  <local:WorkoutsPageXaml.Resources>
+    <ResourceDictionary>
+      <converters:DateTimeToStringConverter x:Key="DateConverter" />
+      <converters:WeightMetricToImperialConverter x:Key="WeightConverter" />
+      <converters:IntToStringConverter x:Key="IntToStringConverter" />
+      <converters:TrophiesToStringConverter x:Key="TrophiesToStringConverter" />
+      <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+    </ResourceDictionary>
+  </local:WorkoutsPageXaml.Resources>
+
+  <local:WorkoutsPageXaml.ToolbarItems>
+    <ToolbarItem Text="{Binding RestTimerItem.Text}" Icon="{Binding RestTimerItem.Icon}" Order="Primary" Command="{Binding RestTimerCommand}" Priority="0"/>
+    <ToolbarItem Text="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>
+    <ToolbarItem Text="{i18n:Translate GotoDateTitle}" Order="Secondary" Command="{Binding GotoDateCommand}" Priority="1"/>
+  </local:WorkoutsPageXaml.ToolbarItems>
+
+  <local:WorkoutsPageXaml.Content>
+    <controls:GestureFrame x:Name="MainFrame" Padding="10, 10, 10, 10" >
+
+      <StackLayout Orientation="Vertical">
+
+        <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
+          <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
+          <Label Text="{Binding Trophies}" FontSize="Large" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource primaryText}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Padding="0, 0, 0, 0" VerticalOptions="Fill" >
+          <Button BackgroundColor="Transparent" Image="ic_fa_chevron_left.png" Command="{Binding ChevronTapCommand}" CommandParameter="Left" HorizontalOptions="Start"/>
+          <Label x:Name="CurrentDate" Text="{Binding CurrentDate, Converter={StaticResource DateConverter}}" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold"/>
+          <Button BackgroundColor="Transparent" Image="ic_fa_chevron_right.png" Command="{Binding ChevronTapCommand}" CommandParameter="Right"  HorizontalOptions="End"/>
+        </StackLayout>
+
+        <BoxView HeightRequest="2" Color="{StaticResource divider}"/>
+
+        <StackLayout IsVisible="{Binding CalendarNotesVisible}" Orientation="Horizontal" Padding="10, 0, 0, 0"  HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Spacing="0">
+          <Button BackgroundColor="Transparent" Image="drawable-hdpi/ic_fa_comment_o.png"  Command="{Binding CalendarNotesCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
+          <controls:NoCapsButton x:Name="CalendarNotesButton" BackgroundColor="Transparent" Text="{Binding CalendarNotes}" Command="{Binding CalendarNotesCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" TextColor="{StaticResource secondaryText}" />
+        </StackLayout>
+
+        <!-- No data -->
+        <StackLayout x:Name="NoDataLayout" IsVisible="{Binding NoDataVisible}" Orientation="Vertical" Padding="10, 20, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+
+          <Image x:Name="NoDataImage" Source="comfortable.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+          <ContentView Padding="0, 0, 0, 0">
+            <Label Text="{i18n:Translate NoWorkoutDataTitle}"
+              FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
+          </ContentView>
+
+          <ContentView Padding="0, 10, 0, 0">
+            <Label Text="{i18n:Translate NoWorkoutDataLine1}"
+              FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
+          </ContentView>
+          <ContentView Padding="0, 10, 0, 0">
+            <Label Text="{i18n:Translate NoWorkoutDataLine2}"
+              FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
+          </ContentView>
+        </StackLayout>
+
+        <ListView ItemsSource="{Binding Routine}" IsVisible="{Binding ListVisible}" x:Name="list" HasUnevenRows="true">
+          
+          <ListView.Behaviors>
+            <behaviors:ListViewSelectedItemBehavior Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+          </ListView.Behaviors>
+          
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <ViewCell.View>
+
+                  <StackLayout Orientation="{Binding CellLayoutOrientation}"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" Spacing="0">
+                    <Grid Padding="0,0,5,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                      </Grid.ColumnDefinitions>
+
+                      <Image Grid.Row="0" Grid.Column="0" HeightRequest="48" WidthRequest="48" Source="{Binding StateImage}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                      <Label Text="{Binding Exercise.Name}" VerticalTextAlignment="Center" Font="Large" Grid.Row="0" Grid.Column="1" TextColor="{StaticResource primaryText}"/>
+
+                      <StackLayout IsVisible="{Binding TrophyVisible}" Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                        <Image Source="ic_fa_trophy" HorizontalOptions="Start"/>
+                        <Label Text="{Binding Workout.Trophies, Converter={StaticResource TrophiesToStringConverter}}" FontSize="Medium" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
+                      </StackLayout>
+                    </Grid>
+
+                    <StackLayout Padding="0, 2, 0, 2" Orientation="Horizontal" HorizontalOptions="End">
+                      <StackLayout IsVisible="{Binding LevelUpVisible}" Padding="0, 0, 0, 0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="0">
+                        <Image Source="ic_fa_arrow_up_orange" HorizontalOptions="Start"/>
+                        <Label Text="LVL UP!" VerticalTextAlignment="Center" FontSize="Small" TextColor="#E64A19"/>
+                      </StackLayout>
+
+                      <Grid HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:RoundedBoxView  WidthRequest="90" HeightRequest="35" CornerRadius="32" Color="{StaticResource box}" />
+                        <Label Text="{Binding Reps, Converter={StaticResource IntToStringConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold"
+                          TextColor="{Binding RepsWeightColor}"/>
+                      </Grid>
+
+                      <Grid HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <controls:RoundedBoxView  WidthRequest="90" HeightRequest="38" CornerRadius="35" Color="{StaticResource box}" />
+                        <Label Text="{Binding Weight, Converter={StaticResource WeightConverter}}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold"
+                          TextColor="{Binding RepsWeightColor}"/>
+                      </Grid>
+                    </StackLayout>
+                  </StackLayout>
+
+                </ViewCell.View>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+
+      </StackLayout>
+
+    </controls:GestureFrame>
+  </local:WorkoutsPageXaml.Content>
+  </local:WorkoutsPageXaml>

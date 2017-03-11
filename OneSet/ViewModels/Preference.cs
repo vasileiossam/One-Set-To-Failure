@@ -93,9 +93,9 @@ namespace OneSet.ViewModels
 	public class PagePreference : Preference
 	{
 		public Type NavigateToPage { get; set; }
-	    private readonly INavigationService _navigationService;
+	    private readonly IMasterDetailNavigation _navigationService;
 
-        public PagePreference(INavigationService navigationService) 
+        public PagePreference(IMasterDetailNavigation navigationService) 
         {
             _navigationService = navigationService;
             Clicked += OnClicked;
@@ -105,7 +105,7 @@ namespace OneSet.ViewModels
 		public async void OnClicked(object sender, EventArgs args)
 		{
 			var page = Activator.CreateInstance (NavigateToPage);
-			await _navigationService.PushAsync (page as Page);
+			await _navigationService.NavigateToHierarchical(page as Page);
 		}
 	}
 }

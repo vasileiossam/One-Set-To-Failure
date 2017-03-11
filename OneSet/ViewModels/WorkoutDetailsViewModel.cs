@@ -79,14 +79,14 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private variables
-        private readonly INavigationService _navigationService;
+        private readonly IMasterDetailNavigation _navigationService;
         private readonly IUnitsService _units;
         private readonly IWorkoutRules _workoutRules;
         private readonly IWorkoutsRepository _workoutsRepository;
         private readonly IMessagingService _messagingService;
         #endregion
 
-        public WorkoutDetailsViewModel(INavigationService navigationService, IMessagingService messagingService, 
+        public WorkoutDetailsViewModel(IMasterDetailNavigation navigationService, IMessagingService messagingService, 
             IUnitsService units, IWorkoutRules workoutRules, IWorkoutsRepository workoutsRepository)
         {
             _navigationService = navigationService;
@@ -104,7 +104,7 @@ namespace OneSet.ViewModels
             PreviousIconCommand = new Command(OnPreviousIconCommand);
             TargetIconCommand = new Command(OnTargetIconCommand);
             SaveCommand = new Command(async () => await OnSave());
-            RestTimerCommand = new Command(async () => { await _navigationService.NavigateTo<RestTimerViewModel>(); });
+            RestTimerCommand = new Command(async () => { await _navigationService.NavigateToHierarchical<RestTimerViewModel>(); });
         }
 
         private async Task<bool> Validate ()
@@ -171,7 +171,7 @@ namespace OneSet.ViewModels
                     if (!RestTimerItem.IsRunning)
 				    {
                         var parameters = new NavigationParameters { {"StartImmediately", true } };
-                        await _navigationService.NavigateTo<RestTimerViewModel>(parameters);
+                        await _navigationService.NavigateToHierarchical<RestTimerViewModel>(parameters);
 				    }
 				} else
 				{

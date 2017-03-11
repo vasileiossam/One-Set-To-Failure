@@ -51,7 +51,7 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private variables
-        private readonly INavigationService _navigationService;
+        private readonly IMasterDetailNavigation _navigationService;
         private readonly IDialogService _dialogService;
         private readonly IMessagingService _messagingService;
         private readonly IUnitsService _units;
@@ -60,7 +60,7 @@ namespace OneSet.ViewModels
         #endregion
 
         public ExerciseDetailsViewModel(
-            INavigationService navigationService, IDialogService dialogService, IMessagingService messagingService, IUnitsService units, 
+            IMasterDetailNavigation navigationService, IDialogService dialogService, IMessagingService messagingService, IUnitsService units, 
             IExercisesRepository exercisesRepository, IRoutineDaysRepository routineDaysRepository)
         {
             _navigationService = navigationService;

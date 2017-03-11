@@ -43,10 +43,18 @@ namespace OneSet
             RestTimerItem = new RestTimerItem(Container.Resolve<ISoundService>());
 
             Database = Container.Resolve<Database>();
+            
+            var page = Container.Resolve<MainPage>();
+            var navigationService = Container.Resolve<IMasterDetailNavigation>();
+            navigationService.InitNavigation(page);
 
-            var navigateService = Container.Resolve<INavigationService>();
-            MainPage = navigateService.InitNavigation<MainViewModel>();
-		}
+            Task.Run(async () =>
+            {
+                await navigationService.NavigateToDetail<WorkoutsViewModel>();
+            }).Wait();
+
+            MainPage = page;
+        }
 
 		protected override void OnStart ()
 		{

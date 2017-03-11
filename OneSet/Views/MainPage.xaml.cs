@@ -1,136 +1,59 @@
-﻿using System;
-using OneSet.Abstract;
-using OneSet.Models;
-using OneSet.Services;
-using OneSet.ViewModels;
+﻿using OneSet.Models;
+using System;
+using System.Threading.Tasks;
+using Autofac;
 using Xamarin.Forms;
+using OneSet.Abstract;
+using OneSet.ViewModels;
 
 namespace OneSet.Views
 {
-	public partial class MainPage : MainPageXaml, IScreenRotationAware
+    public partial class MainPage : MasterDetailPage
     {
-        private readonly IMessagingService _messagingService;
-        private readonly IScreenSizeHandler _screenSizeHandler;
-        private StackOrientation _stackOrientation;
+        private readonly IComponentContext _componentContext;
+        private readonly IMasterDetailNavigation _navigationService;
+        
+        public MainPage(IComponentContext componentContext, IMasterDetailNavigation navigationService)
+        {
+            InitializeComponent();
+            _componentContext = componentContext;
+            _navigationService = navigationService;
 
-        public MainPage(IMessagingService messagingService, IScreenSizeHandler screenSizeHandler)
-		{
+            sideMenu.ListView.ItemSelected += OnItemSelected;
+        }
 
-            InitializeComponent ();
-            _messagingService = messagingService;
-		    _screenSizeHandler = screenSizeHandler;
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as SideMenuItem;
+            if (item == null) return;
 
-            _messagingService.Subscribe<MainViewModel>(this, Messages.WorkoutsReloaded, sender =>
+            if (item.TargetType == typeof(WorkoutsViewModel))
             {
-                Refresh();
-            });
-        }
-
-        ~MainPage()
-        {
-            _messagingService.Unsubscribe<MainViewModel>(this, Messages.WorkoutsReloaded);
-        }
-
-        #region private methods
-        private void Refresh()
-        {
-            list.ItemsSource = null;
-            list.ItemsSource = ViewModel.Routine;
-            ChangeOrientation();
-        }
-
-        private void OnLeftChevronTapCommand(object sender, EventArgs args)
-        {
-            // Used by the gesture frame
-            ViewModel.ChevronTapCommand.Execute("Left");
-        }
-
-        private void OnRightChevronTapCommand(object sender, EventArgs args)
-        {
-            // Used by the gesture frame
-            ViewModel.ChevronTapCommand.Execute("Right");
-        }
-
-        #endregion
-
-        #region IScreenRotationAware
-        public void InitScreenSize()
-        {
-            _stackOrientation = StackOrientation.Horizontal;
-            if (_screenSizeHandler.GetStartingOrientation() == Orientations.Portrait && _screenSizeHandler.GetScreenSize() == ScreenSizes.Small)
-            {
-                _stackOrientation = StackOrientation.Vertical;
+                await _navigationService.NavigateToDetail<WorkoutsViewModel>();
             }
-        }
-
-        public void ChangeOrientation()
-        {
-            list.BeginRefresh();
-            if (ViewModel.Routine != null)
+            else
+            if (item.TargetType == typeof(ExerciseListViewModel))
             {
-                foreach (var item in ViewModel.Routine)
-                {
-                    item.CellLayoutOrientation = _stackOrientation;
-                }
+                await _navigationService.NavigateToDetail<ExerciseListViewModel>();
             }
-            list.EndRefresh();
-        }
-        #endregion
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            
-            if (_screenSizeHandler.GetScreenSize() == ScreenSizes.Small)
+            else
+            if (item.TargetType == typeof(SettingsViewModel))
             {
-                var orientation = _screenSizeHandler.OnSizeAllocated(width, height);
-
-                if (orientation == Orientations.Landscape)
-                {
-                    CurrentDate.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
-                    CalendarNotesButton.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button));
-                    NoDataImage.IsVisible = false;
-                    _stackOrientation = StackOrientation.Horizontal;
-                    ChangeOrientation();
-                }
-                if (orientation == Orientations.Portrait)
-                {
-                    CurrentDate.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
-                    CalendarNotesButton.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Button));
-                    NoDataImage.IsVisible = true;
-                    _stackOrientation = StackOrientation.Vertical;
-                    ChangeOrientation();
-                }
+                await _navigationService.NavigateToDetail<SettingsViewModel>();
             }
+            else
+            if (item.TargetType == typeof(AnalysisTabbedPage))
+            {
+                _navigationService.NavigateToDetail(_componentContext.Resolve<AnalysisTabbedPage>());
+            }
+            else
+            if (item.TargetType == typeof(AboutPage))
+            {
+                _navigationService.NavigateToDetail(_componentContext.Resolve<AboutPage>());
+            }
+
+            sideMenu.ListView.SelectedItem = null;
+            IsPresented = false;
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            InitScreenSize();
-            ChangeOrientation();
-            
-            BindingContext = ViewModel;
-            list.SelectedItem = null;
-
-            MainFrame.SwipeLeft += OnLeftChevronTapCommand;
-			MainFrame.SwipeRight += OnRightChevronTapCommand;
-
-            App.RestTimerItem.Update();
-        }
-
-        protected override void OnDisappearing()
-        {
-            MainFrame.SwipeLeft -= OnLeftChevronTapCommand;
-            MainFrame.SwipeRight -= OnRightChevronTapCommand;
-            base.OnDisappearing();
-        }
-    
-	}
-
-    public class MainPageXaml : BasePage<MainViewModel>
-    {
     }
 }
-

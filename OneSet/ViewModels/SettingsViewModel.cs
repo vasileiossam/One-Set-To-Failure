@@ -13,7 +13,6 @@ namespace OneSet.ViewModels
 	public class SettingsViewModel : BaseViewModel, INavigationAware
     {
         #region private variables
-        private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
         private readonly IMessagingService _messagingService;
         private readonly ISettingsStorage _settingsStorage;
@@ -33,11 +32,9 @@ namespace OneSet.ViewModels
         public ICommand SelectItemCommand { get; }
         #endregion
 
-        public SettingsViewModel(INavigationService navigationService, IDialogService dialogService, 
-            IMessagingService messagingService, IBackupRestoreService backupRestoreService,
+        public SettingsViewModel(IDialogService dialogService, IMessagingService messagingService, IBackupRestoreService backupRestoreService,
             ISettingsStorage settingsStorage, ΙStatistics statistics, IExporter exporter)
         {
-            _navigationService = navigationService;
             _dialogService = dialogService;
             _messagingService = messagingService;
             _settingsStorage = settingsStorage;
@@ -450,13 +447,6 @@ namespace OneSet.ViewModels
                     if (preference != null) App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
                     App.SaveSettings();
                 }
-            });
-
-            otherGroup.Add(new PagePreference(_navigationService)
-            {
-                Title = AppResources.SettingsAboutTitle,
-                Hint = AppResources.SettingsAboutHint,
-                NavigateToPage = typeof(Views.AboutPage)
             });
             #endregion
 

@@ -30,7 +30,7 @@ namespace OneSet
             builder.RegisterType<WorkoutRules>().As<IWorkoutRules>().InstancePerLifetimeScope();
             builder.RegisterType<Statistics>().As<ΙStatistics>().InstancePerLifetimeScope();
             builder.RegisterType<Exporter>().As<IExporter>().InstancePerLifetimeScope();
-            builder.RegisterType<NavigationService>().As<INavigationService>().InstancePerLifetimeScope();
+            builder.RegisterType<MasterDetailNavigation>().As<IMasterDetailNavigation>().SingleInstance();
             builder.RegisterType<DialogService>().As<IDialogService>().InstancePerLifetimeScope();
             builder.RegisterType<MessagingService>().As<IMessagingService>().InstancePerLifetimeScope();
             builder.RegisterType<ScreenSizeHandler>().As<IScreenSizeHandler>().InstancePerLifetimeScope();
@@ -46,7 +46,7 @@ namespace OneSet
                .InstancePerDependency();
 
             // register view models
-            builder.RegisterAssemblyTypes(typeof(MainViewModel).GetTypeInfo().Assembly)
+            builder.RegisterAssemblyTypes(typeof(WorkoutsViewModel).GetTypeInfo().Assembly)
                .Where(t => t.Namespace == "OneSet.ViewModels")
                .InstancePerDependency();
 

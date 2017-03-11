@@ -22,12 +22,12 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private variables
-        private readonly INavigationService _navigationService;
+        private readonly IMasterDetailNavigation _navigationService;
         private readonly IMessagingService _messagingService;
         private readonly ICalendarRepository _repo;
         #endregion
 
-        public CalendarNotesViewModel(INavigationService navigationService, IMessagingService messagingService, ICalendarRepository repo)
+        public CalendarNotesViewModel(IMasterDetailNavigation navigationService, IMessagingService messagingService, ICalendarRepository repo)
         {
             _navigationService = navigationService;
             _messagingService = messagingService;

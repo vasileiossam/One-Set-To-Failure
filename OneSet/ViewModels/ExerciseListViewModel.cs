@@ -6,6 +6,7 @@ using Autofac;
 using OneSet.Abstract;
 using OneSet.Models;
 using OneSet.Resx;
+using OneSet.Views;
 using Xamarin.Forms;
 
 namespace OneSet.ViewModels
@@ -29,7 +30,7 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private variables
-        private readonly INavigationService _navigationService;
+        private readonly IMasterDetailNavigation _navigationService;
         private readonly IExercisesRepository _exercisesRepository;
         private readonly IMessagingService _messagingService;
         #endregion
@@ -39,7 +40,7 @@ namespace OneSet.ViewModels
         public ICommand AddExerciseCommand { get; }
         #endregion
 
-        public ExerciseListViewModel (INavigationService navigationService, IMessagingService messagingService, IExercisesRepository exercisesRepository)
+        public ExerciseListViewModel (IMasterDetailNavigation navigationService, IMessagingService messagingService, IExercisesRepository exercisesRepository)
         {
             _navigationService = navigationService;
             _messagingService = messagingService;
@@ -47,7 +48,10 @@ namespace OneSet.ViewModels
             Title = AppResources.ExercisesTitle;
 
             SelectItemCommand = new Command(async (item) => { await OnItemSelected(item); });
-            AddExerciseCommand = new Command(async () => { await _navigationService.NavigateTo<ExerciseDetailsViewModel>(); });
+            AddExerciseCommand = new Command(async () =>
+            {
+                await _navigationService.NavigateToHierarchical<ExerciseDetailsViewModel>();
+            });
 
             _messagingService.Subscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded, async (sender, e) =>
             {
@@ -111,7 +115,7 @@ namespace OneSet.ViewModels
                 {"Title", AppResources.EditExerciseTitle},
                 {"Exercise", item.Exercise }
             };
-            await _navigationService.NavigateTo<ExerciseDetailsViewModel>(parameters);
+            await _navigationService.NavigateToHierarchical<ExerciseDetailsViewModel>(parameters);
         }
 
         private void UpdateVisible()

@@ -3,49 +3,54 @@ using OneSet.Abstract;
 using OneSet.ViewModels;
 using Xamarin.Forms;
 using System;
-using System.Linq;
-using System.Reflection;
 using Autofac;
 using OneSet.Views;
 using OneSet.Models;
 
 namespace OneSet.Services
 {
-    public class NavigationService : INavigationService
+    public class MasterDetailNavigation : IMasterDetailNavigation
     {
-        private NavigationPage _rootPage;
+        private MasterDetailPage _root;
         private readonly IComponentContext _componentContext;
 
-        public NavigationService(IComponentContext componentContext)
+        public MasterDetailNavigation(IComponentContext componentContext)
         {
             _componentContext = componentContext;
         }
 
-        /// <summary>
-        /// Init navigation to set the root page
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public NavigationPage InitNavigation<T>(NavigationParameters parameters = null) where T : BaseViewModel
-        {
-            var page = GetPage<T>();
-            _rootPage = new NavigationPage(page);
-
-            Task.Run(async () =>
-            {
-                await NavigateTo<T>(page, parameters);
-            }).Wait();
-
-            return _rootPage;
+        public void InitNavigation(MasterDetailPage root)
+        { 
+            _root = root;
         }
 
-        public async Task NavigateTo<T>(NavigationParameters parameters = null) where T : BaseViewModel
+        public async Task NavigateToDetail<T>(NavigationParameters parameters = null) where T : BaseViewModel
         {
             var page = GetPage<T>();
-            await NavigateTo<T>(page, parameters);
+            await BindViewModel<T>(page, parameters);
+            var navPage = new NavigationPage(page);
+            _root.Detail = navPage;
         }
 
-        private async Task NavigateTo<T>(Page page, NavigationParameters parameters = null) where T : BaseViewModel
+        public async Task NavigateToHierarchical<T>(NavigationParameters parameters = null) where T : BaseViewModel
+        {
+            var page = GetPage<T>();
+            await BindViewModel<T>(page, parameters);
+            await _root.Detail.Navigation.PushAsync(page);
+        }
+
+
+        public async Task NavigateToHierarchical(Page page)
+        {
+            await _root.Detail.Navigation.PushAsync(page);
+        }
+
+        public void NavigateToDetail(Page page)
+        {
+            _root.Detail = new NavigationPage(page);
+        }
+
+        private async Task BindViewModel<T>(Page page, NavigationParameters parameters = null) where T : BaseViewModel
         {
             if (parameters == null)
             {
@@ -65,28 +70,12 @@ namespace OneSet.Services
                 await OnNavigateFrom();
                 await (viewModel as INavigationAware).OnNavigatedTo(parameters);
             }
-
-            await _rootPage.PushAsync(page);
-        }
-
-        //public async Task NavigateTo(BaseViewModel viewModel)
-        //{
-        //    var page = GetPage(viewModel.GetType());
-        //    var property = page.GetType().GetRuntimeProperties().FirstOrDefault(x=>x.Name == "ViewModel");
-        //    property?.SetValue(page, viewModel);
-
-        //    await _rootPage.PushAsync(page);
-        //}
-
-        public async Task PushAsync(Page page)
-        {
-            await _rootPage.PushAsync(page);
         }
 
         public async Task PopAsync()
         {
             await OnNavigateFrom();
-            await _rootPage.PopAsync();
+            await _root.Detail.Navigation.PopAsync();
         }
 
         public async Task OnNavigateFrom()

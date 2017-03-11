@@ -1,7 +1,5 @@
-﻿using Autofac;
-using OneSet.Abstract;
+﻿using OneSet.Abstract;
 using OneSet.Models;
-using OneSet.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +10,7 @@ using Xamarin.Forms;
 
 namespace OneSet.ViewModels
 {
-    public class MainViewModel : BaseViewModel, INavigationAware
+    public class WorkoutsViewModel : BaseViewModel, INavigationAware
     {
         #region properties
         private string _trophies;
@@ -58,11 +56,8 @@ namespace OneSet.ViewModels
 
         public ICommand ChevronTapCommand { get; }
         public ICommand CalendarNotesCommand { get; }
-        public ICommand AnalysisCommand { get; }
         public ICommand GotoDateCommand { get; }
         public ICommand SelectItemCommand { get; }
-        public ICommand ExercisesCommand { get; }
-        public ICommand SettingsCommand { get; }
         public ICommand RestTimerCommand { get; }
 
         private DateTime _currentDate;
@@ -88,8 +83,7 @@ namespace OneSet.ViewModels
         #endregion
 
         #region private variables
-        private readonly IComponentContext _componentContext;
-        private readonly INavigationService _navigationService;
+        private readonly IMasterDetailNavigation _navigationService;
         private readonly IMessagingService _messagingService;
         private readonly IDatePickerDialog _datePickerDialog;
         private readonly IWorkoutRules _workoutRules;
@@ -99,12 +93,11 @@ namespace OneSet.ViewModels
         private readonly IRoutineDaysRepository _routineDaysRepository;
         #endregion
 
-        public MainViewModel(IComponentContext componentContext, INavigationService navigationService, 
+        public WorkoutsViewModel(IMasterDetailNavigation navigationService, 
             IMessagingService messagingService, IDatePickerDialog datePickerDialog, IWorkoutRules workoutRules,
             IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, 
             ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
-            _componentContext = componentContext;
             _navigationService = navigationService;
             _messagingService = messagingService;
             _datePickerDialog = datePickerDialog;
@@ -118,12 +111,9 @@ namespace OneSet.ViewModels
 
             ChevronTapCommand = new Command(async (s) => { await OnChevronTapCommand(s); });
             CalendarNotesCommand = new Command(async () => { await OnCalendarNotesCommand(); });
-            AnalysisCommand = new Command(async () => { await OnAnalysisCommand(); });
             GotoDateCommand = new Command(OnGotoDateCommand);
             SelectItemCommand = new Command(async (item) => { await OnItemSelected(item); });
-            ExercisesCommand = new Command(async () => { await _navigationService.NavigateTo<ExerciseListViewModel>(); });
-            SettingsCommand = new Command(async () => { await _navigationService.NavigateTo<SettingsViewModel>(); });
-            RestTimerCommand = new Command(async () => { await _navigationService.NavigateTo<RestTimerViewModel>(); });
+            RestTimerCommand = new Command(async () => { await _navigationService.NavigateToHierarchical<RestTimerViewModel>(); });
 
             RestTimerItem = App.RestTimerItem;
 
@@ -159,7 +149,7 @@ namespace OneSet.ViewModels
             });
         }
 
-        ~MainViewModel()
+        ~WorkoutsViewModel()
         {
             _messagingService.Unsubscribe<WorkoutDetailsViewModel, Workout>(this, Messages.ItemChanged);
             _messagingService.Unsubscribe<ExerciseDetailsViewModel, Exercise>(this, Messages.ItemAdded);
@@ -188,14 +178,9 @@ namespace OneSet.ViewModels
         private async Task OnCalendarNotesCommand()
         {
             var parameters = new NavigationParameters { { "CurrentDate", CurrentDate } };
-            await _navigationService.NavigateTo<CalendarNotesViewModel>(parameters);
+            await _navigationService.NavigateToHierarchical<CalendarNotesViewModel>(parameters);
         }
 
-        private async Task OnAnalysisCommand()
-        {
-            var page = _componentContext.Resolve<AnalysisTabbedPage>();
-            await _navigationService.PushAsync(page);
-        }
 
         private void OnGotoDateCommand()
         {
@@ -225,7 +210,7 @@ namespace OneSet.ViewModels
                 {"Exercise", item.Exercise}
             };
 
-            await _navigationService.NavigateTo<WorkoutDetailsViewModel>(parameters);
+            await _navigationService.NavigateToHierarchical<WorkoutDetailsViewModel>(parameters);
         }
 
         private async Task Reload()
