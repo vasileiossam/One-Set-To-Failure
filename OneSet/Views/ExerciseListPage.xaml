@@ -28,21 +28,11 @@
     <StackLayout Orientation="Vertical" >
 
       <!-- No data -->
-      <StackLayout IsVisible="{Binding NoDataVisible}" Orientation="Vertical" Padding="50, 30, 10, 10"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Image Source="gymnast21.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
-
-        <ContentView Padding="0, 0, 0, 0">
-          <Label Text="{i18n:Translate NoExerciseDataTitle}"
-            FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
-        </ContentView>
-        <ContentView Padding="0, 10, 0, 0">
-          <Label Text="{i18n:Translate NoExerciseDataLine1}"
-            FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
-        </ContentView>
-        <ContentView Padding="0, 10, 0, 0">
-          <Label Text="{i18n:Translate NoExerciseDataLine2}"
-            FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
-        </ContentView>
+      <StackLayout IsVisible="{Binding NoDataVisible}" Orientation="Vertical" Padding="10, 30, 10, 10"  Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <Image Source="gymnast21.png" WidthRequest="128" HeightRequest="128" HorizontalOptions="Center" VerticalOptions="Center"/>
+          <Label Text="{i18n:Translate NoExerciseDataTitle}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
+          <Label Text="{i18n:Translate NoExerciseDataLine1}" FontSize="Large" HorizontalOptions="Center"  VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
+          <Label Text="{i18n:Translate NoExerciseDataLine2}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource secondaryText}"/>
       </StackLayout>
 
       <ListView ItemsSource="{Binding Exercises}" IsVisible="{Binding ListVisible}" x:Name="list" HasUnevenRows="true">
