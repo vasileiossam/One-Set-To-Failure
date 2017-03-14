@@ -75,7 +75,7 @@ namespace OneSet.ViewModels
         public ICommand PreviousIconCommand { get; set; }
         public ICommand TargetIconCommand { get; set; }
         public ICommand SaveCommand { get; set; }
-        public ICommand RestTimerCommand { get; set; }
+        public ICommand TimerCommand { get; set; }
         #endregion
 
         #region private variables
@@ -104,7 +104,11 @@ namespace OneSet.ViewModels
             PreviousIconCommand = new Command(OnPreviousIconCommand);
             TargetIconCommand = new Command(OnTargetIconCommand);
             SaveCommand = new Command(async () => await OnSave());
-            RestTimerCommand = new Command(async () => { await _navigationService.NavigateToHierarchical<RestTimerViewModel>(); });
+            TimerCommand = new Command(async () =>
+            {
+                var parameters = new NavigationParameters { { "RestTimerItem", RestTimerItem } };
+                await _navigationService.NavigateToHierarchical<RestTimerViewModel>(parameters);
+            });
         }
 
         private async Task<bool> Validate ()
@@ -274,8 +278,10 @@ namespace OneSet.ViewModels
             {
                 Exercise = parameters["Exercise"] as Exercise;
             }
-
-            RestTimerItem = App.RestTimerItem;
+            if (parameters.ContainsKey("RestTimerItem"))
+            {
+                RestTimerItem = parameters["RestTimerItem"] as RestTimerItem;
+            }
 
             var workout = new Workout();
             if (parameters.ContainsKey("Workout"))

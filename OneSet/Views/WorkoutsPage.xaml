@@ -26,7 +26,7 @@ Title="{Binding Title}">
   </local:WorkoutsPageXaml.Resources>
 
   <local:WorkoutsPageXaml.ToolbarItems>
-    <ToolbarItem Text="{Binding RestTimerItem.Text}" Icon="{Binding RestTimerItem.Icon}" Order="Primary" Command="{Binding RestTimerCommand}" Priority="0"/>
+    <ToolbarItem Text="{Binding RestTimerItem.Text}" Icon="{Binding RestTimerItem.Icon}" Order="Primary" Command="{Binding TimerCommand}" Priority="0"/>
     <ToolbarItem Text="{i18n:Translate CommentWorkoutTitle}" Order="Secondary" Command="{Binding CalendarNotesCommand}" Priority="1"/>
     <ToolbarItem Text="{i18n:Translate GotoDateTitle}" Order="Secondary" Command="{Binding GotoDateCommand}" Priority="1"/>
   </local:WorkoutsPageXaml.ToolbarItems>

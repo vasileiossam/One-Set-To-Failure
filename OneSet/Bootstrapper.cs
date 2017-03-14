@@ -7,6 +7,7 @@ using OneSet.Data;
 using OneSet.Views;
 using Xamarin.Forms;
 using SQLite;
+using OneSet.Models;
 
 namespace OneSet
 {
@@ -55,7 +56,8 @@ namespace OneSet
                .Where(t => t.Namespace == "OneSet.Data" && t.Name.EndsWith("Repository"))
                .AsImplementedInterfaces()
                .SingleInstance();
-            
+
+            builder.RegisterType<RestTimerItem>().SingleInstance();
         }
 	}
 }

@@ -13,6 +13,8 @@ namespace OneSet.Services
     {
         private MasterDetailPage _root;
         private readonly IComponentContext _componentContext;
+        private NavigationPage _navPage;
+        private Type _mainViewModel;
 
         public MasterDetailNavigation(IComponentContext componentContext)
         {
@@ -28,8 +30,26 @@ namespace OneSet.Services
         {
             var page = GetPage<T>();
             await BindViewModel<T>(page, parameters);
-            var navPage = new NavigationPage(page);
-            _root.Detail = navPage;
+            
+            // init
+            if (_navPage == null)
+            {
+                _navPage = new NavigationPage(page);
+                _mainViewModel = typeof(T);
+                _root.Detail = _navPage;
+                return;
+            }
+
+            // main page
+            if (typeof(T) == _mainViewModel)
+            {
+                _root.Detail = _navPage;
+            }
+            // other page
+            else
+            {
+                await _navPage.PushAsync(page);
+            }
         }
 
         public async Task NavigateToHierarchical<T>(NavigationParameters parameters = null) where T : BaseViewModel

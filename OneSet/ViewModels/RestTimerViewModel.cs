@@ -24,6 +24,8 @@ namespace OneSet.ViewModels
         #endregion
 
         #region properties
+        public RestTimerItem RestTimerItem { get; set; }
+        
         protected double _progress;
         public double Progress
         {
@@ -166,7 +168,7 @@ namespace OneSet.ViewModels
                     _soundService.Play ("Bleep");
 				}
 
-				App.RestTimerItem.SecondsLeft = 0;
+				RestTimerItem.SecondsLeft = 0;
 				return false;
 			}
 
@@ -175,7 +177,7 @@ namespace OneSet.ViewModels
 			var progress = Progress + _progressStep;
 		    Progress = progress >= 1 ? 1 : progress;
 
-            App.RestTimerItem.SecondsLeft = SecondsLeft;
+            RestTimerItem.SecondsLeft = SecondsLeft;
 			return State == RestTimerStates.Running;	
 		}
 
@@ -194,13 +196,13 @@ namespace OneSet.ViewModels
 
         private void OnPauseCommand()
 		{
-            App.RestTimerItem.SecondsLeft = 0;
+            RestTimerItem.SecondsLeft = 0;
 			State = RestTimerStates.Paused;
 		}
 
 		private void OnResetCommand()
 		{
-            App.RestTimerItem.SecondsLeft = 0;
+            RestTimerItem.SecondsLeft = 0;
 			State = RestTimerStates.Paused;
 			SecondsLeft = TotalSeconds;
 			Progress = 0;
@@ -230,15 +232,20 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
+            if (parameters.ContainsKey("RestTimerItem"))
+            {
+                RestTimerItem = parameters["RestTimerItem"] as RestTimerItem;
+            }
+
             _canSave = false;
             AutoStart = App.Settings.RestTimerAutoStart;
             PlaySounds = App.Settings.RestTimerPlaySounds;
             TotalSeconds = App.Settings.RestTimerTotalSeconds;
 
-            if (App.RestTimerItem.IsRunning)
+            if (RestTimerItem.IsRunning)
             {
-                var seconds = App.RestTimerItem.SecondsLeft;
-                App.RestTimerItem.Stop();
+                var seconds = RestTimerItem.SecondsLeft;
+                RestTimerItem.Stop();
 
                 OnResetCommand();
 

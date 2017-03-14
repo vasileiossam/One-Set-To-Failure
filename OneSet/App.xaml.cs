@@ -28,8 +28,7 @@ namespace OneSet
 		public static double ScreenWidth {get; set;}
 		public static double ScreenHeight {get; set;}
 		public static int? TotalTrophies {get; set;}
-	    public static RestTimerItem RestTimerItem;
-			
+        
 		public App ()
 		{
             InitializeComponent();
@@ -39,8 +38,6 @@ namespace OneSet
 
 			var netLanguage = DependencyService.Get<ILocale>().GetCurrent();
 		    AppResources.Culture = new CultureInfo (netLanguage);
-
-            RestTimerItem = new RestTimerItem(Container.Resolve<ISoundService>());
 
             Database = Container.Resolve<Database>();
             
@@ -59,7 +56,6 @@ namespace OneSet
 		protected override void OnStart ()
 		{
             CurrentDate = DateTime.Today;
-		    RestTimerItem.Reset();
 		}
 
 		protected override void OnSleep ()

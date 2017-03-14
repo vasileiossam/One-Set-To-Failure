@@ -1,4 +1,5 @@
-﻿using OneSet.Abstract;
+﻿using Autofac;
+using OneSet.Abstract;
 using OneSet.Models;
 using System;
 using System.Collections.Generic;
@@ -52,14 +53,7 @@ namespace OneSet.ViewModels
             set { SetProperty(ref _noDataVisible, value); }
         }
 
-        public RestTimerItem RestTimerItem { get; set; }
-
-        public ICommand ChevronTapCommand { get; }
-        public ICommand CalendarNotesCommand { get; }
-        public ICommand GotoDateCommand { get; }
-        public ICommand SelectItemCommand { get; }
-        public ICommand RestTimerCommand { get; }
-
+public RestTimerItem RestTimerItem { get; set; }
         private DateTime _currentDate;
         public DateTime CurrentDate
         {
@@ -80,9 +74,16 @@ namespace OneSet.ViewModels
             get { return _routine; }
             set { SetProperty(ref _routine, value); }
         }
+
+        public ICommand ChevronTapCommand { get; }
+        public ICommand CalendarNotesCommand { get; }
+        public ICommand GotoDateCommand { get; }
+        public ICommand SelectItemCommand { get; }
+        public ICommand TimerCommand { get; }
         #endregion
 
         #region private variables
+        private readonly IComponentContext _componentContext;
         private readonly IMasterDetailNavigation _navigationService;
         private readonly IMessagingService _messagingService;
         private readonly IDatePickerDialog _datePickerDialog;
@@ -93,11 +94,13 @@ namespace OneSet.ViewModels
         private readonly IRoutineDaysRepository _routineDaysRepository;
         #endregion
 
-        public WorkoutsViewModel(IMasterDetailNavigation navigationService, 
+        public WorkoutsViewModel(
+            IComponentContext componentContext, IMasterDetailNavigation navigationService, 
             IMessagingService messagingService, IDatePickerDialog datePickerDialog, IWorkoutRules workoutRules,
             IWorkoutsRepository workoutsRepository, IExercisesRepository exercisesRepository, 
             ICalendarRepository calendarRepository, IRoutineDaysRepository routineDaysRepository)
         {
+            _componentContext = componentContext;
             _navigationService = navigationService;
             _messagingService = messagingService;
             _datePickerDialog = datePickerDialog;
@@ -107,15 +110,19 @@ namespace OneSet.ViewModels
             _calendarRepository = calendarRepository;
             _routineDaysRepository = routineDaysRepository;
 
+            RestTimerItem = _componentContext.Resolve<RestTimerItem>();
+
             Title = "One Set To Failure";
 
             ChevronTapCommand = new Command(async (s) => { await OnChevronTapCommand(s); });
             CalendarNotesCommand = new Command(async () => { await OnCalendarNotesCommand(); });
             GotoDateCommand = new Command(OnGotoDateCommand);
             SelectItemCommand = new Command(async (item) => { await OnItemSelected(item); });
-            RestTimerCommand = new Command(async () => { await _navigationService.NavigateToHierarchical<RestTimerViewModel>(); });
-
-            RestTimerItem = App.RestTimerItem;
+            TimerCommand = new Command(async () =>
+            {
+                var parameters = new NavigationParameters { { "RestTimerItem", RestTimerItem } };
+                await _navigationService.NavigateToHierarchical<RestTimerViewModel>(parameters);
+            });
 
             _messagingService.Subscribe<WorkoutDetailsViewModel, Workout>(this, Messages.ItemChanged, (sender, workout) =>
             {
@@ -157,7 +164,6 @@ namespace OneSet.ViewModels
             _messagingService.Unsubscribe<ExerciseDetailsViewModel>(this, Messages.ItemDeleted);
             _messagingService.Unsubscribe<CalendarNotesViewModel>(this, Messages.ItemChanged);
             _messagingService.Unsubscribe<SettingsViewModel>(this, Messages.WorkoutDataCleared);
-
         }
 
         #region commands
@@ -207,7 +213,8 @@ namespace OneSet.ViewModels
             {
                 {"CurrentDate", CurrentDate },
                 {"Workout", item.Workout},
-                {"Exercise", item.Exercise}
+                {"Exercise", item.Exercise},
+                {"RestTimerItem", RestTimerItem}
             };
 
             await _navigationService.NavigateToHierarchical<WorkoutDetailsViewModel>(parameters);

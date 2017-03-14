@@ -117,7 +117,7 @@ namespace OneSet.Views
             MainFrame.SwipeLeft += OnLeftChevronTapCommand;
 			MainFrame.SwipeRight += OnRightChevronTapCommand;
 
-            App.RestTimerItem.Update();
+            ViewModel.RestTimerItem.Update();
         }
 
         protected override void OnDisappearing()
@@ -126,7 +126,6 @@ namespace OneSet.Views
             MainFrame.SwipeRight -= OnRightChevronTapCommand;
             base.OnDisappearing();
         }
-    
 	}
 
     public class WorkoutsPageXaml : BasePage<WorkoutsViewModel>

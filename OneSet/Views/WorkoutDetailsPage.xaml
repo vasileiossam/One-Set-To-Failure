@@ -22,7 +22,7 @@
   </local:WorkoutPageXaml.Resources>
 
   <local:WorkoutPageXaml.ToolbarItems>
-    <ToolbarItem Text="{Binding RestTimerItem.Text}" Icon="{Binding RestTimerItem.Icon}" Order="Primary" Command="{Binding RestTimerCommand}" Priority="0"/>
+    <ToolbarItem Text="{Binding RestTimerItem.Text}" Icon="{Binding RestTimerItem.Icon}" Order="Primary" Command="{Binding TimerCommand}" Priority="0"/>
     <ToolbarItem Icon="ic_action_accept" Order="Primary" Command="{Binding SaveCommand}"/>
   </local:WorkoutPageXaml.ToolbarItems>
 
