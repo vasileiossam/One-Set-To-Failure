@@ -48,8 +48,9 @@ namespace OneSet.ViewModels
         #region private methods
         private ObservableCollection<ExerciseAnalysisItem> GetItems(int exerciseIndex)
         {
-            var exercise = ExercisesInWorkouts[exerciseIndex];
+            if (ExercisesInWorkouts.Count == 0) return new ObservableCollection<ExerciseAnalysisItem>();
 
+            var exercise = ExercisesInWorkouts[exerciseIndex];
             var list = new ObservableCollection<ExerciseAnalysisItem>
             {
                 new ExerciseAnalysisItem {Title = "Started", Value = GetStarted(exercise)},
