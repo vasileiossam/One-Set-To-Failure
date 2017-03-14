@@ -48,8 +48,27 @@ namespace OneSet.Services
             // other page
             else
             {
+                if (_navPage.Navigation.NavigationStack.Count > 1)
+                {
+                    await _navPage.PopAsync();
+                }
                 await _navPage.PushAsync(page);
             }
+        }
+
+        public async Task NavigateToDetail(Page page)
+        {
+            // _root.Detail = new NavigationPage(page);
+            // we need to navigate off the _navPage that wraps the WorkoutsPage (where the RestTimerItem in the toolbar is)
+            // otherwise we have an Unhandled Exception:
+            //     System.ObjectDisposedException: Cannot access a disposed object.
+            //     Object name: 'Xamarin.Forms.Platform.Android.AppCompat.NavigationPageRenderer'.
+            // which is because every new NavigatePage(page) creates its own instance of the toolbar
+            if (_navPage.Navigation.NavigationStack.Count > 1)
+            {
+                await _navPage.PopAsync();
+            }
+            await _navPage.PushAsync(page);
         }
 
         public async Task NavigateToHierarchical<T>(NavigationParameters parameters = null) where T : BaseViewModel
@@ -63,11 +82,6 @@ namespace OneSet.Services
         public async Task NavigateToHierarchical(Page page)
         {
             await _root.Detail.Navigation.PushAsync(page);
-        }
-
-        public void NavigateToDetail(Page page)
-        {
-            _root.Detail = new NavigationPage(page);
         }
 
         private async Task BindViewModel<T>(Page page, NavigationParameters parameters = null) where T : BaseViewModel
