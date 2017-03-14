@@ -74,13 +74,15 @@ namespace OneSet.Data
 
 		public async Task LoadLifeFitnessData()
 		{
-			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Pectoral Fly", 7);
-			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Chess Press", 7);
-			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Shoulder Press", 7);
-			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Triceps Extension", 7);
-			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Biceps Curl", 7);
-			await _connection.ExecuteAsync ("INSERT INTO Exercises (Name, PlateWeight) VALUES (?, ?)", "LF Lat Pulldown", 7);
-		}
-	}
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Pectoral Fly", 7, "Anterior Deltoids, Pectoralis");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Lat Pulldown", 7, " Biceps, Latissimus Dorsi");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Shoulder Press", 7, "Deltoids, Triceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Biceps Curl", 7, "Biceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Triceps Extension", 7, "Triceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Chess Press", 7, "Anterior Deltoids, Triceps, Pectoralis");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Seated Leg Curl", 7, "Gluteus, Hamstrings");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Leg Extension", 7, "Quadriceps");
+        }
+    }
 }
 
