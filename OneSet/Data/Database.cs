@@ -74,14 +74,14 @@ namespace OneSet.Data
 
 		public async Task LoadLifeFitnessData()
 		{
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Pectoral Fly", 7, "Anterior Deltoids, Pectoralis");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Lat Pulldown", 7, " Biceps, Latissimus Dorsi");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Shoulder Press", 7, "Deltoids, Triceps");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Biceps Curl", 7, "Biceps");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Triceps Extension", 7, "Triceps");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Chess Press", 7, "Anterior Deltoids, Triceps, Pectoralis");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Seated Leg Curl", 7, "Gluteus, Hamstrings");
-            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Leg Extension", 7, "Quadriceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Pectoral Fly", 2.5, "Anterior Deltoids, Pectoralis");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Lat Pulldown", 2.5, " Biceps, Latissimus Dorsi");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Shoulder Press", 2.5, "Deltoids, Triceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Biceps Curl", 2.5, "Biceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Triceps Extension", 2.5, "Triceps");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Chess Press", 2.5, "Anterior Deltoids, Triceps, Pectoralis");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Seated Leg Curl", 2.5, "Gluteus, Hamstrings");
+            await _connection.ExecuteAsync("INSERT INTO Exercises (Name, PlateWeight, Notes) VALUES (?, ?, ?)", "LF Leg Extension", 2.5, "Quadriceps");
         }
     }
 }
