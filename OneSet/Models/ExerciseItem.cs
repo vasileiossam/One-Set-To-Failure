@@ -25,6 +25,6 @@
         }
         
         public bool TrainingDaysVisible => !string.IsNullOrEmpty(TrainingDays);
-        public bool NotesVisible => !string.IsNullOrEmpty(Exercise.Notes);
+        public bool NotesVisible => !string.IsNullOrEmpty(Exercise?.Notes);
     }
 }
