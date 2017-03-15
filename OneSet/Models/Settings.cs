@@ -30,7 +30,7 @@ namespace OneSet.Models
 			// defaults
 			IsMetric = RegionInfo.CurrentRegion.IsMetric;
 			MaxReps = 12;
-			MinReps = 5;
+			MinReps = 6;
 			RepsIncrementId = 1; // +1
 			PreviousRepsWeightVisible = true;
 			TargetRepsWeightVisible = true;
@@ -42,7 +42,7 @@ namespace OneSet.Models
 			#region Rest Timer defaults
 			RestTimerAutoStart = true;
 			RestTimerPlaySounds = true;
-			RestTimerTotalSeconds = 90;
+			RestTimerTotalSeconds = 180;
 			#endregion
 		}
 

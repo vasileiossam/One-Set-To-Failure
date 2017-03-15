@@ -19,6 +19,7 @@ namespace OneSet.ViewModels
     {
         #region private variables
         private readonly ISoundService _soundService;
+        private readonly ISettingsStorage _settingsStorage;
         private double _progressStep;
         private bool _canSave;
         #endregion
@@ -123,9 +124,10 @@ namespace OneSet.ViewModels
         public ICommand EditingModeCommand { get; set; }
         #endregion
 
-        public RestTimerViewModel(ISoundService soundService)
+        public RestTimerViewModel(ISoundService soundService, ISettingsStorage settingsStorage)
         {
             _soundService = soundService;
+            _settingsStorage = settingsStorage;
 
             Title = AppResources.RestTimerTitle;
 		
@@ -151,7 +153,7 @@ namespace OneSet.ViewModels
 			App.Settings.RestTimerAutoStart = AutoStart;
 			App.Settings.RestTimerPlaySounds = PlaySounds ?? false;
 			App.Settings.RestTimerTotalSeconds = TotalSeconds;
-			App.SaveSettings ();
+            _settingsStorage.Save(App.Settings);
 		}
 
         private bool OnTimer()

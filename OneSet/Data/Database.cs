@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using OneSet.Models;
 using SQLite;
@@ -18,25 +17,26 @@ namespace OneSet.Data
 			{
 				if (_repsIncrements == null)
 				{
-					_repsIncrements = new List<RepsIncrement>();
+				    _repsIncrements = new List<RepsIncrement>
+				    {
+                        // no increment
+				        new RepsIncrement(1, 0, 0),
+                        
+                        // +1 in every workout
+                        new RepsIncrement(10, 1, 1),
+                        
+                        // +1 in every other workout
+                        new RepsIncrement(20, 1, 2),
 
-					// no increment
-                    _repsIncrements.Add(new RepsIncrement(1, 0, 0));
-
-					// +1 in every workout
-					_repsIncrements.Add(new RepsIncrement(10, 1, 1));
-
-					// +1 in every other workout
-					_repsIncrements.Add(new RepsIncrement(20, 1, 2));
-
-					// +1 in every three workouts
-					_repsIncrements.Add(new RepsIncrement(30, 1, 3));
-
-					// +1 in every four workout
-					_repsIncrements.Add(new RepsIncrement(40, 1, 4));
-
-					// +1 in every five workout
-					_repsIncrements.Add(new RepsIncrement(50, 1, 5));
+                        // +1 in every three workouts
+				        new RepsIncrement(30, 1, 3),
+                        
+                        // +1 in every four workout
+				        new RepsIncrement(40, 1, 4),
+                        
+                        // +1 in every five workout
+				        new RepsIncrement(50, 1, 5)
+				    };
 				}
 				return _repsIncrements;
 			}

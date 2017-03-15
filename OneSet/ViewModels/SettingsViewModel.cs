@@ -127,7 +127,6 @@ namespace OneSet.ViewModels
 
         public async Task OnNavigatedTo(NavigationParameters parameters)
         {
-
             var list = new ObservableCollection<PreferenceGroup>();
 
             #region general group
@@ -151,7 +150,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     if (preference != null) App.Settings.IsMetric = ((string)preference.Value == AppResources.UnitSystemMetric);
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
             #endregion
@@ -171,7 +170,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     if (preference != null) App.Settings.MaxReps = int.Parse((string)preference.Value);
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
 
@@ -186,7 +185,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     if (preference != null) App.Settings.MinReps = int.Parse((string)preference.Value);
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
 
@@ -207,7 +206,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     App.Settings.RepsIncrementId = App.Database.RepsIncrements.FirstOrDefault(x => x.Description == (string)preference.Value).RepsIncrementId;
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
 
@@ -230,13 +229,13 @@ namespace OneSet.ViewModels
                 Options = options,
                 Clicked = OnClicked,
                 Value = App.Settings.ImagePack.Title,
-                OnSave = async (sender, args) =>
+                OnSave = (sender, args) =>
                 {
                     var preference = sender as ListPreference;
                     if (preference == null) throw new ArgumentNullException(nameof(preference));
                     if (App.Settings != null)
                         App.Settings.ImagePackId = App.Database.ImagePacks.FirstOrDefault(x => x.Title == (string)preference.Value).ImagePackId;
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
 
@@ -250,7 +249,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     if (preference != null) App.Settings.CanShowImagePackInRestTimer = preference.GetValueAsBool();
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
 
@@ -431,7 +430,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     if (preference != null) App.Settings.PreviousRepsWeightVisible = preference.GetValueAsBool();
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
 
@@ -445,7 +444,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as ListPreference;
                     if (preference != null) App.Settings.TargetRepsWeightVisible = preference.GetValueAsBool();
-                    App.SaveSettings();
+                    SaveSettings();
                 }
             });
             #endregion
@@ -457,6 +456,11 @@ namespace OneSet.ViewModels
         private void OnItemSelected(Preference item)
         {
             item?.Clicked(item, null);
+        }
+
+        private void SaveSettings()
+        {
+            _settingsStorage.Save(App.Settings);
         }
     }
 }

@@ -102,11 +102,6 @@ namespace OneSet
 		}
         #endregion
 
-        public static void SaveSettings()
-		{
-			DependencyService.Get<ISettingsStorage> ().Save(Settings);
-		}
-
 		public static void ShowErrorPage(object sender, Exception ex)
 		{
 			var viewModel = new ErrorViewModel () { Sender = sender, Exception = ex };
