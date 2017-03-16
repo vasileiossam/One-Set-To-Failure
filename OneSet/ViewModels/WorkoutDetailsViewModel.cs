@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using OneSet.Abstract;
+using OneSet.Extensions;
 using OneSet.Localization;
 using OneSet.Models;
 using OneSet.Resx;
@@ -115,25 +116,25 @@ namespace OneSet.ViewModels
 		{
 			if (Reps == 0)
 			{
-				await App.ShowWarning(AppResources.WorkoutRepsIsRequired);
+				AppResources.WorkoutRepsIsRequired.ToToast(ToastNotificationType.Warning);
 				return false;
 			}
 			if (Weight == 0)
 			{
-				await App.ShowWarning(AppResources.WorkoutWeightIsRequired);
-				return false;
+				AppResources.WorkoutWeightIsRequired.ToToast(ToastNotificationType.Warning);
+                return false;
 			}
 
 			if (Reps <= 0 || Reps > 100)
 			{
-				await App.ShowWarning(AppResources.WorkoutInvalidReps);
-				Reps = 0;
+				AppResources.WorkoutInvalidReps.ToToast(ToastNotificationType.Warning);
+                Reps = 0;
 				return false;
 			}
 			if (Weight <= 0 || Weight > 1000)
 			{
-				await App.ShowWarning(AppResources.WorkoutInvalidWeight);
-				Weight = 0;
+				AppResources.WorkoutInvalidWeight.ToToast(ToastNotificationType.Warning);
+                Weight = 0;
 				return false;
 			}
 
@@ -166,7 +167,7 @@ namespace OneSet.ViewModels
                 WorkoutId = await _workoutsRepository.SaveAsync(workout);
 
                 _messagingService.Send(this, Messages.ItemChanged, workout);
-                await App.ShowSuccess(AppResources.WorkoutSaved);
+                AppResources.WorkoutSaved.ToToast(ToastNotificationType.Success);
 
 				if (App.Settings.RestTimerAutoStart && !isPersisted)
 				{

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Autofac;
-using Plugin.Toasts;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using OneSet.Data;
 
 namespace OneSet.Droid
 {
@@ -32,9 +28,6 @@ namespace OneSet.Droid
 			OxyPlot.Xamarin.Forms.Platform.Android.Forms.Init();
 			Forms.Init (this, bundle);
 		    
-            DependencyService.Register<ToastNotification>();
-            ToastNotification.Init(this, new PlatformOptions { SmallIconDrawable = Android.Resource.Drawable.IcDialogInfo });
-
             var context = ApplicationContext;
 			App.Version = context.PackageManager.GetPackageInfo(context.PackageName, PackageInfoFlags.Activities).VersionName;
 			App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;

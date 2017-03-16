@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using OneSet.Abstract;
+using OneSet.Extensions;
 using OneSet.Models;
 using OneSet.Resx;
 using Xamarin.Forms;
@@ -285,7 +286,7 @@ namespace OneSet.ViewModels
                     var preference = sender as AlertPreference;
                     await App.Database.ClearWorkoutData();
                     _messagingService.Send(this, Messages.WorkoutDataCleared);
-                    if (preference != null) await App.ShowToast(preference.PopupTitle, AppResources.ClearWorkoutDataCompleted);
+                    if (preference != null) AppResources.ClearWorkoutDataCompleted.ToToast(ToastNotificationType.Info, preference.PopupTitle);
                 }
             });
 
@@ -302,7 +303,7 @@ namespace OneSet.ViewModels
                 {
                     var preference = sender as Preference;
                     await App.Database.LoadLifeFitnessData();
-                    if (preference != null) await App.ShowToast(preference.Title, AppResources.LoadSampleDataCompleted);
+                    if (preference != null) AppResources.LoadSampleDataCompleted.ToToast(ToastNotificationType.Info, preference.Title);
                 }
             });
 
@@ -322,14 +323,15 @@ namespace OneSet.ViewModels
 
                     var backupInfo = await _backupRestoreService.GetBackupInfo();
 
-                    await App.ShowToast(AppResources.SettingsBackupToastTitleOnSuccess, string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder));
+                    string.Format(AppResources.SettingsBackupToastMessageOnSuccess, backupInfo.BackupFolder)
+                        .ToToast(ToastNotificationType.Info, AppResources.SettingsBackupToastTitleOnSuccess);
 
                     var preference = sender as AlertPreference;
                     if (preference != null) preference.Value = await GetLastBackupDate();
                 }
                 catch (Exception ex)
                 {
-                    await App.ShowError(AppResources.ToastErrorTitle, ex.Message);
+                    App.ShowErrorPage(this, ex);
                 }
             };
             dataGroup.Add(backupPreference);
@@ -360,12 +362,12 @@ namespace OneSet.ViewModels
                         App.Settings = _settingsStorage.Load();
                         _messagingService.Send(this, Messages.SettingsReloaded);
 
-                        await App.ShowToast(AppResources.SettingsRestoreToastTitleOnSuccess, AppResources.SettingsRestoreToastMessageOnSuccess);
+                        AppResources.SettingsRestoreToastMessageOnSuccess.ToToast(ToastNotificationType.Info, AppResources.SettingsRestoreToastTitleOnSuccess);
                     }
                 }
                 catch (Exception ex)
                 {
-                    await App.ShowError(AppResources.ToastErrorTitle, ex.Message);
+                    App.ShowErrorPage(this, ex);
                 }
 
             };
@@ -387,7 +389,7 @@ namespace OneSet.ViewModels
                     if (pathName != string.Empty)
                     {
                         if (preference != null)
-                            await App.ShowToast(preference.Title, string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName));
+                            string.Format(AppResources.SettingsExportWorkoutDataCompleted, pathName).ToToast(ToastNotificationType.Info, preference.Title);
                     }
                 }
             });
@@ -403,11 +405,11 @@ namespace OneSet.ViewModels
                 try
                 {
                     await _statistics.Recalc();
-                    await App.ShowToast(AppResources.SettingsRecalcStatisticsTitle, AppResources.SettingsRecalcStatisticsFinished);
+                    AppResources.SettingsRecalcStatisticsFinished.ToToast(ToastNotificationType.Info, AppResources.SettingsRecalcStatisticsTitle);
                 }
                 catch (Exception ex)
                 {
-                    await App.ShowError(AppResources.ToastErrorTitle, ex.Message);
+                    App.ShowErrorPage(this, ex);
                 }
 
             };

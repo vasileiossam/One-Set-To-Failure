@@ -10,7 +10,6 @@ using OneSet.Resx;
 using OneSet.ViewModels;
 using OneSet.Views;
 using Xamarin.Forms;
-using Plugin.Toasts;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -68,41 +67,7 @@ namespace OneSet
 			// Handle when your app resumes
 		}
 
-        #region Toast messages
-        public static async Task ShowWarning(string message)
-	    {
-	        await ShowToast(AppResources.ToastWarningTitle, message);
-	    }
-        public static async Task ShowError(string title, string message)
-        {
-            await ShowToast($"{AppResources.ToastErrorTitle}: {title}", message);
-        }
-        public static async Task ShowError(string message)
-        {
-            await ShowToast(AppResources.ToastErrorTitle, message);
-        }
-        public static async Task ShowInfo(string message)
-        {
-            await ShowToast(AppResources.ToastInfoTitle, message);
-        }
-        public static async Task ShowSuccess(string message)
-        {
-            await ShowToast(AppResources.ToastSuccessTitle, message);
-        }
-        public static async Task ShowToast(string title, string message)
-		{
-		    var notificator = DependencyService.Get<IToastNotificator>();
-            var options = new NotificationOptions
-            {
-                Title = title,
-                Description = message,
-                IsClickable = true,
-            };
-            await notificator.Notify(options);
-		}
-        #endregion
-
-		public static void ShowErrorPage(object sender, Exception ex)
+        public static void ShowErrorPage(object sender, Exception ex)
 		{
 			var viewModel = new ErrorViewModel () { Sender = sender, Exception = ex };
 

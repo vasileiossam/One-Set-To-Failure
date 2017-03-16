@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using OneSet.Services;
+using Xamarin.Forms;
 
 namespace OneSet.Models
 {

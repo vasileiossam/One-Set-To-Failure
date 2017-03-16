@@ -35,6 +35,8 @@ namespace OneSet
             builder.RegisterType<DialogService>().As<IDialogService>().InstancePerLifetimeScope();
             builder.RegisterType<MessagingService>().As<IMessagingService>().InstancePerLifetimeScope();
             builder.RegisterType<ScreenSizeHandler>().As<IScreenSizeHandler>().InstancePerLifetimeScope();
+
+            builder.Register(c => DependencyService.Get<IToastNotifier>()).As<IToastNotifier>().InstancePerLifetimeScope();
             builder.Register(c => DependencyService.Get<ISettingsStorage>()).As<ISettingsStorage>().InstancePerLifetimeScope();
             builder.Register(c => DependencyService.Get<ITextStorage>()).As<ITextStorage>().InstancePerLifetimeScope();
             builder.Register(c => DependencyService.Get<IDatePickerDialog>()).As<IDatePickerDialog>().InstancePerLifetimeScope();

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
 using OneSet.Abstract;
+using OneSet.Extensions;
 using OneSet.Models;
 using OneSet.Resx;
 
@@ -102,13 +103,13 @@ namespace OneSet.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                App.ShowWarning(AppResources.ExerciseNameIsRequired);
+                AppResources.ExerciseNameIsRequired.ToToast(ToastNotificationType.Warning);
                 return false;
             }
 
             if (PlateWeight < 0 || PlateWeight > 999)
             {
-                App.ShowWarning(AppResources.ExerciseInvalidPlateWeight);
+                AppResources.ExerciseInvalidPlateWeight.ToToast(ToastNotificationType.Warning);
                 PlateWeight = 0;
                 return false;
             }
@@ -144,7 +145,7 @@ namespace OneSet.ViewModels
                 }
 
                 _messagingService.Send(this, message, exercise);
-                await App.ShowSuccess(AppResources.ExerciseSaved);
+                AppResources.ExerciseSaved.ToToast(ToastNotificationType.Success);
                 await _navigationService.PopAsync();
             }
         }
