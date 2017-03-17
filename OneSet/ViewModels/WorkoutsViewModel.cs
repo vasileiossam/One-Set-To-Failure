@@ -53,7 +53,7 @@ namespace OneSet.ViewModels
             set { SetProperty(ref _noDataVisible, value); }
         }
 
-public RestTimerItem RestTimerItem { get; set; }
+        public RestTimerItem RestTimerItem { get; set; }
         private DateTime _currentDate;
         public DateTime CurrentDate
         {

@@ -175,7 +175,11 @@ namespace OneSet.ViewModels
 
                     if (!RestTimerItem.IsRunning)
 				    {
-                        var parameters = new NavigationParameters { {"StartImmediately", true } };
+                        var parameters = new NavigationParameters
+                        {
+                            { "StartImmediately", true },
+                            { "RestTimerItem", RestTimerItem }
+                        };
                         await _navigationService.NavigateToHierarchical<RestTimerViewModel>(parameters);
 				    }
 				} else
