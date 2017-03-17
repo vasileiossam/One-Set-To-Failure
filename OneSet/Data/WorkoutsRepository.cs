@@ -71,12 +71,9 @@ namespace OneSet.Data
 		{
 			using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{				
-				var sql = @"SELECT SUM(Trophies) AS TotalTrophies FROM Workouts";
-                // couldn't make ExecuteScalarAsync<int> or ExecuteScalarAsync<int?> work properly; 
-                // it was throwing NullReferenceException when no data
-                var result = await _connection.QueryAsync<int>(sql);
-                if (result != null && result.Count > 0) return result[0];
-                return 0;
+				const string sql = @"SELECT coalesce(SUM(Trophies), 0) FROM Workouts";
+                var result = await _connection.ExecuteScalarAsync<int>(sql);
+                return result;
             }
 		}
 
@@ -84,23 +81,19 @@ namespace OneSet.Data
 		{
             using (await Mutex.LockAsync ().ConfigureAwait (false))
 			{				
-				var sql = @"SELECT SUM(Trophies) AS DayTrophies FROM Workouts WHERE Created = ?";
-                // couldn't make ExecuteScalarAsync<int> or ExecuteScalarAsync<int?> work properly; 
-                // it was throwing NullReferenceException when no data
-                var result = await _connection.QueryAsync<int>(sql, date);
-                if (result != null && result.Count > 0) return result[0];
-                return 0;
-			}
+				const string sql = @"SELECT coalesce(SUM(Trophies), 0) FROM Workouts WHERE Created = ?";
+                var result = await _connection.ExecuteScalarAsync<int>(sql, date);
+                return result;
+            }
 		}
 
         public async Task<int> GetWorkoutsCount(int exerciseId)
         {
             using (await Mutex.LockAsync().ConfigureAwait(false))
             {
-                var sql = @"SELECT Count(*) FROM Workouts WHERE ExerciseId = ?";
-                var result = await _connection.QueryAsync<int>(sql, exerciseId);
-                if (result != null && result.Count > 0) return result[0];
-                return 0;
+                const string sql = @"SELECT coalesce(Count(*), 0) FROM Workouts WHERE ExerciseId = ?";
+                var result = await _connection.ExecuteScalarAsync<int>(sql, exerciseId);
+                return result;
             }
         }
     }

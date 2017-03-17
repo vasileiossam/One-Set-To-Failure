@@ -306,7 +306,10 @@ namespace OneSet.ViewModels
                 App.TotalTrophies = await _workoutsRepository.GetTotalTrophies();
             }
             var dayTrophies = await _workoutsRepository.GetTrophies(CurrentDate);
-            if (App.TotalTrophies != null) Trophies = $"{dayTrophies} / {(int)App.TotalTrophies}";
+            if (App.TotalTrophies != null)
+            {
+                Trophies = $"{dayTrophies} / {(int)App.TotalTrophies}";
+            }
         }
         #endregion
 
