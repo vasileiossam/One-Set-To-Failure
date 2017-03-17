@@ -12,19 +12,32 @@ namespace OneSet.Droid.Services
 {
 	public class BackupRestoreService : IBackupRestoreService
 	{
+        private static string DownloadsFolder
+        {
+            get
+            {
+                var filePath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).ToString();
+                filePath = Path.Combine(filePath, "OneSet/");
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                return filePath;
+            }
+        }
 
-		public async Task Backup()
+        public async Task Backup()
 		{
 			// backup SQLITE
 			var source = SQLiteAndroid.GetPathName ();
-			var dest = Path.Combine(GetBackupFolder(), SQLiteAndroid.FileName); 
+			var dest = Path.Combine(DownloadsFolder, SQLiteAndroid.FileName); 
 			File.Copy (source, dest, true);
 
 			// backup settings
 			source = SettingsStorage.GetPathName ();
 			if (File.Exists (source))
 			{
-				dest = Path.Combine(GetBackupFolder(), SettingsStorage.FileName); 
+				dest = Path.Combine(DownloadsFolder, SettingsStorage.FileName); 
 				File.Copy (source, dest, true);
 			}
 
@@ -35,12 +48,12 @@ namespace OneSet.Droid.Services
 		public async Task Restore()
 		{
 			// restore SQLITE
-			var source = Path.Combine(GetBackupFolder(), SQLiteAndroid.FileName); 
+			var source = Path.Combine(DownloadsFolder, SQLiteAndroid.FileName); 
 			var dest = SQLiteAndroid.GetPathName ();
 			File.Copy (source, dest, true);
 
 			// restore settings
-			source = Path.Combine(GetBackupFolder(), SettingsStorage.FileName); 
+			source = Path.Combine(DownloadsFolder, SettingsStorage.FileName); 
 			if (File.Exists (source))
 			{
 				dest = SettingsStorage.GetPathName ();
@@ -58,27 +71,14 @@ namespace OneSet.Droid.Services
 
 			return new BackupInfo
 			{
-				BackupFolder = GetBackupFolder(),
+				BackupFolder = DownloadsFolder,
 				LastBackupDate = GetLastBackupDate()
 			};
 		}
 
-		private string GetBackupFolder()
-		{
-			var rootPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-			var backupFolder = Path.Combine(rootPath, "OneSet");
-
-			if (!Directory.Exists(backupFolder))
-			{
-				Directory.CreateDirectory(backupFolder);
-			}
-
-			return backupFolder;
-		}
-
 		private DateTime? GetLastBackupDate()
 		{
-			var pathName = Path.Combine(GetBackupFolder(), SQLiteAndroid.FileName); 
+			var pathName = Path.Combine(DownloadsFolder, SQLiteAndroid.FileName); 
 			if (!File.Exists (pathName))
 				return null;
 			return File.GetLastWriteTime (pathName);

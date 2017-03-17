@@ -10,12 +10,12 @@ namespace OneSet.Droid.Services
 {
 	public class TextStorage : ITextStorage
     {
-        private static string PersonalFolder
+        private static string DownloadsFolder
         {
             get
             {
                 var filePath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).ToString();
-				filePath = Path.Combine (filePath, "oneset/files/");
+				filePath = Path.Combine (filePath, "OneSet/");
 				if (!Directory.Exists (filePath))
 				{
 					Directory.CreateDirectory (filePath);
@@ -26,7 +26,7 @@ namespace OneSet.Droid.Services
 
 		public string Save(StringBuilder text, string fileName)
         {
-			var pathName = Path.Combine (PersonalFolder, fileName);
+			var pathName = Path.Combine (DownloadsFolder, fileName);
 			File.WriteAllText (pathName, text.ToString ());
 			return fileName;
         }
