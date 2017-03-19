@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECF5768F-1760-4A5F-8306-5BCDEEDF7D3B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
 		Notes.txt = Notes.txt
 		assets\palette.png = assets\palette.png
 		README.md = README.md
