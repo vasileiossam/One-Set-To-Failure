@@ -1,5 +1,4 @@
-3rd Party libs/packages
------------------------
+### Build with
 
 AutoMapper
 https://github.com/AutoMapper/AutoMapper
