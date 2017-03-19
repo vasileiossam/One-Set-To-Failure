@@ -1,16 +1,30 @@
+# One Set To Failure
+
+This is an Android weight training tracking app. It is made for SINGLE SET workouts only. It is ideal when you are training with one-set-to-failure workouts. These are workouts where you are not performing a weight exercise in multiple sets but you do one set with as many reps as you can until you can't do more. You can read about training to failure [here](https://en.wikipedia.org/wiki/Training_to_failure). Be advised that this is a controversial topic.
+
+## Screenshots
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/slide_menu.png" alt="Slide Menu" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/workouts.png" alt="Workouts list" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/exercises.png" alt="Exercises list" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/exercise_detail.png" alt="Exercise details" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/rest_timer.png" alt="Rest Timer" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/analysis.png" alt="Analysis and statistics" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/settings1.png" alt="Settings" Width="210" />
+
+<img src="https://raw.githubusercontent.com/vasileiossam/One-Set-To-Failure/Screenshots/settings2.png" alt="Settings" Width="210" />
+
 ### Build with
+* [Xamarin Forms](https://github.com/xamarin/Xamarin.Forms)
+* [Json.NET](http://www.newtonsoft.com/json)
+* [Autofac](https://autofac.org/)
+* [SQLite-net PCL](https://www.nuget.org/packages/sqlite-net-pcl)
+* [OxyPlot](http://www.oxyplot.org/)
 
-AutoMapper
-https://github.com/AutoMapper/AutoMapper
-
-SQLite-net PCL (Frank A. Krueger)
-https://www.nuget.org/packages/sqlite-net-pcl/
-
-Json.NET
-http://www.newtonsoft.com/json
-
-OxyPlot.Core (Charting)
-http://docs.oxyplot.org/en/latest/models/axes/TimeSpanAxis.html
-http://docs.oxyplot.org/en/latest/getting-started/hello-xamarin-forms.html
-http://oxyplot.org/
-https://github.com/conceptdev/xamarin-forms-samples/tree/master/OxyPlotDemo
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
