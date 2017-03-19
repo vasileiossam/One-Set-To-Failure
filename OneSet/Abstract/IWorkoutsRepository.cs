@@ -12,7 +12,7 @@ namespace OneSet.Abstract
 	    Task<int> GetTotalTrophies();
 	    Task<int> GetTrophies(DateTime date);
 	    Task<Workout> GetPreviousWorkout(int exerciseId, DateTime created);
-
+	    Task<List<float>> GetWeightsDone(int exerciseId);
 	}
 }
 	 

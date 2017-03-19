@@ -310,7 +310,7 @@ namespace OneSet.ViewModels
                 PreviousWeight = _units.GetWeight(App.Settings.IsMetric, previousWorkout.Weight);
             }
 
-            var targetWorkout = await _workoutRules.GetTargetWorkout(workout, Exercise, previousWorkout);
+            var targetWorkout = await _workoutRules.GetTargetWorkout(Exercise, previousWorkout);
             TargetReps = targetWorkout.Key;
             TargetWeight = _units.GetWeight(App.Settings.IsMetric, targetWorkout.Value);
         }

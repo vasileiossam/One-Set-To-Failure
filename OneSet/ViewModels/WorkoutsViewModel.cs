@@ -254,7 +254,7 @@ namespace OneSet.ViewModels
                     vm.PreviousWeight = previousWorkout.Weight;
                 }
 
-                var targetWorkout = await _workoutRules.GetTargetWorkout(vm.Workout, vm.Exercise, previousWorkout);
+                var targetWorkout = await _workoutRules.GetTargetWorkout(vm.Exercise, previousWorkout);
                 if (!targetWorkout.Equals(default(KeyValuePair<int, double>)))
                 {
                     vm.TargetReps = targetWorkout.Key;

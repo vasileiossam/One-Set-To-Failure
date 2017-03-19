@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using OneSet.Abstract;
 using OneSet.Models;
@@ -96,5 +97,20 @@ namespace OneSet.Data
                 return result;
             }
         }
+        
+        public async Task<List<float>> GetWeightsDone(int exerciseId)
+	    {
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                const string sql = @"SELECT Weight FROM Workouts WHERE ExerciseId = ? GROUP BY Weight ORDER BY Weight";
+                var list = await _connection.QueryAsync<WeightDto> (sql, exerciseId);
+                return list.Select(x => x.Weight).ToList();
+            }
+        }
+
+	    public class WeightDto
+	    {
+	        public float Weight { get; set; }
+	    }
     }
 }
